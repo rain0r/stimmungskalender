@@ -1,0 +1,257 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-02 08:24+0100\n"
+"PO-Revision-Date: 2022-03-02 08:13+0100\n"
+"Last-Translator:   <>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Translated-Using: django-rosetta 0.9.8\n"
+
+#: service/scatter_graph.py:34
+msgid "day"
+msgstr "Tag"
+
+#: service/scatter_graph.py:42
+msgid "night"
+msgstr "Nacht"
+
+#: templates/registration/login.html:13
+msgid "Log in"
+msgstr ""
+
+#: templates/web/base.html:49 templates/web/base.html:73
+msgid "home"
+msgstr "Startseite"
+
+#: templates/web/base.html:52
+msgid "graph"
+msgstr "Diagramm"
+
+#: templates/web/base.html:55 templates/web/search.html:5
+msgid "search"
+msgstr "Suche"
+
+#: templates/web/base.html:58 templates/web/settings.html:5
+msgid "settings"
+msgstr "Einstellungen"
+
+#: templates/web/base.html:61
+msgid "logged_in_as"
+msgstr "Angemeldet als"
+
+#: templates/web/base.html:76
+msgid "logout"
+msgstr "Abmelden"
+
+#: templates/web/graph.html:9
+msgid "graphs"
+msgstr "Diagramme"
+
+#: templates/web/graph.html:12 templates/web/graph/scatter.html:8
+msgid "scatterplot"
+msgstr "Scatterplot"
+
+#: templates/web/graph.html:13
+msgid "pie_chart"
+msgstr "Kuchendiagramm"
+
+#: templates/web/graph.html:21
+msgid "date_filter"
+msgstr "Datum-Filter"
+
+#: templates/web/graph/date_select.html:8 templates/web/search.html:11
+msgid "start_date"
+msgstr "Von"
+
+#: templates/web/graph/date_select.html:18 templates/web/search.html:21
+msgid "end_date"
+msgstr "Bis"
+
+#: templates/web/graph/date_select.html:28
+#: templates/web/index/entry_list.html:57 templates/web/search.html:59
+msgid "go_to"
+msgstr "Los"
+
+#: templates/web/graph/date_select.html:38
+msgid "from_start"
+msgstr "Seit Anfang"
+
+#: templates/web/graph/date_select.html:44
+msgid "last_week"
+msgstr "Letzte Woche"
+
+#: templates/web/graph/date_select.html:50
+msgid "last_month"
+msgstr "Letzten Monat"
+
+#: templates/web/graph/date_select.html:56
+msgid "last_year"
+msgstr "Letztes Jahr"
+
+#: templates/web/graph/pie_chart.html:5
+msgid "pie_charts"
+msgstr "Kuchendiagramme"
+
+#: templates/web/graph/pie_chart.html:8 templates/web/graph/scatter.html:11
+msgid "time_range"
+msgstr "Zeitraum"
+
+#: templates/web/graph/pie_chart.html:13
+msgid "day_moods"
+msgstr "Tag-Stimmungen"
+
+#: templates/web/graph/pie_chart.html:19
+msgid "night_moods"
+msgstr "Nacht-Stimmungen"
+
+#: templates/web/graph/scatter.html:20
+#: templates/web/settings/default_view_mode.html:14
+msgid "markers"
+msgstr "Punkte"
+
+#: templates/web/graph/scatter.html:26
+#: templates/web/settings/default_view_mode.html:23
+msgid "lines"
+msgstr "Linien"
+
+#: templates/web/index/entry_list.html:7
+#: templates/web/index/standout_data.html:11
+#: templates/web/index/standout_data.html:24
+#: templates/web/index/standout_data.html:37
+#: templates/web/index/standout_data.html:50 templates/web/search.html:69
+msgid "week"
+msgstr "Woche"
+
+#: templates/web/index/entry_list.html:17
+msgid "note"
+msgstr "Notiz"
+
+#: templates/web/index/entry_list.html:19
+msgid "prev"
+msgstr "Zurück"
+
+#: templates/web/index/entry_list.html:20
+msgid "next"
+msgstr "Vor"
+
+#: templates/web/index/entry_list.html:31
+msgid "what_happened_this_week"
+msgstr "Was geschah diese Woche?"
+
+#: templates/web/index/entry_list.html:34
+#: templates/web/settings/default_view_mode.html:27
+#: templates/web/settings/language.html:20
+#: templates/web/settings/view_forms.html:28
+msgid "save"
+msgstr "Speichern"
+
+#: templates/web/index/entry_list.html:42
+msgid "jump_to_week"
+msgstr "Springe zu Woche"
+
+#: templates/web/index/entry_list.html:63
+msgid "day_header"
+msgstr "Mein Tag war..."
+
+#: templates/web/index/entry_list.html:64
+msgid "night_header"
+msgstr "Meine Nacht war..."
+
+#: templates/web/index/form.html:16
+msgid "click_to_toggle"
+msgstr "Klicken, um zu verstecken"
+
+#: templates/web/index/standout_data.html:7
+msgid "last_very_good_day"
+msgstr "Letzter sehr guter Tag"
+
+#: templates/web/index/standout_data.html:20
+msgid "last_very_good_night"
+msgstr "Letzte sehr gute Nacht"
+
+#: templates/web/index/standout_data.html:33
+msgid "last_very_bad_day"
+msgstr "Letzter sehr schlechter Tag"
+
+#: templates/web/index/standout_data.html:46
+msgid "last_very_bad_night"
+msgstr "Letzte sehr schlechte Nacht"
+
+#: templates/web/search.html:32
+msgid "mood"
+msgstr "Stimmungen"
+
+#: templates/web/search.html:48 templates/web/search.html:53
+msgid "search_term"
+msgstr "Suchbegriff"
+
+#: templates/web/settings/default_view_mode.html:2
+msgid "default_view_mode"
+msgstr "Standard-Ansicht"
+
+#: templates/web/settings/language.html:2
+msgid "language"
+msgstr "Sprache"
+
+#: templates/web/settings/language.html:24
+msgid "current_language"
+msgstr "Aktuelle Sprache"
+
+#: templates/web/settings/view_forms.html:2
+msgid "view_forms"
+msgstr "Angezeigte Formulare"
+
+#: templates/web/settings/view_forms.html:15
+msgid "view_night_form"
+msgstr "Nacht-Formular"
+
+#: templates/web/settings/view_forms.html:24
+msgid "view_day_form"
+msgstr "Tag-Formular"
+
+#: views.py:38 views.py:447
+msgid "very_bad"
+msgstr "Sehr schlecht"
+
+#: views.py:39 views.py:448
+msgid "bad"
+msgstr "Schlecht"
+
+#: views.py:40 views.py:449
+msgid "medium"
+msgstr "Mittel"
+
+#: views.py:41 views.py:450
+msgid "good"
+msgstr "Gut"
+
+#: views.py:42 views.py:451
+msgid "very_good"
+msgstr "Sehr gut"
+
+#, python-format
+#~ msgid "last %(data)s day"
+#~ msgstr "Letzter  %(data)s Tag"
+
+#~ msgid "loading"
+#~ msgstr "Lade"
+
+#~ msgid "js_entry_form"
+#~ msgstr "JavaScript-Form"
+
+#~ msgid "year"
+#~ msgstr "Jahr"
+
+#~ msgid "all"
+#~ msgstr "Alles"

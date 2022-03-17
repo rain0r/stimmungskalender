@@ -1,0 +1,55 @@
+{% load i18n %}
+<div class="row">
+    {% if standout_data.last_very_good_day.day %}
+    <div class="col-12 col-md">
+        <div class="card text-white bg-success my-3">
+            <div class="card-body">
+                <h6 class="card-title">{% translate 'last_very_good_day' %}</h6>
+                <p class="card-text">
+                    {{ standout_data.last_very_good_day.day|date }}
+                </p>
+                <a class="text-reset" href="{% url 'index' %}?start_day={{ standout_data.last_very_good_day.day|date:'Y-W' }}">{% translate 'week' %} #{{ standout_data.last_very_good_day.day|date:"W" }}</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if standout_data.last_very_good_night.day %}
+    <div class="col-12 col-md">
+        <div class="card text-white bg-success my-3">
+            <div class="card-body">
+                <h6 class="card-title">{% translate 'last_very_good_night' %}</h6>
+                <p class="card-text">
+                    {{ standout_data.last_very_good_night.day|date }}
+                </p>
+                <a class="text-reset" href="{% url 'index' %}?start_day={{ standout_data.last_very_good_night.day|date:'Y-W' }}">{% translate 'week' %} #{{ standout_data.last_very_good_night.day|date:"W" }}</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if standout_data.last_very_bad_day.day %}
+    <div class="col-12 col-md">
+        <div class="card text-white bg-danger my-3">
+            <div class="card-body">
+                <h6 class="card-title">{% translate 'last_very_bad_day' %}</h6>
+                <p class="card-text">
+                    {{ standout_data.last_very_bad_day.day|date }}
+                </p>
+                <a class="text-reset" href="{% url 'index' %}?start_day={{ standout_data.last_very_bad_day.day|date:'Y-W' }}">{% translate 'week' %} #{{ standout_data.last_very_bad_day.day|date:"W" }}</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if standout_data.last_very_bad_night.day %}
+    <div class="col-12 col-md">
+        <div class="card text-white bg-danger my-3">
+            <div class="card-body">
+                <h6 class="card-title">{% translate 'last_very_bad_night' %}</h6>
+                <p class="card-text">
+                    {{ standout_data.last_very_bad_night.day|date }}
+                </p>
+                <a class="text-reset" href="{% url 'index' %}?start_day={{ standout_data.last_very_bad_night.day|date:'Y-W' }}">{% translate 'week' %} #{{ standout_data.last_very_bad_night.day|date:"W" }}</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>

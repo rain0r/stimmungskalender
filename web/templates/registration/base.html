@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Login · Stimmungskalender</title>
+        {% load static %}
+        {% load bootstrap4 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+        <link rel="icon" href="{% static 'favicon.ico' %}">
+        <link rel="apple-touch-icon"
+              sizes="180x180"
+              href="{% static '/img/apple-touch-icon.png' %}">
+        <link rel="icon"
+              type="image/png"
+              sizes="32x32"
+              href="{% static '/img/favicon-32x32.png' %}">
+        <link rel="icon"
+              type="image/png"
+              sizes="16x16"
+              href="{% static '/img/favicon-16x16.png' %}">
+        <link rel="manifest" href="{% static '/site.webmanifest' %}">
+        <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+        </style>
+        <!-- Custom styles for this template -->
+        <link rel="stylesheet"
+              type="text/css"
+              href="{% static '/css/signin.css' %}">
+    </head>
+    <body class="text-center d-flex flex-column">
+        {% block content %}
+        {% endblock content %}
+        <hr>
+        <p class="mt-5 mb-3 text-muted">
+            &copy; 2021-2022
+        </p>
+    </body>
+</html>

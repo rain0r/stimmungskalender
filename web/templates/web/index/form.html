@@ -1,0 +1,52 @@
+{% load i18n %}
+
+{% with "view_"|add:form.name|add:"_form" as period %}
+    {% if request.user.usersettings|get_obj_attr:period %}
+
+<form id="{{ form.name }}"
+      class="bg-light border rounded form-{{ form.name }}"
+      method="post"
+      action="{% url 'save-mood' %}#{{ form.name }}">
+    {% csrf_token %}
+    <input type="hidden" name="period" value="{{ form.name }}">
+    <div class="bg-light d-flex align-items-center justify-content-center my-3 sticky-top">
+        <span class="h4 clickable"
+              data-toggle="collapse"
+              data-target="#collapse-{{ form.name }}"
+              title="{% translate 'click_to_toggle' %}">
+            {% translate form.name_header %}
+            {% if form.name == 'night' %}
+                🌙
+            {% else %}
+                ☀️
+            {% endif %}
+        </span>
+    </div>
+    <div class="d-flex align-items-center justify-content-center pb-3">
+        <div id="collapse-{{ form.name }}"
+             class="col-12 col-md-11 row justify-content-center collapse show">
+            <div class="col-12 d-lg-none d-flex justify-content-around">
+                {% for it in days_of_week %}
+                {% with weekday_entry=days_of_week|get_item:it %}
+                <a href="#{{form.name}}-{{ weekday_entry.weekday|date:'D' }}">{{ weekday_entry.weekday|date:"D" }}</a>
+                {% endwith %}
+                {% endfor %}
+            </div>
+
+            {% for it in days_of_week %}
+                {% with weekday_entry=days_of_week|get_item:it %}
+                    <div class="col-12 col-md-auto d-flex flex-column my-3 my-md-0" id="{{form.name}}-{{ weekday_entry.weekday|date:'D' }}">
+                        <span class="font-weight-bold border p-1 m-1 d-flex justify-content-center">{{ weekday_entry.weekday|date:"D" }}</span>
+                        <span class="border text-muted text-monospace p-1 m-1 d-flex justify-content-center">{{ weekday_entry.weekday|date:"d. m." }}</span>
+                        {% for number in moods reversed %}
+                            {% include 'web/index/mood_button.html' with mood_value=weekday_entry|get_obj_attr:form.attr %}
+                        {% endfor %}
+                    </div>
+                {% endwith %}
+            {% endfor %}
+        </div>
+    </div>
+</form>
+
+{% endif %}
+{% endwith %}

@@ -1,0 +1,13 @@
+{% extends 'web/base.html' %}
+{% block content %}
+    {% load i18n %}
+    {% get_current_language as LANGUAGE_CODE %}
+    <a href="{% url 'settings' %}" class="h1 text-dark mb-2">{% translate 'settings' %}</a>
+    <hr>
+    {% include 'web/settings/language.html' %}
+    <hr>
+    {% include 'web/settings/default_view_mode.html' %}
+    <hr>
+    {% include 'web/settings/view_forms.html' %}
+
+{% endblock %}

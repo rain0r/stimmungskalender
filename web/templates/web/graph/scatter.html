@@ -1,0 +1,34 @@
+{% load relative_url %}
+{% load i18n %}
+
+<div class="pt-4 row">
+    <div class="col-12 col-md-5">
+        <a href="#scatterplot"
+           class="h5 text-reset my-2 my-md-0"
+           id="scatterplot">{% translate 'scatterplot' %}</a>
+    </div>
+    <div class="col-12 col-md-5">
+        {% translate 'time_range' %}: {{ start_dt|date:"SHORT_DATE_FORMAT" }} — {{ end_dt|date:"SHORT_DATE_FORMAT" }}
+    </div>
+    {% with params=request.GET.urlencode %}
+    <div class="col-12 col-md-2">
+        <div class="btn-group" role="group">
+            <a href="{% relative_url 'markers' 'view' params %}"
+               type="button"
+               title="View as list."
+               class="btn btn-light my-2 my-md-0 {% if is_markers %} active{% endif %}">
+                {% translate 'markers' %}
+            </a>
+            <a href="{% relative_url 'lines' 'view' params %}"
+               type="button"
+               title="View as list."
+               class="btn btn-light my-2 my-md-0 {% if not is_markers %} active{% endif %}">
+                {% translate 'lines' %}
+            </a>
+        </div>
+    </div>
+    {% endwith %}
+</div>
+<hr>
+<!-- Plot diagram -->
+{{ graph|safe }}

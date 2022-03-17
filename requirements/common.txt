@@ -1,0 +1,13 @@
+# Contains requirements common to all environments
+Django==4.0.3
+dj-database-url==0.5.0
+django-bootstrap-datepicker-plus==4.0.0
+django-bootstrap4==22.1
+django-cache-url==3.3.0
+django-registration==3.2
+django-rosetta==0.9.8
+djangorestframework==3.13.1
+ipython==8.1.1
+plotly==5.6.0
+psycopg2==2.9.3
+python-decouple==3.6

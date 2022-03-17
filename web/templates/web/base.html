@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        {% load static %}
+        {% load bootstrap4 %}
+        {% load i18n %}
+        {% bootstrap_css %}
+        <meta charset="utf-8">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="author" content="Hihn">
+        <title>Stimmungskalender
+            {% block title %}
+            {% endblock title %}
+        </title>
+        <link rel="icon" href="{% static 'favicon.ico' %}">
+        <link rel="apple-touch-icon"
+              sizes="180x180"
+              href="{% static '/img/apple-touch-icon.png' %}">
+        <link rel="icon"
+              type="image/png"
+              sizes="32x32"
+              href="{% static '/img/favicon-32x32.png' %}">
+        <link rel="icon"
+              type="image/png"
+              sizes="16x16"
+              href="{% static '/img/favicon-16x16.png' %}">
+        <link rel="manifest" href="{% static '/site.webmanifest' %}">
+        <link rel="stylesheet" href="{% static '/css/bootstrap-datepicker3.css' %}" />
+        <link rel="stylesheet" href="{% static '/css/stimmungskalender.css' %}" />
+        <style>{% include 'web/css/moods.css' %}</style>
+    </head>
+    <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'index' %}">🗓️ Stimmungskalender</a>
+            <button class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'index' %}">{% translate 'home' %}</a>
+                    </li>
+                    <li class="nav-item {% if request.resolver_match.url_name == 'graph' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'graph' %}">{% translate 'graph' %}</a>
+                    </li>
+                    <li class="nav-item {% if request.resolver_match.url_name == 'search' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'search' %}">{% translate 'search' %}</a>
+                    </li>
+                    <li class="nav-item {% if request.resolver_match.url_name == 'settings' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'settings' %}">{% translate 'settings' %}</a>
+                    </li>
+                </ul>
+                <span class="text-muted">{% translate 'logged_in_as' %}: {{ user.get_username }}</span>
+            </div>
+        </div>
+    </nav>
+        <main class="container pt-3">
+            {% block content %}
+            {% endblock content %}
+            <hr>
+        </main>
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a href="{% url 'index' %}">{% translate 'home' %}</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="{% url 'logout' %}" title="Logout {{ user.get_username }}">{% translate 'logout' %}</a>
+                </li>
+            </ul>
+        </footer>
+        <div id="device-size-detector">
+            <div id="xs" class="d-block d-sm-none"></div>
+            <div id="sm" class="d-none d-sm-block d-md-none"></div>
+            <div id="md" class="d-none d-md-block d-lg-none"></div>
+            <div id="lg" class="d-none d-lg-block d-xl-none"></div>
+            <div id="xl" class="d-none d-xl-block"></div>
+        </div>
+        {% bootstrap_javascript jquery='full' %}
+    </body>
+</html>

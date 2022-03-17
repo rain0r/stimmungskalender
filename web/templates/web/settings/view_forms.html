@@ -1,0 +1,31 @@
+{% load i18n %}
+<h3>{% translate 'view_forms' %}</h3>
+<form class="mt-3" action="{% url 'save-settings' %}" method="post">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}">
+    <div class="form-row align-items-start">
+        <div class="col-12 col-md-6">
+            <div class="form-check">
+                <input class="form-check-input"
+                       type="checkbox"
+                       name="view_night_form"
+                       value="{{ user_settings.view_night_form }}"
+                       id="view-night-form"
+                       {% if user_settings.view_night_form %}checked{% endif %}>
+                <label class="form-check-label" for="view-night-form">{% translate 'view_night_form' %}</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input"
+                       type="checkbox"
+                       name="view_day_form"
+                       value="{{ user_settings.view_day_form }}"
+                       id="view-day-form"
+                       {% if user_settings.view_day_form %}checked{% endif %}>
+                <label class="form-check-label" for="view-day-form">{% translate 'view_day_form' %}</label>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <button type="submit" class="btn btn-primary mb-2">{% translate 'save' %}</button>
+        </div>
+    </div>
+</form>
