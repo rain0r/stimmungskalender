@@ -1,6 +1,6 @@
 -r common.txt
 black==22.1.0
 curlylint==0.13.0
-djlint==0.7.5
+djlint==0.7.6
 ipdb==0.13.9
 pip-upgrader==1.4.15
