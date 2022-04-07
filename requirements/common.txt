@@ -8,6 +8,6 @@ django-registration==3.2
 django-rosetta==0.9.8
 djangorestframework==3.13.1
 ipython==8.2.0
-plotly==5.6.0
+plotly==5.7.0
 psycopg2==2.9.3
 python-decouple==3.6
