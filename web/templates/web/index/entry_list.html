@@ -3,12 +3,12 @@
     {% load i18n %}
     <div class="d-flex flex-column flex-md-row align-items-baseline justify-content-between">
         <div class="d-flex mb-2 align-items-baseline">
-            <a href="{% url 'index' %}?start_day={{ week_date|date:'Y-W' }}"
-               class="h4 text-reset">{% translate 'week' %} #{{ week_date|date:"W" }}</a>
-            <span class="text-muted ml-5">{{ week_label }}</span>
+            <a href="{% url 'index' %}?start_day={{ mood_table.week_start|date:'Y-W' }}"
+               class="h4 text-reset">{% translate 'week' %} #{{ mood_table.week.week_date|date:"W" }}</a>
+            <span class="text-muted ml-5">{{ mood_table.week_label }}</span>
         </div>
         <div class="mb-2">
-            <button class="btn {% if my_week.note %} btn-primary {% else %} btn-outline-dark {% endif %}"
+            <button class="btn {% if mood_table.week.note %} btn-primary {% else %} btn-outline-dark {% endif %}"
                     type="button"
                     data-toggle="collapse"
                     data-target="#collapseNote"
@@ -16,8 +16,8 @@
                     aria-controls="collapseNote">
                 {% translate 'note' %}
             </button>
-            <a href="?start_day={{ prev_week }}" class="btn btn-outline-dark">{% translate 'prev' %}</a>
-            <a href="?start_day={{ next_week }}" class="btn btn-outline-dark">{% translate 'next' %}</a>
+            <a href="?start_day={{ mood_table.prev_week }}" class="btn btn-outline-dark">{% translate 'prev' %}</a>
+            <a href="?start_day={{ mood_table.next_week }}" class="btn btn-outline-dark">{% translate 'next' %}</a>
         </div>
     </div>
     <form method="post"
@@ -26,9 +26,9 @@
           class="collapse">
         {% csrf_token %}
         <hr>
-        <input type="hidden" name="week" value="{{ week_date|date:'Y-m-d' }}">
+        <input type="hidden" name="week" value="{{ mood_table.week.week_date|date:'Y-m-d' }}">
         <div class="row p-1">
-            <textarea id="note" name="note" class="form-control" rows="6" placeholder="{% translate 'what_happened_this_week' %}">{{ my_week.note }}</textarea>
+            <textarea id="note" name="note" class="form-control" rows="6" placeholder="{% translate 'what_happened_this_week' %}">{{ mood_table.week.note }}</textarea>
         </div>
         <div class="row mt-3">
             <button class="btn btn-primary">{% translate 'save' %}</button>
@@ -63,15 +63,15 @@
     {% translate 'day_header' %}
     {% translate 'night_header' %}
 -->
-<hr>
-{% include 'web/index/standout_data.html' %}
+    <hr>
+    {% include 'web/index/standout_data.html' %}
 {% endblock %}
 {% block js %}
-{% load static %}
-<script src="{% static '/js/bootstrap-datepicker.js' %}"></script>
-<script>
+    {% load static %}
+    <script src="{% static '/js/bootstrap-datepicker.js' %}"></script>
+    <script>
     $(document).ready(() => {
         $('[data-toggle="tooltip"]').tooltip();
     });
-</script>
+    </script>
 {% endblock %}

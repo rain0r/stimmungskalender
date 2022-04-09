@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-02 08:24+0100\n"
+"POT-Creation-Date: 2022-04-14 20:23+0200\n"
 "PO-Revision-Date: 2022-03-02 08:13+0100\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -221,23 +221,23 @@ msgstr "Night form"
 msgid "view_day_form"
 msgstr "Day form"
 
-#: views.py:38 views.py:447
+#: views.py:33
 msgid "very_bad"
 msgstr "Very bad"
 
-#: views.py:39 views.py:448
+#: views.py:34
 msgid "bad"
 msgstr "Bad"
 
-#: views.py:40 views.py:449
+#: views.py:35
 msgid "medium"
 msgstr "Medium"
 
-#: views.py:41 views.py:450
+#: views.py:36
 msgid "good"
 msgstr "Good"
 
-#: views.py:42 views.py:451
+#: views.py:37
 msgid "very_good"
 msgstr "Very good"
 

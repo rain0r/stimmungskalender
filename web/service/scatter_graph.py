@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import timedelta, date
 
 import plotly.graph_objs as go
 from django.utils.translation import gettext_lazy as _
@@ -14,8 +14,8 @@ class ScatterGraphService(BaseGraph):
         is_markers: bool,
         mood_mapping: dict,
         user: User,
-        start_dt: datetime,
-        end_dt: datetime,
+        start_dt: date,
+        end_dt: date,
     ):
         super().__init__(start_dt=start_dt, end_dt=end_dt)
         self.is_markers = is_markers
