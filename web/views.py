@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 from django.conf import settings
 from django.contrib.auth import logout
@@ -14,22 +14,12 @@ from django.utils.translation import gettext as _
 from django.views import View
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import RedirectView, TemplateView
-from rest_framework import viewsets
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 
-from web.api import serializers
 from web.models import Entry, UserSettings, Week, Moods
 from web.service.pie_graph import PieGraphService
 from web.service.scatter_graph import ScatterGraphService
-from web.structs import WeekdayEntry
+from web.service.sk import SkService
 from web.util import get_default_view_mode
-
-BR_INVALID_REQUEST = "Invalid request."
-
-PER_PAGE = 25
-START_DAY_P = "start_day"  # Used to jump between weeks
-SK_DATE_FORMAT = "%Y-%W"
 
 
 class MoodMapping:
@@ -89,20 +79,14 @@ class EntryListView(MoodMapping, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        self.week_date = self.build_week_date()
-        self.my_week, created = Week.objects.get_or_create(
-            user=self.request.user, week_date=self.week_date
-        )
+        sk_service = SkService(self.request.user)
 
-        context["days_of_week"] = self.get_week_data()
-        context["week_date"] = self.week_date
-        context["my_week"] = self.my_week
-        context["next_week"] = self.get_next_week()
-        context["prev_week"] = self.get_prev_week()
+        start_day_p = self.request.GET.get(settings.QS_START_DAY, "").strip()
+        mood_table = sk_service.mood_table(start_day_p)
+
+        context["mood_table"] = mood_table
         context["moods"] = self.mood_mapping
-        context["week_label"] = self.get_week_label()
         context["forms"] = self.get_forms()
-        context["start_day"] = self.week_date.strftime(SK_DATE_FORMAT)
         context["standout_data"] = self.get_standout_data()
 
         return context
@@ -128,58 +112,6 @@ class EntryListView(MoodMapping, TemplateView):
         )
         return ret
 
-    def build_week_date(self):
-        start_day_p = self.request.GET.get(START_DAY_P, "").strip()
-        if start_day_p:
-            dt1 = datetime.strptime(f"{start_day_p}-1", "%Y-%W-%w")
-        else:
-            dt1 = timezone.now()
-        dt1 += timedelta(days=0 - dt1.weekday())
-        return dt1
-
-    def get_week_data(self):
-        my_entries = Entry.objects.filter(user=self.request.user, week=self.my_week)
-        days = [(self.week_date + timedelta(days=d)).date() for d in range(7)]
-        ret = {}
-        ret2 = {}
-        for day in days:
-            ret2[day.strftime("%Y-%m-%d")] = WeekdayEntry(
-                weekday=day, mood_day=0, mood_night=0
-            )
-            ret[day] = {"mood_day": 0, "mood_night": 0}
-        for entry in my_entries:
-            ret[entry.day] = entry
-            ret2[entry.day.strftime("%Y-%m-%d")] = WeekdayEntry(
-                weekday=entry.day, mood_day=entry.mood_day, mood_night=entry.mood_night
-            )
-        return ret2
-
-    def get_start_of_week(self):
-        dt1 = self.week_date
-        dt1 += timedelta(days=0 - self.week_date.weekday())
-        return dt1
-
-    def get_next_week(self):
-        ret = self.week_date + timedelta(days=0 - self.week_date.weekday() + 7)
-        return ret.strftime(SK_DATE_FORMAT)
-
-    def get_prev_week(self):
-        ret = self.week_date + timedelta(days=0 - self.week_date.weekday() - 7)
-        return ret.strftime(SK_DATE_FORMAT)
-
-    def build_start_day_date(self):
-        param = self.request.GET.get(START_DAY_P)
-        return datetime.strptime(param + "-1", "%Y-%W-%w")
-
-    def get_week_label(self):
-        start = formats.date_format(
-            self.get_start_of_week().date(), "SHORT_DATE_FORMAT"
-        )
-        end = formats.date_format(
-            (self.get_start_of_week() + timedelta(days=7)).date(), "SHORT_DATE_FORMAT"
-        )
-        return f"{start} — {end}"
-
     def get_forms(self):
         ret = []
         ret.append(
@@ -196,67 +128,21 @@ class SaveMoodView(View):
         period = request.POST.get("period", None)
 
         if not entry or not period:
-            raise BadRequest(BR_INVALID_REQUEST)
+            raise BadRequest()
 
         if period not in ["day", "night"]:
-            raise BadRequest(BR_INVALID_REQUEST)
+            raise BadRequest()
 
         data = entry.split("_")
         mood = data[0]
+        day = data[1]
 
-        form_mapping = {
-            "night": "mood_night",
-            "day": "mood_day",
-        }
-
-        # Create related week object
-        dt1 = datetime.strptime(data[1], "%Y-%m-%d")
-        dt1 += timedelta(days=0 - dt1.weekday())
-        my_week, created = Week.objects.get_or_create(
-            user=self.request.user, week_date=dt1
+        sk_service = SkService(self.request.user)
+        sk_service.set_entry(period, mood, day)
+        start_day_p = datetime.strptime(day, "%Y-%m-%d").strftime(
+            settings.SK_DATE_FORMAT
         )
-
-        db_data = {"day": data[1], "user": self.request.user, "week": my_week}
-        if period == "night":
-            db_data["mood_night"] = mood
-        elif period == "day":
-            db_data["mood_day"] = mood
-        else:
-            raise BadRequest(BR_INVALID_REQUEST)
-
-        if Entry.objects.filter(**db_data).count() == 1:
-            # Click on saved mood: remove it
-            Entry.objects.filter(**db_data).update(**{form_mapping[period]: None})
-        else:
-            Entry.objects.update_or_create(
-                day=data[1], week=my_week, user=self.request.user, defaults=db_data
-            )
-        start_day_p = datetime.strptime(data[1], "%Y-%m-%d").strftime(SK_DATE_FORMAT)
-        return redirect(f"{reverse('index')}?{START_DAY_P}={start_day_p}")
-
-
-@method_decorator(login_required, name="dispatch")
-class SaveNoteView(View):
-    def post(self, request):
-        week = request.POST.get("week", "").strip()
-        note = request.POST.get("note", "").strip()
-
-        if not week:
-            raise BadRequest(BR_INVALID_REQUEST)
-
-        week_date = datetime.strptime(week, "%Y-%m-%d").date()
-        Week.objects.update_or_create(
-            week_date=week_date,
-            user=self.request.user,
-            defaults={
-                "week_date": week_date,
-                "note": note,
-                "user": self.request.user,
-            },
-        )
-
-        start_day_p = week_date.strftime(SK_DATE_FORMAT)
-        return redirect(f"{reverse('index')}?{START_DAY_P}={start_day_p}")
+        return redirect(f"{reverse('index')}?{settings.QS_START_DAY}={start_day_p}")
 
 
 @method_decorator(login_required, name="dispatch")
@@ -270,7 +156,7 @@ class JumpToWeekView(View):
         except ValueError:
             return redirect("settings")
         return redirect(
-            f"{reverse('index')}?{START_DAY_P}={parsed.strftime(SK_DATE_FORMAT)}"
+            f"{reverse('index')}?{settings.QS_START_DAY}={parsed.strftime(settings.SK_DATE_FORMAT)}"
         )
 
 
@@ -317,7 +203,7 @@ class GraphView(MoodMapping, TemplateView):
 
         return context
 
-    def default_start_dt(self):
+    def default_start_dt(self) -> date:
         try:
             start_date = self.request.GET.get("start_date", "")
             start_dt = datetime.strptime(start_date, "%Y-%m-%d")
@@ -325,7 +211,7 @@ class GraphView(MoodMapping, TemplateView):
             start_dt = timezone.now() + timedelta(days=-7)
         return start_dt.date()
 
-    def default_end_dt(self):
+    def default_end_dt(self) -> date:
         try:
             end_date = self.request.GET.get("end_date", "")
             end_dt = datetime.strptime(end_date, "%Y-%m-%d").date()
@@ -366,12 +252,12 @@ class SearchView(MoodMapping, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        paginator = Paginator(self.get_results(), PER_PAGE)
+        paginator = Paginator(self.get_results(), settings.PER_PAGE)
         page = self.request.GET.get("page", 1)
         get_copy = self.request.GET.copy()
         context["results"] = paginator.get_page(page)
         for week in context["results"]:
-            week.label = self.get_week_label(week.week_date)
+            week.label = self.get_week_label(week._week_date)
 
         context["paginator"] = paginator
         context["page_obj"] = paginator.page
@@ -423,31 +309,16 @@ class SearchView(MoodMapping, TemplateView):
         return qs
 
 
-# API views
+@method_decorator(login_required, name="dispatch")
+class SaveNoteView(View):
+    def post(self, request):
+        week = request.POST.get("week", "").strip()
+        note = request.POST.get("note", "").strip()
 
+        if not week:
+            raise BadRequest()
 
-class EntryViewSet(viewsets.ModelViewSet):
-    serializer_class = serializers.EntrySerializer
-
-    def get_queryset(self):
-        return Entry.objects.filter(user=self.request.user)
-
-
-class WeekViewSet(viewsets.ModelViewSet):
-    serializer_class = serializers.WeekSerializer
-
-    def get_queryset(self):
-        return Week.objects.filter(user=self.request.user)
-
-
-@api_view()
-def api_moods(request):
-    return Response(
-        {
-            1: _("very_bad"),
-            2: _("bad"),
-            3: _("medium"),
-            4: _("good"),
-            5: _("very_good"),
-        }
-    )
+        sk_service = SkService(self.request.user)
+        week = sk_service.save_note(week, note)
+        start_day_p = week.week_date.strftime(settings.SK_DATE_FORMAT)
+        return redirect(f"{reverse('index')}?{settings.QS_START_DAY}={start_day_p}")

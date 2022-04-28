@@ -1,11 +1,15 @@
 # Contains requirements common to all environments
-Django==4.0.3
+Django==4.0.4
 dj-database-url==0.5.0
+dj-rest-auth==2.2.4
 django-bootstrap-datepicker-plus==4.0.0
 django-bootstrap4==22.1
 django-cache-url==3.4.0
+django-cors-headers==3.11.0
 django-registration==3.2
 django-rosetta==0.9.8
+djangorestframework-dataclasses==1.1.1
+djangorestframework-simplejwt==5.1.0
 djangorestframework==3.13.1
 ipython==8.2.0
 plotly==5.7.0

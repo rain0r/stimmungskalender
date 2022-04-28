@@ -1,5 +1,5 @@
 from abc import ABC
-from datetime import datetime
+from datetime import datetime, date
 
 from django.db.models import QuerySet
 from django.utils import timezone
@@ -8,7 +8,7 @@ from web.models import Entry
 
 
 class BaseGraph(ABC):
-    def __init__(self, start_dt: datetime, end_dt: datetime, **kwargs):
+    def __init__(self, start_dt: date, end_dt: date, **kwargs):
         self.user = None
         self.start_dt = start_dt
         self.end_dt = end_dt

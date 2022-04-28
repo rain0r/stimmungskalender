@@ -16,14 +16,8 @@ Including another URLconf
 from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path, re_path
-from rest_framework.routers import DefaultRouter
 
-from web import views
-
-router = DefaultRouter()
-router.register(r"api/entry", views.EntryViewSet, basename="api-entry")
-router.register(r"api/week", views.WeekViewSet, basename="api-week")
-
+from web import views, api
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -39,8 +33,10 @@ urlpatterns = [
     path("graph/", views.GraphView.as_view(), name="graph"),
     path("settings/", views.SettingsView.as_view(), name="settings"),
     path("search/", views.SearchView.as_view(), name="search"),
-    path("", include(router.urls)),
-    path("api/moods", views.api_moods, name="api-moods"),
+    path("api/entry-day/", api.EntryDayView.as_view()),
+    path("api/mood-table/", api.MoodTableView.as_view()),
+    path("api/save-note/", api.SaveNoteView.as_view()),
     re_path(r"^rosetta/", include("rosetta.urls")),
     path("i18n/", include("django.conf.urls.i18n")),
+    path("dj-rest-auth/", include("dj_rest_auth.urls")),
 ]

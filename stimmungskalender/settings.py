@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+from datetime import timedelta
 from pathlib import Path
 
 import django_cache_url
@@ -17,9 +18,9 @@ from decouple import Csv, config
 from dj_database_url import parse as db_url
 from django.utils.translation import gettext_lazy as _
 
-# from django.utils.translation import gettext as _
-
 from stimmungskalender import tupled_list
+
+# from django.utils.translation import gettext as _
 
 MAX_LOG_FILE_SIZE = 20971520  # 20 MB
 
@@ -52,12 +53,16 @@ INSTALLED_APPS = [
     "bootstrap_datepicker_plus",
     "django_registration",
     "rest_framework",
+    "rest_framework.authtoken",
+    "dj_rest_auth",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -194,8 +199,8 @@ LOGGING = {
     },
     "loggers": {
         "django": {
-            "handlers": ["log_file"],
-            "level": "WARN",
+            "handlers": config("SK_LOG_HANDLERS", cast=Csv()),
+            "level": config("DJANGO_LOG_LEVEL", default="ERROR"),
         },
     },
 }
@@ -205,6 +210,12 @@ LOGGING = {
 DEFAULT_VIEW_MODE = "lines"
 
 SITE_URL = config("SITE_URL", default="http://127.0.0.1:8000")
+
+PER_PAGE = 25
+
+QS_START_DAY = "start_day"  # Used to jump between weeks
+
+SK_DATE_FORMAT = "%Y-%W"  # To identify a week
 
 # Django Registration
 
@@ -217,4 +228,31 @@ LOGOUT_REDIRECT_URL = "/accounts/login/"
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 7,
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
+    ),
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
+}
+
+# django corse header
+
+CORS_ORIGIN_REGEX_WHITELIST = [
+    r"^.+ $",
+]
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+# dj rest auth
+
+REST_USE_JWT = True
+JWT_AUTH_COOKIE = "sk-auth-cookie"
+JWT_AUTH_REFRESH_COOKIE = "sk-refresh-token"
+
+# Simple JWT
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=5),
 }

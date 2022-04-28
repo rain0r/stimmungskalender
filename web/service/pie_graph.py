@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date
 
 import plotly.graph_objs as go
 from django.db.models import Count
@@ -12,9 +12,7 @@ PERIODS = ["mood_day", "mood_night"]
 
 
 class PieGraphService(BaseGraph):
-    def __init__(
-        self, user: User, mood_mapping: dict, start_dt: datetime, end_dt: datetime
-    ):
+    def __init__(self, user: User, mood_mapping: dict, start_dt: date, end_dt: date):
         super().__init__(start_dt=start_dt, end_dt=end_dt)
         self.user = user
         self.mood_mapping = mood_mapping

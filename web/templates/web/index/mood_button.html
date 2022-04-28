@@ -1,6 +1,6 @@
 <button type="submit"
         name="entry"
-        value="{{ number }}_{{ weekday_entry.weekday|date:'Y-m-d' }}"
+        value="{{ number }}_{{ weekday_entry.day|date:'Y-m-d' }}"
         title="{{ moods|get_item:number }}"
         data-toggle="tooltip"
         data-placement="top"

@@ -31,37 +31,37 @@
         <style>{% include 'web/css/moods.css' %}</style>
     </head>
     <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'index' %}">🗓️ Stimmungskalender</a>
-            <button class="navbar-toggler"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbarCollapse"
-                    aria-controls="navbarCollapse"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
-                        <a class="nav-link" href="{% url 'index' %}">{% translate 'home' %}</a>
-                    </li>
-                    <li class="nav-item {% if request.resolver_match.url_name == 'graph' %}active{% endif %}">
-                        <a class="nav-link" href="{% url 'graph' %}">{% translate 'graph' %}</a>
-                    </li>
-                    <li class="nav-item {% if request.resolver_match.url_name == 'search' %}active{% endif %}">
-                        <a class="nav-link" href="{% url 'search' %}">{% translate 'search' %}</a>
-                    </li>
-                    <li class="nav-item {% if request.resolver_match.url_name == 'settings' %}active{% endif %}">
-                        <a class="nav-link" href="{% url 'settings' %}">{% translate 'settings' %}</a>
-                    </li>
-                </ul>
-                <span class="text-muted">{% translate 'logged_in_as' %}: {{ user.get_username }}</span>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'index' %}">🗓️ Stimmungskalender</a>
+                <button class="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarCollapse"
+                        aria-controls="navbarCollapse"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+                            <a class="nav-link" href="{% url 'index' %}">{% translate 'home' %}</a>
+                        </li>
+                        <li class="nav-item {% if request.resolver_match.url_name == 'graph' %}active{% endif %}">
+                            <a class="nav-link" href="{% url 'graph' %}">{% translate 'graph' %}</a>
+                        </li>
+                        <li class="nav-item {% if request.resolver_match.url_name == 'search' %}active{% endif %}">
+                            <a class="nav-link" href="{% url 'search' %}">{% translate 'search' %}</a>
+                        </li>
+                        <li class="nav-item {% if request.resolver_match.url_name == 'settings' %}active{% endif %}">
+                            <a class="nav-link" href="{% url 'settings' %}">{% translate 'settings' %}</a>
+                        </li>
+                    </ul>
+                    <span class="text-muted">{% translate 'logged_in_as' %}: {{ user.get_username }}</span>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
         <main class="container pt-3">
             {% block content %}
             {% endblock content %}
