@@ -244,6 +244,8 @@ CORS_ORIGIN_REGEX_WHITELIST = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='127.0.0.1', cast=Csv())
+
 # dj rest auth
 
 REST_USE_JWT = True
