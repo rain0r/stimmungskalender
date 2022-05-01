@@ -143,18 +143,6 @@ class SkService:
         )
         return f"{start} — {end}"
 
-    # def get_day_entry(self, day: str) -> WeekdayEntry:
-    #     try:
-    #         entry = Entry.objects.get(user=self._user, day=day)
-    #         day = entry.day
-    #         mood_day = entry.mood_day
-    #         mood_night = entry.mood_night
-    #     except Entry.DoesNotExist:
-    #         day = timezone.now().date()
-    #         mood_day = 0
-    #         mood_night = 0
-    #     return WeekdayEntry(day=day, mood_day=mood_day, mood_night=mood_night)
-
     def _week_start(self, start_day_p: str) -> datetime:
         """
         Returns the start of a week defined by YYYY-W format, eg: 2022-54
