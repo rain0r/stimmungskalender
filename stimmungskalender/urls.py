@@ -36,6 +36,7 @@ urlpatterns = [
     path("api/entry-day/", api.EntryDayView.as_view()),
     path("api/mood-table/", api.MoodTableView.as_view()),
     path("api/save-note/", api.SaveNoteView.as_view()),
+    path("api/search/", api.SearchView.as_view()),
     re_path(r"^rosetta/", include("rosetta.urls")),
     path("i18n/", include("django.conf.urls.i18n")),
     path("dj-rest-auth/", include("dj_rest_auth.urls")),

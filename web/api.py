@@ -58,5 +58,21 @@ class MoodTableView(views.APIView):
         start_day_p = request.GET.get(settings.QS_START_DAY, "").strip()
         mood_table = sk_service.mood_table(start_day_p)
         serializer = serializers.MoodTableSerializer(mood_table)
+        return Response(serializer.data)
 
+
+class SearchView(views.APIView):
+    """
+    Provide endpoint to search for weeks.
+    """
+
+    def get(self, request):
+        sk_service = SkService(request.user)
+        results = sk_service.search(
+            mood=self.request.GET.get("mood", ""),
+            search_term=self.request.GET.get("search_term", ""),
+            start_date=self.request.GET.get("start_date", ""),
+            end_date=self.request.GET.get("end_date", ""),
+        )
+        serializer = serializers.WeekSerializer(results, many=True)
         return Response(serializer.data)

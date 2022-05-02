@@ -252,7 +252,14 @@ class SearchView(MoodMapping, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        paginator = Paginator(self.get_results(), settings.PER_PAGE)
+        sk_service = SkService(self.request.user)
+        results = sk_service.search(
+            mood=self.request.GET.get("mood", ""),
+            search_term=self.request.GET.get("search_term", ""),
+            start_date=self.request.GET.get("start_date", ""),
+            end_date=self.request.GET.get("end_date", ""),
+        )
+        paginator = Paginator(results, settings.PER_PAGE)
         page = self.request.GET.get("page", 1)
         get_copy = self.request.GET.copy()
         context["results"] = paginator.get_page(page)
@@ -270,43 +277,6 @@ class SearchView(MoodMapping, TemplateView):
         start = formats.date_format(week, "SHORT_DATE_FORMAT")
         end = formats.date_format((week + timedelta(days=7)), "SHORT_DATE_FORMAT")
         return f"{start} — {end}"
-
-    def get_results(self):
-        qs = Week.objects.filter(user=self.request.user).order_by("-week_date")
-        qs = self.filter_search(qs)
-        qs = self.filter_date(qs)
-        qs = self.filter_mood(qs)
-        return qs
-
-    def filter_mood(self, qs):
-        mood_param = self.request.GET.get("mood", "")
-        try:
-            mood = int(mood_param)
-        except ValueError:
-            return qs
-        qs = qs.filter(Q(entry__mood_day=mood) | Q(entry__mood_night=mood))
-        return qs
-
-    def filter_search(self, qs):
-        search_term = self.request.GET.get("search_term", "").strip()
-        if search_term:
-            qs = qs.filter(note__icontains=search_term)
-        return qs
-
-    def filter_date(self, qs):
-        start = self.request.GET.get("start_date", "").strip()
-        end = self.request.GET.get("end_date", "").strip()
-
-        if start:
-            start_dt = datetime.strptime(start, "%Y-%m-%d").date()
-            qs = qs.filter(week_date__gte=start_dt)
-        if end:
-            end_dt = datetime.strptime(end, "%Y-%m-%d").date()
-            qs = qs.filter(week_date__lte=end_dt)
-        else:
-            this_week = timezone.now()
-            qs = qs.filter(week_date__lte=this_week)
-        return qs
 
 
 @method_decorator(login_required, name="dispatch")

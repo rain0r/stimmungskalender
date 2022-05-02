@@ -4,6 +4,7 @@ from enum import Enum
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.utils import timezone, formats
 from django.utils.timezone import now
 
@@ -30,6 +31,19 @@ class SkService:
         user: User,
     ):
         self._user = user
+
+    def search(
+        self,
+        search_term: str = "",
+        start_date: str = "",
+        end_date: str = "",
+        mood: str = "",
+    ):
+        qs = Week.objects.filter(user=self._user).order_by("-week_date")
+        qs = self._filter_search(qs, search_term)
+        qs = self._filter_date(qs, start_date, end_date)
+        qs = self._filter_mood(qs, mood)
+        return qs
 
     def mood_table(self, start_day_p: str) -> MoodTable:
         week_start = self._week_start(start_day_p)
@@ -169,3 +183,45 @@ class SkService:
         elif period == Period.DAY:
             return entry.mood_day
         raise InvalidPeriodError()
+
+    def _filter_mood(
+        self,
+        qs,
+        mood: str = "",
+    ):
+        try:
+            mood = int(mood)
+        except ValueError:
+            return qs
+        qs = qs.filter(Q(entry__mood_day=mood) | Q(entry__mood_night=mood))
+        return qs
+
+    def _filter_search(
+        self,
+        qs,
+        search_term: str = "",
+    ):
+        search_term = search_term.strip()
+        if search_term:
+            qs = qs.filter(note__icontains=search_term)
+        return qs
+
+    def _filter_date(
+        self,
+        qs,
+        start_date: str = "",
+        end_date: str = "",
+    ):
+        start = start_date.strip()
+        end = end_date.strip()
+
+        if start:
+            start_dt = datetime.strptime(start, "%Y-%m-%d").date()
+            qs = qs.filter(week_date__gte=start_dt)
+        if end:
+            end_dt = datetime.strptime(end, "%Y-%m-%d").date()
+            qs = qs.filter(week_date__lte=end_dt)
+        else:
+            this_week = timezone.now()
+            qs = qs.filter(week_date__lte=this_week)
+        return qs
