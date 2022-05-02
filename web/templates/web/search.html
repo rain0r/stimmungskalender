@@ -6,7 +6,7 @@
     <hr>
     <form action="{% url 'search' %}" method="get">
         <div class="form-row">
-            <div class="form-row col-12 col-md-6 input-daterange">
+            <div class="form-row col-12 col-md-12 input-daterange">
                 <div class="form-group col-12 col-md-6">
                     <label for="start_date" class="col-sm-2 col-form-label">{% translate 'start_date' %}</label>
                     <input type="text"
@@ -32,7 +32,7 @@
                            value="{{ request.GET.end_date }}"/>
                 </div>
             </div>
-            <div class="form-group col-12 col-md-3">
+            <div class="form-group col-12 col-md-6">
                 <label for="end_date" class="col-sm-2 col-form-label">{% translate 'mood' %}</label>
                 <select name="mood" class="custom-select">
                     <option>
@@ -48,8 +48,8 @@
                     {% endfor %}
                 </select>
             </div>
-            <div class="form-group col-12 col-md-3">
-                <label for="search_term" class="col-sm-2 col-form-label">{% translate 'search_term' %}</label>
+            <div class="form-group col-12 col-md-6">
+                <label for="search_term" class="col-form-label">{% translate 'search_term' %}</label>
                 <input type="text"
                        class="form-control"
                        id="search_term"
