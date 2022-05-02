@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta, date
 
+import ipdb
 from django.conf import settings
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -257,7 +258,7 @@ class SearchView(MoodMapping, TemplateView):
         get_copy = self.request.GET.copy()
         context["results"] = paginator.get_page(page)
         for week in context["results"]:
-            week.label = self.get_week_label(week._week_date)
+            week.label = self.get_week_label(week.week_date)
 
         context["paginator"] = paginator
         context["page_obj"] = paginator.page
