@@ -71,8 +71,8 @@ class SearchView(views.APIView):
         results = sk_service.search(
             mood=self.request.GET.get("mood", ""),
             search_term=self.request.GET.get("search_term", ""),
-            start_date=self.request.GET.get("start_date", ""),
-            end_date=self.request.GET.get("end_date", ""),
+            start_date=self.request.GET.get("start_day", ""),
+            end_date=self.request.GET.get("end_day", ""),
         )
         serializer = serializers.WeekSerializer(results, many=True)
         return Response(serializer.data)

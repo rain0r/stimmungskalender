@@ -1,7 +1,6 @@
-from datetime import timedelta, datetime, date
+from datetime import timedelta, date
 
 from django.template.defaulttags import register
-from django.utils import formats
 
 
 @register.filter

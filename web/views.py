@@ -5,17 +5,16 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import BadRequest
 from django.core.paginator import Paginator
-from django.db.models import Q
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
-from django.utils import formats, timezone
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views import View
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import RedirectView, TemplateView
 
-from web.models import Entry, UserSettings, Week, Moods
+from web.models import Entry, UserSettings, Moods
 from web.service.pie_graph import PieGraphService
 from web.service.scatter_graph import ScatterGraphService
 from web.service.sk import SkService
