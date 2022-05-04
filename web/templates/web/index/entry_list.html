@@ -5,7 +5,11 @@
         <div class="d-flex mb-2 align-items-baseline">
             <a href="{% url 'index' %}?start_day={{ mood_table.week_start|date:'Y-W' }}"
                class="h4 text-reset">{% translate 'week' %} #{{ mood_table.week.week_date|date:"W" }}</a>
-            <span class="text-muted ml-5">{{ mood_table.week_label }}</span>
+            <span class="text-muted ml-5">
+                {{ mood_table.week.week_date }}
+                 —
+                {{ mood_table.week.week_date|week_end_date }}
+            </span>
         </div>
         <div class="mb-2">
             <button class="btn {% if mood_table.week.note %} btn-primary {% else %} btn-outline-dark {% endif %}"

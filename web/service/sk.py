@@ -51,7 +51,6 @@ class SkService:
         week = self._week(week_start)
         next_week = self._next_week(week_start)
         prev_week = self._prev_week(week_start)
-        week_label = self._week_label(week_start)
         current_day = self._current_mood(Period.DAY, days_of_week)
         current_night = self._current_mood(Period.NIGHT, days_of_week)
 
@@ -60,7 +59,6 @@ class SkService:
             week=week,
             next_week=next_week,
             prev_week=prev_week,
-            week_label=week_label,
             current_day=current_day,
             current_night=current_night,
         )
@@ -149,13 +147,6 @@ class SkService:
     def _prev_week(self, week_start: datetime) -> str:
         ret = week_start + timedelta(days=0 - week_start.weekday() - 7)
         return ret.strftime(settings.SK_DATE_FORMAT)
-
-    def _week_label(self, week_start: datetime) -> str:
-        start = formats.date_format(week_start, "SHORT_DATE_FORMAT")
-        end = formats.date_format(
-            (week_start + timedelta(days=7)).date(), "SHORT_DATE_FORMAT"
-        )
-        return f"{start} — {end}"
 
     def _week_start(self, start_day_p: str) -> datetime:
         """

@@ -263,20 +263,12 @@ class SearchView(MoodMapping, TemplateView):
         page = self.request.GET.get("page", 1)
         get_copy = self.request.GET.copy()
         context["results"] = paginator.get_page(page)
-        for week in context["results"]:
-            week.label = self.get_week_label(week.week_date)
-
         context["paginator"] = paginator
         context["page_obj"] = paginator.page
         context["parameters"] = get_copy.pop("page", True) and get_copy.urlencode()
         context["moods"] = self.mood_mapping
 
         return context
-
-    def get_week_label(self, week):
-        start = formats.date_format(week, "SHORT_DATE_FORMAT")
-        end = formats.date_format((week + timedelta(days=7)), "SHORT_DATE_FORMAT")
-        return f"{start} — {end}"
 
 
 @method_decorator(login_required, name="dispatch")
