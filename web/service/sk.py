@@ -6,7 +6,6 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.utils import timezone
-from django.utils.timezone import now
 
 from web.models import Entry, Week
 from web.structs import WeekdayEntry, MoodTable
@@ -43,6 +42,9 @@ class SkService:
         qs = self._filter_search(qs, search_term)
         qs = self._filter_date(qs, start_date, end_date)
         qs = self._filter_mood(qs, mood)
+
+        # Exclude future weeks
+        qs = qs.exclude(week_date__gt=timezone.now())
         return qs
 
     def mood_table(self, start_day_p: str) -> MoodTable:
@@ -69,8 +71,8 @@ class SkService:
         :param note:
         :return:
         """
-        # ipdb.set_trace()
         week_date = datetime.strptime(week, "%Y-%m-%d").date()
+        week_date += timedelta(days=0 - week_date.weekday())
         Week.objects.update_or_create(
             week_date=week_date,
             user=self._user,
@@ -164,7 +166,7 @@ class SkService:
     def _current_mood(
         self, period: Period, days_of_week: typing.List[WeekdayEntry]
     ) -> int:
-        today = now().date()
+        today = timezone.now().date()
         entry = next((i for i in days_of_week if i.day == today), None)
         if not entry:
             # We're browsing a previous week
@@ -184,7 +186,8 @@ class SkService:
             mood = int(mood)
         except ValueError:
             return qs
-        qs = qs.filter(Q(entry__mood_day=mood) | Q(entry__mood_night=mood))
+        if mood:
+            qs = qs.filter(Q(entry__mood_day=mood) | Q(entry__mood_night=mood))
         return qs
 
     def _filter_search(
@@ -212,7 +215,4 @@ class SkService:
         if end:
             end_dt = datetime.strptime(end, "%Y-%m-%d").date()
             qs = qs.filter(week_date__lte=end_dt)
-        else:
-            this_week = timezone.now()
-            qs = qs.filter(week_date__lte=this_week)
         return qs
