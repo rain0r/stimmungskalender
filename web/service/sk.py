@@ -137,6 +137,8 @@ class SkService:
         return [week_data[i] for i in week_data]
 
     def _week(self, week_start: datetime) -> Week:
+        # Make sure we use the start of the week
+        week_start += timedelta(days=0 - week_start.weekday())
         my_week, created = Week.objects.get_or_create(
             user=self._user, week_date=week_start
         )
