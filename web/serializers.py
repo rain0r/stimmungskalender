@@ -8,7 +8,7 @@ from web.structs import MoodTable, WeekdayEntry
 class WeekSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Week
-        fields = ["week_date", "note"]
+        fields = ["id", "week_date", "note"]
 
 
 class WeekdayEntrySerializer(DataclassSerializer):
