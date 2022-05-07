@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path, re_path
+from django.views.i18n import JavaScriptCatalog, JSONCatalog
 
 from web import views, api
 
@@ -39,5 +40,11 @@ urlpatterns = [
     path("api/search/", api.SearchView.as_view()),
     re_path(r"^rosetta/", include("rosetta.urls")),
     path("i18n/", include("django.conf.urls.i18n")),
+    path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog"),
+    path(
+        "jsoni18n/",
+        api.SkJSONCatalog.as_view(domain="django"),
+        name="json-catalog",
+    ),
     path("dj-rest-auth/", include("dj_rest_auth.urls")),
 ]
