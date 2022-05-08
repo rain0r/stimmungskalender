@@ -41,7 +41,6 @@ urlpatterns = [
     path("api/set-language/", api.SetLanguageView.as_view()),
     re_path(r"^rosetta/", include("rosetta.urls")),
     path("i18n/", include("django.conf.urls.i18n")),
-    path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog"),
     path(
         "jsoni18n/",
         api.SkJSONCatalog.as_view(domain="django"),
