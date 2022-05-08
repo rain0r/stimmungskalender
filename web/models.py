@@ -40,7 +40,9 @@ class Week(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=["user", "week_date"], name="Unique user and week_date")
+            models.UniqueConstraint(
+                fields=["user", "week_date"], name="Unique user and week_date"
+            )
         ]
 
 
