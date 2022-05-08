@@ -214,7 +214,7 @@ PER_PAGE = 25
 
 QS_START_DAY = "start_day"  # Used to jump between weeks
 
-SK_DATE_FORMAT = "%Y-%W"  # To identify a week
+SK_DATE_FORMAT = "%Y-%m-%d"  # To identify a week
 
 # Django Registration
 

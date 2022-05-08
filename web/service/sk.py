@@ -71,7 +71,7 @@ class SkService:
         :param note:
         :return:
         """
-        week_date = datetime.strptime(week, "%Y-%m-%d").date()
+        week_date = datetime.strptime(week, settings.SK_DATE_FORMAT).date()
         week_date += timedelta(days=0 - week_date.weekday())
         Week.objects.update_or_create(
             week_date=week_date,
@@ -93,7 +93,7 @@ class SkService:
         }
 
         # Create related week object
-        dt1 = datetime.strptime(day, "%Y-%m-%d")
+        dt1 = datetime.strptime(day, settings.SK_DATE_FORMAT)
         dt1 += timedelta(days=0 - dt1.weekday())
         my_week, created = Week.objects.get_or_create(user=self._user, week_date=dt1)
 
@@ -126,11 +126,11 @@ class SkService:
         days = [(week_start + timedelta(days=d)).date() for d in range(7)]
         week_data = {}
         for day in days:
-            week_data[day.strftime("%Y-%m-%d")] = WeekdayEntry(
+            week_data[day.strftime(settings.SK_DATE_FORMAT)] = WeekdayEntry(
                 day=day, mood_day=0, mood_night=0
             )
         for entry in my_entries:
-            week_data[entry.day.strftime("%Y-%m-%d")] = WeekdayEntry(
+            week_data[entry.day.strftime(settings.SK_DATE_FORMAT)] = WeekdayEntry(
                 day=entry.day, mood_day=entry.mood_day, mood_night=entry.mood_night
             )
 
@@ -159,7 +159,7 @@ class SkService:
         :return:
         """
         if start_day_p:
-            dt1 = datetime.strptime(f"{start_day_p}-1", "%Y-%W-%w")
+            dt1 = datetime.strptime(f"{start_day_p}", settings.SK_DATE_FORMAT)
         else:
             dt1 = timezone.now()
         dt1 += timedelta(days=0 - dt1.weekday())
@@ -212,9 +212,9 @@ class SkService:
         end = end_date.strip()
 
         if start:
-            start_dt = datetime.strptime(start, "%Y-%m-%d").date()
+            start_dt = datetime.strptime(start, settings.SK_DATE_FORMAT).date()
             qs = qs.filter(week_date__gte=start_dt)
         if end:
-            end_dt = datetime.strptime(end, "%Y-%m-%d").date()
+            end_dt = datetime.strptime(end, settings.SK_DATE_FORMAT).date()
             qs = qs.filter(week_date__lte=end_dt)
         return qs

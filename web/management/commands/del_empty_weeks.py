@@ -1,5 +1,3 @@
-import ipdb
-from django.core.mail import mail_admins
 from django.core.management import BaseCommand
 from django.db.models import Count
 
