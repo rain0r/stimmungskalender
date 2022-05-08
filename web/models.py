@@ -24,10 +24,10 @@ class Entry(models.Model):
             f"User: {self.user}, Date: {self.day}, Day: {self.mood_day}, Night: {self.mood_night}"
         )
 
-        class Meta:
-            constraints = [
-                models.UniqueConstraint(fields=["user", "day"], name="unique entry")
-            ]
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["user", "day"], name="unique entry")
+        ]
 
 
 class Week(models.Model):
