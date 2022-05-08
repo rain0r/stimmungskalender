@@ -38,6 +38,7 @@ urlpatterns = [
     path("api/mood-table/", api.MoodTableView.as_view()),
     path("api/save-note/", api.SaveNoteView.as_view()),
     path("api/search/", api.SearchView.as_view()),
+    path("api/set-language/", api.SetLanguageView.as_view()),
     re_path(r"^rosetta/", include("rosetta.urls")),
     path("i18n/", include("django.conf.urls.i18n")),
     path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog"),

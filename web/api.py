@@ -1,10 +1,10 @@
-import ipdb
 from django.conf import settings
 from django.core.exceptions import BadRequest
 from django.http import JsonResponse
 from django.utils import translation
 from django.views.i18n import JSONCatalog
 from rest_framework import views, status
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from web import serializers
@@ -83,22 +83,30 @@ class SearchView(views.APIView):
 
 
 class SkJSONCatalog(views.APIView, JSONCatalog):
+    permission_classes = [AllowAny]
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.user_language = "de-de"
-        # translation.activate(self.user_language)
+        self.user_language = settings.LANGUAGE_CODE
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
-        print(f"lang: {self.request.GET.get('lang')}")
-        print(f"username1: {self.request.user.username}")
         self.user_language = self.request.GET.get("lang")
         translation.activate(self.user_language)
 
     def render_to_response(self, context, **response_kwargs):
-        print(f"username2: {self.request.user.username}")
-        cur_language = translation.get_language()
-        print(cur_language)
         response = JsonResponse(context)
         response.set_cookie(settings.LANGUAGE_COOKIE_NAME, self.user_language)
+
         return response
+
+
+class SetLanguageView(views.APIView):
+    """
+    Set the language of a user.
+    """
+
+    def post(self, request):
+        user_language = request.data.get("language", settings.LANGUAGE_CODE).strip()
+        translation.activate(user_language)
+        return Response(status=status.HTTP_200_OK)
