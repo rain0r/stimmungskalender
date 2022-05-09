@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-09 19:27+0200\n"
-"PO-Revision-Date: 2022-03-02 08:13+0100\n"
+"POT-Creation-Date: 2022-05-09 20:34+0200\n"
+"PO-Revision-Date: 2022-05-09 20:34+0200\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -125,17 +125,37 @@ msgstr "Punkte"
 msgid "lines"
 msgstr "Linien"
 
-#: templates/web/i18n.html:4
+#: templates/web/i18n.html:6
 msgid "day_header"
 msgstr "Mein Tag war..."
 
-#: templates/web/i18n.html:5 templates/web/i18n.html:6
+#: templates/web/i18n.html:7 templates/web/i18n.html:8
 msgid "night_header"
 msgstr "Meine Nacht war..."
 
-#: templates/web/i18n.html:7
+#: templates/web/i18n.html:9
 msgid "first_page"
-msgstr ""
+msgstr "Erste Seite"
+
+#: templates/web/i18n.html:10
+msgid "items_per_page"
+msgstr "Einträge pro Seite"
+
+#: templates/web/i18n.html:11
+msgid "last_page"
+msgstr "Letzte Seite"
+
+#: templates/web/i18n.html:12
+msgid "next_page"
+msgstr "Nächste Seite"
+
+#: templates/web/i18n.html:13
+msgid "previous_page"
+msgstr "Vorherige Seite"
+
+#: templates/web/i18n.html:14
+msgid "page"
+msgstr "Seite"
 
 #: templates/web/index/entry_list.html:7
 #: templates/web/index/standout_data.html:12
