@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-06 19:05+0200\n"
+"POT-Creation-Date: 2022-05-09 19:27+0200\n"
 "PO-Revision-Date: 2022-03-02 08:13+0100\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,7 @@ msgstr "Night"
 msgid "Log in"
 msgstr ""
 
-#: templates/web/base.html:49 templates/web/base.html:73
+#: templates/web/base.html:49 templates/web/base.html:74
 msgid "home"
 msgstr "Home"
 
@@ -51,7 +51,7 @@ msgstr "Settings"
 msgid "logged_in_as"
 msgstr "Logged in as"
 
-#: templates/web/base.html:76
+#: templates/web/base.html:77
 msgid "logout"
 msgstr "Logout"
 
@@ -126,6 +126,18 @@ msgstr "Markers"
 msgid "lines"
 msgstr "Lines"
 
+#: templates/web/i18n.html:4
+msgid "day_header"
+msgstr "My day was..."
+
+#: templates/web/i18n.html:5 templates/web/i18n.html:6
+msgid "night_header"
+msgstr "My night was..."
+
+#: templates/web/i18n.html:7
+msgid "first_page"
+msgstr ""
+
 #: templates/web/index/entry_list.html:7
 #: templates/web/index/standout_data.html:12
 #: templates/web/index/standout_data.html:26
@@ -160,14 +172,6 @@ msgstr "Save"
 #: templates/web/index/entry_list.html:46
 msgid "jump_to_week"
 msgstr "Jump to week"
-
-#: templates/web/index/entry_list.html:68
-msgid "day_header"
-msgstr "My day was..."
-
-#: templates/web/index/entry_list.html:69
-msgid "night_header"
-msgstr "My night was..."
 
 #: templates/web/index/form.html:14
 msgid "click_to_toggle"
