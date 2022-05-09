@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.utils import translation
 from django.views.i18n import JSONCatalog
 from rest_framework import views, status
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from web import serializers
@@ -18,6 +18,8 @@ class EntryDayView(views.APIView):
     """
     Get and set data for a single day.
     """
+
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         sk_service = SkService(request.user)
@@ -36,6 +38,8 @@ class SaveNoteView(views.APIView):
     """
     Save note for a week.
     """
+
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         week = request.data.get("week_date", "").strip()
@@ -57,6 +61,8 @@ class MoodTableView(views.APIView):
     Get data for a specific week.
     """
 
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         sk_service = SkService(request.user)
         start_day_p = request.GET.get(settings.QS_START_DAY, "").strip()
@@ -69,6 +75,8 @@ class SearchView(views.APIView):
     """
     Provide endpoint to search for weeks.
     """
+
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         sk_service = SkService(request.user)
@@ -105,6 +113,8 @@ class SetLanguageView(views.APIView):
     """
     Set the language of a user.
     """
+
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         user_language = request.data.get("language", settings.LANGUAGE_CODE).strip()
