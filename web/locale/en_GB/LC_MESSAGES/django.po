@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-09 20:34+0200\n"
-"PO-Revision-Date: 2022-05-09 20:34+0200\n"
+"POT-Creation-Date: 2022-05-13 18:05+0200\n"
+"PO-Revision-Date: 2022-05-13 18:05+0200\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -157,6 +157,14 @@ msgstr "Previous page"
 #: templates/web/i18n.html:14
 msgid "page"
 msgstr "Page"
+
+#: templates/web/i18n.html:15
+msgid "colors_enabled"
+msgstr "Colors enabled"
+
+#: templates/web/i18n.html:16
+msgid "colors_enabled_label"
+msgstr "Use a color for each mood."
 
 #: templates/web/index/entry_list.html:7
 #: templates/web/index/standout_data.html:12
