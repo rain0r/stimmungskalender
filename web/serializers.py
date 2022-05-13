@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework_dataclasses.serializers import DataclassSerializer
 
 from web import models
-from web.structs import MoodTable, WeekdayEntry
+from web.structs import MoodTable, WeekdayEntry, StandoutData
 
 
 class WeekSerializer(serializers.ModelSerializer):
@@ -21,3 +21,10 @@ class MoodTableSerializer(DataclassSerializer):
 
     class Meta:
         dataclass = MoodTable
+
+
+class StandoutDataSerializer(DataclassSerializer):
+    entry = WeekdayEntrySerializer()
+
+    class Meta:
+        dataclass = StandoutData

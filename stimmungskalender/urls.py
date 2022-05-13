@@ -35,6 +35,7 @@ urlpatterns = [
     path("search/", views.SearchView.as_view(), name="search"),
     path("api/entry-day/", api.EntryDayView.as_view()),
     path("api/mood-table/", api.MoodTableView.as_view()),
+    path("api/standout-data/", api.StandoutDataView.as_view()),
     path("api/save-note/", api.SaveNoteView.as_view()),
     path("api/search/", api.SearchView.as_view()),
     path("api/set-language/", api.SetLanguageView.as_view()),

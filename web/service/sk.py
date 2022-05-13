@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.utils import timezone
 
-from web.models import Entry, Week
-from web.structs import WeekdayEntry, MoodTable
+from web.models import Entry, Week, Moods
+from web.structs import WeekdayEntry, MoodTable, StandoutData
 
 
 class InvalidPeriodError(Exception):
@@ -119,6 +119,47 @@ class SkService:
         return WeekdayEntry(
             day=obj.day, mood_day=obj.mood_day, mood_night=obj.mood_night
         )
+
+    def standout_data(self) -> typing.List[StandoutData]:
+        ret = []
+        qs = Entry.objects.filter(user=self._user)
+
+        # very good day
+        ret.append(
+            StandoutData(
+                label="last_very_good_day",
+                css_class="alert-success",
+                entry=(qs.filter(mood_day=Moods.VERY_GOOD).order_by("-id").first()),
+            )
+        )
+
+        # very good night
+        ret.append(
+            StandoutData(
+                label="last_very_good_night",
+                css_class="alert-success",
+                entry=(qs.filter(mood_night=Moods.VERY_GOOD).order_by("-id").first()),
+            )
+        )
+
+        # very bad day
+        ret.append(
+            StandoutData(
+                label="last_very_bad_day",
+                css_class="alert-danger",
+                entry=(qs.filter(mood_day=Moods.VERY_BAD).order_by("-id").first()),
+            )
+        )
+
+        # very bad night
+        ret.append(
+            StandoutData(
+                label="last_very_bad_night",
+                css_class="alert-danger",
+                entry=(qs.filter(mood_night=Moods.VERY_BAD).order_by("-id").first()),
+            )
+        )
+        return ret
 
     def _week_data(self, week_start: datetime) -> typing.List[WeekdayEntry]:
         week = self._week(week_start)

@@ -120,3 +120,17 @@ class SetLanguageView(views.APIView):
         user_language = request.data.get("language", settings.LANGUAGE_CODE).strip()
         translation.activate(user_language)
         return Response(status=status.HTTP_200_OK)
+
+
+class StandoutDataView(views.APIView):
+    """
+    Get the standout data.
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        sk_service = SkService(request.user)
+        standout_data = sk_service.standout_data()
+        serializer = serializers.StandoutDataSerializer(standout_data, many=True)
+        return Response(serializer.data)

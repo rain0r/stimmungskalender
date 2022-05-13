@@ -2,7 +2,7 @@ import typing
 from dataclasses import dataclass
 from datetime import date
 
-from web.models import Week
+from web.models import Week, Entry
 
 
 @dataclass
@@ -34,3 +34,10 @@ class MoodTable:
     prev_week: str
     current_day: int  # today's day mood
     current_night: int  # last night's mood
+
+
+@dataclass
+class StandoutData:
+    label: str
+    css_class: str
+    entry: Entry

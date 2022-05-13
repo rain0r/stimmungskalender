@@ -81,39 +81,12 @@ class EntryListView(MoodMapping, TemplateView):
         sk_service = SkService(self.request.user)
 
         start_day_p = self.request.GET.get(settings.QS_START_DAY, "").strip()
-        mood_table = sk_service.mood_table(start_day_p)
-
-        context["mood_table"] = mood_table
+        context["mood_table"] = sk_service.mood_table(start_day_p)
         context["moods"] = self.mood_mapping
         context["forms"] = self.get_forms()
-        context["standout_data"] = self.get_standout_data()
+        context["standout_data"] = sk_service.standout_data()
 
         return context
-
-    def get_standout_data(self):
-        ret = {}
-        qs = Entry.objects.filter(user=self.request.user)
-        # very good day
-        ret["last_very_good_day"] = {
-            "class": "alert-success",
-            "entry": (qs.filter(mood_day=Moods.VERY_GOOD).order_by("-id").first()),
-        }
-        # # very good night
-        ret["last_very_good_night"] = {
-            "class": "alert-success",
-            "entry": (qs.filter(mood_night=Moods.VERY_GOOD).order_by("-id").first()),
-        }
-        # very bad day
-        ret["last_very_bad_day"] = {
-            "class": "alert-danger",
-            "entry": (qs.filter(mood_day=Moods.VERY_BAD).order_by("-id").first()),
-        }
-        # very bad night
-        ret["last_very_bad_night"] = {
-            "class": "alert-danger",
-            "entry": (qs.filter(mood_night=Moods.VERY_BAD).order_by("-id").first()),
-        }
-        return ret
 
     def get_forms(self):
         ret = []
