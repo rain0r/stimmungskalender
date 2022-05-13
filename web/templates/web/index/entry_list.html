@@ -7,7 +7,7 @@
                class="h4 text-reset">{% translate 'week' %} #{{ mood_table.week.week_date|date:"W" }}</a>
             <span class="text-muted ml-5">
                 {{ mood_table.week.week_date }}
-                 —
+                —
                 {{ mood_table.week.week_date|week_end_date }}
             </span>
         </div>
@@ -20,8 +20,10 @@
                     aria-controls="collapseNote">
                 {% translate 'note' %}
             </button>
-            <a href="?start_day={{ mood_table.prev_week }}" class="btn btn-outline-dark">{% translate 'prev' %}</a>
-            <a href="?start_day={{ mood_table.next_week }}" class="btn btn-outline-dark">{% translate 'next' %}</a>
+            <a href="?start_day={{ mood_table.prev_week }}"
+               class="btn btn-outline-dark">{% translate 'prev' %}</a>
+            <a href="?start_day={{ mood_table.next_week }}"
+               class="btn btn-outline-dark">{% translate 'next' %}</a>
         </div>
     </div>
     <form method="post"
@@ -30,7 +32,9 @@
           class="collapse">
         {% csrf_token %}
         <hr>
-        <input type="hidden" name="week" value="{{ mood_table.week.week_date|date:'Y-m-d' }}">
+        <input type="hidden"
+               name="week"
+               value="{{ mood_table.week.week_date|date:'Y-m-d' }}">
         <div class="row p-1">
             <textarea id="note" name="note" class="form-control" rows="6" placeholder="{% translate 'what_happened_this_week' %}">{{ mood_table.week.note }}</textarea>
         </div>
@@ -44,8 +48,7 @@
         <hr>
     {% endfor %}
     <span class="h4">{% translate 'jump_to_week' %}</span>
-    <form method="post" action="{% url 'jump-to-week' %}" class="my-3">
-        {% csrf_token %}
+    <form method="get" action="{% url 'index' %}" class="my-3">
         <div class="form-row align-items-end">
             <div class="form-group col-12 col-md-2">
                 <input type="text"
@@ -53,7 +56,7 @@
                        data-date-format="yyyy-mm-dd"
                        data-date-autoclose="true"
                        placeholder="YYYY-MM-DD"
-                       name="jump_to_date"
+                       name="start_day"
                        class="form-control"
                        data-date-week-start="1">
             </div>

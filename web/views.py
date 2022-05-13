@@ -148,21 +148,6 @@ class SaveMoodView(View):
         return redirect(f"{reverse('index')}?{settings.QS_START_DAY}={start_day_p}")
 
 
-@method_decorator(login_required, name="dispatch")
-class JumpToWeekView(View):
-    def post(self, request):
-        jump_to_date = request.POST.get("jump_to_date", "").strip()
-        if not jump_to_date:
-            return redirect("index")
-        try:
-            parsed = datetime.strptime(jump_to_date, "%Y-%m-%d")
-        except ValueError:
-            return redirect("settings")
-        return redirect(
-            f"{reverse('index')}?{settings.QS_START_DAY}={parsed.strftime(settings.SK_DATE_FORMAT)}"
-        )
-
-
 class GraphView(MoodMapping, TemplateView):
     template_name = "web/graph.html"
 

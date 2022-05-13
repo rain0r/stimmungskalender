@@ -30,7 +30,6 @@ urlpatterns = [
     path("save-mood/", views.SaveMoodView.as_view(), name="save-mood"),
     path("save-note/", views.SaveNoteView.as_view(), name="save-note"),
     path("save-settings/", views.SaveSettingsView.as_view(), name="save-settings"),
-    path("jump-to-week/", views.JumpToWeekView.as_view(), name="jump-to-week"),
     path("graph/", views.GraphView.as_view(), name="graph"),
     path("settings/", views.SettingsView.as_view(), name="settings"),
     path("search/", views.SearchView.as_view(), name="search"),

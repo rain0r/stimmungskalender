@@ -1,23 +1,22 @@
 {% load i18n %}
 <div class="row">
-        {% for key in standout_data %}
-    {% with data=standout_data|get_item:key %}
-    <div class="col-12 col-md">
-        <div class="alert {{ data.class }}" role="alert">
-             {% translate key %}: <a class="alert-link"
-                                                     href="{% url 'index' %}?start_day={{ data.entry.day|date:'Y-W' }}">{{ data.entry.day|date }}</a>
-        </div>
-    </div>
-    {% endwith %}
+    {% for key in standout_data %}
+        {% with data=standout_data|get_item:key %}
+            <div class="col-12 col-md">
+                <div class="alert {{ data.class }}" role="alert">
+                    {% translate key %}: <a class="alert-link"
+    href="{% url 'index' %}?start_day={{ data.entry.day|date:'Y-W' }}">{{ data.entry.day|date }}</a>
+                </div>
+            </div>
+        {% endwith %}
     {% endfor %}
 </div>
-
 <div class="row">
     {% if standout_data.last_very_good_day.day %}
         <div class="col-12 col-md">
             <div class="alert alert-success" role="alert">
                 {% translate 'last_very_good_day' %}: <a class="alert-link"
-                                                         href="{% url 'index' %}?start_day={{ standout_data.last_very_good_day.day|date:'Y-W' }}">{{ standout_data.last_very_good_day.day|date }}</a>
+    href="{% url 'index' %}?start_day={{ standout_data.last_very_good_day.day|date:'Y-W' }}">{{ standout_data.last_very_good_day.day|date }}</a>
             </div>
         </div>
     {% endif %}
@@ -25,7 +24,7 @@
         <div class="col-12 col-md">
             <div class="alert alert-success" role="alert">
                 {% translate 'last_very_good_night' %}: <a class="alert-link"
-                                                         href="{% url 'index' %}?start_day={{ standout_data.last_very_good_night.day|date:'Y-W' }}">{{ standout_data.last_very_good_night.day|date }}</a>
+    href="{% url 'index' %}?start_day={{ standout_data.last_very_good_night.day|date:'Y-W' }}">{{ standout_data.last_very_good_night.day|date }}</a>
             </div>
         </div>
     {% endif %}
@@ -33,7 +32,7 @@
         <div class="col-12 col-md">
             <div class="alert alert-danger" role="alert">
                 {% translate 'last_very_bad_day' %}: <a class="alert-link"
-                                                           href="{% url 'index' %}?start_day={{ standout_data.last_very_bad_day.day|date:'Y-W' }}">{{ standout_data.last_very_bad_day.day|date }}</a>
+    href="{% url 'index' %}?start_day={{ standout_data.last_very_bad_day.day|date:'Y-W' }}">{{ standout_data.last_very_bad_day.day|date }}</a>
             </div>
         </div>
     {% endif %}
@@ -41,7 +40,7 @@
         <div class="col-12 col-md">
             <div class="alert alert-danger" role="alert">
                 {% translate 'last_very_bad_night' %}: <a class="alert-link"
-                                                        href="{% url 'index' %}?start_day={{ standout_data.last_very_bad_night.day|date:'Y-W' }}">{{ standout_data.last_very_bad_night.day|date }}</a>
+    href="{% url 'index' %}?start_day={{ standout_data.last_very_bad_night.day|date:'Y-W' }}">{{ standout_data.last_very_bad_night.day|date }}</a>
             </div>
         </div>
     {% endif %}
