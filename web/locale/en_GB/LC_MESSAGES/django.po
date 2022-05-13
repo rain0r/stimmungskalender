@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-13 18:05+0200\n"
+"POT-Creation-Date: 2022-05-13 22:05+0200\n"
 "PO-Revision-Date: 2022-05-13 18:05+0200\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,7 +80,7 @@ msgid "end_date"
 msgstr "To"
 
 #: templates/web/graph/date_select.html:31
-#: templates/web/index/entry_list.html:61 templates/web/search.html:63
+#: templates/web/index/entry_list.html:64 templates/web/search.html:63
 msgid "go_to"
 msgstr "Go"
 
@@ -126,51 +126,63 @@ msgstr "Markers"
 msgid "lines"
 msgstr "Lines"
 
-#: templates/web/i18n.html:6
+#: templates/web/i18n.html:5
 msgid "day_header"
 msgstr "My day was..."
 
-#: templates/web/i18n.html:7 templates/web/i18n.html:8
+#: templates/web/i18n.html:6 templates/web/i18n.html:7
 msgid "night_header"
 msgstr "My night was..."
 
-#: templates/web/i18n.html:9
+#: templates/web/i18n.html:8
 msgid "first_page"
 msgstr "First page"
 
-#: templates/web/i18n.html:10
+#: templates/web/i18n.html:9
 msgid "items_per_page"
 msgstr "Items per page"
 
-#: templates/web/i18n.html:11
+#: templates/web/i18n.html:10
 msgid "last_page"
 msgstr "Last page"
 
-#: templates/web/i18n.html:12
+#: templates/web/i18n.html:11
 msgid "next_page"
 msgstr "Next page"
 
-#: templates/web/i18n.html:13
+#: templates/web/i18n.html:12
 msgid "previous_page"
 msgstr "Previous page"
 
-#: templates/web/i18n.html:14
+#: templates/web/i18n.html:13
 msgid "page"
 msgstr "Page"
 
-#: templates/web/i18n.html:15
+#: templates/web/i18n.html:14
 msgid "colors_enabled"
 msgstr "Colors enabled"
 
-#: templates/web/i18n.html:16
+#: templates/web/i18n.html:15
 msgid "colors_enabled_label"
 msgstr "Use a color for each mood."
 
-#: templates/web/index/entry_list.html:7
-#: templates/web/index/standout_data.html:12
-#: templates/web/index/standout_data.html:26
-#: templates/web/index/standout_data.html:40
-#: templates/web/index/standout_data.html:54 templates/web/search.html:73
+#: templates/web/i18n.html:16
+msgid "last_very_good_day"
+msgstr "Last very good day"
+
+#: templates/web/i18n.html:17
+msgid "last_very_bad_day"
+msgstr "Last very bad day"
+
+#: templates/web/i18n.html:18
+msgid "last_very_good_night"
+msgstr "Last very good night"
+
+#: templates/web/i18n.html:19
+msgid "last_very_bad_night"
+msgstr "Last very bad night"
+
+#: templates/web/index/entry_list.html:7 templates/web/search.html:73
 msgid "week"
 msgstr "Week"
 
@@ -178,48 +190,32 @@ msgstr "Week"
 msgid "note"
 msgstr "Note"
 
-#: templates/web/index/entry_list.html:23
+#: templates/web/index/entry_list.html:24
 msgid "prev"
 msgstr "Previous"
 
-#: templates/web/index/entry_list.html:24
+#: templates/web/index/entry_list.html:26
 msgid "next"
 msgstr "Next"
 
-#: templates/web/index/entry_list.html:35
+#: templates/web/index/entry_list.html:39
 msgid "what_happened_this_week"
 msgstr "What happened this week?"
 
-#: templates/web/index/entry_list.html:38
+#: templates/web/index/entry_list.html:42
 #: templates/web/settings/default_view_mode.html:27
 #: templates/web/settings/language.html:20
 #: templates/web/settings/view_forms.html:28
 msgid "save"
 msgstr "Save"
 
-#: templates/web/index/entry_list.html:46
+#: templates/web/index/entry_list.html:50
 msgid "jump_to_week"
 msgstr "Jump to week"
 
 #: templates/web/index/form.html:14
 msgid "click_to_toggle"
 msgstr "Click to toggle"
-
-#: templates/web/index/standout_data.html:7
-msgid "last_very_good_day"
-msgstr "Last very good day"
-
-#: templates/web/index/standout_data.html:21
-msgid "last_very_good_night"
-msgstr "Last very good night"
-
-#: templates/web/index/standout_data.html:35
-msgid "last_very_bad_day"
-msgstr "Last very bad day"
-
-#: templates/web/index/standout_data.html:49
-msgid "last_very_bad_night"
-msgstr "Last very bad night"
 
 #: templates/web/search.html:36
 msgid "mood"
