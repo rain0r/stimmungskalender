@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, date
+from datetime import datetime, timedelta
 
 from django.conf import settings
 from django.contrib.auth import logout
@@ -14,11 +14,11 @@ from django.views import View
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import RedirectView, TemplateView
 
-from web.models import Entry, UserSettings, Moods
+from web import util
+from web.models import Entry, UserSettings
 from web.service.pie_graph import PieGraphService
 from web.service.scatter_graph import ScatterGraphService
 from web.service.sk import SkService
-from web.util import get_default_view_mode
 
 
 class MoodMapping:
@@ -38,7 +38,7 @@ class SettingsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["default_view_mode"] = get_default_view_mode(self.request.user)
+        context["default_view_mode"] = util.get_default_view_mode(self.request.user)
         context["user_settings"] = UserSettings.objects.get(user=self.request.user)
         return context
 
@@ -127,9 +127,9 @@ class GraphView(MoodMapping, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        is_markers = self.is_markers()
-        start_dt = self.default_start_dt()
-        end_dt = self.default_end_dt()
+        is_markers = util.is_markers(self.request)
+        start_dt = util.default_start_dt(self.request)
+        end_dt = util.default_end_dt(self.request)
 
         scatter_graph = ScatterGraphService(
             is_markers=is_markers,
@@ -164,34 +164,12 @@ class GraphView(MoodMapping, TemplateView):
 
         return context
 
-    def default_start_dt(self) -> date:
-        try:
-            start_date = self.request.GET.get("start_date", "")
-            start_dt = datetime.strptime(start_date, "%Y-%m-%d")
-        except ValueError:
-            start_dt = timezone.now() + timedelta(days=-7)
-        return start_dt.date()
-
-    def default_end_dt(self) -> date:
-        try:
-            end_date = self.request.GET.get("end_date", "")
-            end_dt = datetime.strptime(end_date, "%Y-%m-%d").date()
-        except ValueError:
-            end_dt = timezone.now().date()
-        return end_dt
-
     def get_first_day(self):
         qs = Entry.objects.filter(user=self.request.user).order_by("day")
         if qs.count() > 0:
             obj = qs.first()
             return obj.day.strftime("%Y-%m-%d")
         return timezone.now().strftime("%Y-%m-%d")
-
-    def is_markers(self):
-        if "view" in self.request.GET:
-            return self.request.GET.get("view", "markers") == "markers"
-        else:
-            return get_default_view_mode(self.request.user) == "markers"
 
 
 @method_decorator(login_required, name="dispatch")

@@ -7,11 +7,13 @@ from rest_framework import views, status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
-from web import serializers
+from web import serializers, util
+from web.service.scatter_graph import ScatterGraphService
 from web.service.sk import SkService
 
 
 # API views
+from web.views import MoodMapping
 
 
 class EntryDayView(views.APIView):
@@ -134,3 +136,24 @@ class StandoutDataView(views.APIView):
         standout_data = sk_service.standout_data()
         serializer = serializers.StandoutDataSerializer(standout_data, many=True)
         return Response(serializer.data)
+
+
+class GraphView(MoodMapping, views.APIView):
+    """
+    Get the mood graph.
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        is_markers = util.is_markers(self.request)
+        start_dt = util.default_start_dt(self.request)
+        end_dt = util.default_end_dt(self.request)
+        scatter_graph = ScatterGraphService(
+            is_markers=is_markers,
+            mood_mapping=self.mood_mapping,
+            user=self.request.user,
+            start_dt=start_dt,
+            end_dt=end_dt,
+        )
+        return Response(scatter_graph.build_plot())
