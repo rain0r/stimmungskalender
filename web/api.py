@@ -138,7 +138,7 @@ class StandoutDataView(views.APIView):
         return Response(serializer.data)
 
 
-class GraphView(MoodMapping, views.APIView):
+class ScatterGraphView(MoodMapping, views.APIView):
     """
     Get the mood graph.
     """
@@ -156,4 +156,4 @@ class GraphView(MoodMapping, views.APIView):
             start_dt=start_dt,
             end_dt=end_dt,
         )
-        return Response(scatter_graph.build_plot())
+        return Response(scatter_graph.load_data())

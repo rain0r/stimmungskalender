@@ -32,8 +32,6 @@ class MoodTable:
     week: Week
     next_week: str
     prev_week: str
-    current_day: int  # today's day mood
-    current_night: int  # last night's mood
 
 
 @dataclass

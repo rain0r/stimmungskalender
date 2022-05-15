@@ -1,5 +1,5 @@
 from abc import ABC
-from datetime import datetime, date
+from datetime import date
 
 from django.db.models import QuerySet
 from django.utils import timezone
@@ -13,7 +13,7 @@ class BaseGraph(ABC):
         self.start_dt = start_dt
         self.end_dt = end_dt
 
-    def build_day_range(self, start_dt: datetime, end_dt: datetime) -> int:
+    def build_day_range(self, start_dt: date, end_dt: date) -> int:
         if start_dt:
             return (end_dt - start_dt).days
         else:

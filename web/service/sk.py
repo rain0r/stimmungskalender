@@ -1,5 +1,5 @@
 import typing
-from datetime import datetime, timedelta
+from datetime import date, timedelta, datetime
 from enum import Enum
 
 from django.conf import settings
@@ -53,16 +53,12 @@ class SkService:
         week = self._week(week_start)
         next_week = self._next_week(week_start)
         prev_week = self._prev_week(week_start)
-        current_day = self._current_mood(Period.DAY, days_of_week)
-        current_night = self._current_mood(Period.NIGHT, days_of_week)
 
         return MoodTable(
             days_of_week=days_of_week,
             week=week,
             next_week=next_week,
             prev_week=prev_week,
-            current_day=current_day,
-            current_night=current_night,
         )
 
     def save_note(self, week: str, note: str) -> Week:
@@ -161,7 +157,7 @@ class SkService:
         )
         return ret
 
-    def _week_data(self, week_start: datetime) -> typing.List[WeekdayEntry]:
+    def _week_data(self, week_start: date) -> typing.List[WeekdayEntry]:
         week = self._week(week_start)
         my_entries = Entry.objects.filter(user=self._user, week=week)
         days = [(week_start + timedelta(days=d)).date() for d in range(7)]
@@ -177,7 +173,7 @@ class SkService:
 
         return [week_data[i] for i in week_data]
 
-    def _week(self, week_start: datetime) -> Week:
+    def _week(self, week_start: date) -> Week:
         # Make sure we use the start of the week
         week_start += timedelta(days=0 - week_start.weekday())
         my_week, created = Week.objects.get_or_create(
@@ -185,15 +181,15 @@ class SkService:
         )
         return my_week
 
-    def _next_week(self, week_start: datetime) -> str:
+    def _next_week(self, week_start: date) -> str:
         ret = week_start + timedelta(days=0 - week_start.weekday() + 7)
         return ret.strftime(settings.SK_DATE_FORMAT)
 
-    def _prev_week(self, week_start: datetime) -> str:
+    def _prev_week(self, week_start: date) -> str:
         ret = week_start + timedelta(days=0 - week_start.weekday() - 7)
         return ret.strftime(settings.SK_DATE_FORMAT)
 
-    def _week_start(self, start_day_p: str) -> datetime:
+    def _week_start(self, start_day_p: str) -> date:
         """
         Returns the start of a week defined by YYYY-W format, eg: 2022-54
         :param start_day_p:
@@ -205,20 +201,6 @@ class SkService:
             dt1 = timezone.now()
         dt1 += timedelta(days=0 - dt1.weekday())
         return dt1
-
-    def _current_mood(
-        self, period: Period, days_of_week: typing.List[WeekdayEntry]
-    ) -> int:
-        today = timezone.now().date()
-        entry = next((i for i in days_of_week if i.day == today), None)
-        if not entry:
-            # We're browsing a previous week
-            return 0
-        if period == Period.NIGHT:
-            return entry.mood_night
-        elif period == Period.DAY:
-            return entry.mood_day
-        raise InvalidPeriodError()
 
     def _filter_mood(
         self,
