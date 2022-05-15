@@ -8,7 +8,9 @@ from plotly.offline import plot
 from web.mood_colors import COLORS
 from web.service.base_graph import BaseGraph
 
-PERIODS = ["mood_day", "mood_night"]
+PERIOD_DAY = "mood_day"
+PERIOD_NIGHT = "mood_night"
+PERIODS = [PERIOD_DAY, PERIOD_NIGHT]
 
 
 class PieGraphService(BaseGraph):

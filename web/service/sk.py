@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.utils import timezone
 
 from web.models import Entry, Week, Moods
+from web.service.pie_graph import PERIOD_NIGHT, PERIOD_DAY
 from web.structs import WeekdayEntry, MoodTable, StandoutData
 
 
@@ -84,8 +85,8 @@ class SkService:
         """Set or remove a mood"""
 
         form_mapping = {
-            "night": "mood_night",
-            "day": "mood_day",
+            "night": PERIOD_NIGHT,
+            "day": PERIOD_DAY,
         }
 
         # Create related week object
@@ -95,9 +96,9 @@ class SkService:
 
         db_data = {"day": day, "user": self._user, "week": my_week}
         if period == "night":
-            db_data["mood_night"] = mood
+            db_data[PERIOD_NIGHT] = mood
         elif period == "day":
-            db_data["mood_day"] = mood
+            db_data[PERIOD_DAY] = mood
         else:
             raise MoodEntryError()
 

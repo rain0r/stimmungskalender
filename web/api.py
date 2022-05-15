@@ -1,3 +1,4 @@
+import ipdb
 from django.conf import settings
 from django.core.exceptions import BadRequest
 from django.http import JsonResponse
@@ -8,6 +9,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from web import serializers, util
+from web.service.pie_graph import PieGraphService
 from web.service.scatter_graph import ScatterGraphService
 from web.service.sk import SkService
 
@@ -140,7 +142,7 @@ class StandoutDataView(views.APIView):
 
 class ScatterGraphView(MoodMapping, views.APIView):
     """
-    Get the mood graph.
+    Get the mood scatter graph.
     """
 
     permission_classes = [IsAuthenticated]
@@ -157,3 +159,30 @@ class ScatterGraphView(MoodMapping, views.APIView):
             end_dt=end_dt,
         )
         return Response(scatter_graph.load_data())
+
+
+class PieChartGraphView(MoodMapping, views.APIView):
+    """
+    Get the mood scatter graph.
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        start_dt = util.default_start_dt(self.request)
+        end_dt = util.default_end_dt(self.request)
+        period = self.request.GET.get("period", None)
+
+        if not period:
+            return Response(status=400)
+
+        pie_graph = PieGraphService(
+            user=self.request.user,
+            mood_mapping=self.mood_mapping,
+            start_dt=start_dt,
+            end_dt=end_dt,
+        )
+        label_numbers, values = pie_graph.load_data(period)
+        ret = {"label_numbers": label_numbers, "values": values}
+
+        return Response(ret)

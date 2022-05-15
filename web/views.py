@@ -16,7 +16,7 @@ from django.views.generic import RedirectView, TemplateView
 
 from web import util
 from web.models import Entry, UserSettings
-from web.service.pie_graph import PieGraphService
+from web.service.pie_graph import PieGraphService, PERIOD_DAY, PERIOD_NIGHT
 from web.service.scatter_graph import ScatterGraphService
 from web.service.sk import SkService
 
@@ -91,9 +91,9 @@ class EntryListView(MoodMapping, TemplateView):
     def get_forms(self):
         ret = []
         ret.append(
-            {"name": "night", "name_header": "night_header", "attr": "mood_night"}
+            {"name": "night", "name_header": "night_header", "attr": PERIOD_NIGHT}
         )
-        ret.append({"name": "day", "name_header": "day_header", "attr": "mood_day"})
+        ret.append({"name": "day", "name_header": "day_header", "attr": PERIOD_DAY})
         return ret
 
 
@@ -148,8 +148,8 @@ class GraphView(MoodMapping, TemplateView):
         context["end_dt"] = end_dt
         context["is_markers"] = is_markers
         context["graph"] = scatter_graph.build_plot()
-        context["pie_chart_day"] = pie_graph.build_chart("mood_day")
-        context["pie_chart_night"] = pie_graph.build_chart("mood_night")
+        context["pie_chart_day"] = pie_graph.build_chart(PERIOD_DAY)
+        context["pie_chart_night"] = pie_graph.build_chart(PERIOD_NIGHT)
         context["first_day"] = self.get_first_day()
         context["last_week_start_date"] = (
             timezone.now() + timedelta(days=-7)
