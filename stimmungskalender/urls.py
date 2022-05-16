@@ -17,7 +17,7 @@ from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path, re_path
 from django.views.i18n import JavaScriptCatalog, JSONCatalog
-
+from django.views.generic import TemplateView
 from web import views, api
 
 urlpatterns = [
@@ -33,6 +33,8 @@ urlpatterns = [
     path("graph/", views.GraphView.as_view(), name="graph"),
     path("settings/", views.SettingsView.as_view(), name="settings"),
     path("search/", views.SearchView.as_view(), name="search"),
+    # path("ng-sk/", TemplateView.as_view(template_name="web/ng-sk/index.html")),
+    re_path(r'^ng-sk/', TemplateView.as_view(template_name="web/ng-sk/index.html")),
     path("api/entry-day/", api.EntryDayView.as_view()),
     path("api/mood-table/", api.MoodTableView.as_view()),
     path("api/standout-data/", api.StandoutDataView.as_view()),
