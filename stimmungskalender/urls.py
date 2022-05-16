@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path, re_path
@@ -33,8 +34,6 @@ urlpatterns = [
     path("graph/", views.GraphView.as_view(), name="graph"),
     path("settings/", views.SettingsView.as_view(), name="settings"),
     path("search/", views.SearchView.as_view(), name="search"),
-    # path("ng-sk/", TemplateView.as_view(template_name="web/ng-sk/index.html")),
-    re_path(r'^ng-sk/', TemplateView.as_view(template_name="web/ng-sk/index.html")),
     path("api/entry-day/", api.EntryDayView.as_view()),
     path("api/mood-table/", api.MoodTableView.as_view()),
     path("api/standout-data/", api.StandoutDataView.as_view()),
@@ -52,3 +51,12 @@ urlpatterns = [
     ),
     path("dj-rest-auth/", include("dj_rest_auth.urls")),
 ]
+
+if settings.NG_SK_ENABLED:
+    urlpatterns.append(
+        re_path(
+            rf"^{settings.NG_SK_PATH}/",
+            TemplateView.as_view(template_name="ng-sk/index.html"),
+            name="ng-sk",
+        )
+    )

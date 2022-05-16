@@ -57,6 +57,11 @@
                         <li class="nav-item {% if request.resolver_match.url_name == 'settings' %}active{% endif %}">
                             <a class="nav-link" href="{% url 'settings' %}">{% translate 'settings' %}</a>
                         </li>
+                        {% if ng_sk_enabled %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'ng-sk' %}">NG SK</a>
+                        </li>
+                        {% endif %}
                     </ul>
                     <span class="text-muted">{% translate 'logged_in_as' %}: {{ user.get_username }}</span>
                 </div>

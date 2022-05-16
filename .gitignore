@@ -154,3 +154,5 @@ cython_debug/
 
 # Stimmungskalender Sqlite Database
 sk.sqlite
+
+web/static/ng-sk/

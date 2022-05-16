@@ -29,7 +29,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=False, cast=bool)
 
 SESSION_COOKIE_SECURE = config("SESSION_COOKIE_SECURE", default=False, cast=bool)
@@ -82,9 +81,9 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "web.context_processors.api_urls",
                 "web.context_processors.lang",
                 "web.context_processors.mood_colors",
+                "web.context_processors.ng_sk",
             ],
         },
     },
@@ -228,14 +227,12 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 7,
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        # 'rest_framework.authentication.SessionAuthentication',
-        # 'rest_framework.authentication.TokenAuthentication',
         "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ),
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
 }
 
-# django corse header
+# django cors header
 
 CORS_ORIGIN_REGEX_WHITELIST = [
     r"^.+ $",
@@ -257,3 +254,9 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=5),
 }
+
+# Stimmungskalender
+
+NG_SK_ENABLED = config("NG_SK_ENABLED", default=False, cast=bool)
+
+NG_SK_PATH = config("NG_SK_PATH", default="ng-sk")  # without leading or trailing slash

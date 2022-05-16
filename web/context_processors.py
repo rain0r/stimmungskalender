@@ -4,16 +4,6 @@ from django.utils.translation import get_language, to_locale
 from web.mood_colors import COLORS
 
 
-def api_urls(request):
-    return {
-        "SITE_URL": settings.SITE_URL,
-        "API_URLS": {
-            "entries": f"{settings.SITE_URL}/api/entries",
-            "saveMood": f"{settings.SITE_URL}/save-mood/",
-        },
-    }
-
-
 def lang(request):
     return {
         "sk_language_code": get_language().split("-")[0],
@@ -27,3 +17,7 @@ def mood_colors(request):
     for color in COLORS:
         ret[int(color)] = COLORS[color]
     return {"MOOD_COLORS": ret}
+
+
+def ng_sk(request):
+    return {"ng_sk_enabled": settings.NG_SK_ENABLED}
