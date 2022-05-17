@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-13 22:05+0200\n"
+"POT-Creation-Date: 2022-05-16 20:02+0200\n"
 "PO-Revision-Date: 2022-05-13 18:06+0200\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,7 @@ msgstr "Nacht"
 msgid "Log in"
 msgstr ""
 
-#: templates/web/base.html:49 templates/web/base.html:74
+#: templates/web/base.html:49 templates/web/base.html:79
 msgid "home"
 msgstr "Startseite"
 
@@ -46,11 +46,11 @@ msgstr "Suche"
 msgid "settings"
 msgstr "Einstellungen"
 
-#: templates/web/base.html:61
+#: templates/web/base.html:66
 msgid "logged_in_as"
 msgstr "Angemeldet als"
 
-#: templates/web/base.html:77
+#: templates/web/base.html:82
 msgid "logout"
 msgstr "Abmelden"
 

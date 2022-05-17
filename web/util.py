@@ -30,7 +30,7 @@ def is_markers(request):
 
 def default_start_dt(request) -> date:
     try:
-        start_date = request.GET.get("start_date", "")
+        start_date = request.GET.get("start_dt", "")
         start_dt = datetime.strptime(start_date, "%Y-%m-%d")
     except ValueError:
         start_dt = timezone.now() + timedelta(days=-7)
@@ -39,7 +39,7 @@ def default_start_dt(request) -> date:
 
 def default_end_dt(request) -> date:
     try:
-        end_date = request.GET.get("end_date", "")
+        end_date = request.GET.get("end_dt", "")
         end_dt = datetime.strptime(end_date, "%Y-%m-%d").date()
     except ValueError:
         end_dt = timezone.now().date()

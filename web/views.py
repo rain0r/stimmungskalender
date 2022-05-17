@@ -80,7 +80,7 @@ class EntryListView(MoodMapping, TemplateView):
         context = super().get_context_data(**kwargs)
         sk_service = SkService(self.request.user)
 
-        start_day_p = self.request.GET.get(settings.QS_START_DAY, "").strip()
+        start_day_p = self.request.GET.get("start_dt", "").strip()
         context["mood_table"] = sk_service.mood_table(start_day_p)
         context["moods"] = self.mood_mapping
         context["forms"] = self.get_forms()
@@ -118,7 +118,7 @@ class SaveMoodView(View):
         start_day_p = datetime.strptime(day, "%Y-%m-%d").strftime(
             settings.SK_DATE_FORMAT
         )
-        return redirect(f"{reverse('index')}?{settings.QS_START_DAY}={start_day_p}")
+        return redirect(f"{reverse('index')}?start_dt={start_day_p}")
 
 
 class GraphView(MoodMapping, TemplateView):
@@ -147,7 +147,7 @@ class GraphView(MoodMapping, TemplateView):
         context["start_dt"] = start_dt
         context["end_dt"] = end_dt
         context["is_markers"] = is_markers
-        context["graph"] = scatter_graph.build_plot()
+        context["scatter"] = scatter_graph.build_plot()
         context["pie_chart_day"] = pie_graph.build_chart(PERIOD_DAY)
         context["pie_chart_night"] = pie_graph.build_chart(PERIOD_NIGHT)
         context["first_day"] = self.get_first_day()
@@ -195,8 +195,8 @@ class SearchView(MoodMapping, TemplateView):
         results = sk_service.search(
             mood=self.request.GET.get("mood", ""),
             search_term=self.request.GET.get("search_term", ""),
-            start_date=self.request.GET.get("start_date", ""),
-            end_date=self.request.GET.get("end_date", ""),
+            start_dt=self.request.GET.get("start_date", ""),
+            end_dt=self.request.GET.get("end_date", ""),
         )
         paginator = Paginator(results, settings.PER_PAGE)
         page = self.request.GET.get("page", 1)
@@ -222,4 +222,4 @@ class SaveNoteView(View):
         sk_service = SkService(self.request.user)
         week = sk_service.save_note(week, note)
         start_day_p = week.week_date.strftime(settings.SK_DATE_FORMAT)
-        return redirect(f"{reverse('index')}?{settings.QS_START_DAY}={start_day_p}")
+        return redirect(f"{reverse('index')}?start_dt={start_day_p}")

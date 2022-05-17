@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    {% load static %}
-    <meta charset="utf-8" />
-    <title>NgSk</title>
-    <base href="{{ng_sk_path}}" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="{% static '/ng-sk/styles.css' %}" />
-  </head>
-  <body class="mat-typography dark-theme">
-    <app-root></app-root>
-    <script src="{% static '/ng-sk/runtime.js' %}" type="module"></script>
-    <script src="{% static '/ng-sk/polyfills.js' %}" type="module"></script>
-    <script src="{% static '/ng-sk/vendor.js' %}" type="module"></script>
-    <script src="{% static '/ng-sk/main.js' %}" type="module"></script>
-  </body>
+    <head>
+        {% load static %}
+        <meta charset="utf-8" />
+        <title>NgSk</title>
+        <base href="{{ ng_sk_path }}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/x-icon" href="favicon.ico" />
+        <link rel="stylesheet" href="{% static '/ng-sk/styles.css' %}" />
+    </head>
+    <body class="mat-typography dark-theme">
+        <app-root></app-root>
+        <script src="{% static '/ng-sk/runtime.js' %}" type="module"></script>
+        <script src="{% static '/ng-sk/polyfills.js' %}" type="module"></script>
+        <script src="{% static '/ng-sk/vendor.js' %}" type="module"></script>
+        <script src="{% static '/ng-sk/main.js' %}" type="module"></script>
+    </body>
 </html>

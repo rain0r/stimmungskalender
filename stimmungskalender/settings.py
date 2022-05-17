@@ -20,8 +20,6 @@ from django.utils.translation import gettext_lazy as _
 
 from stimmungskalender import tupled_list
 
-# from django.utils.translation import gettext as _
-
 MAX_LOG_FILE_SIZE = 20971520  # 20 MB
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -33,9 +31,13 @@ DEBUG = config("DEBUG", default=False, cast=bool)
 
 SESSION_COOKIE_SECURE = config("SESSION_COOKIE_SECURE", default=False, cast=bool)
 
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="127.0.0.1", cast=Csv())
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
 
-CSRF_TRUSTED_ORIGINS = [config("CSRF_TRUSTED_ORIGINS")]
+CSRF_TRUSTED_ORIGINS = config(
+    "CSRF_TRUSTED_ORIGINS", default=[], cast=Csv(post_process=tupled_list)
+)
+
+ADMINS = config("ADMINS", default=[], cast=Csv(post_process=tupled_list))
 
 # Application definition
 
@@ -161,8 +163,6 @@ BOOTSTRAP4 = {
     "jquery_url": "/static/js/jquery-3.6.0.min.js",
 }
 
-ADMINS = config("ADMINS", default=[], cast=Csv(post_process=tupled_list))
-
 STATIC_ROOT = config("STATIC_ROOT", default=None)
 
 LOG_FILE_PATH = config("LOG_FILE_PATH", default=BASE_DIR / "sk_debug.log")
@@ -203,21 +203,9 @@ LOGGING = {
     },
 }
 
-# Stimmungskalender Settings
-
-DEFAULT_VIEW_MODE = "lines"
-
-SITE_URL = config("SITE_URL", default="http://127.0.0.1:8000")
-
-PER_PAGE = 25
-
-QS_START_DAY = "start_day"  # Used to jump between weeks
-
-SK_DATE_FORMAT = "%Y-%m-%d"  # To identify a week
-
 # Django Registration
 
-REGISTRATION_OPEN = True
+REGISTRATION_OPEN = config("REGISTRATION_OPEN", default=False, cast=bool)
 
 LOGOUT_REDIRECT_URL = "/accounts/login/"
 
@@ -234,13 +222,13 @@ REST_FRAMEWORK = {
 
 # django cors header
 
-CORS_ORIGIN_REGEX_WHITELIST = [
-    r"^.+ $",
-]
+# CORS_ORIGIN_REGEX_WHITELIST = [    r"^.+ $",]
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", default="127.0.0.1", cast=Csv())
+CORS_ALLOWED_ORIGINS = config(
+    "CORS_ALLOWED_ORIGINS", default="http://localhost", cast=Csv()
+)
 
 # dj rest auth
 
@@ -255,7 +243,13 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=5),
 }
 
-# Stimmungskalender
+# SK Settings
+
+DEFAULT_VIEW_MODE = "lines"
+
+PER_PAGE = 25
+
+SK_DATE_FORMAT = "%Y-%m-%d"  # To identify a week
 
 NG_SK_ENABLED = config("NG_SK_ENABLED", default=False, cast=bool)
 

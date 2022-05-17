@@ -25,6 +25,6 @@ class BaseGraph(ABC):
         qs = Entry.objects.filter(user=self.user)
         if self.start_dt:
             qs = qs.filter(day__gte=self.start_dt)
-            if self.end_dt:
-                qs = qs.filter(day__lte=self.end_dt)
+        if self.end_dt:
+            qs = qs.filter(day__lte=self.end_dt)
         return qs

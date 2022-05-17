@@ -1,5 +1,6 @@
 from datetime import timedelta, date
 
+
 import plotly.graph_objs as go
 from django.utils.translation import gettext_lazy as _
 from django_registration.forms import User
@@ -62,7 +63,7 @@ class ScatterGraphService(BaseGraph):
         # Performance tweak: Load the last week as default
         data = {}
         day_count = self.build_day_range(self.start_dt, self.end_dt)
-        days = [(self.end_dt - timedelta(days=d)) for d in range(day_count)]
+        days = [(self.start_dt + timedelta(days=d)) for d in range(day_count)]
         for day in days:
             data[day] = {"day": 0, "night": 0}
         entries = self.date_range_qs()
