@@ -34,9 +34,9 @@ class SkService:
 
     def search(
         self,
-        start_dt: date,
-        end_dt: date,
         search_term: str = "",
+        start_dt: str = "",
+        end_dt: str = "",
         mood: str = "",
     ):
         qs = Week.objects.filter(user=self._user).order_by("-week_date")
@@ -229,9 +229,15 @@ class SkService:
     def _filter_date(
         self,
         qs,
-        start_dt: date,
-        end_dt: date,
+        start_date: str = "",
+        end_date: str = "",
     ):
-        qs = qs.filter(week_date__gte=start_dt)
-        qs = qs.filter(week_date__lte=end_dt)
+        start = start_date.strip()
+        end = end_date.strip()
+        if start:
+            start_dt = datetime.strptime(start, settings.SK_DATE_FORMAT).date()
+            qs = qs.filter(week_date__gte=start_dt)
+        if end:
+            end_dt = datetime.strptime(end, settings.SK_DATE_FORMAT).date()
+            qs = qs.filter(week_date__lte=end_dt)
         return qs

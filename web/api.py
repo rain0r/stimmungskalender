@@ -8,6 +8,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from web import serializers, util
+from web.query_params import QP_START_DT, QP_END_DT
 from web.service.pie_graph import PieGraphService
 from web.service.scatter_graph import ScatterGraphService
 from web.service.sk import SkService
@@ -82,8 +83,8 @@ class SearchView(views.APIView):
 
     def get(self, request):
         sk_service = SkService(request.user)
-        start_dt = util.default_start_dt(self.request)
-        end_dt = util.default_end_dt(self.request)
+        start_dt = self.request.GET.get(QP_START_DT, "")
+        end_dt = self.request.GET.get(QP_END_DT, "")
         results = sk_service.search(
             mood=self.request.GET.get("mood", ""),
             search_term=self.request.GET.get("search_term", ""),
