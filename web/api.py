@@ -1,4 +1,3 @@
-import ipdb
 from django.conf import settings
 from django.core.exceptions import BadRequest
 from django.http import JsonResponse
@@ -15,7 +14,6 @@ from web.service.pie_graph import PieGraphService
 from web.service.scatter_graph import ScatterGraphService
 from web.service.settings import SettingsService
 from web.service.sk import SkService
-
 # API views
 from web.views import MoodMapping
 

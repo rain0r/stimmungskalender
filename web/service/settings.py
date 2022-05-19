@@ -1,4 +1,3 @@
-import ipdb
 from django.contrib.auth.models import User
 
 from web import models
