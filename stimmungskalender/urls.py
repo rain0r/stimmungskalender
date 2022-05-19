@@ -42,6 +42,7 @@ urlpatterns = [
     path("api/save-note/", api.SaveNoteView.as_view()),
     path("api/search/", api.SearchView.as_view()),
     path("api/set-language/", api.SetLanguageView.as_view()),
+    path("api/forms-displayed/", api.FormsDisplayedView.as_view()),
     re_path(r"^rosetta/", include("rosetta.urls")),
     path("i18n/", include("django.conf.urls.i18n")),
     path(

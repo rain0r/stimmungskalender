@@ -1,3 +1,4 @@
+import ipdb
 from django.conf import settings
 from django.core.exceptions import BadRequest
 from django.http import JsonResponse
@@ -8,9 +9,11 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from web import serializers, util
+from web.models import UserSettings
 from web.query_params import QP_START_DT, QP_END_DT
 from web.service.pie_graph import PieGraphService
 from web.service.scatter_graph import ScatterGraphService
+from web.service.settings import SettingsService
 from web.service.sk import SkService
 
 # API views
@@ -187,3 +190,23 @@ class PieChartGraphView(MoodMapping, views.APIView):
         ret = {"label_numbers": label_numbers, "values": values}
 
         return Response(ret)
+
+
+class FormsDisplayedView(views.APIView):
+    """
+    Enable and disable forms
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user_settings = UserSettings.objects.get(user=self.request.user)
+        serializer = serializers.UserSettingsSerializer(user_settings)
+        return Response(serializer.data)
+
+    def post(self, request):
+        night_form = request.data.get("night_form")
+        day_form = request.data.get("day_form")
+        ss = SettingsService(self.request.user)
+        ss.set_forms_displayed(day=day_form, night=night_form)
+        return Response(status=status.HTTP_200_OK)

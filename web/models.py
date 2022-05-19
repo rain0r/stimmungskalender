@@ -3,6 +3,8 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+PERIODS = ["day", "night"]
+
 
 class Moods(models.IntegerChoices):
     VERY_BAD = 1

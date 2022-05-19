@@ -7,10 +7,6 @@ from web.models import UserSettings
 from web.query_params import QP_START_DT, QP_END_DT
 
 
-def date_for_year_week(week, year=2021):
-    return datetime.strptime(f"{year}-{week}-1", "%Y-%W-%w")
-
-
 def get_default_view_mode(username):
     try:
         obj = UserSettings.objects.get(user=username)

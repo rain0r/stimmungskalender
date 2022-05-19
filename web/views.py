@@ -15,7 +15,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import RedirectView, TemplateView
 
 from web import util
-from web.models import Entry, UserSettings
+from web.models import Entry, UserSettings, PERIODS
 from web.service.pie_graph import PieGraphService, PERIOD_DAY, PERIOD_NIGHT
 from web.service.scatter_graph import ScatterGraphService
 from web.service.sk import SkService
@@ -47,6 +47,9 @@ class SettingsView(TemplateView):
 class SaveSettingsView(View):
     def post(self, request):
         view_is_markers = request.POST.get("default_view_mode", "").strip()
+        view_day_form = request.POST.get("view_day_form", "").strip()
+        view_night_form = request.POST.get("view_night_form", "").strip()
+
         if view_is_markers:
             UserSettings.objects.update_or_create(
                 user=self.request.user,
@@ -56,7 +59,7 @@ class SaveSettingsView(View):
                 },
             )
 
-        for period in ["day", "night"]:
+        for period in PERIODS:
             setting = request.POST.get(f"view_{period}_form", "").strip()
             UserSettings.objects.update_or_create(
                 user=self.request.user,
@@ -106,7 +109,7 @@ class SaveMoodView(View):
         if not entry or not period:
             raise BadRequest()
 
-        if period not in ["day", "night"]:
+        if period not in PERIODS:
             raise BadRequest()
 
         data = entry.split("_")
