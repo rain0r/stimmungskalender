@@ -68,7 +68,7 @@
     {% for week in results %}
         <div class="row border rounded p-3 my-3">
             <div class="col-12 col-md-2 d-flex flex-column">
-                <a href="{% url 'index' %}?start_dt={{ week.week_date|date:'Y-W' }}"
+                <a href="{% url 'index' %}?start_dt={{ week.week_date|date:'Y-m-d' }}"
                    class="flex-grow-1">
                     {% translate 'week' %} #{{ week.week_date|date:'W' }}
                 </a>

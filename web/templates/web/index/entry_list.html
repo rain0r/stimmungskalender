@@ -3,7 +3,7 @@
     {% load i18n %}
     <div class="d-flex flex-column flex-md-row align-items-baseline justify-content-between">
         <div class="d-flex mb-2 align-items-baseline">
-            <a href="{% url 'index' %}?start_dt={{ mood_table.week_start|date:'Y-W' }}"
+            <a href="{% url 'index' %}?start_dt={{ mood_table.week_start|date:'Y-m-d' }}"
                class="h4 text-reset">{% translate 'week' %} #{{ mood_table.week.week_date|date:"W" }}</a>
             <span class="text-muted ml-5">
                 {{ mood_table.week.week_date }}
