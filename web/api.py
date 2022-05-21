@@ -98,11 +98,15 @@ class SearchView(views.APIView):
 
 
 class SkJSONCatalog(views.APIView, JSONCatalog):
-    permission_classes = [AllowAny]
+    authentication_classes = []  # disables authentication
+    permission_classes = []  # disables permission
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.user_language = settings.LANGUAGE_CODE
+
+    def check_permissions(self, request):
+        super().check_permissions(request)
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
