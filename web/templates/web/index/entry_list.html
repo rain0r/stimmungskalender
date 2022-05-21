@@ -26,6 +26,7 @@
                class="btn btn-outline-dark">{% translate 'next' %}</a>
         </div>
     </div>
+    {% if mood_table.week.note %}<div class="alert alert-light">{{ mood_table.week.note }}</div>{% endif %}
     <form method="post"
           action="{% url 'save-note' %}"
           id="collapseNote"
