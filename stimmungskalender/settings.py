@@ -220,8 +220,6 @@ REST_FRAMEWORK = {
 
 # django cors header
 
-# CORS_ORIGIN_REGEX_WHITELIST = [    r"^.+ $",]
-
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOWED_ORIGINS = config(
