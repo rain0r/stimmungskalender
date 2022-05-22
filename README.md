@@ -20,7 +20,7 @@ It's build with [Django](https://www.djangoproject.com/) and can be self-hosted.
 
 ---
 
-![Screenshot of ampd on a mobile device](.github/form.png)
+![Screenshot of Stimmungskalender](.github/form.png)
 
 ---
 
