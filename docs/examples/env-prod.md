@@ -6,14 +6,15 @@
 ADMINS="Foobar:Foobar@example.com"
 ALLOWED_HOSTS=sk.example.com
 CACHE_URL='file:///var/tmp/django_cache/sk.example.com'
-CSRF_TRUSTED_ORIGINS=https://sk.example.com
+CORS_ALLOWED_ORIGINS="https://example.com, https://sk.example.com"
 DATABASE_URL=pgsql://<user>:<password>@<host>/<database_name>
 DEBUG=False
-LOG_PATH='/var/log/uwsgi/sk.example.com.log'
+LOG_FILE_PATH='/var/log/uwsgi/sk.example.com.log'
 SECRET_KEY=<secret_key>
 SESSION_COOKIE_SECURE=True
-SITE_URL=https://sk.example.com
+SK_LOG_HANDLERS='log_file'
 STATIC_ROOT="/srv/www/sk.example.com/static/"
+
 ```
 
 ## Other databases
