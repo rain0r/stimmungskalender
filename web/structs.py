@@ -39,3 +39,11 @@ class StandoutData:
     label: str
     css_class: str
     entry: Entry
+
+
+@dataclass
+class GraphTimeRanges:
+    first_day: str
+    last_week_start_dt: str
+    last_month_start_dt: str
+    last_year_start_dt: str

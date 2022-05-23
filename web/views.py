@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from django.conf import settings
 from django.contrib.auth import logout
@@ -7,7 +7,6 @@ from django.core.exceptions import BadRequest
 from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
-from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views import View
@@ -15,7 +14,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import RedirectView, TemplateView
 
 from web import util
-from web.models import Entry, UserSettings, PERIODS
+from web.models import UserSettings, PERIODS
 from web.service.pie_graph import PieGraphService, PERIOD_DAY, PERIOD_NIGHT
 from web.service.scatter_graph import ScatterGraphService
 from web.service.sk import SkService
@@ -147,30 +146,16 @@ class GraphView(MoodMapping, TemplateView):
             start_dt=start_dt,
             end_dt=end_dt,
         )
+        sk_service = SkService(self.request.user)
+
         context["start_dt"] = start_dt
         context["end_dt"] = end_dt
         context["is_markers"] = is_markers
         context["scatter"] = scatter_graph.build_plot()
         context["pie_chart_day"] = pie_graph.build_chart(PERIOD_DAY)
         context["pie_chart_night"] = pie_graph.build_chart(PERIOD_NIGHT)
-        context["first_day"] = self.get_first_day()
-        context["last_week_start_dt"] = (timezone.now() + timedelta(days=-7)).strftime(
-            "%Y-%m-%d"
-        )
-        context["last_month_start_dt"] = (
-            timezone.now() + timedelta(days=-30)
-        ).strftime("%Y-%m-%d")
-        context["last_year_start_dt"] = (
-            timezone.now() + timedelta(days=-365)
-        ).strftime("%Y-%m-%d")
+        context["graph_time_ranges"] = sk_service.graph_time_ranges()
         return context
-
-    def get_first_day(self):
-        qs = Entry.objects.filter(user=self.request.user).order_by("day")
-        if qs.count() > 0:
-            obj = qs.first()
-            return obj.day.strftime("%Y-%m-%d")
-        return timezone.now().strftime("%Y-%m-%d")
 
 
 @method_decorator(login_required, name="dispatch")

@@ -1,6 +1,5 @@
 from datetime import timedelta, date
 
-
 import plotly.graph_objs as go
 from django.utils.translation import gettext_lazy as _
 from django_registration.forms import User

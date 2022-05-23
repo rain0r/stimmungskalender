@@ -35,24 +35,24 @@
 <!-- Date range buttons -->
 <div class="row">
     <div class="col-12 col-md-2">
-        <a href="{% relative_url first_day 'start_dt' params %}"
+        <a href="{% relative_url graph_time_ranges.first_day 'start_dt' params %}"
            class="my-2 my-md-0">{% translate 'from_start' %}</a>
     </div>
     {% with params=request.GET.urlencode %}
         <div class="col-12 col-md-2">
-            <a href="{% relative_url last_week_start_dt 'start_dt' params %}"
+            <a href="{% relative_url graph_time_ranges.last_week_start_dt 'start_dt' params %}"
                class="my-2 my-md-0">
                 {% translate 'last_week' %}
             </a>
         </div>
         <div class="col-12 col-md-2">
-            <a href="{% relative_url last_month_start_dt 'start_dt' params %}"
+            <a href="{% relative_url graph_time_ranges.last_month_start_dt 'start_dt' params %}"
                class="my-2 my-md-0">
                 {% translate 'last_month' %}
             </a>
         </div>
         <div class="col-12 col-md-2">
-            <a href="{% relative_url last_year_start_dt 'start_dt' params %}"
+            <a href="{% relative_url graph_time_ranges.last_year_start_dt 'start_dt' params %}"
                class="my-2 my-md-0">
                 {% translate 'last_year' %}
             </a>

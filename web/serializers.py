@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework_dataclasses.serializers import DataclassSerializer
 
 from web import models
-from web.structs import MoodTable, WeekdayEntry, StandoutData
+from web.structs import MoodTable, WeekdayEntry, StandoutData, GraphTimeRanges
 
 
 class WeekSerializer(serializers.ModelSerializer):
@@ -34,3 +34,8 @@ class UserSettingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.UserSettings
         fields = ["view_is_markers", "view_day_form", "view_night_form"]
+
+
+class GraphTimeRangesSerializer(DataclassSerializer):
+    class Meta:
+        dataclass = GraphTimeRanges

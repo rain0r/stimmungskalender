@@ -9,7 +9,7 @@ from django.utils import timezone
 
 from web.models import Entry, Week, Moods
 from web.service.pie_graph import PERIOD_NIGHT, PERIOD_DAY
-from web.structs import WeekdayEntry, MoodTable, StandoutData
+from web.structs import WeekdayEntry, MoodTable, StandoutData, GraphTimeRanges
 
 
 class InvalidPeriodError(Exception):
@@ -157,6 +157,28 @@ class SkService:
             )
         )
         return ret
+
+    def graph_time_ranges(self) -> GraphTimeRanges:
+        return GraphTimeRanges(
+            first_day=self._first_day(),
+            last_week_start_dt=(timezone.now() + timedelta(days=-7)).strftime(
+                "%Y-%m-%d"
+            ),
+            last_month_start_dt=(timezone.now() + timedelta(days=-30)).strftime(
+                "%Y-%m-%d"
+            ),
+            last_year_start_dt=(timezone.now() + timedelta(days=-365)).strftime(
+                "%Y-%m-%d"
+            ),
+        )
+
+    def _first_day(self):
+        """Returns the date of the first mood entry"""
+        qs = Entry.objects.filter(user=self._user).order_by("day")
+        if qs.count() > 0:
+            obj = qs.first()
+            return obj.day.strftime("%Y-%m-%d")
+        return timezone.now().strftime("%Y-%m-%d")
 
     def _week_data(self, week_start: date) -> typing.List[WeekdayEntry]:
         week = self._week(week_start)

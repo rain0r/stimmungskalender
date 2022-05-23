@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.utils import translation
 from django.views.i18n import JSONCatalog
 from rest_framework import views, status
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from web import serializers, util
@@ -213,3 +213,18 @@ class FormsDisplayedView(views.APIView):
         ss = SettingsService(self.request.user)
         ss.set_forms_displayed(day=day_form, night=night_form)
         return Response(status=status.HTTP_200_OK)
+
+
+class GraphView(views.APIView):
+    """
+    General graph info
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        sk_service = SkService(request.user)
+        serializer = serializers.GraphTimeRangesSerializer(
+            sk_service.graph_time_ranges()
+        )
+        return Response(serializer.data)
