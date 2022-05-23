@@ -154,13 +154,13 @@ class GraphView(MoodMapping, TemplateView):
         context["pie_chart_day"] = pie_graph.build_chart(PERIOD_DAY)
         context["pie_chart_night"] = pie_graph.build_chart(PERIOD_NIGHT)
         context["first_day"] = self.get_first_day()
-        context["last_week_start_date"] = (
+        context["last_week_start_dt"] = (
             timezone.now() + timedelta(days=-7)
         ).strftime("%Y-%m-%d")
-        context["last_month_start_date"] = (
+        context["last_month_start_dt"] = (
             timezone.now() + timedelta(days=-30)
         ).strftime("%Y-%m-%d")
-        context["last_year_start_date"] = (
+        context["last_year_start_dt"] = (
             timezone.now() + timedelta(days=-365)
         ).strftime("%Y-%m-%d")
         context["today"] = timezone.now().strftime("%Y-%m-%d")
