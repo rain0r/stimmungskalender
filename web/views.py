@@ -163,8 +163,6 @@ class GraphView(MoodMapping, TemplateView):
         context["last_year_start_dt"] = (
             timezone.now() + timedelta(days=-365)
         ).strftime("%Y-%m-%d")
-        context["today"] = timezone.now().strftime("%Y-%m-%d")
-
         return context
 
     def get_first_day(self):
