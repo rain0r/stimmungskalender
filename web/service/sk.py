@@ -39,7 +39,6 @@ class SkService:
         self._user = user
 
     def calendar(self):
-        # calendar = SkCalendar()
         my_entries = Entry.objects.filter(user=self._user)
         first_day = my_entries.first().day
         last_day = my_entries.last().day
