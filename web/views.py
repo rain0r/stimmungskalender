@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.conf import settings
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -116,11 +114,8 @@ class SaveMoodView(View):
         day = data[1]
 
         sk_service = SkService(self.request.user)
-        sk_service.set_entry(period, mood, day)
-        start_day_p = datetime.strptime(day, "%Y-%m-%d").strftime(
-            settings.SK_DATE_FORMAT
-        )
-        return redirect(f"{reverse('index')}?start_dt={start_day_p}")
+        sk_service.save_entry(period, mood, day)
+        return redirect(f"{reverse('index')}?start_dt={day}")
 
 
 class GraphView(MoodMapping, TemplateView):
@@ -218,13 +213,6 @@ class CalendarView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         sk_service = SkService(self.request.user)
-
         serializer = serializers.CalendarSerializer(sk_service.calendar())
-        # serializer = serializers.CalendarSerializer(sk_service.calendar())
-        # context["calendar"] = sk_service.calendar()
-
         context["serializer"] = serializer.data
-
-        # return Response(serializer.data)
-
         return context

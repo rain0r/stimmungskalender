@@ -31,7 +31,7 @@ class EntryDayView(views.APIView):
         mood = request.data.get("mood", None)
         period = request.data.get("period", None)
         day = request.data.get("day", None)
-        obj = sk_service.set_entry(period, mood, day)
+        obj = sk_service.save_entry(period, mood, day)
         serialized_ret = serializers.WeekdayEntrySerializer(obj, data=request.data)
         if serialized_ret.is_valid():
             return Response(serialized_ret.data, status=status.HTTP_201_CREATED)
