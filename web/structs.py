@@ -47,3 +47,10 @@ class GraphTimeRanges:
     last_week_start_dt: str
     last_month_start_dt: str
     last_year_start_dt: str
+
+
+@dataclass
+class SkCalendar:
+    first_day: date
+    last_day: date
+    entries: typing.List[WeekdayEntry]

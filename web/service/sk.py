@@ -9,7 +9,13 @@ from django.utils import timezone
 
 from web.models import Entry, Week, Moods
 from web.service.pie_graph import PERIOD_NIGHT, PERIOD_DAY
-from web.structs import WeekdayEntry, MoodTable, StandoutData, GraphTimeRanges
+from web.structs import (
+    WeekdayEntry,
+    MoodTable,
+    StandoutData,
+    GraphTimeRanges,
+    SkCalendar,
+)
 
 
 class InvalidPeriodError(Exception):
@@ -31,6 +37,30 @@ class SkService:
         user: User,
     ):
         self._user = user
+
+    def calendar(self):
+        # calendar = SkCalendar()
+        my_entries = Entry.objects.filter(user=self._user)
+        first_day = my_entries.first().day
+        last_day = my_entries.last().day
+        delta = last_day - first_day
+        days = [(first_day + timedelta(days=d)) for d in range(delta.days)]
+        week_data = {}
+        for day in days:
+            week_data[day.strftime(settings.SK_DATE_FORMAT)] = WeekdayEntry(
+                day=day, mood_day=0, mood_night=0
+            )
+        for entry in my_entries:
+            week_data[entry.day.strftime(settings.SK_DATE_FORMAT)] = WeekdayEntry(
+                day=entry.day, mood_day=entry.mood_day, mood_night=entry.mood_night
+            )
+
+        data = SkCalendar(
+            first_day=first_day,
+            last_day=last_day,
+            entries=[week_data[i] for i in week_data],
+        )
+        return data
 
     def search(
         self,
@@ -183,7 +213,7 @@ class SkService:
     def _week_data(self, week_start: date) -> typing.List[WeekdayEntry]:
         week = self._week(week_start)
         my_entries = Entry.objects.filter(user=self._user, week=week)
-        days = [(week_start + timedelta(days=d)).date() for d in range(7)]
+        days = [(week_start + timedelta(days=d)) for d in range(7)]
         week_data = {}
         for day in days:
             week_data[day.strftime(settings.SK_DATE_FORMAT)] = WeekdayEntry(
@@ -263,3 +293,20 @@ class SkService:
             end_dt = datetime.strptime(end, settings.SK_DATE_FORMAT).date()
             qs = qs.filter(week_date__lte=end_dt)
         return qs
+
+    def _range_data(self):
+        start = date(timezone.now().year, 1, 1)
+        end = timezone.now().date()
+        delta = start - end
+        qs = Entry.objects.filter(user=self._user, day__gte=start, day__lte=end)
+        days = [(start + timedelta(days=d)).date() for d in range(delta.days)]
+        calendar = {}
+        for day in days:
+            calendar[day.strftime(settings.SK_DATE_FORMAT)] = WeekdayEntry(
+                day=day, mood_day=0, mood_night=0
+            )
+        for entry in qs.iterator():
+            calendar[entry.day.strftime(settings.SK_DATE_FORMAT)] = WeekdayEntry(
+                day=entry.day, mood_day=entry.mood_day, mood_night=entry.mood_night
+            )
+        return [calendar[i] for i in calendar]

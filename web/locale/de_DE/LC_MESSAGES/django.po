@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-16 20:02+0200\n"
-"PO-Revision-Date: 2022-05-13 18:06+0200\n"
+"POT-Creation-Date: 2022-05-27 22:06+0200\n"
+"PO-Revision-Date: 2022-05-27 22:00+0200\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -30,27 +30,31 @@ msgstr "Nacht"
 msgid "Log in"
 msgstr ""
 
-#: templates/web/base.html:49 templates/web/base.html:79
+#: templates/web/base.html:50 templates/web/base.html:83
 msgid "home"
 msgstr "Startseite"
 
-#: templates/web/base.html:52
+#: templates/web/base.html:53
 msgid "graph"
 msgstr "Diagramm"
 
-#: templates/web/base.html:55 templates/web/search.html:5
+#: templates/web/base.html:56 templates/web/calendar.html:4
+msgid "calendar"
+msgstr "Kalender"
+
+#: templates/web/base.html:59 templates/web/search.html:5
 msgid "search"
 msgstr "Suche"
 
-#: templates/web/base.html:58 templates/web/settings.html:5
+#: templates/web/base.html:62 templates/web/settings.html:5
 msgid "settings"
 msgstr "Einstellungen"
 
-#: templates/web/base.html:66
+#: templates/web/base.html:70
 msgid "logged_in_as"
 msgstr "Angemeldet als"
 
-#: templates/web/base.html:82
+#: templates/web/base.html:86
 msgid "logout"
 msgstr "Abmelden"
 
@@ -79,7 +83,7 @@ msgid "end_date"
 msgstr "Bis"
 
 #: templates/web/graph/date_select.html:31
-#: templates/web/index/entry_list.html:64 templates/web/search.html:63
+#: templates/web/index/entry_list.html:69 templates/web/search.html:63
 msgid "go_to"
 msgstr "Los"
 
@@ -197,18 +201,18 @@ msgstr "Zurück"
 msgid "next"
 msgstr "Vor"
 
-#: templates/web/index/entry_list.html:39
+#: templates/web/index/entry_list.html:44
 msgid "what_happened_this_week"
 msgstr "Was geschah diese Woche?"
 
-#: templates/web/index/entry_list.html:42
+#: templates/web/index/entry_list.html:47
 #: templates/web/settings/default_view_mode.html:27
 #: templates/web/settings/language.html:20
 #: templates/web/settings/view_forms.html:28
 msgid "save"
 msgstr "Speichern"
 
-#: templates/web/index/entry_list.html:50
+#: templates/web/index/entry_list.html:55
 msgid "jump_to_week"
 msgstr "Springe zu Woche"
 
@@ -248,23 +252,23 @@ msgstr "Nacht-Formular"
 msgid "view_day_form"
 msgstr "Tag-Formular"
 
-#: views.py:27
+#: views.py:26
 msgid "very_bad"
 msgstr "Sehr schlecht"
 
-#: views.py:28
+#: views.py:27
 msgid "bad"
 msgstr "Schlecht"
 
-#: views.py:29
+#: views.py:28
 msgid "medium"
 msgstr "Mittel"
 
-#: views.py:30
+#: views.py:29
 msgid "good"
 msgstr "Gut"
 
-#: views.py:31
+#: views.py:30
 msgid "very_good"
 msgstr "Sehr gut"
 
