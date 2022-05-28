@@ -28,6 +28,7 @@
         <link rel="manifest" href="{% static '/site.webmanifest' %}">
         <link rel="stylesheet" href="{% static '/css/bootstrap-datepicker3.css' %}" />
         <link rel="stylesheet" href="{% static '/css/stimmungskalender.css' %}" />
+        <link rel="stylesheet" href="{% static '/css/js-year-calendar.min.css' %}" />
         <style>{% include 'web/css/moods.css' %}</style>
     </head>
     <body>
@@ -50,6 +51,9 @@
                         </li>
                         <li class="nav-item {% if request.resolver_match.url_name == 'graph' %}active{% endif %}">
                             <a class="nav-link" href="{% url 'graph' %}">{% translate 'graph' %}</a>
+                        </li>
+                        <li class="nav-item {% if request.resolver_match.url_name == 'calendar' %}active{% endif %}">
+                            <a class="nav-link" href="{% url 'calendar' %}">{% translate 'calendar' %}</a>
                         </li>
                         <li class="nav-item {% if request.resolver_match.url_name == 'search' %}active{% endif %}">
                             <a class="nav-link" href="{% url 'search' %}">{% translate 'search' %}</a>
@@ -83,13 +87,6 @@
                 </li>
             </ul>
         </footer>
-        <div id="device-size-detector">
-            <div id="xs" class="d-block d-sm-none"></div>
-            <div id="sm" class="d-none d-sm-block d-md-none"></div>
-            <div id="md" class="d-none d-md-block d-lg-none"></div>
-            <div id="lg" class="d-none d-lg-block d-xl-none"></div>
-            <div id="xl" class="d-none d-xl-block"></div>
-        </div>
         {% bootstrap_javascript jquery='full' %}
         {% block js %}
         {% endblock js %}

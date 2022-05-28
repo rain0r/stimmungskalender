@@ -13,7 +13,7 @@ from django.views import View
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import RedirectView, TemplateView
 
-from web import util
+from web import util, serializers
 from web.models import UserSettings, PERIODS
 from web.service.pie_graph import PieGraphService, PERIOD_DAY, PERIOD_NIGHT
 from web.service.scatter_graph import ScatterGraphService
@@ -209,3 +209,22 @@ class SaveNoteView(View):
         week = sk_service.save_note(week, note)
         start_day_p = week.week_date.strftime(settings.SK_DATE_FORMAT)
         return redirect(f"{reverse('index')}?start_dt={start_day_p}")
+
+
+@method_decorator(login_required, name="dispatch")
+class CalendarView(TemplateView):
+    template_name = "web/calendar.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        sk_service = SkService(self.request.user)
+
+        serializer = serializers.CalendarSerializer(sk_service.calendar())
+        # serializer = serializers.CalendarSerializer(sk_service.calendar())
+        # context["calendar"] = sk_service.calendar()
+
+        context["serializer"] = serializer.data
+
+        # return Response(serializer.data)
+
+        return context

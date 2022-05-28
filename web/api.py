@@ -228,3 +228,16 @@ class GraphView(views.APIView):
             sk_service.graph_time_ranges()
         )
         return Response(serializer.data)
+
+
+class CalendarView(views.APIView):
+    """
+    Return data for the calendar view
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        sk_service = SkService(request.user)
+        serializer = serializers.CalendarSerializer(sk_service.calendar())
+        return Response(serializer.data)

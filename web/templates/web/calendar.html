@@ -1,0 +1,12 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+{% block content %}
+    <h1>{% translate 'calendar' %}</h1>
+    <div class="calendar"></div>
+{% endblock %}
+{% block js %}
+    {{ serializer|json_script:"entries" }}
+    {% load static %}
+    <script src="{% static '/js/js-year-calendar.min.js' %}"></script>
+    <script src="{% static '/js/calendar.js' %}"></script>
+{% endblock %}
