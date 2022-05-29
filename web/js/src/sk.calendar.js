@@ -1,5 +1,6 @@
 import Calendar from "js-year-calendar";
 import "js-year-calendar/dist/js-year-calendar.css";
+import "bootstrap/js/dist/popover";
 
 const calendarData = JSON.parse(document.getElementById("entries").textContent);
 calendarData.entries.map((item) => {
@@ -11,6 +12,12 @@ calendarData.entries.map((item) => {
   item.endDate = day;
   return item;
 });
+
+function formatDate(dateStr) {
+  const event = new Date(dateStr);
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  return event.toLocaleDateString(undefined, options);
+}
 
 function moodColors(mood) {
   let color;
@@ -36,13 +43,15 @@ function moodColors(mood) {
   return color;
 }
 
-$(function () {
-  const minDate = calendarData.first_day.split("-");
-  const maxDate = calendarData.last_day.split("-");
+$(() => {
+  // const minDate = calendarData.first_day.split("-");
+  // const maxDate = calendarData.last_day.split("-");
 
   new Calendar(".calendar", {
-    minDate: new Date(minDate[0], minDate[1] - 1, minDate[2]),
-    maxDate: new Date(maxDate[0], maxDate[1] - 1, maxDate[2]),
+    // minDate: new Date(minDate[0], minDate[1] - 1, minDate[2]),
+    // maxDate: new Date(maxDate[0], maxDate[1] - 1, maxDate[2]),
+    minDate: new Date(calendarData.first_day),
+    maxDate: new Date(calendarData.last_day),
     style: "custom",
     customDataSourceRenderer: function (ele, renderDate, eventList) {
       let dayColor = "red";
@@ -69,6 +78,7 @@ $(function () {
         for (let i in e.events) {
           content += `
           <div class="event-tooltip-content">
+          <p>${formatDate(e.events[i].day)}</p>
           Mood night: ${e.events[i].mood_night}.
           Mood day: ${e.events[i].mood_day}.
           </div>
