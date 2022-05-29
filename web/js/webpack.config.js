@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack"); //to access built-in plugins
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   mode: "production",
@@ -24,7 +25,16 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",
-      Popper: ['popper.js', 'default']
+      Popper: ["popper.js", "default"],
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "bootstrap/dist/css/bootstrap.min.css",
+          to: path.resolve(__dirname, "../static/css"),
+          context: "node_modules",
+        },
+      ],
     }),
   ],
 };

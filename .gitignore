@@ -152,11 +152,12 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 
-# Stimmungskalender Sqlite Database
+# stimmungskalender Sqlite Database
 sk.sqlite
 
 web/static/ng-sk/
 web/static/js/
+web/static/css/bootstrap.min.css
 
 # Logs
 logs

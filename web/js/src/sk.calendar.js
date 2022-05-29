@@ -15,7 +15,12 @@ calendarData.entries.map((item) => {
 
 function formatDate(dateStr) {
   const event = new Date(dateStr);
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
   return event.toLocaleDateString(undefined, options);
 }
 

@@ -157,12 +157,6 @@ CACHES = {"default": config("CACHE_URL", cast=django_cache_url.parse)}
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-BOOTSTRAP4 = {
-    "css_url": "/static/css/bootstrap.min.css",
-    "javascript_url": "/static/js/bootstrap.bundle.min.js",
-    "jquery_url": "/static/js/jquery-3.6.0.min.js",
-}
-
 STATIC_ROOT = config("STATIC_ROOT", default=None)
 
 LOG_FILE_PATH = config("LOG_FILE_PATH", default=BASE_DIR / "sk_debug.log")
