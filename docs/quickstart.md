@@ -24,6 +24,8 @@ sed -i 's/psycopg2/#psycopg2/' requirements/common.txt
 ./virtualenv/bin/django-admin compilemessages
 # Create a user account
 ./virtualenv/bin/python manage.py createsuperuser
+# Generate javascript and css files
+./scripts/node.sh
 # Start the app
 ./virtualenv/bin/python manage.py runserver
 ```
