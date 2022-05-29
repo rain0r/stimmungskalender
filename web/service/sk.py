@@ -4,7 +4,7 @@ from enum import Enum
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.db.models import Q, Max, Min
+from django.db.models import Q
 from django.utils import timezone
 
 from web.models import Entry, Week, Moods
@@ -39,10 +39,7 @@ class SkService:
         self._user = user
 
     def calendar(self):
-        my_entries = Entry.objects.filter(user=self._user)
-        my_entries = my_entries.annotate(first_day=Max("day")).annotate(
-            last_day=Min("day")
-        )
+        my_entries = Entry.objects.filter(user=self._user).order_by("-day")
         first_day = my_entries.last().day
         last_day = my_entries.first().day
         delta = last_day - first_day
