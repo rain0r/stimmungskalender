@@ -1,94 +1,90 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        {% load static %}
-        {% load bootstrap4 %}
-        {% load i18n %}
-        {% bootstrap_css %}
-        <meta charset="utf-8">
-        <meta name="viewport"
-              content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="author" content="Hihn">
-        <title>Stimmungskalender
-            {% block title %}
-            {% endblock title %}
-        </title>
-        <link rel="icon" href="{% static 'favicon.ico' %}">
-        <link rel="apple-touch-icon"
-              sizes="180x180"
-              href="{% static '/img/apple-touch-icon.png' %}">
-        <link rel="icon"
-              type="image/png"
-              sizes="32x32"
-              href="{% static '/img/favicon-32x32.png' %}">
-        <link rel="icon"
-              type="image/png"
-              sizes="16x16"
-              href="{% static '/img/favicon-16x16.png' %}">
-        <link rel="manifest" href="{% static '/site.webmanifest' %}">
-        <link rel="stylesheet" href="{% static '/css/bootstrap-datepicker3.css' %}" />
-        <link rel="stylesheet" href="{% static '/css/stimmungskalender.css' %}" />
-        <link rel="stylesheet" href="{% static '/css/js-year-calendar.min.css' %}" />
-        <style>{% include 'web/css/moods.css' %}</style>
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-            <div class="container">
-                <a class="navbar-brand" href="{% url 'index' %}">🗓️ Stimmungskalender</a>
-                <button class="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#navbarCollapse"
-                        aria-controls="navbarCollapse"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
-                            <a class="nav-link" href="{% url 'index' %}">{% translate 'home' %}</a>
-                        </li>
-                        <li class="nav-item {% if request.resolver_match.url_name == 'graph' %}active{% endif %}">
-                            <a class="nav-link" href="{% url 'graph' %}">{% translate 'graph' %}</a>
-                        </li>
-                        <li class="nav-item {% if request.resolver_match.url_name == 'calendar' %}active{% endif %}">
-                            <a class="nav-link" href="{% url 'calendar' %}">{% translate 'calendar' %}</a>
-                        </li>
-                        <li class="nav-item {% if request.resolver_match.url_name == 'search' %}active{% endif %}">
-                            <a class="nav-link" href="{% url 'search' %}">{% translate 'search' %}</a>
-                        </li>
-                        <li class="nav-item {% if request.resolver_match.url_name == 'settings' %}active{% endif %}">
-                            <a class="nav-link" href="{% url 'settings' %}">{% translate 'settings' %}</a>
-                        </li>
-                        {% if ng_sk_enabled %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'ng-sk' %}">NG SK</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                    <span class="text-muted">{% translate 'logged_in_as' %}: {{ user.get_username }}</span>
-                </div>
-            </div>
-        </nav>
-        <main class="container pt-3">
-            {% block content %}
-            {% endblock content %}
-            {% include 'web/i18n.html' %}
-            <hr>
-        </main>
-        <footer class="my-5 pt-5 text-muted text-center text-small">
-            <ul class="list-inline">
-                <li class="list-inline-item">
-                    <a href="{% url 'index' %}">{% translate 'home' %}</a>
+<head>
+    {% load static %}
+    {% load i18n %}
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Hihn">
+    <title>Stimmungskalender
+        {% block title %}
+        {% endblock title %}
+    </title>
+    <link rel="icon" href="{% static 'favicon.ico' %}">
+    <link rel="apple-touch-icon"
+          sizes="180x180"
+          href="{% static '/img/apple-touch-icon.png' %}">
+    <link rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="{% static '/img/favicon-32x32.png' %}">
+    <link rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="{% static '/img/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static '/site.webmanifest' %}">
+    <link rel="stylesheet" href="{% static '/css/stimmungskalender.css' %}"/>
+    <style>{% include 'web/css/moods.css' %}</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}">🗓️ Stimmungskalender</a>
+        <button class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarCollapse"
+                aria-controls="navbarCollapse"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'index' %}">{% translate 'home' %}</a>
                 </li>
-                <li class="list-inline-item">
-                    <a href="{% url 'logout' %}" title="Logout {{ user.get_username }}">{% translate 'logout' %}</a>
+                <li class="nav-item {% if request.resolver_match.url_name == 'graph' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'graph' %}">{% translate 'graph' %}</a>
                 </li>
+                <li class="nav-item {% if request.resolver_match.url_name == 'calendar' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'calendar' %}">{% translate 'calendar' %}</a>
+                </li>
+                <li class="nav-item {% if request.resolver_match.url_name == 'search' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'search' %}">{% translate 'search' %}</a>
+                </li>
+                <li class="nav-item {% if request.resolver_match.url_name == 'settings' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'settings' %}">{% translate 'settings' %}</a>
+                </li>
+                {% if ng_sk_enabled %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'ng-sk' %}">NG SK</a>
+                </li>
+                {% endif %}
             </ul>
-        </footer>
-        {% bootstrap_javascript jquery='full' %}
-        {% block js %}
-        {% endblock js %}
-    </body>
+            <span class="text-muted">{% translate 'logged_in_as' %}: {{ user.get_username }}</span>
+        </div>
+    </div>
+</nav>
+<main class="container pt-3">
+    {% block content %}
+    {% endblock content %}
+    {% include 'web/i18n.html' %}
+    <hr>
+</main>
+<footer class="my-5 pt-5 text-muted text-center text-small">
+    <ul class="list-inline">
+        <li class="list-inline-item">
+            <a href="{% url 'index' %}">{% translate 'home' %}</a>
+        </li>
+        <li class="list-inline-item">
+            <a href="{% url 'logout' %}" title="Logout {{ user.get_username }}">{% translate 'logout' %}</a>
+        </li>
+    </ul>
+</footer>
+<script src="{% static '/js/skBase.js' %}"></script>
+{% block js %}
+{% endblock js %}
+</body>
 </html>
