@@ -75,10 +75,5 @@
 {% endblock %}
 {% block js %}
     {% load static %}
-    <script src="{% static '/js/bootstrap-datepicker.js' %}"></script>
-    <script>
-    $(document).ready(() => {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-    </script>
+    <script src="{% static '/js/skDatePicker.js' %}"></script>
 {% endblock %}

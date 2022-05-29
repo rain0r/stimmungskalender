@@ -1,4 +1,6 @@
-let calendar = null;
+import Calendar from "js-year-calendar";
+import "js-year-calendar/dist/js-year-calendar.css";
+
 const calendarData = JSON.parse(document.getElementById("entries").textContent);
 calendarData.entries.map((item) => {
   const parts = item.day.split("-");
@@ -38,7 +40,7 @@ $(function () {
   const minDate = calendarData.first_day.split("-");
   const maxDate = calendarData.last_day.split("-");
 
-  calendar = new Calendar(".calendar", {
+  new Calendar(".calendar", {
     minDate: new Date(minDate[0], minDate[1] - 1, minDate[2]),
     maxDate: new Date(maxDate[0], maxDate[1] - 1, maxDate[2]),
     style: "custom",
@@ -62,9 +64,9 @@ $(function () {
     dataSource: calendarData.entries,
     mouseOnDay: function (e) {
       if (e.events.length > 0) {
-        var content = "";
+        let content = "";
 
-        for (var i in e.events) {
+        for (let i in e.events) {
           content += `
           <div class="event-tooltip-content">
           Mood night: ${e.events[i].mood_night}.
@@ -90,16 +92,3 @@ $(function () {
     },
   });
 });
-
-/*
-new Calendar(".calendar", {
-  style: "background",
-  displayHeader: false,
-  // startDate: new Date(2022, 1, 1), // TODO
-  numberMonthsDisplayed: 12,
-  minDate: new Date(2022, 0, 1), // TODO erster eintrag
-  maxDate: new Date(), // TODO heute
-  language: "de", // TODO
-  alwaysHalfDay: true,
-});
-*/

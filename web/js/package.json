@@ -1,0 +1,27 @@
+{
+  "name": "stimmungskalender",
+  "version": "0.0.1",
+  "description": "JavaScript files for stimmungskalender",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Rainer Hihn <hihn.rainer@gmail.com> (https://hihn.org/)",
+  "license": "AGPL-3.0",
+  "devDependencies": {
+    "css-loader": "^6.7.1",
+    "package-lock-sanitizer": "^1.0.1",
+    "prettier": "^2.6.2",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "bootstrap": "4.6.1",
+    "bootstrap-datepicker": "1.9.0",
+    "jquery": "^3.6.0",
+    "js-year-calendar": "^2.0.0"
+  }
+}

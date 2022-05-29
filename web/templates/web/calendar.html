@@ -7,6 +7,5 @@
 {% block js %}
     {{ serializer|json_script:"entries" }}
     {% load static %}
-    <script src="{% static '/js/js-year-calendar.min.js' %}"></script>
-    <script src="{% static '/js/calendar.js' %}"></script>
+    <script src="{% static '/js/skCalendar.js' %}"></script>
 {% endblock %}

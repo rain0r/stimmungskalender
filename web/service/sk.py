@@ -4,7 +4,7 @@ from enum import Enum
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.db.models import Q
+from django.db.models import Q, Max, Min
 from django.utils import timezone
 
 from web.models import Entry, Week, Moods
@@ -40,10 +40,13 @@ class SkService:
 
     def calendar(self):
         my_entries = Entry.objects.filter(user=self._user)
-        first_day = my_entries.first().day
-        last_day = my_entries.last().day
+        my_entries = my_entries.annotate(first_day=Max("day")).annotate(
+            last_day=Min("day")
+        )
+        first_day = my_entries.last().day
+        last_day = my_entries.first().day
         delta = last_day - first_day
-        days = [(first_day + timedelta(days=d)) for d in range(delta.days)]
+        days = [(first_day - timedelta(days=d)) for d in range(delta.days)]
         week_data = {}
         for day in days:
             week_data[day.strftime(settings.SK_DATE_FORMAT)] = WeekdayEntry(
@@ -110,7 +113,7 @@ class SkService:
         )
         return Week(note=note, week_date=week_date)
 
-    def set_entry(self, period: str, mood: int, day: str) -> WeekdayEntry:
+    def save_entry(self, period: str, mood: int, day: str) -> WeekdayEntry:
         """Set or remove a mood"""
 
         form_mapping = {

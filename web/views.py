@@ -116,7 +116,7 @@ class SaveMoodView(View):
         day = data[1]
 
         sk_service = SkService(self.request.user)
-        sk_service.set_entry(period, mood, day)
+        sk_service.save_entry(period, mood, day)
         start_day_p = datetime.strptime(day, "%Y-%m-%d").strftime(
             settings.SK_DATE_FORMAT
         )
