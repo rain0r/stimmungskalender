@@ -38,10 +38,17 @@ class SkService:
     ):
         self._user = user
 
-    def calendar(self):
+    def calendar(self) -> SkCalendar:
         my_entries = Entry.objects.filter(user=self._user).order_by("-day")
-        first_day = my_entries.last().day
-        last_day = my_entries.first().day
+        try:
+            first_day = my_entries.last().day
+            last_day = my_entries.first().day
+        except AttributeError:
+            return SkCalendar(
+                first_day=timezone.now().date(),
+                last_day=timezone.now().date(),
+                entries=[],
+            )
         delta = last_day - first_day
         days = [(first_day - timedelta(days=d)) for d in range(delta.days)]
         week_data = {}
