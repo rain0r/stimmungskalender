@@ -155,7 +155,7 @@ class ScatterGraphView(MoodMapping, views.APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        is_markers = self.is_markers()
+        is_markers = self.is_markers(self.request.GET)
         start_dt = self.default_start_dt()
         end_dt = self.default_end_dt()
         scatter_graph = ScatterGraphService(

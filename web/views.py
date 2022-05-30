@@ -16,7 +16,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import RedirectView, TemplateView
 
 from web import serializers
-from web.models import UserSettings, PERIODS
+from web.models import PERIODS
 from web.query_params import QP_START_DT, QP_END_DT
 from web.service.pie_graph import PieGraphService, PERIOD_DAY, PERIOD_NIGHT
 from web.service.scatter_graph import ScatterGraphService
@@ -26,6 +26,7 @@ from web.service.sk import SkService
 
 class MoodMapping:
     def __init__(self) -> None:
+        """Provides translated names for each mood"""
         self.mood_mapping = {
             1: _("very_bad"),
             2: _("bad"),
@@ -33,22 +34,6 @@ class MoodMapping:
             4: _("good"),
             5: _("very_good"),
         }
-
-    def get_default_view_mode(self) -> str:
-        try:
-            obj = UserSettings.objects.get(user=self.request.user)
-            if obj.view_is_markers:
-                return "markers"
-            else:
-                return "lines"
-        except UserSettings.DoesNotExist:
-            return settings.DEFAULT_VIEW_MODE
-
-    def is_markers(self) -> bool:
-        if "view" in self.request.GET:
-            return self.request.GET.get("view", "markers") == "markers"
-        else:
-            return self.get_default_view_mode() == "markers"
 
     def default_start_dt(
         self,
@@ -74,28 +59,25 @@ class SettingsView(TemplateView):
     template_name = "web/settings.html"
 
     def get_context_data(self, **kwargs):
+        ss = SettingsService(self.request.user)
         context = super().get_context_data(**kwargs)
-        context["default_view_mode"] = self.get_default_view_mode(self.request.user)
-        context["user_settings"] = UserSettings.objects.get(user=self.request.user)
+        context["default_view_mode"] = ss.get_default_view_mode()
+        context["user_settings"] = ss.user_settings()
         return context
 
 
 @method_decorator(login_required, name="dispatch")
 class SaveSettingsView(View):
     def post(self, request):
-        view_is_markers = request.POST.get("default_view_mode", "").strip()
-        if view_is_markers:
-            UserSettings.objects.update_or_create(
-                user=self.request.user,
-                defaults={
-                    "user": self.request.user,
-                    "view_is_markers": view_is_markers == "markers",
-                },
-            )
-        view_day_form = request.POST.get("view_day_form", "")
-        view_night_form = request.POST.get("view_night_form", "")
         ss = SettingsService(self.request.user)
-        ss.set_forms_displayed(day=view_day_form, night=view_night_form)
+        form_name = request.POST.get("form_name", "")
+        if form_name == "save_view_forms":
+            view_day_form = request.POST.get("view_day_form", "")
+            view_night_form = request.POST.get("view_night_form", "")
+            ss.set_forms_displayed(day=view_day_form, night=view_night_form)
+        if form_name == "save_view_mode":
+            view_mode = request.POST.get("default_view_mode", "")
+            ss.set_markers(view_mode)
         return redirect("settings")
 
 
@@ -158,7 +140,8 @@ class GraphView(MoodMapping, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        is_markers = self.is_markers()
+        ss = SettingsService(self.request.user)
+        is_markers = ss.is_markers(self.request.GET)
         start_dt = self.default_start_dt()
         end_dt = self.default_end_dt()
 
@@ -241,12 +224,13 @@ class SaveNoteView(View):
 
 
 @method_decorator(login_required, name="dispatch")
-class CalendarView(TemplateView):
+class CalendarView(MoodMapping, TemplateView):
     template_name = "web/calendar.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         sk_service = SkService(self.request.user)
         serializer = serializers.CalendarSerializer(sk_service.calendar())
-        context["serializer"] = serializer.data
+        context["entries"] = serializer.data
+        context["mood_mapping"] = self.mood_mapping
         return context
