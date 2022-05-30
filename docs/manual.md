@@ -67,6 +67,9 @@ Create the admin user for ` stimmungskalender`:
 Generate all needed JavaScript and css files:
 
 ```shell
+# To manage all needed ressources, stimmungskalender uses node and webpack.
+# This is needed, to avoid pushing production JavaScript files to git 
+
 cd web/js
 npm i && npm run build
 ```
