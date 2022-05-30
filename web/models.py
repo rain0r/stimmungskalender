@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.base import ModelBase
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -21,7 +22,7 @@ class Entry(models.Model):
     mood_night = models.IntegerField(choices=Moods.choices, null=True)
     day = models.DateField(db_index=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(
             f"User: {self.user}, Date: {self.day}, Day: {self.mood_day}, Night: {self.mood_night}"
         )
@@ -37,7 +38,7 @@ class Week(models.Model):
     week_date = models.DateField(db_index=True, null=True)  # Start of the week
     note = models.TextField(blank=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"User: {self.user}, Week Date: {self.week_date}, Note: {self.note[:10]}"
 
     class Meta:
@@ -59,6 +60,8 @@ class UserSettings(models.Model):
 
 # Create a UserSettings entry for each user
 @receiver(post_save, sender=User)
-def create_user_settings(sender, instance, created, **kwargs):
+def create_user_settings(
+    sender: ModelBase, instance: User, created: bool, **kwargs: dict
+) -> None:
     if created:
         UserSettings.objects.create(user=instance)

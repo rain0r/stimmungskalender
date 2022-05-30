@@ -11,20 +11,6 @@ class WeekdayEntry:
     mood_day: typing.Optional[int] = 0
     mood_night: typing.Optional[int] = 0
 
-    def __key(self):
-        return self.day, self.mood_day, self.mood_night
-
-    def __hash__(self):
-        return hash(self.__key())
-
-    def __eq__(self, other):
-        if isinstance(other, WeekdayEntry):
-            return self.__key() == other.__key()
-        return NotImplemented
-
-    def __lt__(self, other):
-        return self.day < other.day
-
 
 @dataclass
 class MoodTable:

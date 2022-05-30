@@ -2,7 +2,7 @@ import random
 from datetime import timedelta
 
 from django.conf import settings
-from django.core.management import BaseCommand
+from django.core.management import BaseCommand, CommandParser
 from django.utils import timezone
 from django_registration.forms import User
 
@@ -11,10 +11,10 @@ from web.service.sk import SkService
 
 
 class Command(BaseCommand):
-    def add_arguments(self, parser):
+    def add_arguments(self, parser: CommandParser) -> None:
         parser.add_argument("username")
 
-    def handle(self, *args, **options):
+    def handle(self, *args: tuple, **options: dict) -> None:
         user = User.objects.get(username=options.get("username"))
         Week.objects.filter(user=user).delete()
         sk_service = SkService(user)

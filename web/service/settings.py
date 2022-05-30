@@ -11,7 +11,7 @@ class SettingsService:
     ):
         self._user = user
 
-    def set_forms_displayed(self, **kwargs):
+    def set_forms_displayed(self, **kwargs: dict) -> None:
         for period in models.PERIODS:
             UserSettings.objects.update_or_create(
                 user=self._user,
@@ -20,12 +20,3 @@ class SettingsService:
                     f"view_{period}_form": bool(kwargs.get(period)),
                 },
             )
-
-    def bar(self, view_is_markers: str):
-        UserSettings.objects.update_or_create(
-            user=self._user,
-            defaults={
-                "user": self._user,
-                "view_is_markers": view_is_markers == "markers",
-            },
-        )

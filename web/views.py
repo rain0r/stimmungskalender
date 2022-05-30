@@ -1,4 +1,5 @@
-from datetime import datetime
+import typing
+from datetime import datetime, date, timedelta
 
 from django.conf import settings
 from django.contrib.auth import logout
@@ -7,21 +8,24 @@ from django.core.exceptions import BadRequest
 from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views import View
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import RedirectView, TemplateView
 
-from web import util, serializers
+from web import serializers
 from web.models import UserSettings, PERIODS
+from web.query_params import QP_START_DT, QP_END_DT
 from web.service.pie_graph import PieGraphService, PERIOD_DAY, PERIOD_NIGHT
 from web.service.scatter_graph import ScatterGraphService
+from web.service.settings import SettingsService
 from web.service.sk import SkService
 
 
 class MoodMapping:
-    def __init__(self):
+    def __init__(self) -> None:
         self.mood_mapping = {
             1: _("very_bad"),
             2: _("bad"),
@@ -30,6 +34,40 @@ class MoodMapping:
             5: _("very_good"),
         }
 
+    def get_default_view_mode(self) -> str:
+        try:
+            obj = UserSettings.objects.get(user=self.request.user)
+            if obj.view_is_markers:
+                return "markers"
+            else:
+                return "lines"
+        except UserSettings.DoesNotExist:
+            return settings.DEFAULT_VIEW_MODE
+
+    def is_markers(self) -> bool:
+        if "view" in self.request.GET:
+            return self.request.GET.get("view", "markers") == "markers"
+        else:
+            return self.get_default_view_mode() == "markers"
+
+    def default_start_dt(
+        self,
+    ) -> date:
+        try:
+            start_date = self.request.GET.get(QP_START_DT, "")
+            start_dt = datetime.strptime(start_date, "%Y-%m-%d")
+        except ValueError:
+            start_dt = timezone.now() + timedelta(days=-7)
+        return start_dt.date()
+
+    def default_end_dt(self) -> date:
+        try:
+            end_date = self.request.GET.get(QP_END_DT, "")
+            end_dt = datetime.strptime(end_date, "%Y-%m-%d").date()
+        except ValueError:
+            end_dt = timezone.now().date()
+        return end_dt
+
 
 @method_decorator(login_required, name="dispatch")
 class SettingsView(TemplateView):
@@ -37,7 +75,7 @@ class SettingsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["default_view_mode"] = util.get_default_view_mode(self.request.user)
+        context["default_view_mode"] = self.get_default_view_mode(self.request.user)
         context["user_settings"] = UserSettings.objects.get(user=self.request.user)
         return context
 
@@ -46,9 +84,6 @@ class SettingsView(TemplateView):
 class SaveSettingsView(View):
     def post(self, request):
         view_is_markers = request.POST.get("default_view_mode", "").strip()
-        view_day_form = request.POST.get("view_day_form", "").strip()
-        view_night_form = request.POST.get("view_night_form", "").strip()
-
         if view_is_markers:
             UserSettings.objects.update_or_create(
                 user=self.request.user,
@@ -57,16 +92,10 @@ class SaveSettingsView(View):
                     "view_is_markers": view_is_markers == "markers",
                 },
             )
-
-        for period in PERIODS:
-            setting = request.POST.get(f"view_{period}_form", "").strip()
-            UserSettings.objects.update_or_create(
-                user=self.request.user,
-                defaults={
-                    "user": self.request.user,
-                    f"view_{period}_form": bool(setting),
-                },
-            )
+        view_day_form = request.POST.get("view_day_form", "")
+        view_night_form = request.POST.get("view_night_form", "")
+        ss = SettingsService(self.request.user)
+        ss.set_forms_displayed(day=view_day_form, night=view_night_form)
         return redirect("settings")
 
 
@@ -90,7 +119,7 @@ class EntryListView(MoodMapping, TemplateView):
 
         return context
 
-    def get_forms(self):
+    def get_forms(self) -> typing.List[dict]:
         ret = []
         ret.append(
             {"name": "night", "name_header": "night_header", "attr": PERIOD_NIGHT}
@@ -129,9 +158,9 @@ class GraphView(MoodMapping, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        is_markers = util.is_markers(self.request)
-        start_dt = util.default_start_dt(self.request)
-        end_dt = util.default_end_dt(self.request)
+        is_markers = self.is_markers()
+        start_dt = self.default_start_dt()
+        end_dt = self.default_end_dt()
 
         scatter_graph = ScatterGraphService(
             is_markers=is_markers,
@@ -218,13 +247,6 @@ class CalendarView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         sk_service = SkService(self.request.user)
-
         serializer = serializers.CalendarSerializer(sk_service.calendar())
-        # serializer = serializers.CalendarSerializer(sk_service.calendar())
-        # context["calendar"] = sk_service.calendar()
-
         context["serializer"] = serializer.data
-
-        # return Response(serializer.data)
-
         return context

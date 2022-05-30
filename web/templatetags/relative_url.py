@@ -4,10 +4,10 @@ register = template.Library()
 
 
 @register.simple_tag
-def relative_url(value, field_name, urlencode=None):
+def relative_url(value: str, field_name: str, url_encode: str = "") -> str:
     url = "?{}={}".format(field_name, value)
-    if urlencode:
-        querystring = urlencode.split("&")
+    if url_encode:
+        querystring = url_encode.split("&")
         filtered_querystring = filter(
             lambda p: p.split("=")[0] != field_name, querystring
         )

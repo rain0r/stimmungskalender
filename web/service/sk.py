@@ -4,7 +4,7 @@ from enum import Enum
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.db.models import Q
+from django.db.models import Q, QuerySet
 from django.utils import timezone
 
 from web.models import Entry, Week, Moods
@@ -39,32 +39,21 @@ class SkService:
         self._user = user
 
     def calendar(self) -> SkCalendar:
-        my_entries = Entry.objects.filter(user=self._user).order_by("-day")
+        qs = Entry.objects.filter(user=self._user).order_by("-day")
         try:
-            first_day = my_entries.last().day
-            last_day = my_entries.first().day
+            first_day = qs.last().day
+            last_day = qs.first().day
         except AttributeError:
             return SkCalendar(
                 first_day=timezone.now().date(),
                 last_day=timezone.now().date(),
                 entries=[],
             )
-        delta = last_day - first_day
-        days = [(first_day - timedelta(days=d)) for d in range(delta.days)]
-        week_data = {}
-        for day in days:
-            week_data[day.strftime(settings.SK_DATE_FORMAT)] = WeekdayEntry(
-                day=day, mood_day=0, mood_night=0
-            )
-        for entry in my_entries:
-            week_data[entry.day.strftime(settings.SK_DATE_FORMAT)] = WeekdayEntry(
-                day=entry.day, mood_day=entry.mood_day, mood_night=entry.mood_night
-            )
-
+        entries = self._entries_range(first_day, last_day)
         data = SkCalendar(
             first_day=first_day,
             last_day=last_day,
-            entries=[week_data[i] for i in week_data],
+            entries=entries,
         )
         return data
 
@@ -74,7 +63,7 @@ class SkService:
         start_dt: str = "",
         end_dt: str = "",
         mood: str = "",
-    ):
+    ) -> QuerySet:
         qs = Week.objects.filter(user=self._user).order_by("-week_date")
         qs = self._filter_search(qs, search_term)
         qs = self._filter_date(qs, start_dt, end_dt)
@@ -208,29 +197,19 @@ class SkService:
             ),
         )
 
-    def _first_day(self):
-        """Returns the date of the first mood entry"""
+    def _first_day(self) -> str:
+        """Returns the date of the first mood entry. If the user has no entries, returns today's date"""
         qs = Entry.objects.filter(user=self._user).order_by("day")
         if qs.count() > 0:
             obj = qs.first()
             return obj.day.strftime("%Y-%m-%d")
         return timezone.now().strftime("%Y-%m-%d")
 
-    def _week_data(self, week_start: date) -> typing.List[WeekdayEntry]:
-        week = self._week(week_start)
-        my_entries = Entry.objects.filter(user=self._user, week=week)
-        days = [(week_start + timedelta(days=d)).date() for d in range(7)]
-        week_data = {}
-        for day in days:
-            week_data[day.strftime(settings.SK_DATE_FORMAT)] = WeekdayEntry(
-                day=day, mood_day=0, mood_night=0
-            )
-        for entry in my_entries:
-            week_data[entry.day.strftime(settings.SK_DATE_FORMAT)] = WeekdayEntry(
-                day=entry.day, mood_day=entry.mood_day, mood_night=entry.mood_night
-            )
+    def _week_data(self, first_day: date) -> typing.List[WeekdayEntry]:
+        last_day = first_day + timedelta(days=7)
+        ret2 = self._entries_range(first_day, last_day)
 
-        return [week_data[i] for i in week_data]
+        return ret2
 
     def _week(self, week_start: date) -> Week:
         # Make sure we use the start of the week
@@ -248,7 +227,7 @@ class SkService:
         ret = week_start + timedelta(days=0 - week_start.weekday() - 7)
         return ret.strftime(settings.SK_DATE_FORMAT)
 
-    def _week_start(self, start_day_p: str) -> date:
+    def _week_start(self, start_day_p: str = "") -> date:
         """
         Returns the start of a week defined by YYYY-W format, eg: 2022-54
         :param start_day_p:
@@ -259,26 +238,25 @@ class SkService:
         else:
             dt1 = timezone.now()
         dt1 += timedelta(days=0 - dt1.weekday())
-        return dt1
+        return dt1.date()
 
     def _filter_mood(
         self,
-        qs,
-        mood: str = "",
-    ):
+        qs: QuerySet,
+        mood_p: str = "",
+    ) -> QuerySet:
         try:
-            mood = int(mood)
+            mood = int(mood_p)
         except ValueError:
             return qs
-        if mood:
-            qs = qs.filter(Q(entry__mood_day=mood) | Q(entry__mood_night=mood))
+        qs = qs.filter(Q(entry__mood_day=mood) | Q(entry__mood_night=mood))
         return qs
 
     def _filter_search(
         self,
-        qs,
+        qs: QuerySet,
         search_term: str = "",
-    ):
+    ) -> QuerySet:
         search_term = search_term.strip()
         if search_term:
             qs = qs.filter(note__icontains=search_term)
@@ -286,10 +264,10 @@ class SkService:
 
     def _filter_date(
         self,
-        qs,
+        qs: QuerySet,
         start_date: str = "",
         end_date: str = "",
-    ):
+    ) -> QuerySet:
         start = start_date.strip()
         end = end_date.strip()
         if start:
@@ -300,19 +278,29 @@ class SkService:
             qs = qs.filter(week_date__lte=end_dt)
         return qs
 
-    def _range_data(self):
-        start = date(timezone.now().year, 1, 1)
-        end = timezone.now().date()
-        delta = start - end
-        qs = Entry.objects.filter(user=self._user, day__gte=start, day__lte=end)
-        days = [(start + timedelta(days=d)).date() for d in range(delta.days)]
-        calendar = {}
+    def _entries_range(
+        self, first_day: date, last_day: date
+    ) -> typing.List[WeekdayEntry]:
+        """
+        Generates a list of WeekdayEntry objects for a date range. Fills empty days with empty data.
+        :param first_day: Uses entries of this day or after
+        :param last_day: Uses entries of this day or before
+        :return:
+        """
+        qs = (
+            Entry.objects.filter(user=self._user)
+            .filter(day__gte=first_day, day__lte=last_day)
+            .order_by("-day")
+        )
+        delta = last_day - first_day
+        days = [(first_day + timedelta(days=d)) for d in range(delta.days)]
+        week_data = {}
         for day in days:
-            calendar[day.strftime(settings.SK_DATE_FORMAT)] = WeekdayEntry(
+            week_data[day.strftime(settings.SK_DATE_FORMAT)] = WeekdayEntry(
                 day=day, mood_day=0, mood_night=0
             )
-        for entry in qs.iterator():
-            calendar[entry.day.strftime(settings.SK_DATE_FORMAT)] = WeekdayEntry(
+        for entry in qs:
+            week_data[entry.day.strftime(settings.SK_DATE_FORMAT)] = WeekdayEntry(
                 day=entry.day, mood_day=entry.mood_day, mood_night=entry.mood_night
             )
-        return [calendar[i] for i in calendar]
+        return [week_data[i] for i in week_data]

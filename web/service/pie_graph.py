@@ -1,3 +1,4 @@
+import typing
 from datetime import date
 
 import plotly.graph_objs as go
@@ -36,7 +37,7 @@ class PieGraphService(BaseGraph):
         )
         return plot(fig, output_type="div", include_plotlyjs=True)
 
-    def load_data(self, period: str):
+    def load_data(self, period: str) -> tuple[typing.List[int], typing.List[int]]:
         if period not in PERIODS:
             raise ValueError(f"period must be one of {PERIODS}")
         qs = (

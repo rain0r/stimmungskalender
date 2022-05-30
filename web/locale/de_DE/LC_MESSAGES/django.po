@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-27 22:06+0200\n"
-"PO-Revision-Date: 2022-05-27 22:00+0200\n"
+"POT-Creation-Date: 2022-05-30 18:26+0200\n"
+"PO-Revision-Date: 2022-05-30 18:26+0200\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -30,31 +30,31 @@ msgstr "Nacht"
 msgid "Log in"
 msgstr ""
 
-#: templates/web/base.html:50 templates/web/base.html:83
+#: templates/web/base.html:48 templates/web/base.html:81
 msgid "home"
 msgstr "Startseite"
 
-#: templates/web/base.html:53
+#: templates/web/base.html:51
 msgid "graph"
 msgstr "Diagramm"
 
-#: templates/web/base.html:56 templates/web/calendar.html:4
+#: templates/web/base.html:54 templates/web/calendar.html:4
 msgid "calendar"
 msgstr "Kalender"
 
-#: templates/web/base.html:59 templates/web/search.html:5
+#: templates/web/base.html:57 templates/web/search.html:5
 msgid "search"
 msgstr "Suche"
 
-#: templates/web/base.html:62 templates/web/settings.html:5
+#: templates/web/base.html:60 templates/web/settings.html:5
 msgid "settings"
 msgstr "Einstellungen"
 
-#: templates/web/base.html:70
+#: templates/web/base.html:68
 msgid "logged_in_as"
 msgstr "Angemeldet als"
 
-#: templates/web/base.html:86
+#: templates/web/base.html:84
 msgid "logout"
 msgstr "Abmelden"
 
@@ -185,6 +185,10 @@ msgstr "Letzte sehr gute Nacht"
 msgid "last_very_bad_night"
 msgstr "Letzte sehr schlechte Nacht"
 
+#: templates/web/i18n.html:20
+msgid "no_results"
+msgstr "Keine Ergebnisse"
+
 #: templates/web/index/entry_list.html:7 templates/web/search.html:73
 msgid "week"
 msgstr "Woche"
@@ -252,23 +256,23 @@ msgstr "Nacht-Formular"
 msgid "view_day_form"
 msgstr "Tag-Formular"
 
-#: views.py:26
+#: views.py:27
 msgid "very_bad"
 msgstr "Sehr schlecht"
 
-#: views.py:27
+#: views.py:28
 msgid "bad"
 msgstr "Schlecht"
 
-#: views.py:28
+#: views.py:29
 msgid "medium"
 msgstr "Mittel"
 
-#: views.py:29
+#: views.py:30
 msgid "good"
 msgstr "Gut"
 
-#: views.py:30
+#: views.py:31
 msgid "very_good"
 msgstr "Sehr gut"
 

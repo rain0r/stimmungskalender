@@ -8,7 +8,7 @@ from web.models import Entry
 
 
 class BaseGraph(ABC):
-    def __init__(self, start_dt: date, end_dt: date, **kwargs):
+    def __init__(self, start_dt: date, end_dt: date, **kwargs: dict):
         self.user = None
         self.start_dt = start_dt
         self.end_dt = end_dt

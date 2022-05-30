@@ -7,7 +7,7 @@ from rest_framework import views, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from web import serializers, util
+from web import serializers
 from web.models import UserSettings
 from web.query_params import QP_START_DT, QP_END_DT
 from web.service.pie_graph import PieGraphService
@@ -155,9 +155,9 @@ class ScatterGraphView(MoodMapping, views.APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        is_markers = util.is_markers(self.request)
-        start_dt = util.default_start_dt(self.request)
-        end_dt = util.default_end_dt(self.request)
+        is_markers = self.is_markers()
+        start_dt = self.default_start_dt()
+        end_dt = self.default_end_dt()
         scatter_graph = ScatterGraphService(
             is_markers=is_markers,
             mood_mapping=self.mood_mapping,
