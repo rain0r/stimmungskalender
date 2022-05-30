@@ -64,6 +64,13 @@ Create the admin user for ` stimmungskalender`:
 ./virtualenv/bin/python manage.py createsuperuser
 ```
 
+Generate all needed JavaScript and css files:
+
+```shell
+cd web/js
+npm i && npm run build
+```
+
 Copy all needed static files (images, JavaScript files etc.) to the static root directory:
 
 ```shell
