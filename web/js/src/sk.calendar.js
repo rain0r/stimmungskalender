@@ -2,6 +2,9 @@ import Calendar from "js-year-calendar";
 import "js-year-calendar/dist/js-year-calendar.css";
 import "bootstrap/js/dist/popover";
 
+const moodMapping = JSON.parse(
+  document.getElementById("mood_mapping").textContent
+);
 const calendarData = JSON.parse(document.getElementById("entries").textContent);
 calendarData.entries.map((item) => {
   const parts = item.day.split("-");
@@ -48,13 +51,19 @@ function moodColors(mood) {
   return color;
 }
 
-$(() => {
-  // const minDate = calendarData.first_day.split("-");
-  // const maxDate = calendarData.last_day.split("-");
+function loadTranslation() {
+  // Assign handlers immediately after making the request,
+  // and remember the jqxhr object for this request
+  const jqxhr = $.get("/jsoni18n/").fail((err) => {
+    console.error("Error", err);
+    $("#error-card").removeClass("invisible");
+    $("#error-msg").text(err.statusText);
+  });
+  return jqxhr;
+}
 
-  new Calendar(".calendar", {
-    // minDate: new Date(minDate[0], minDate[1] - 1, minDate[2]),
-    // maxDate: new Date(maxDate[0], maxDate[1] - 1, maxDate[2]),
+function buildCalendar(data) {
+  new Calendar("#calendar", {
     minDate: new Date(calendarData.first_day),
     maxDate: new Date(calendarData.last_day),
     style: "custom",
@@ -83,9 +92,19 @@ $(() => {
         for (let i in e.events) {
           content += `
           <div class="event-tooltip-content">
-          <p>${formatDate(e.events[i].day)}</p>
-          Mood night: ${e.events[i].mood_night}.
-          Mood day: ${e.events[i].mood_day}.
+            <p>${formatDate(e.events[i].day)}</p>
+            <ul>
+              <li>
+                ${data.catalog["mood"]} ${data.catalog["night"]}: ${
+            moodMapping[e.events[i].mood_night]
+          }
+              </li>
+              <li>
+                ${data.catalog["mood"]} ${data.catalog["day"]}: ${
+            moodMapping[e.events[i].mood_day]
+          }
+              </li>
+            </ul>
           </div>
           `;
         }
@@ -106,4 +125,8 @@ $(() => {
       }
     },
   });
+}
+
+$(() => {
+  loadTranslation().then((data) => buildCalendar(data));
 });

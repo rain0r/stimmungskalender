@@ -4,7 +4,8 @@
   "description": "JavaScript files for stimmungskalender",
   "main": "index.js",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "format": "prettier --write src/*js && package-lock-sanitizer"
   },
   "keywords": [],
   "author": "Rainer Hihn <hihn.rainer@gmail.com> (https://hihn.org/)",
