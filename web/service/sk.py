@@ -219,7 +219,7 @@ class SkService:
     def _week_data(self, week_start: date) -> typing.List[WeekdayEntry]:
         week = self._week(week_start)
         my_entries = Entry.objects.filter(user=self._user, week=week)
-        days = [(week_start + timedelta(days=d)) for d in range(7)]
+        days = [(week_start + timedelta(days=d)).date() for d in range(7)]
         week_data = {}
         for day in days:
             week_data[day.strftime(settings.SK_DATE_FORMAT)] = WeekdayEntry(
