@@ -1,18 +1,18 @@
 {% extends 'web/base.html' %}
 {% load i18n %}
 {% block content %}
-<h1>{% translate 'calendar' %}</h1>
-<div id="calendar"></div>
-<div id="error-card" class="card invisible">
-    <div class="card-body">
-        <h5 class="card-title">Error loading calendar</h5>
-        <div class="card-text" id="error-msg"></div>
+    <h1>{% translate 'calendar' %}</h1>
+    <div id="calendar"></div>
+    <div id="error-card" class="card invisible">
+        <div class="card-body">
+            <h5 class="card-title">Error loading calendar</h5>
+            <div class="card-text" id="error-msg"></div>
+        </div>
     </div>
-</div>
 {% endblock %}
 {% block js %}
-{{ entries|json_script:"entries" }}
-{{ mood_mapping|json_script:"mood_mapping" }}
-{% load static %}
-<script src="{% static '/js/skCalendar.js' %}"></script>
+    {{ entries|json_script:"entries" }}
+    {{ mood_mapping|json_script:"mood_mapping" }}
+    {% load static %}
+    <script src="{% static '/js/skCalendar.js' %}"></script>
 {% endblock %}

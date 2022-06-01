@@ -67,17 +67,21 @@
     <hr class="py-3">
     {% for week in results %}
         <div class="row border rounded p-3 my-3">
-            <div class="col-12 col-md-2 d-flex flex-column">
+            <div class="col-12 col-md-3 d-flex flex-column">
                 <a href="{% url 'index' %}?start_dt={{ week.week_date|date:'Y-m-d' }}"
                    class="flex-grow-1">
                     {% translate 'week' %} #{{ week.week_date|date:'W' }}
                 </a>
-                <small>{{ week.label }}</small>
+                <small>
+                    {{ week.week_date }}
+                    —
+                    {{ week.week_date|week_end_date }}
+                </small>
             </div>
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-md-6">
                 <pre class="text-muted">{% if week.note %}{{ week.note }}{% endif %}</pre>
             </div>
-            <div class="col-12 col-md-2">
+            <div class="col-12 col-md-3">
                 <a href="{% url 'graph' %}?start_date={{ week.week_date|date:'Y-m-d' }}"
                    class="flex-grow-1 d-flex justify-content-end">
                     Graph
@@ -91,5 +95,5 @@
 {% endblock %}
 {% block js %}
     {% load static %}
-    <script src="{% static '/js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static '/js/skDatePicker.js' %}"></script>
 {% endblock %}

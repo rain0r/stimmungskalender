@@ -16,7 +16,7 @@ from web.service.settings import SettingsService
 from web.service.sk import SkService
 
 # API views
-from web.views import MoodMapping
+from web.views import MoodMapping, DefaultDateHandler
 
 
 class EntryDayView(views.APIView):
@@ -110,8 +110,10 @@ class SkJSONCatalog(views.APIView, JSONCatalog):
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
-        self.user_language = self.request.GET.get("lang")
-        translation.activate(self.user_language)
+        lang = self.request.GET.get("lang", "")
+        if lang:
+            self.user_language = lang
+            translation.activate(self.user_language)
 
     def render_to_response(self, context, **response_kwargs):
         response = JsonResponse(context)
@@ -147,7 +149,7 @@ class StandoutDataView(views.APIView):
         return Response(serializer.data)
 
 
-class ScatterGraphView(MoodMapping, views.APIView):
+class ScatterGraphView(MoodMapping, DefaultDateHandler, views.APIView):
     """
     Get the mood scatter graph.
     """
@@ -168,7 +170,7 @@ class ScatterGraphView(MoodMapping, views.APIView):
         return Response(scatter_graph.load_data())
 
 
-class PieChartGraphView(MoodMapping, views.APIView):
+class PieChartGraphView(MoodMapping, DefaultDateHandler, views.APIView):
     """
     Get the mood scatter graph.
     """
@@ -176,8 +178,8 @@ class PieChartGraphView(MoodMapping, views.APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        start_dt = util.default_start_dt(self.request)
-        end_dt = util.default_end_dt(self.request)
+        start_dt = self.default_start_dt(self.request)
+        end_dt = self.default_end_dt(self.request)
         period = self.request.GET.get("period", None)
 
         if not period:

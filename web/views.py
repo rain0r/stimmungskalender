@@ -35,6 +35,8 @@ class MoodMapping:
             5: _("very_good"),
         }
 
+
+class DefaultDateHandler:
     def default_start_dt(
         self,
     ) -> date:
@@ -134,7 +136,7 @@ class SaveMoodView(View):
         return redirect(f"{reverse('index')}?start_dt={start_day_p}")
 
 
-class GraphView(MoodMapping, TemplateView):
+class GraphView(MoodMapping, DefaultDateHandler, TemplateView):
     template_name = "web/graph.html"
 
     def get_context_data(self, **kwargs):
