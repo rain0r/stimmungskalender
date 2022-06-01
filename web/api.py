@@ -157,7 +157,8 @@ class ScatterGraphView(MoodMapping, DefaultDateHandler, views.APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        is_markers = self.is_markers(self.request.GET)
+        ss = SettingsService(self.request.user)
+        is_markers = ss.is_markers(self.request.GET)
         start_dt = self.default_start_dt()
         end_dt = self.default_end_dt()
         scatter_graph = ScatterGraphService(
@@ -178,8 +179,8 @@ class PieChartGraphView(MoodMapping, DefaultDateHandler, views.APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        start_dt = self.default_start_dt(self.request)
-        end_dt = self.default_end_dt(self.request)
+        start_dt = self.default_start_dt()
+        end_dt = self.default_end_dt()
         period = self.request.GET.get("period", None)
 
         if not period:
