@@ -33,8 +33,8 @@ class Period(Enum):
 
 class SkService:
     def __init__(
-            self,
-            user: User,
+        self,
+        user: User,
     ):
         self._user = user
 
@@ -58,11 +58,11 @@ class SkService:
         return data
 
     def search(
-            self,
-            search_term: str = "",
-            start_dt: str = "",
-            end_dt: str = "",
-            mood: str = "",
+        self,
+        search_term: str = "",
+        start_dt: str = "",
+        end_dt: str = "",
+        mood: str = "",
     ) -> QuerySet:
         qs = Week.objects.filter(user=self._user).order_by("-week_date")
         qs = self._filter_search(qs, search_term)
@@ -241,21 +241,22 @@ class SkService:
         return dt1.date()
 
     def _filter_mood(
-            self,
-            qs: QuerySet,
-            mood_p: str = "",
+        self,
+        qs: QuerySet,
+        mood_p: str = "",
     ) -> QuerySet:
         try:
             mood = int(mood_p)
         except ValueError:
             return qs
-        qs = qs.filter(Q(entry__mood_day=mood) | Q(entry__mood_night=mood))
+        if mood in Moods:
+            qs = qs.filter(Q(entry__mood_day=mood) | Q(entry__mood_night=mood))
         return qs
 
     def _filter_search(
-            self,
-            qs: QuerySet,
-            search_term: str = "",
+        self,
+        qs: QuerySet,
+        search_term: str = "",
     ) -> QuerySet:
         search_term = search_term.strip()
         if search_term:
@@ -263,10 +264,10 @@ class SkService:
         return qs
 
     def _filter_date(
-            self,
-            qs: QuerySet,
-            start_date: str = "",
-            end_date: str = "",
+        self,
+        qs: QuerySet,
+        start_date: str = "",
+        end_date: str = "",
     ) -> QuerySet:
         start = start_date.strip()
         end = end_date.strip()
@@ -279,7 +280,7 @@ class SkService:
         return qs
 
     def _entries_range(
-            self, first_day: date, last_day: date
+        self, first_day: date, last_day: date
     ) -> typing.List[WeekdayEntry]:
         """
         Generates a list of WeekdayEntry objects for a date range. Fills empty days with empty data.
@@ -289,8 +290,8 @@ class SkService:
         """
         qs = (
             Entry.objects.filter(user=self._user)
-                .filter(day__gte=first_day, day__lte=last_day)
-                .order_by("-day")
+            .filter(day__gte=first_day, day__lte=last_day)
+            .order_by("-day")
         )
         delta = last_day - first_day
         days = [(first_day + timedelta(days=d)) for d in range(delta.days)]
