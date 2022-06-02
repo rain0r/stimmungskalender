@@ -1,7 +1,7 @@
 {% extends 'web/base.html' %}
 {% load i18n %}
 {% block content %}
-    <h1>{% translate 'calendar' %}</h1>
+    <a href="{% url 'calendar' %}" class="h1 text-dark mb-2">{% translate 'calendar' %}</a>
     <div id="calendar"></div>
     <div id="error-card" class="card invisible">
         <div class="card-body">
