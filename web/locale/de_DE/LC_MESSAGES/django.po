@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-30 18:26+0200\n"
-"PO-Revision-Date: 2022-05-30 18:26+0200\n"
+"POT-Creation-Date: 2022-06-02 20:13+0200\n"
+"PO-Revision-Date: 2022-06-02 20:12+0200\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -30,31 +30,31 @@ msgstr "Nacht"
 msgid "Log in"
 msgstr ""
 
-#: templates/web/base.html:48 templates/web/base.html:81
+#: templates/web/base.html:47 templates/web/base.html:80
 msgid "home"
 msgstr "Startseite"
 
-#: templates/web/base.html:51
+#: templates/web/base.html:50
 msgid "graph"
 msgstr "Diagramm"
 
-#: templates/web/base.html:54 templates/web/calendar.html:4
+#: templates/web/base.html:53 templates/web/calendar.html:4
 msgid "calendar"
 msgstr "Kalender"
 
-#: templates/web/base.html:57 templates/web/search.html:5
+#: templates/web/base.html:56 templates/web/search.html:5
 msgid "search"
 msgstr "Suche"
 
-#: templates/web/base.html:60 templates/web/settings.html:5
+#: templates/web/base.html:59 templates/web/settings.html:5
 msgid "settings"
 msgstr "Einstellungen"
 
-#: templates/web/base.html:68
+#: templates/web/base.html:67
 msgid "logged_in_as"
 msgstr "Angemeldet als"
 
-#: templates/web/base.html:84
+#: templates/web/base.html:83
 msgid "logout"
 msgstr "Abmelden"
 
@@ -120,12 +120,12 @@ msgid "night_moods"
 msgstr "Nacht-Stimmungen"
 
 #: templates/web/graph/scatter.html:19
-#: templates/web/settings/default_view_mode.html:14
+#: templates/web/settings/default_view_mode.html:15
 msgid "markers"
 msgstr "Punkte"
 
 #: templates/web/graph/scatter.html:25
-#: templates/web/settings/default_view_mode.html:23
+#: templates/web/settings/default_view_mode.html:24
 msgid "lines"
 msgstr "Linien"
 
@@ -210,9 +210,9 @@ msgid "what_happened_this_week"
 msgstr "Was geschah diese Woche?"
 
 #: templates/web/index/entry_list.html:47
-#: templates/web/settings/default_view_mode.html:27
+#: templates/web/settings/default_view_mode.html:28
 #: templates/web/settings/language.html:20
-#: templates/web/settings/view_forms.html:28
+#: templates/web/settings/view_forms.html:29
 msgid "save"
 msgstr "Speichern"
 
@@ -226,7 +226,7 @@ msgstr "Klicken, um zu verstecken"
 
 #: templates/web/search.html:36
 msgid "mood"
-msgstr "Stimmungen"
+msgstr "Stimmung"
 
 #: templates/web/search.html:52 templates/web/search.html:57
 msgid "search_term"
@@ -248,31 +248,31 @@ msgstr "Aktuelle Sprache"
 msgid "view_forms"
 msgstr "Angezeigte Formulare"
 
-#: templates/web/settings/view_forms.html:15
+#: templates/web/settings/view_forms.html:16
 msgid "view_night_form"
 msgstr "Nacht-Formular"
 
-#: templates/web/settings/view_forms.html:24
+#: templates/web/settings/view_forms.html:25
 msgid "view_day_form"
 msgstr "Tag-Formular"
 
-#: views.py:27
+#: views.py:31
 msgid "very_bad"
 msgstr "Sehr schlecht"
 
-#: views.py:28
+#: views.py:32
 msgid "bad"
 msgstr "Schlecht"
 
-#: views.py:29
+#: views.py:33
 msgid "medium"
 msgstr "Mittel"
 
-#: views.py:30
+#: views.py:34
 msgid "good"
 msgstr "Gut"
 
-#: views.py:31
+#: views.py:35
 msgid "very_good"
 msgstr "Sehr gut"
 
