@@ -5,6 +5,7 @@ import "bootstrap/js/dist/popover";
 const moodMapping = JSON.parse(
   document.getElementById("mood_mapping").textContent
 );
+const siteUrl = JSON.parse(document.getElementById("site_url").textContent);
 const calendarData = JSON.parse(document.getElementById("entries").textContent);
 calendarData.entries.map((item) => {
   const parts = item.day.split("-");
@@ -54,7 +55,7 @@ function moodColors(mood) {
 function loadTranslation() {
   // Assign handlers immediately after making the request,
   // and remember the jqxhr object for this request
-  const jqxhr = $.get("/jsoni18n/").fail((err) => {
+  const jqxhr = $.get(`${siteUrl}jsoni18n/`).fail((err) => {
     console.error("Error", err);
     $("#error-card").removeClass("invisible");
     $("#error-msg").text(err.statusText);

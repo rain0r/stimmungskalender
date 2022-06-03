@@ -235,4 +235,5 @@ class CalendarView(MoodMapping, TemplateView):
         serializer = serializers.CalendarSerializer(sk_service.calendar())
         context["entries"] = serializer.data
         context["mood_mapping"] = self.mood_mapping
+        context["site_url"] = reverse_lazy("index")
         return context

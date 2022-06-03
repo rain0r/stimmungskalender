@@ -12,6 +12,7 @@
 {% endblock %}
 {% block js %}
     {{ entries|json_script:"entries" }}
+    {{ site_url|json_script:"site_url" }}
     {{ mood_mapping|json_script:"mood_mapping" }}
     {% load static %}
     <script src="{% static '/js/skCalendar.js' %}"></script>
