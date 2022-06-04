@@ -1,33 +1,15 @@
-# Quickstart
+# Quickstart with a release
 
-This section covers a quick set up (with sqlite) that is not suitable for production use.
-
-You can do this line by line or execute `scripts/quickstart.sh`.
+This section covers a quick set up that is not suitable for production use.
 
 On debian based systems, you need the package `python3-venv`.
 
+Download the latest release from [GitHub](https://github.com/rain0r/stimmungskalender/releases) or get the latest source code via `git`:
+
 ```sh
-# Get the source
-git clone https://github.com/rain0r/stimmungskalender
-cd stimmungskalender
-# Use the developer settings for a quick start
-cp .env.sample .env
-# Create a virtualenv that holds all dependencies
-python3 -m venv virtualenv
-# We don't need postgres support for now, so let's comment it out
-sed -i 's/psycopg2/#psycopg2/' requirements/common.txt
-# Install the developer dependencies
-./virtualenv/bin/pip install -r requirements/dev.txt
-# Initialize the sqlite database
-./virtualenv/bin/python manage.py migrate
-# Create the frontend texts
-./virtualenv/bin/django-admin compilemessages
-# Create a user account
-./virtualenv/bin/python manage.py createsuperuser
-# Generate javascript and css files
-./scripts/node.sh
-# Start the app
-./virtualenv/bin/python manage.py runserver
+git clone https://github.com/rain0r/stimmungskalender.git
 ```
+
+Then execute `scripts/quickstart.sh`.
 
 Visit `http://127.0.0.1:8000/` and log in with the user you just created.

@@ -11,10 +11,14 @@ sed -i 's/psycopg2/#psycopg2/' requirements/common.txt
 # Initialize the sqlite database
 ./virtualenv/bin/python manage.py migrate
 # Create the frontend texts
-./virtualenv/bin/django-admin compilemessages
+if [ -d ../.git ]; then
+  ./virtualenv/bin/django-admin compilemessages
+fi
 # Create a user account
 ./virtualenv/bin/python manage.py createsuperuser
 # Generate javascript and css files
-./scripts/node.sh
+if [ -d ../.git ]; then
+  ./scripts/node.sh
+fi
 # Start the app
 ./virtualenv/bin/python manage.py runserver

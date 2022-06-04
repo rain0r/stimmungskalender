@@ -1,4 +1,4 @@
-# Installation
+# Installation 
 
 These are **productive** deployment instructions are for `nginx`, `uwsgi` and `openrc`.
 
@@ -15,8 +15,7 @@ Create the postgres database and a user for `stimmungskalender`:
 createuser stimmungskalender
 createdb -O stimmungskalender stimmungskalender
 ```
-
-Get the `stimmungskalender` source code:
+Download the latest release from [GitHub](https://github.com/rain0r/stimmungskalender/releases) or get the latest `stimmungskalender` source code:
 
 ```shell
 cd /srv/www/
@@ -37,7 +36,7 @@ An example `.env` file can be found at [`docs/examples/env-prod.md`](examples/en
 
 ```shell
 touch .env
-# Edit the file to set database access, site url etc
+# Edit the file to configure database access etc
 ```
 
 Create the virtualenv: 
@@ -63,11 +62,10 @@ Create the admin user for ` stimmungskalender`:
 ```shell
 ./virtualenv/bin/python manage.py createsuperuser
 ```
-
-Generate all needed JavaScript and css files:
+The next step is only required if you got the source code from GitHub. The release archive contains all required JavaScript and css files.
 
 ```shell
-# To manage all needed ressources, stimmungskalender uses node and webpack.
+# To manage all needed resources, stimmungskalender uses node and webpack.
 # This is needed, to avoid pushing production JavaScript files to git 
 
 cd web/js
@@ -80,9 +78,10 @@ Copy all needed static files (images, JavaScript files etc.) to the static root 
 ./virtualenv/bin/python manage.py collectstatic --noinput
 ```
 
-To use `stimmungskalender` in different languages:
+The next step is only required if you got the source code from GitHub. The release archive contains all required translation files.
 
 ```shell
+# To use `stimmungskalender` in different languages:
 ./virtualenv/bin/django-admin compilemessages
 ```
 
@@ -108,8 +107,10 @@ In order to update the application:
 ```shell
 cd /srv/www/stimmungskalender
 
-# Pull code changes
+# If you cloned the git repository, update it...
 git pull
+
+# ... if you downloaded a release, extract it into the existing installation
 
 # Update installed pip packages and install newly added dependencies (if any).
 ./virtualenv/bin/pip install -r requirements/prod.txt -U
@@ -117,7 +118,7 @@ git pull
 # Apply database changes (if there are any)
 ./virtualenv/bin/python migrate
 
-# Collect static files
+# Collect static files (only need if you cloned the git repository)
 ./virtualenv/bin/python collectstatic --noinput
   
 # Correct ownernship
