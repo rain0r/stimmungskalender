@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-02 20:13+0200\n"
+"POT-Creation-Date: 2022-06-05 13:53+0200\n"
 "PO-Revision-Date: 2022-06-02 20:12+0200\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: service/scatter_graph.py:34
+#: service/scatter_graph.py:36
 msgid "day"
 msgstr "Tag"
 
-#: service/scatter_graph.py:42
+#: service/scatter_graph.py:44
 msgid "night"
 msgstr "Nacht"
 
@@ -30,7 +30,7 @@ msgstr "Nacht"
 msgid "Log in"
 msgstr ""
 
-#: templates/web/base.html:47 templates/web/base.html:80
+#: templates/web/base.html:47 templates/web/base.html:79
 msgid "home"
 msgstr "Startseite"
 
@@ -54,7 +54,7 @@ msgstr "Einstellungen"
 msgid "logged_in_as"
 msgstr "Angemeldet als"
 
-#: templates/web/base.html:83
+#: templates/web/base.html:82
 msgid "logout"
 msgstr "Abmelden"
 

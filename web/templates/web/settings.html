@@ -11,6 +11,16 @@
     {% include 'web/settings/view_forms.html' %}
     <hr>
     <div class="d-flex flex-row-reverse">
-        <a href="https://github.com/rain0r/stimmungskalender/">stimmungskalender on GitHub</a>
+        <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">
+                <a href="{% url 'schema' %}">API schema</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{% url 'swagger-ui' %}">API swagger UI</a>
+            </li>
+            <li class="list-group-item">
+                <a href="https://github.com/rain0r/stimmungskalender/">stimmungskalender on GitHub</a>
+            </li>
+        </ul>
     </div>
 {% endblock %}

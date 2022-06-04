@@ -30,4 +30,12 @@ If you want to deploy in production, follow the instructions in [`docs/install.m
 
 There is also a [`docs/faq.md`](docs/faq.md).
 
+## REST API
+
+An OpenAPI 3.0 schema can be accessed under `/api/schema/` and swagger under `/api/schema/swagger-ui/`.
+
+---
+
+## Requirements
+
 Requires Python **3.8** or higher.
