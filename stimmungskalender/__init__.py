@@ -1,4 +1,7 @@
-def tupled_list(input):
+__version__ = "1.0.0"
+
+
+def listed_tuples(config_val):
     """Transforms a value from the .env file to a list of tuples.
     For example:
     ADMINS="foo:foo@example1.com,bar:bar@example2.com"
@@ -6,7 +9,7 @@ def tupled_list(input):
     """
     ret = []
     try:
-        for line in input:
+        for line in config_val:
             admin = str(line).split(":")
             ret.append((admin[0], admin[1]))
     except AttributeError:

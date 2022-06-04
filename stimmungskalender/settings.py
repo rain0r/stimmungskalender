@@ -18,7 +18,7 @@ from decouple import Csv, config
 from dj_database_url import parse as db_url
 from django.utils.translation import gettext_lazy as _
 
-from stimmungskalender import tupled_list
+from stimmungskalender import listed_tuples
 
 MAX_LOG_FILE_SIZE = 20971520  # 20 MB
 
@@ -37,7 +37,7 @@ CSRF_TRUSTED_ORIGINS = config(
     "CSRF_TRUSTED_ORIGINS", default="http://127.0.0.1", cast=Csv()
 )
 
-ADMINS = config("ADMINS", default=[], cast=Csv(post_process=tupled_list))
+ADMINS = config("ADMINS", default=[], cast=Csv(post_process=listed_tuples))
 
 # Application definition
 
