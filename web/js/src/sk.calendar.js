@@ -69,8 +69,8 @@ function buildCalendar(data) {
     maxDate: new Date(calendarData.last_day),
     style: "custom",
     customDataSourceRenderer: function (ele, renderDate, eventList) {
-      let dayColor = "red";
-      let nightColor = "red";
+      let dayColor = "transparent";
+      let nightColor = "transparent";
       ele = ele.parentElement; // We are passed the child of the element to be styled
       if (eventList[0].startDate.getTime() == renderDate.getTime()) {
         if (eventList[0].mood_day) {

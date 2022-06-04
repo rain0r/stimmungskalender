@@ -41,8 +41,8 @@ class SkService:
     def calendar(self) -> SkCalendar:
         qs = Entry.objects.filter(user=self._user).order_by("-day")
         try:
-            first_day = qs.last().day
-            last_day = qs.first().day
+            first_day = qs.last().day + timedelta(days=-1)
+            last_day = qs.first().day + timedelta(days=1)
         except AttributeError:
             return SkCalendar(
                 first_day=timezone.now().date(),
