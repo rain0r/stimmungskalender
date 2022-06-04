@@ -10,13 +10,13 @@ It's build with [Django](https://www.djangoproject.com/) and can be self-hosted.
 
 ## Features
 
- * You can track your mood of each day and night 
- * Every week can be annotated with a note
- * Diagrams (build with [Plotly](https://plotly.com/))
- * Localized (currently in English and German)
- * If you like to track only daytime (or only nights), you can choose so in the settings
- * REST-api (if you like to build your own frontend)
- * Privacy-friendly: no external resources (css, js) loaded
+* You can track your mood of each day and night
+* Every week can be annotated with a note
+* Diagrams (build with [Plotly](https://plotly.com/))
+* Localized (currently in English and German)
+* If you like to track only daytime (or only nights), you can choose so in the settings
+* REST-api (if you like to build your own frontend)
+* Privacy-friendly: no external resources (css, js) loaded
 
 ---
 

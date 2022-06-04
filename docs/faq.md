@@ -4,11 +4,10 @@
 
 All database engines that are supported by [Django](https://docs.djangoproject.com/en/4.0/ref/settings/#std:setting-DATABASE-ENGINE).
 
- * Postgres
- * MySQL
- * SQLite
- * Oracle
-
+* Postgres
+* MySQL
+* SQLite
+* Oracle
 
 ## How can I use MySQL?
 

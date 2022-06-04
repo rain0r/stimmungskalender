@@ -1,6 +1,4 @@
-# Example configuration
-
-# `.env` file
+# Example `.env`-file configuration
 
 ```ini
 ADMINS="Foobar:Foobar@example.com"
@@ -19,7 +17,7 @@ STATIC_ROOT="/srv/www/sk.example.com/static/"
 
 ## Other databases
 
-For other databases than postgres, see the [examples](https://github.com/kennethreitz/dj-database-url#url-schema) in the ` dj-database-url` docs.
+For other databases than postgres, see the [examples](https://github.com/kennethreitz/dj-database-url#url-schema) in the `dj-database-url` docs.
 
 For sqlite, the `DATABASE_URL` might look like this:
 
@@ -37,11 +35,9 @@ To use no cache at all:
 CACHE_URL='dummy://'
 ```
 
-
 ## `SECRET_KEY`
 
 To generate a value for `SECRET_KEY` (from inside `/srv/www/stimmungskalender`):
-
 
 ```shell
 ./virtualenv/bin/python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'

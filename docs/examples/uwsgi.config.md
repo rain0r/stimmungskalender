@@ -1,3 +1,5 @@
+# Example `uwsgi` config
+
 ```ini
 [uwsgi]
 gid = nginx

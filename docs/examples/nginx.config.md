@@ -1,3 +1,5 @@
+# Example `nginx` config
+
 ```nginx
 server {
 

@@ -1,3 +1,5 @@
+# Example `openRC` config
+
 ```shell
 #!/sbin/openrc-run
 # Copyright 1999-2017 Gentoo Foundation

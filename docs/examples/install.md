@@ -1,13 +1,13 @@
-# Installation 
+# Installation
 
 These are **productive** deployment instructions are for `nginx`, `uwsgi` and `openrc`.
 
 Throughout this document, we are assuming the following:
 
- * `uwsgi` is running as user `nginx`
- * The source code is located at `/srv/www/stimmungskalender`
- * The virtualenv is located at  `/srv/www/stimmungskalender/virtualenv`
- * The database backend is `postgres`, accessed by the user `stimmungskalender`
+* `uwsgi` is running as user `nginx`
+* The source code is located at `/srv/www/stimmungskalender`
+* The virtualenv is located at  `/srv/www/stimmungskalender/virtualenv`
+* The database backend is `postgres`, accessed by the user `stimmungskalender`
 
 Create the postgres database and a user for `stimmungskalender`:
 
@@ -15,6 +15,7 @@ Create the postgres database and a user for `stimmungskalender`:
 createuser stimmungskalender
 createdb -O stimmungskalender stimmungskalender
 ```
+
 Download the latest release from [GitHub](https://github.com/rain0r/stimmungskalender/releases) or get the latest `stimmungskalender` source code:
 
 ```shell
@@ -39,7 +40,7 @@ touch .env
 # Edit the file to configure database access etc
 ```
 
-Create the virtualenv: 
+Create the virtualenv:
 
 ```shell
 python3 -m venv virtualenv
@@ -57,11 +58,12 @@ Populate the database:
 ./virtualenv/bin/python manage.py migrate
 ```
 
-Create the admin user for ` stimmungskalender`:
+Create the admin user for `stimmungskalender`:
 
 ```shell
 ./virtualenv/bin/python manage.py createsuperuser
 ```
+
 The next step is only required if you got the source code from GitHub. The release archive contains all required JavaScript and css files.
 
 ```shell
@@ -102,6 +104,7 @@ For systemd, please see the official [uwsgi documentation](https://uwsgi-docs.re
 A working `nginx` configuration is located at [`docs/examples/nginx.config.md`](examples/nginx.config.md).
 
 ## Updating
+
 In order to update the application:
 
 ```shell
