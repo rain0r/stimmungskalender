@@ -20,7 +20,7 @@ sed -i 's/psycopg2/#psycopg2/' requirements/common.txt
 
 # Create the frontend texts
 if [ -d "${dir_path}/../.git" ]; then
-  ./virtualenv/bin/django-admin compilemessages
+    ./virtualenv/bin/django-admin compilemessages
 fi
 
 # Create a user account
@@ -28,7 +28,7 @@ fi
 
 # Generate javascript and css files
 if [ -d "${dir_path}/../.git" ]; then
-  ./scripts/node.sh
+    ./scripts/node.sh
 fi
 
 # Start the app
