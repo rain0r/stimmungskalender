@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+full_path=$(realpath $0)
+dir_path=$(dirname $full_path)
+
 # Use the developer settings for a quick start
 cp .env.sample .env
 # Create a virtualenv that holds all dependencies
@@ -11,13 +14,13 @@ sed -i 's/psycopg2/#psycopg2/' requirements/common.txt
 # Initialize the sqlite database
 ./virtualenv/bin/python manage.py migrate
 # Create the frontend texts
-if [ -d ../.git ]; then
+if [ -d "${dir_path}/../.git" ]; then
   ./virtualenv/bin/django-admin compilemessages
 fi
 # Create a user account
 ./virtualenv/bin/python manage.py createsuperuser
 # Generate javascript and css files
-if [ -d ../.git ]; then
+if [ -d "${dir_path}/../.git" ]; then
   ./scripts/node.sh
 fi
 # Start the app
