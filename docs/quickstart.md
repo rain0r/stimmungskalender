@@ -1,4 +1,4 @@
-# Quickstart with a release
+# Quickstart
 
 This section covers a quick set up that is not suitable for production use.
 
