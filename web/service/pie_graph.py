@@ -21,14 +21,14 @@ class PieGraphService(BaseGraph):
         self.mood_mapping = mood_mapping
 
     def build_chart(self, period: str) -> str:
-        label_numbers, values = self.load_data(period)
-        labels = [self.mood_mapping.get(x) for x in label_numbers]
-        colors = [COLORS[x] for x in label_numbers]
+        pie_chart = self.load_data(period)
+        labels = [self.mood_mapping.get(x) for x in pie_chart.label_numbers]
+        colors = [COLORS[x] for x in pie_chart.label_numbers]
         fig = go.Figure(
             data=[
                 go.Pie(
                     labels=labels,
-                    values=values,
+                    values=pie_chart.values,
                     textinfo="label+percent",
                     insidetextorientation="radial",
                     marker=dict(colors=colors, line=dict(color="#000000", width=2)),

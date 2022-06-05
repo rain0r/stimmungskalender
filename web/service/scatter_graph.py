@@ -27,17 +27,18 @@ class ScatterGraphService(BaseGraph):
     def build_plot(self) -> str:
         data = self.load_data()
         mode = "markers" if self.is_markers else "lines"
+
         trace0 = go.Scatter(
-            x=[i["x"] for i in data],
-            y=[i["y"]["day"] for i in data],
+            x=[i.x for i in data],
+            y=[i.y.day for i in data],
             cliponaxis=False,
             line_shape="spline",
             mode=mode,
             name=str(_("day")),
         )
         trace1 = go.Scatter(
-            x=[i["x"] for i in data],
-            y=[i["y"]["night"] for i in data],
+            x=[i.x for i in data],
+            y=[i.y.night for i in data],
             cliponaxis=False,
             line_shape="spline",
             mode=mode,
