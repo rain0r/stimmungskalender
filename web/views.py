@@ -166,8 +166,7 @@ class GraphView(MoodMapping, DefaultDateHandler, TemplateView):
         context["end_dt"] = end_dt
         context["is_markers"] = is_markers
         context["scatter"] = scatter_graph.build_plot()
-        context["pie_chart_day"] = pie_graph.build_chart(PERIOD_DAY)
-        context["pie_chart_night"] = pie_graph.build_chart(PERIOD_NIGHT)
+        context["pie_chart"] = pie_graph.build_chart()
         context["graph_time_ranges"] = sk_service.graph_time_ranges()
         return context
 
