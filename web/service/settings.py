@@ -36,7 +36,7 @@ class SettingsService:
         except UserSettings.DoesNotExist:
             return settings.DEFAULT_VIEW_MODE
 
-    def is_markers(self, query_dict: QueryDict):
+    def is_markers(self, query_dict: QueryDict) -> bool:
         if "view" in query_dict:
             return query_dict.get("view", "markers") == "markers"
         else:
