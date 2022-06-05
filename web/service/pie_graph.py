@@ -1,4 +1,3 @@
-import typing
 from datetime import date
 
 import plotly.graph_objs as go
@@ -8,6 +7,7 @@ from plotly.offline import plot
 
 from web.mood_colors import COLORS
 from web.service.base_graph import BaseGraph
+from web.structs import PieChartResponse
 
 PERIOD_DAY = "mood_day"
 PERIOD_NIGHT = "mood_night"
@@ -37,7 +37,7 @@ class PieGraphService(BaseGraph):
         )
         return plot(fig, output_type="div", include_plotlyjs=True)
 
-    def load_data(self, period: str) -> tuple[typing.List[int], typing.List[int]]:
+    def load_data(self, period: str) -> PieChartResponse:
         if period not in PERIODS:
             raise ValueError(f"period must be one of {PERIODS}")
         qs = (
@@ -53,4 +53,4 @@ class PieGraphService(BaseGraph):
                 continue
             labels.append(item[period])
             values.append(item["total"])
-        return labels, values
+        return PieChartResponse(label_numbers=labels, values=values)

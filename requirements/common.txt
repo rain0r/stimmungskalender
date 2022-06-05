@@ -10,6 +10,7 @@ django-rosetta==0.9.8
 djangorestframework-dataclasses==1.1.1
 djangorestframework-simplejwt==5.2.0
 djangorestframework==3.13.1
+drf-spectacular==0.22.1
 ipython==8.4.0
 plotly==5.8.0
 psycopg2==2.9.3

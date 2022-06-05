@@ -40,3 +40,21 @@ class SkCalendar:
     first_day: date
     last_day: date
     entries: typing.List[WeekdayEntry]
+
+
+@dataclass
+class GraphDataPointY:
+    day: int
+    night: int
+
+
+@dataclass
+class ScatterGraphResponse:
+    x: str
+    y: GraphDataPointY
+
+
+@dataclass
+class PieChartResponse:
+    label_numbers: typing.List[int]
+    values: typing.List[int]

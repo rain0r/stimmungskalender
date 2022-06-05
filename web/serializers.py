@@ -8,13 +8,16 @@ from web.structs import (
     StandoutData,
     GraphTimeRanges,
     SkCalendar,
+    ScatterGraphResponse,
+    PieChartResponse,
+    GraphDataPointY,
 )
 
 
 class WeekSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Week
-        fields = ["id", "week_date", "note"]
+        fields = ["week_date", "note"]
 
 
 class WeekdayEntrySerializer(DataclassSerializer):
@@ -50,3 +53,18 @@ class GraphTimeRangesSerializer(DataclassSerializer):
 class CalendarSerializer(DataclassSerializer):
     class Meta:
         dataclass = SkCalendar
+
+
+class GraphDataPointYSerializer(DataclassSerializer):
+    class Meta:
+        dataclass = GraphDataPointY
+
+
+class ScatterGraphResponseSerializer(DataclassSerializer):
+    class Meta:
+        dataclass = ScatterGraphResponse
+
+
+class PieChartResponseSerializer(DataclassSerializer):
+    class Meta:
+        dataclass = PieChartResponse

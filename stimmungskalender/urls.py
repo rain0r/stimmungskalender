@@ -17,8 +17,9 @@ from django.conf import settings
 from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path, re_path
-from django.views.i18n import JavaScriptCatalog, JSONCatalog
 from django.views.generic import TemplateView
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+
 from web import views, api
 
 urlpatterns = [
@@ -54,6 +55,12 @@ urlpatterns = [
         name="json-catalog",
     ),
     path("dj-rest-auth/", include("dj_rest_auth.urls")),
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path(
+        "api/schema/swagger-ui/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
 ]
 
 if settings.NG_SK_ENABLED:
