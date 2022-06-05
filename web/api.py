@@ -12,7 +12,7 @@ from rest_framework.response import Response
 
 from web import serializers
 from web.models import UserSettings, PERIODS, Moods
-from web.query_params import QP_START_DT, QP_END_DT
+from web.query_params import QP_START_DT, QP_END_DT, QP_MOOD, QP_SEARCH_TERM, QP_PERIOD
 from web.service.pie_graph import PieGraphService
 from web.service.scatter_graph import ScatterGraphService
 from web.service.settings import SettingsService
@@ -141,8 +141,8 @@ class SearchView(GenericAPIView):
         start_dt = self.request.GET.get(QP_START_DT, "")
         end_dt = self.request.GET.get(QP_END_DT, "")
         results = sk_service.search(
-            mood=self.request.GET.get("mood", ""),
-            search_term=self.request.GET.get("search_term", ""),
+            mood=self.request.GET.get(QP_MOOD, ""),
+            search_term=self.request.GET.get(QP_SEARCH_TERM, ""),
             start_dt=start_dt,
             end_dt=end_dt,
         )
@@ -281,7 +281,7 @@ class PieChartGraphView(MoodMapping, DefaultDateHandler, GenericAPIView):
     def get(self, request):
         start_dt = self.default_start_dt()
         end_dt = self.default_end_dt()
-        period = self.request.GET.get("period", None)
+        period = self.request.GET.get(QP_PERIOD, None)
 
         if not period:
             return Response(status=400)

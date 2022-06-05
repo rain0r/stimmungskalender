@@ -17,7 +17,7 @@ from django.views.generic import RedirectView, TemplateView
 
 from web import serializers
 from web.models import PERIODS
-from web.query_params import QP_START_DT, QP_END_DT
+from web.query_params import QP_START_DT, QP_END_DT, QP_MOOD, QP_SEARCH_TERM, QP_PAGE
 from web.service.pie_graph import PieGraphService, PERIOD_DAY, PERIOD_NIGHT
 from web.service.scatter_graph import ScatterGraphService
 from web.service.settings import SettingsService
@@ -95,7 +95,7 @@ class EntryListView(MoodMapping, TemplateView):
         context = super().get_context_data(**kwargs)
         sk_service = SkService(self.request.user)
 
-        start_day_p = self.request.GET.get("start_dt", "").strip()
+        start_day_p = self.request.GET.get(QP_START_DT, "").strip()
         context["mood_table"] = sk_service.mood_table(start_day_p)
         context["moods"] = self.mood_mapping
         context["forms"] = self.get_forms()
@@ -193,18 +193,18 @@ class SearchView(MoodMapping, TemplateView):
         context = super().get_context_data(**kwargs)
         sk_service = SkService(self.request.user)
         results = sk_service.search(
-            mood=self.request.GET.get("mood", ""),
-            search_term=self.request.GET.get("search_term", ""),
-            start_dt=self.request.GET.get("start_date", ""),
-            end_dt=self.request.GET.get("end_date", ""),
+            mood=self.request.GET.get(QP_MOOD, ""),
+            search_term=self.request.GET.get(QP_SEARCH_TERM, ""),
+            start_dt=self.request.GET.get(QP_START_DT, ""),
+            end_dt=self.request.GET.get(QP_END_DT, ""),
         )
         paginator = Paginator(results, settings.PER_PAGE)
-        page = self.request.GET.get("page", 1)
+        page = self.request.GET.get(QP_PAGE, 1)
         get_copy = self.request.GET.copy()
         context["results"] = paginator.get_page(page)
         context["paginator"] = paginator
         context["page_obj"] = paginator.page
-        context["parameters"] = get_copy.pop("page", True) and get_copy.urlencode()
+        context["parameters"] = get_copy.pop(QP_PAGE, True) and get_copy.urlencode()
         context["moods"] = self.mood_mapping
 
         return context
@@ -222,7 +222,7 @@ class SaveNoteView(View):
         sk_service = SkService(self.request.user)
         week = sk_service.save_note(week, note)
         start_day_p = week.week_date.strftime(settings.SK_DATE_FORMAT)
-        return redirect(f"{reverse('index')}?start_dt={start_day_p}")
+        return redirect(f"{reverse('index')}?{QP_START_DT}={start_day_p}")
 
 
 @method_decorator(login_required, name="dispatch")
