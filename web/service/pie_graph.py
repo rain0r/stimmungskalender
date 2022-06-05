@@ -2,8 +2,10 @@ from datetime import date
 
 import plotly.graph_objs as go
 from django.db.models import Count
+from django.utils.translation import gettext as _
 from django_registration.forms import User
 from plotly.offline import plot
+from plotly.subplots import make_subplots
 
 from web.mood_colors import COLORS
 from web.service.base_graph import BaseGraph
@@ -20,20 +22,48 @@ class PieGraphService(BaseGraph):
         self.user = user
         self.mood_mapping = mood_mapping
 
-    def build_chart(self, period: str) -> str:
-        pie_chart = self.load_data(period)
-        labels = [self.mood_mapping.get(x) for x in pie_chart.label_numbers]
-        colors = [COLORS[x] for x in pie_chart.label_numbers]
-        fig = go.Figure(
-            data=[
-                go.Pie(
-                    labels=labels,
-                    values=pie_chart.values,
-                    textinfo="label+percent",
-                    insidetextorientation="radial",
-                    marker=dict(colors=colors, line=dict(color="#000000", width=2)),
-                )
-            ]
+    def build_chart(
+        self,
+    ) -> str:
+        day = self.load_data(PERIOD_DAY)
+        night = self.load_data(PERIOD_NIGHT)
+        labels = [self.mood_mapping.get(x) for x in day.label_numbers]
+        colors = [COLORS[x] for x in day.label_numbers]
+
+        fig = make_subplots(
+            rows=1, cols=2, specs=[[{"type": "domain"}, {"type": "domain"}]]
+        )
+        fig.add_trace(
+            go.Pie(
+                labels=labels,
+                values=day.values,
+                textinfo="label+percent",
+                insidetextorientation="radial",
+                marker=dict(colors=colors, line=dict(color="#000000", width=2)),
+            ),
+            1,
+            1,
+        )
+        fig.add_trace(
+            go.Pie(
+                labels=labels,
+                values=night.values,
+                textinfo="label+percent",
+                insidetextorientation="radial",
+                marker=dict(colors=colors, line=dict(color="#000000", width=2)),
+            ),
+            1,
+            2,
+        )
+        # Use `hole` to create a donut-like pie chart
+        fig.update_traces(hole=0.4, hoverinfo="label+percent+name")
+        fig.update_layout(
+            title_text="Global Emissions 1990-2011",
+            # Add annotations in the center of the donut pies.
+            annotations=[
+                dict(text=_("day"), x=0.18, y=0.5, font_size=20, showarrow=False),
+                dict(text=_("night"), x=0.82, y=0.5, font_size=20, showarrow=False),
+            ],
         )
         return plot(fig, output_type="div", include_plotlyjs=True)
 
