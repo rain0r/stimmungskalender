@@ -47,7 +47,7 @@
                             <a class="nav-link" href="{% url 'index' %}">{% translate 'home' %}</a>
                         </li>
                         <li class="nav-item {% if request.resolver_match.url_name == 'graph' %}active{% endif %}">
-                            <a class="nav-link" href="{% url 'graph' %}">{% translate 'graph' %}</a>
+                            <a class="nav-link" href="{% url 'graph' %}">{% translate 'graphs' %}</a>
                         </li>
                         <li class="nav-item {% if request.resolver_match.url_name == 'calendar' %}active{% endif %}">
                             <a class="nav-link" href="{% url 'calendar' %}">{% translate 'calendar' %}</a>
