@@ -100,6 +100,7 @@ class EntryListView(MoodMapping, TemplateView):
         context["moods"] = self.mood_mapping
         context["forms"] = self.get_forms()
         context["standout_data"] = sk_service.standout_data()
+        context["general_stats"] = sk_service.general_stats()
 
         return context
 

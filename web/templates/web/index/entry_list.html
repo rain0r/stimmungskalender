@@ -72,6 +72,11 @@
     </form>
     <hr>
     {% include 'web/index/standout_data.html' %}
+    <hr>
+    <div class="d-flex flex-row-reverse">
+        <div class="mx-1">{{ general_stats.day_count }} {% translate 'days_tracked' %}.</div>
+        <div class="mx-1">{{ general_stats.night_count }} {% translate 'nights_tracked' %}.</div>
+    </div>
 {% endblock %}
 {% block js %}
     {% load static %}

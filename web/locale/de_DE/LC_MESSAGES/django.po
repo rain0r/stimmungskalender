@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-05 13:53+0200\n"
-"PO-Revision-Date: 2022-06-02 20:12+0200\n"
+"POT-Creation-Date: 2022-06-05 19:18+0200\n"
+"PO-Revision-Date: 2022-06-05 19:19+0200\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: service/scatter_graph.py:36
+#: service/pie_graph.py:64 service/scatter_graph.py:37
 msgid "day"
 msgstr "Tag"
 
-#: service/scatter_graph.py:44
+#: service/pie_graph.py:65 service/scatter_graph.py:45
 msgid "night"
 msgstr "Nacht"
 
@@ -34,9 +34,9 @@ msgstr ""
 msgid "home"
 msgstr "Startseite"
 
-#: templates/web/base.html:50
-msgid "graph"
-msgstr "Diagramm"
+#: templates/web/base.html:50 templates/web/graph.html:8
+msgid "graphs"
+msgstr "Diagramme"
 
 #: templates/web/base.html:53 templates/web/calendar.html:4
 msgid "calendar"
@@ -58,21 +58,17 @@ msgstr "Angemeldet als"
 msgid "logout"
 msgstr "Abmelden"
 
-#: templates/web/graph.html:8
-msgid "graphs"
-msgstr "Diagramme"
+#: templates/web/graph.html:13
+msgid "date_filter"
+msgstr "Datum-Filter"
 
-#: templates/web/graph.html:11 templates/web/graph/scatter.html:7
+#: templates/web/graph.html:25
 msgid "scatterplot"
 msgstr "Scatterplot"
 
-#: templates/web/graph.html:12
-msgid "pie_chart"
-msgstr "Kuchendiagramm"
-
-#: templates/web/graph.html:20
-msgid "date_filter"
-msgstr "Datum-Filter"
+#: templates/web/graph.html:34
+msgid "pie_charts"
+msgstr "Kuchendiagramme"
 
 #: templates/web/graph/date_select.html:7 templates/web/search.html:11
 msgid "start_date"
@@ -103,28 +99,16 @@ msgstr "Letzten Monat"
 msgid "last_year"
 msgstr "Letztes Jahr"
 
-#: templates/web/graph/pie_chart.html:4
-msgid "pie_charts"
-msgstr "Kuchendiagramme"
-
-#: templates/web/graph/pie_chart.html:7 templates/web/graph/scatter.html:10
+#: templates/web/graph/pie_chart.html:4 templates/web/graph/scatter.html:5
 msgid "time_range"
 msgstr "Zeitraum"
 
-#: templates/web/graph/pie_chart.html:14
-msgid "day_moods"
-msgstr "Tag-Stimmungen"
-
-#: templates/web/graph/pie_chart.html:22
-msgid "night_moods"
-msgstr "Nacht-Stimmungen"
-
-#: templates/web/graph/scatter.html:19
+#: templates/web/graph/scatter.html:14
 #: templates/web/settings/default_view_mode.html:15
 msgid "markers"
 msgstr "Punkte"
 
-#: templates/web/graph/scatter.html:25
+#: templates/web/graph/scatter.html:20
 #: templates/web/settings/default_view_mode.html:24
 msgid "lines"
 msgstr "Linien"
@@ -220,6 +204,15 @@ msgstr "Speichern"
 msgid "jump_to_week"
 msgstr "Springe zu Woche"
 
+#: templates/web/index/entry_list.html:77
+msgid "days_tracked"
+msgstr "Tage eingetragen"
+
+#: templates/web/index/entry_list.html:78
+#| msgid "night_header"
+msgid "nights_tracked"
+msgstr "Nächte eingetragen"
+
 #: templates/web/index/form.html:14
 msgid "click_to_toggle"
 msgstr "Klicken, um zu verstecken"
@@ -275,6 +268,18 @@ msgstr "Gut"
 #: views.py:35
 msgid "very_good"
 msgstr "Sehr gut"
+
+#~ msgid "graph"
+#~ msgstr "Diagramm"
+
+#~ msgid "pie_chart"
+#~ msgstr "Kuchendiagramm"
+
+#~ msgid "day_moods"
+#~ msgstr "Tag-Stimmungen"
+
+#~ msgid "night_moods"
+#~ msgstr "Nacht-Stimmungen"
 
 #, python-format
 #~ msgid "last %(data)s day"

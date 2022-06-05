@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-05 13:53+0200\n"
-"PO-Revision-Date: 2022-05-30 18:26+0200\n"
+"POT-Creation-Date: 2022-06-05 19:18+0200\n"
+"PO-Revision-Date: 2022-06-05 19:19+0200\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,11 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: service/scatter_graph.py:36
+#: service/pie_graph.py:64 service/scatter_graph.py:37
 msgid "day"
 msgstr "Day"
 
-#: service/scatter_graph.py:44
+#: service/pie_graph.py:65 service/scatter_graph.py:45
 msgid "night"
 msgstr "Night"
 
@@ -35,9 +35,9 @@ msgstr ""
 msgid "home"
 msgstr "Home"
 
-#: templates/web/base.html:50
-msgid "graph"
-msgstr "Graph"
+#: templates/web/base.html:50 templates/web/graph.html:8
+msgid "graphs"
+msgstr "Graphs"
 
 #: templates/web/base.html:53 templates/web/calendar.html:4
 msgid "calendar"
@@ -59,21 +59,17 @@ msgstr "Logged in as"
 msgid "logout"
 msgstr "Logout"
 
-#: templates/web/graph.html:8
-msgid "graphs"
-msgstr "Graphs"
+#: templates/web/graph.html:13
+msgid "date_filter"
+msgstr "Date filter"
 
-#: templates/web/graph.html:11 templates/web/graph/scatter.html:7
+#: templates/web/graph.html:25
 msgid "scatterplot"
 msgstr "Scatterplot"
 
-#: templates/web/graph.html:12
-msgid "pie_chart"
-msgstr "Pie Chart"
-
-#: templates/web/graph.html:20
-msgid "date_filter"
-msgstr "Date filter"
+#: templates/web/graph.html:34
+msgid "pie_charts"
+msgstr "Pie Charts"
 
 #: templates/web/graph/date_select.html:7 templates/web/search.html:11
 msgid "start_date"
@@ -104,28 +100,16 @@ msgstr "Last month"
 msgid "last_year"
 msgstr "Last year"
 
-#: templates/web/graph/pie_chart.html:4
-msgid "pie_charts"
-msgstr "Pie Charts"
-
-#: templates/web/graph/pie_chart.html:7 templates/web/graph/scatter.html:10
+#: templates/web/graph/pie_chart.html:4 templates/web/graph/scatter.html:5
 msgid "time_range"
 msgstr "Time range"
 
-#: templates/web/graph/pie_chart.html:14
-msgid "day_moods"
-msgstr "Day moods"
-
-#: templates/web/graph/pie_chart.html:22
-msgid "night_moods"
-msgstr "Night moods"
-
-#: templates/web/graph/scatter.html:19
+#: templates/web/graph/scatter.html:14
 #: templates/web/settings/default_view_mode.html:15
 msgid "markers"
 msgstr "Markers"
 
-#: templates/web/graph/scatter.html:25
+#: templates/web/graph/scatter.html:20
 #: templates/web/settings/default_view_mode.html:24
 msgid "lines"
 msgstr "Lines"
@@ -221,6 +205,15 @@ msgstr "Save"
 msgid "jump_to_week"
 msgstr "Jump to week"
 
+#: templates/web/index/entry_list.html:77
+msgid "days_tracked"
+msgstr "days tracked"
+
+#: templates/web/index/entry_list.html:78
+#| msgid "night_header"
+msgid "nights_tracked"
+msgstr "nights tracked"
+
 #: templates/web/index/form.html:14
 msgid "click_to_toggle"
 msgstr "Click to toggle"
@@ -276,6 +269,18 @@ msgstr "Good"
 #: views.py:35
 msgid "very_good"
 msgstr "Very good"
+
+#~ msgid "graph"
+#~ msgstr "Graph"
+
+#~ msgid "pie_chart"
+#~ msgstr "Pie Chart"
+
+#~ msgid "day_moods"
+#~ msgstr "Day moods"
+
+#~ msgid "night_moods"
+#~ msgstr "Night moods"
 
 #~ msgid "loading"
 #~ msgstr "Loading"

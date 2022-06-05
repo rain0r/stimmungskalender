@@ -58,3 +58,9 @@ class ScatterGraphResponse:
 class PieChartResponse:
     label_numbers: typing.List[int]
     values: typing.List[int]
+
+
+@dataclass
+class GeneralStats:
+    day_count: int
+    night_count: int

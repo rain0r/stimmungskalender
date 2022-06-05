@@ -15,6 +15,7 @@ from web.structs import (
     StandoutData,
     GraphTimeRanges,
     SkCalendar,
+    GeneralStats,
 )
 
 
@@ -37,6 +38,13 @@ class SkService:
         user: User,
     ):
         self._user = user
+
+    def general_stats(self) -> GeneralStats:
+        qs = Entry.objects.filter(user=self._user)
+        day_count = qs.exclude(mood_day__isnull=True).count()
+        night_count = qs.exclude(mood_night__isnull=True).count()
+        gs = GeneralStats(day_count=day_count, night_count=night_count)
+        return gs
 
     def calendar(self) -> SkCalendar:
         qs = Entry.objects.filter(user=self._user).order_by("-day")
