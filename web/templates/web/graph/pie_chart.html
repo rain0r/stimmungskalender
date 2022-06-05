@@ -1,24 +1,8 @@
 {% load i18n %}
-<div class="pt-5 pb-3 row">
-    <div class="col-12 col-md-6">
-        <a href="#pie-charts" class="h5 text-reset my-2 my-md-0" id="pie-charts">{% translate 'pie_charts' %}</a>
-    </div>
+<div class="pt-4 row">
     <div class="col-12 col-md-6 my-2 my-md-0">
         {% translate 'time_range' %}: {{ start_dt|date:"SHORT_DATE_FORMAT" }} — {{ end_dt|date:"SHORT_DATE_FORMAT" }}
     </div>
 </div>
-<!-- Pie charts day -->
-<div>
-    <a href="#pie-charts-day"
-       id="pie-charts-day"
-       class="font-weight-bold text-reset">{% translate 'day_moods' %}</a>
-</div>
-<div class="border">{{ pie_chart_day|safe }}</div>
 <hr>
-<!-- Pie charts night -->
-<div>
-    <a href="#pie-charts-night"
-       id="pie-charts-night"
-       class="font-weight-bold text-reset">{% translate 'night_moods' %}</a>
-</div>
-<div class="border">{{ pie_chart_night|safe }}</div>
+<div class="border">{{ pie_chart|safe }}</div>

@@ -7,26 +7,48 @@
         <div class="col-12 col-md-6">
             <a href="{% url 'graph' %}" class="h1 text-dark my-2 my-md-0">{% translate 'graphs' %}</a>
         </div>
-        <div class="col-12 col-md-6 text-right d-flex flex-column">
-            <a href="#scatterplot">{% translate 'scatterplot' %}</a>
-            <a href="#pie-charts">{% translate 'pie_chart' %}</a>
-        </div>
     </div>
     <hr>
     <div class="mt-3 mb-1">
-        <a href="{% url 'graph' %}#date-filter"
-           class="text-dark font-weight-bold"
-           id="date-filter">
-            {% translate 'date_filter' %}
-        </a>
+        <a href="{% url 'graph' %}" class="text-dark font-weight-bold">{% translate 'date_filter' %}</a>
     </div>
     <div class="border p-3 bg-light border">{% include 'web/graph/date_select.html' %}</div>
     <hr>
-    <!-- Date range display and markers/lines switch -->
-    {% include 'web/graph/scatter.html' %}
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active"
+               id="scatter-tab"
+               data-toggle="tab"
+               href="#scatter"
+               role="tab"
+               aria-controls="scatter"
+               aria-selected="true">{% translate 'scatterplot' %}</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link"
+               id="pie-tab"
+               data-toggle="tab"
+               href="#pie"
+               role="tab"
+               aria-controls="pie"
+               aria-selected="false">{% translate 'pie_charts' %}</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade show active"
+             id="scatter"
+             role="tabpanel"
+             aria-labelledby="scatter-tab">
+            {% include 'web/graph/scatter.html' %}
+        </div>
+        <div class="tab-pane fade"
+             id="pie"
+             role="tabpanel"
+             aria-labelledby="pie-tab">
+            {% include 'web/graph/pie_chart.html' %}
+        </div>
+    </div>
     <hr>
-    <!-- Pie charts -->
-    {% include 'web/graph/pie_chart.html' %}
 {% endblock %}
 {% block js %}
     {% load static %}
