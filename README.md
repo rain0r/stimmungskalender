@@ -1,6 +1,6 @@
 # stimmungskalender
 
-`stimmungskalender` is a mood calendar. It is a simple but effective way of keeping track of your mood daily mood and sleep.
+`stimmungskalender` is a mood calendar. It is a simple but effective way of keeping track of your daily mood and sleep.
 
 This can can help you identify patterns to establish a better understanding of your wellbeing or sleeping habits.
 
