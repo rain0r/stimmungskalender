@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 full_path=$(realpath $0)
 dir_path=$(dirname $full_path)

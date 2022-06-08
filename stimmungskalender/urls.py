@@ -71,3 +71,9 @@ if settings.NG_SK_ENABLED:
             name="ng-sk",
         )
     )
+
+# Host the static from uWSGI
+if settings.IS_WSGI:
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+    urlpatterns += staticfiles_urlpatterns()
