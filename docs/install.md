@@ -119,10 +119,10 @@ git pull
 ./virtualenv/bin/pip install -r requirements/prod.txt -U
 
 # Apply database changes (if there are any)
-./virtualenv/bin/python migrate
+./virtualenv/bin/python manage.py migrate
 
 # Collect static files (only need if you cloned the git repository)
-./virtualenv/bin/python collectstatic --noinput
+./virtualenv/bin/python manage.py collectstatic --noinput
   
 # Correct ownernship
 chown -R nginx:nginx /srv/www/stimmungskalender
