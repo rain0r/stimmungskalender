@@ -4,7 +4,7 @@
 
 This can can help you identify patterns to establish a better understanding of your wellbeing or sleeping habits.
 
-It's build with [Django](https://www.djangoproject.com/) and can be self-hosted.
+It's built with [Django](https://www.djangoproject.com/) and can be self-hosted.
 
 ---
 
