@@ -215,9 +215,8 @@ class SkService:
 
     def _week_data(self, first_day: date) -> typing.List[WeekdayEntry]:
         last_day = first_day + timedelta(days=7)
-        ret2 = self._entries_range(first_day, last_day)
-
-        return ret2
+        ret = self._entries_range(first_day, last_day)
+        return ret
 
     def _week(self, week_start: date) -> Week:
         # Make sure we use the start of the week
@@ -298,7 +297,7 @@ class SkService:
         """
         qs = (
             Entry.objects.filter(user=self._user)
-            .filter(day__gte=first_day, day__lte=last_day)
+            .filter(day__gte=first_day, day__lt=last_day)
             .order_by("-day")
         )
         delta = last_day - first_day
