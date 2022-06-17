@@ -26,7 +26,7 @@ It's built with [Django](https://www.djangoproject.com/) and can be self-hosted.
 
 To take a first look `stimmungskalender`, you can set up a local running instance. 
 
-See [`docs/quickstart.md`](docs/quickstart.md).
+See [`docs/quickstart.md`](docs/quickstart.md) or [`docs/docker.md`](docs/docker.md) for Docker.
 
 If you want to deploy in production, follow the instructions in [`docs/install.md`](docs/install.md).
 
