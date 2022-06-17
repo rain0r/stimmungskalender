@@ -19,7 +19,7 @@ sed -i 's/psycopg2/#psycopg2/' requirements/common.txt
 ./virtualenv/bin/python manage.py migrate
 
 # Create the frontend texts
-if [ -d "${dir_path}/../.git" ]; then
+if [ ! -f "${dir_path}/../web/locale/de_DE/LC_MESSAGES/django.mo" ]; then
     ./virtualenv/bin/django-admin compilemessages
 fi
 
@@ -27,7 +27,7 @@ fi
 ./virtualenv/bin/python manage.py createsuperuser
 
 # Generate javascript and css files
-if [ -d "${dir_path}/../.git" ]; then
+if [ ! -f "${dir_path}/../web/static/js/skBase.js" ]; then
     ./scripts/node.sh
 fi
 
