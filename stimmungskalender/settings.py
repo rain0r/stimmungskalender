@@ -137,11 +137,6 @@ CSRF_COOKIE_NAME = "sk_csrftoken"
 
 SESSION_COOKIE_NAME = "sk_sessionid"
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
-
-STATIC_URL = "/static/"
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -151,12 +146,29 @@ DATABASES = {
     )
 }
 
-CACHES = {"default": config("CACHE_URL", cast=django_cache_url.parse)}
+CACHES = {
+    "default": config("CACHE_URL", default="dummy://", cast=django_cache_url.parse)
+}
+# try:
+#     CACHES = {
+#         "default": config("CACHE_URL", default="dummy://", cast=django_cache_url.parse)
+#     }
+# except:
+#     CACHES = {
+#         "default": {
+#             "BACKEND": "django.core.cache.backends.dummy.DummyCache",
+#         }
+#     }
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.2/howto/static-files/
+
+STATIC_URL = "/static/"
 
 STATIC_ROOT = config("STATIC_ROOT", default=None)
 
@@ -247,3 +259,5 @@ SK_DATE_FORMAT = "%Y-%m-%d"  # To identify a week
 NG_SK_ENABLED = config("NG_SK_ENABLED", default=False, cast=bool)
 
 NG_SK_PATH = config("NG_SK_PATH", default="ng-sk")  # without leading or trailing slash
+
+IS_WSGI = config("IS_WSGI", default=False, cast=bool)

@@ -33,4 +33,10 @@ DATABASE_URL=sqlite:////home/my_user/sk.sqlite
 
 ## Is there a docker image?
 
-Not yet, but I'm open for pull requests.
+Yes, you can get via
+
+```sh
+docker pull rain0r/stimmungskalender
+```
+
+See [`docs/docker.md`](docker.md)

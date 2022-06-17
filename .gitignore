@@ -159,6 +159,8 @@ web/static/ng-sk/
 web/static/js/
 web/static/css/bootstrap.min.css
 
+static/
+
 # Logs
 logs
 *.log

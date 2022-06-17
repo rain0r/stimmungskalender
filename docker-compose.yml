@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+  # PostgreSQL
+  db:
+      image: postgres
+      restart: always
+      ports:
+        - "8081:5432"
+      volumes:
+        - "db:/var/lib/postgresql/data"
+      environment:
+        - LC_ALL=C.UTF-8
+        - POSTGRES_USER=stimmungskalender
+        - POSTGRES_PASSWORD=stimmungskalender
+
+  # Django app
+  app:
+      build:
+        context: .
+        dockerfile: ./docker/app/Dockerfile
+      command: uwsgi
+      expose:
+        - "8000"
+      ports:
+        - "8000:8000"
+      volumes:
+        - "static:/srv/www/stimmungskalender/static"
+      depends_on:
+        - db
+
+  # Nginx
+  web:
+      build:
+        context: ./
+        dockerfile: ./docker/web/Dockerfile
+      ports:
+        - "8080:80"
+      volumes:
+        - "static:/srv/www/stimmungskalender/static"
+      depends_on:
+        - app
+
+volumes:
+  db:
+  static:
