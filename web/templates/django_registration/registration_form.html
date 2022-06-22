@@ -5,11 +5,7 @@
         {% csrf_token %}
         <a href="{% url 'index' %}" class="h1 text-monospace text-body">stimmungskalender</a>
         <hr class="mb-5">
-        {% if form.errors %}
-            <div class="border mb-3 p-1">
-                <span class="text-danger">Your username and password didn't match. Please try again.</span>
-            </div>
-        {% endif %}
+        {% bootstrap_form_errors form %}
         <h1 class="h3 mb-3 font-weight-normal">Registration</h1>
         {% bootstrap_form form %}
         <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
