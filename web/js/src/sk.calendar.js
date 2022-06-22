@@ -38,7 +38,7 @@ function moodColors(mood) {
       color = "#ffc107";
       break;
     case 3:
-      color = "#9DB523";
+      color = "#b2beb5";
       break;
     case 4:
       color = "rgba(40,167,69, 0.7)";

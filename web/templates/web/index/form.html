@@ -7,7 +7,7 @@
               action="{% url 'save-mood' %}#{{ form.name }}">
             {% csrf_token %}
             <input type="hidden" name="period" value="{{ form.name }}">
-            <div class="bg-light d-flex align-items-center justify-content-center my-3 sticky-top">
+            <div class="d-flex align-items-center justify-content-center my-3 sticky-top">
                 <span class="h4 clickable"
                       data-toggle="collapse"
                       data-target="#collapse-{{ form.name }}"
