@@ -13,12 +13,14 @@ from web.service.sk import SkService
 class Command(BaseCommand):
     def add_arguments(self, parser: CommandParser) -> None:
         parser.add_argument("username")
+        parser.add_argument("days", type=int, default=30, nargs="?")
 
     def handle(self, *args: tuple, **options: dict) -> None:
         user = User.objects.get(username=options.get("username"))
+        days = options.get("days", 30)
         Week.objects.filter(user=user).delete()
         sk_service = SkService(user)
-        days = [(timezone.now() - timedelta(days=d)).date() for d in range(30)]
+        days = [(timezone.now() - timedelta(days=d)).date() for d in range(days)]
         mood_list = list(Moods)
 
         for period in PERIODS:

@@ -15,6 +15,7 @@ from django.views import View
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import RedirectView, TemplateView
 
+from stimmungskalender import VERSION
 from web import serializers
 from web.models import PERIODS
 from web.query_params import QP_START_DT, QP_END_DT, QP_MOOD, QP_SEARCH_TERM, QP_PAGE
@@ -65,6 +66,8 @@ class SettingsView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["default_view_mode"] = ss.get_default_view_mode()
         context["user_settings"] = ss.user_settings()
+        context["user_colors_settings"] = ss.user_colors_settings()
+        context["version"] = VERSION
         return context
 
 
@@ -80,6 +83,12 @@ class SaveSettingsView(View):
         if form_name == "save_view_mode":
             view_mode = request.POST.get("default_view_mode", "")
             ss.set_markers(view_mode)
+        if form_name == "user_mood_color_settings":
+            reset = bool(request.POST.get("reset", False))
+            if reset:
+                ss.save_user_colors_settings()
+            else:
+                ss.save_user_colors_settings(request.POST.dict())
         return redirect("settings")
 
 

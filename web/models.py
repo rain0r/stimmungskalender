@@ -56,6 +56,12 @@ class UserSettings(models.Model):
     view_night_form = models.BooleanField(default=True)
 
 
+class UserMoodColorSettings(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    mood = models.IntegerField(choices=Moods.choices)
+    color = models.CharField(max_length=32)
+
+
 # Django database signals
 
 # Create a UserSettings entry for each user

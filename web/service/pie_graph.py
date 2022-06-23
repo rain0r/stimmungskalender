@@ -7,7 +7,7 @@ from django_registration.forms import User
 from plotly.offline import plot
 from plotly.subplots import make_subplots
 
-from web.mood_colors import COLORS
+from web.mood_colors import DEFAULT_COLORS
 from web.service.base_graph import BaseGraph
 from web.structs import PieChartResponse
 
@@ -28,7 +28,7 @@ class PieGraphService(BaseGraph):
         day = self.load_data(PERIOD_DAY)
         night = self.load_data(PERIOD_NIGHT)
         labels = [self.mood_mapping.get(x) for x in day.label_numbers]
-        colors = [COLORS[x] for x in day.label_numbers]
+        colors = [DEFAULT_COLORS[x] for x in day.label_numbers]
 
         fig = make_subplots(
             rows=1, cols=2, specs=[[{"type": "domain"}, {"type": "domain"}]]

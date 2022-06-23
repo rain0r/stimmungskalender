@@ -10,8 +10,11 @@
     <hr>
     {% include 'web/settings/view_forms.html' %}
     <hr>
+    {% include 'web/settings/mood_colors.html' %}
+    <hr>
     <div class="d-flex flex-row-reverse">
         <ul class="list-group list-group-horizontal">
+            <li class="list-group-item text-muted">Version {{ version }}</li>
             <li class="list-group-item">
                 <a href="{% url 'schema' %}">API schema</a>
             </li>

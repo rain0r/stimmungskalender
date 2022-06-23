@@ -7,6 +7,13 @@ const moodMapping = JSON.parse(
 );
 const siteUrl = JSON.parse(document.getElementById("site_url").textContent);
 const calendarData = JSON.parse(document.getElementById("entries").textContent);
+const moodColors = JSON.parse(
+  document.getElementById("mood_colors").textContent
+);
+const currentLanguage = JSON.parse(
+  document.getElementById("current_language").textContent
+);
+
 calendarData.entries.map((item) => {
   const parts = item.day.split("-");
   // Please pay attention to the month (parts[1]); JavaScript counts months from 0:
@@ -28,38 +35,16 @@ function formatDate(dateStr) {
   return event.toLocaleDateString(undefined, options);
 }
 
-function moodColors(mood) {
-  let color;
-  switch (mood) {
-    case 1:
-      color = "#dc3545";
-      break;
-    case 2:
-      color = "#ffc107";
-      break;
-    case 3:
-      color = "#b2beb5";
-      break;
-    case 4:
-      color = "rgba(40,167,69, 0.7)";
-      break;
-    case 5:
-      color = "rgba(40,167,69, 1)";
-      break;
-    default:
-      color = "white";
-  }
-  return color;
-}
-
 function loadTranslation() {
   // Assign handlers immediately after making the request,
   // and remember the jqxhr object for this request
-  const jqxhr = $.get(`${siteUrl}jsoni18n/`).fail((err) => {
-    console.error("Error", err);
-    $("#error-card").removeClass("invisible");
-    $("#error-msg").text(err.statusText);
-  });
+  const jqxhr = $.get(`${siteUrl}jsoni18n/?lang=${currentLanguage}`).fail(
+    (err) => {
+      console.error("Error", err);
+      $("#error-card").removeClass("invisible");
+      $("#error-msg").text(err.statusText);
+    }
+  );
   return jqxhr;
 }
 
@@ -74,10 +59,10 @@ function buildCalendar(data) {
       ele = ele.parentElement; // We are passed the child of the element to be styled
       if (eventList[0].startDate.getTime() == renderDate.getTime()) {
         if (eventList[0].mood_day) {
-          dayColor = moodColors(eventList[0].mood_day);
+          dayColor = moodColors[eventList[0].mood_day];
         }
         if (eventList[0].mood_night) {
-          nightColor = moodColors(eventList[0].mood_night);
+          nightColor = moodColors[eventList[0].mood_night];
         }
       }
       $(ele).css("border-bottom", "3px solid " + dayColor);

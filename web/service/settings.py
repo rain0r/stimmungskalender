@@ -1,9 +1,12 @@
+import typing
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.http import QueryDict
 
 from web import models
-from web.models import UserSettings
+from web.models import UserSettings, Moods, UserMoodColorSettings
+from web.mood_colors import DEFAULT_COLORS
 
 
 class SettingsService:
@@ -12,6 +15,40 @@ class SettingsService:
         user: User,
     ):
         self._user = user
+
+    def save_user_colors_settings(self, colors=None) -> None:
+        """
+        Sets a color to each mood.
+        :param args:
+        :return:
+        """
+        if colors is None:
+            colors = dict()
+        for mood in Moods:
+            if f"mood-{mood}" in colors:
+                color = colors.get(f"mood-{mood}")
+            else:
+                color = DEFAULT_COLORS.get(mood)
+            UserMoodColorSettings.objects.update_or_create(
+                user=self._user,
+                mood=mood,
+                defaults={"color": color},
+            )
+
+    def user_colors_settings(self) -> typing.List[UserMoodColorSettings]:
+        """
+        Returns the color for each mood.
+        :return:
+        """
+        colors = []
+        for mood in Moods:
+            obj, created = UserMoodColorSettings.objects.get_or_create(
+                user=self._user,
+                mood=mood,
+                defaults={"color": DEFAULT_COLORS.get(mood)},
+            )
+            colors.append(obj)
+        return colors
 
     def user_settings(self) -> UserSettings:
         return UserSettings.objects.get(user=self._user)

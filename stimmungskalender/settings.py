@@ -87,6 +87,7 @@ TEMPLATES = [
                 "web.context_processors.lang",
                 "web.context_processors.mood_colors",
                 "web.context_processors.ng_sk",
+                "web.context_processors.mood_names",
             ],
         },
     },
@@ -223,6 +224,7 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 7,
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
     ),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }

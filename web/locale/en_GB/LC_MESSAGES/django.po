@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-05 19:18+0200\n"
-"PO-Revision-Date: 2022-06-05 19:19+0200\n"
+"POT-Creation-Date: 2022-06-23 19:02+0200\n"
+"PO-Revision-Date: 2022-06-23 19:03+0200\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -18,6 +18,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
+
+#: context_processors.py:32 views.py:31
+msgid "very_bad"
+msgstr "Very bad"
+
+#: context_processors.py:33 views.py:32
+msgid "bad"
+msgstr "Bad"
+
+#: context_processors.py:34 views.py:33
+msgid "medium"
+msgstr "Medium"
+
+#: context_processors.py:35 views.py:34
+msgid "good"
+msgstr "Good"
+
+#: context_processors.py:36 views.py:35
+msgid "very_good"
+msgstr "Very good"
 
 #: service/pie_graph.py:64 service/scatter_graph.py:37
 msgid "day"
@@ -197,6 +217,7 @@ msgstr "What happened this week?"
 #: templates/web/index/entry_list.html:47
 #: templates/web/settings/default_view_mode.html:28
 #: templates/web/settings/language.html:20
+#: templates/web/settings/mood_colors.html:29
 #: templates/web/settings/view_forms.html:29
 msgid "save"
 msgstr "Save"
@@ -210,7 +231,6 @@ msgid "days_tracked"
 msgstr "days tracked"
 
 #: templates/web/index/entry_list.html:78
-#| msgid "night_header"
 msgid "nights_tracked"
 msgstr "nights tracked"
 
@@ -238,6 +258,22 @@ msgstr "Language"
 msgid "current_language"
 msgstr "Current language"
 
+#: templates/web/settings/mood_colors.html:2
+msgid "mood_colors"
+msgstr "Mood colors"
+
+#: templates/web/settings/mood_colors.html:4
+msgid "you_can_set_a_color_for_each_color"
+msgstr "You can set a color for each color"
+
+#: templates/web/settings/mood_colors.html:5
+msgid "examples"
+msgstr "Examples"
+
+#: templates/web/settings/mood_colors.html:33
+msgid "reset"
+msgstr "Reset"
+
 #: templates/web/settings/view_forms.html:2
 msgid "view_forms"
 msgstr "Displayed forms"
@@ -249,26 +285,6 @@ msgstr "Night form"
 #: templates/web/settings/view_forms.html:25
 msgid "view_day_form"
 msgstr "Day form"
-
-#: views.py:31
-msgid "very_bad"
-msgstr "Very bad"
-
-#: views.py:32
-msgid "bad"
-msgstr "Bad"
-
-#: views.py:33
-msgid "medium"
-msgstr "Medium"
-
-#: views.py:34
-msgid "good"
-msgstr "Good"
-
-#: views.py:35
-msgid "very_good"
-msgstr "Very good"
 
 #~ msgid "graph"
 #~ msgstr "Graph"

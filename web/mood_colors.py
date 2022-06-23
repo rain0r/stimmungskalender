@@ -1,6 +1,6 @@
 from web.models import Moods
 
-COLORS = {
+DEFAULT_COLORS = {
     Moods.VERY_BAD: "#dc3545",
     Moods.BAD: "#ffc107",
     Moods.MEDIUM: "#b2beb5",
