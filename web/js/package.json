@@ -1,7 +1,7 @@
 {
   "name": "stimmungskalender",
-  "version": "1.1.0",
-  "description": "JavaScript files for stimmungskalender",
+  "version": "1.2.0-SNAPSHOT",
+  "description": "JavaScript and CSS files for stimmungskalender",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
