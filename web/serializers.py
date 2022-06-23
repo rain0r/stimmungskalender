@@ -20,29 +20,21 @@ class WeekSerializer(serializers.ModelSerializer):
         fields = ["week_date", "note"]
 
 
-class WeekdayEntrySerializer(DataclassSerializer):
-    class Meta:
-        dataclass = WeekdayEntry
-
-
-class MoodTableSerializer(DataclassSerializer):
-    week = WeekSerializer()
-
-    class Meta:
-        dataclass = MoodTable
-
-
-class StandoutDataSerializer(DataclassSerializer):
-    entry = WeekdayEntrySerializer()
-
-    class Meta:
-        dataclass = StandoutData
-
-
 class UserSettingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.UserSettings
         fields = ["view_is_markers", "view_day_form", "view_night_form"]
+
+
+class UserMoodColorSettingsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.UserMoodColorSettings
+        fields = ["mood", "color"]
+
+
+class WeekdayEntrySerializer(DataclassSerializer):
+    class Meta:
+        dataclass = WeekdayEntry
 
 
 class GraphTimeRangesSerializer(DataclassSerializer):
@@ -68,3 +60,17 @@ class ScatterGraphResponseSerializer(DataclassSerializer):
 class PieChartResponseSerializer(DataclassSerializer):
     class Meta:
         dataclass = PieChartResponse
+
+
+class MoodTableSerializer(DataclassSerializer):
+    week = WeekSerializer()
+
+    class Meta:
+        dataclass = MoodTable
+
+
+class StandoutDataSerializer(DataclassSerializer):
+    entry = WeekdayEntrySerializer()
+
+    class Meta:
+        dataclass = StandoutData

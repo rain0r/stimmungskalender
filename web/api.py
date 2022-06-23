@@ -11,7 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from web import serializers
-from web.models import UserSettings, PERIODS, Moods
+from web.models import UserSettings, PERIODS, Moods, UserMoodColorSettings
 from web.query_params import QP_START_DT, QP_END_DT, QP_MOOD, QP_SEARCH_TERM, QP_PERIOD
 from web.service.pie_graph import PieGraphService
 from web.service.scatter_graph import ScatterGraphService
@@ -293,6 +293,19 @@ class PieChartGraphView(MoodMapping, DefaultDateHandler, GenericAPIView):
             end_dt=end_dt,
         )
         serializer = serializers.PieChartResponseSerializer(pie_graph.load_data(period))
+        return Response(serializer.data)
+
+
+class UserMoodColorSettingsView(GenericAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = serializers.UserMoodColorSettingsSerializer
+    queryset = UserMoodColorSettings.objects.all()
+
+    def get(self, request):
+        sk_service = SettingsService(request.user)
+        serializer = serializers.UserMoodColorSettingsSerializer(
+            sk_service.user_colors_settings(), many=True
+        )
         return Response(serializer.data)
 
 

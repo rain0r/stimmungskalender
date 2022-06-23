@@ -1,27 +1,25 @@
-{{MOOD_COLORS}}
-
 /* Very Bad: */
 .mood-1 {
-     background: {{MOOD_COLORS|get_item:1}} !important;
+     background: {{mood_colors|get_item:1}} !important;
      opacity: 70%
 }
 /* Bad */
  .mood-2 {
-     background: {{MOOD_COLORS|get_item:2}} !important;
+     background: {{mood_colors|get_item:2}} !important;
      opacity: 70%
 }
 /* Medium */
  .mood-3 {
-     background: {{MOOD_COLORS|get_item:3}} !important;
+     background: {{mood_colors|get_item:3}} !important;
      opacity: 70%
 }
 /* Good */
  .mood-4 {
-     background: {{MOOD_COLORS|get_item:4}} !important;
+     background: {{mood_colors|get_item:4}} !important;
      opacity: 70%
 }
 /* Very Good */
  .mood-5 {
-     background: {{MOOD_COLORS|get_item:5}} !important;
+     background: {{mood_colors|get_item:5}} !important;
      opacity: 70%
 }

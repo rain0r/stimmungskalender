@@ -13,6 +13,8 @@
     /* background-color: #eee !important; */
 }
 
-.form-day {
-    /* background-color: #343a40 !important; */
+.color-box {
+    display: block;
+    width: 20px;
+    height: 20px;
 }
