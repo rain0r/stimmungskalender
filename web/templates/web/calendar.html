@@ -11,11 +11,12 @@
     </div>
 {% endblock %}
 {% block js %}
+    {% get_current_language as language_code %}
     {{ entries|json_script:"entries" }}
     {{ site_url|json_script:"site_url" }}
     {{ mood_mapping|json_script:"mood_mapping" }}
     {{ mood_colors|json_script:"mood_colors" }}
-    {{ current_language|json_script:"current_language" }}
+    {{ language_code|json_script:"current_language" }}
     {% load static %}
     <script src="{% static '/js/skCalendar.js' %}"></script>
 {% endblock %}

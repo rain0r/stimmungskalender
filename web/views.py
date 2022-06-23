@@ -15,6 +15,7 @@ from django.views import View
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import RedirectView, TemplateView
 
+from stimmungskalender import VERSION
 from web import serializers
 from web.models import PERIODS
 from web.query_params import QP_START_DT, QP_END_DT, QP_MOOD, QP_SEARCH_TERM, QP_PAGE
@@ -66,6 +67,7 @@ class SettingsView(TemplateView):
         context["default_view_mode"] = ss.get_default_view_mode()
         context["user_settings"] = ss.user_settings()
         context["user_colors_settings"] = ss.user_colors_settings()
+        context["version"] = VERSION
         return context
 
 

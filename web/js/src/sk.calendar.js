@@ -38,7 +38,7 @@ function formatDate(dateStr) {
 function loadTranslation() {
   // Assign handlers immediately after making the request,
   // and remember the jqxhr object for this request
-  const jqxhr = $.get(`${siteUrl}jsoni18n/?lang={currentLanguage}`).fail(
+  const jqxhr = $.get(`${siteUrl}jsoni18n/?lang=${currentLanguage}`).fail(
     (err) => {
       console.error("Error", err);
       $("#error-card").removeClass("invisible");

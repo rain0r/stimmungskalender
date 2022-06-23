@@ -1,7 +1,9 @@
 {% load i18n %}
-<h3>MOOD COLORS</h3>
+<h3>{% translate 'mood_colors' %}</h3>
 <div class="text-muted">
-    You can set a color for each color. Examples: <code>red</code>, <code>#dc3545</code>, <code>rgba(40,167,69, 0.7)</code>
+    {% translate 'you_can_set_a_color_for_each_color' %}.
+    {% translate 'examples' %}
+    : <code>red</code>, <code>#dc3545</code>, <code>rgba(40,167,69, 0.7)</code>
 </div>
 <form class="mt-3" action="{% url 'save-settings' %}" method="post">
     {% csrf_token %}
@@ -28,7 +30,7 @@
             <button type="submit"
                     name="reset"
                     value="true"
-                    class="btn btn-secondary ml-5">RESET</button>
+                    class="btn btn-secondary ml-5">{% translate 'reset' %}</button>
         </div>
     </div>
 </form>
