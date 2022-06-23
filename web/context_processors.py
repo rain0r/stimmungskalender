@@ -15,10 +15,11 @@ def lang(request: WSGIRequest) -> dict:
 
 
 def mood_colors(request: WSGIRequest) -> dict:
-    ss = SettingsService(request.user)
     ret = {}
-    for obj in ss.user_colors_settings():
-        ret[obj.mood] = obj.color
+    if request.user.is_authenticated:
+        ss = SettingsService(request.user)
+        for obj in ss.user_colors_settings():
+            ret[obj.mood] = obj.color
     return {"mood_colors": ret}
 
 
