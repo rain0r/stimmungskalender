@@ -6,7 +6,6 @@ const moodMapping = JSON.parse(
   document.getElementById("mood_mapping").textContent
 );
 const siteUrl = JSON.parse(document.getElementById("site_url").textContent);
-const calendarData = JSON.parse(document.getElementById("entries").textContent);
 const moodColors = JSON.parse(
   document.getElementById("mood_colors").textContent
 );
@@ -14,15 +13,18 @@ const currentLanguage = JSON.parse(
   document.getElementById("current_language").textContent
 );
 
-calendarData.entries.map((item) => {
-  const parts = item.day.split("-");
-  // Please pay attention to the month (parts[1]); JavaScript counts months from 0:
-  // January - 0, February - 1, etc.
-  const day = new Date(parts[0], parts[1] - 1, parts[2]);
-  item.startDate = day;
-  item.endDate = day;
-  return item;
-});
+function buildCalendarEntries(calendarData) {
+  calendarData.entries.map((item) => {
+    const parts = item.day.split("-");
+    // Please pay attention to the month (parts[1]); JavaScript counts months from 0:
+    // January - 0, February - 1, etc.
+    const day = new Date(parts[0], parts[1] - 1, parts[2]);
+    item.startDate = day;
+    item.endDate = day;
+    return item;
+  });
+  return calendarData;
+}
 
 function formatDate(dateStr) {
   const event = new Date(dateStr);
@@ -36,8 +38,6 @@ function formatDate(dateStr) {
 }
 
 function loadTranslation() {
-  // Assign handlers immediately after making the request,
-  // and remember the jqxhr object for this request
   const jqxhr = $.get(`${siteUrl}jsoni18n/?lang=${currentLanguage}`).fail(
     (err) => {
       console.error("Error", err);
@@ -48,7 +48,16 @@ function loadTranslation() {
   return jqxhr;
 }
 
-function buildCalendar(data) {
+function loadEntries() {
+  const jqxhr = $.get(`${siteUrl}api/calendar/`).fail((err) => {
+    console.error("Error", err);
+    $("#error-card").removeClass("invisible");
+    $("#error-msg").text(err.statusText);
+  });
+  return jqxhr;
+}
+
+function buildCalendar(translations, calendarData) {
   new Calendar("#calendar", {
     minDate: new Date(calendarData.first_day),
     maxDate: new Date(calendarData.last_day),
@@ -81,14 +90,14 @@ function buildCalendar(data) {
             <p>${formatDate(e.events[i].day)}</p>
             <ul>
               <li>
-                ${data.catalog["mood"]} ${data.catalog["night"]}: ${
-            moodMapping[e.events[i].mood_night]
-          }
+                ${translations.catalog["mood"]} ${
+            translations.catalog["night"]
+          }: ${moodMapping[e.events[i].mood_night]}
               </li>
               <li>
-                ${data.catalog["mood"]} ${data.catalog["day"]}: ${
-            moodMapping[e.events[i].mood_day]
-          }
+                ${translations.catalog["mood"]} ${
+            translations.catalog["day"]
+          }: ${moodMapping[e.events[i].mood_day]}
               </li>
             </ul>
           </div>
@@ -114,5 +123,9 @@ function buildCalendar(data) {
 }
 
 $(() => {
-  loadTranslation().then((data) => buildCalendar(data));
+  Promise.all([loadTranslation(), loadEntries()]).then((values) => {
+    const translations = values[0];
+    const calendarData = buildCalendarEntries(values[1]);
+    buildCalendar(translations, calendarData);
+  });
 });
