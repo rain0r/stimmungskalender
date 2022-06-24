@@ -1,4 +1,4 @@
-![Screenshot of Stimmungskalender](.github/sk-logo.png)
+![Logo of Stimmungskalender](.github/sk-logo.png)
 
 # stimmungskalender
 
