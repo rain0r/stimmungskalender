@@ -16,7 +16,6 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import RedirectView, TemplateView
 
 from stimmungskalender import VERSION
-from web import serializers
 from web.models import PERIODS
 from web.query_params import QP_START_DT, QP_END_DT, QP_MOOD, QP_SEARCH_TERM, QP_PAGE
 from web.service.pie_graph import PieGraphService, PERIOD_DAY, PERIOD_NIGHT
@@ -240,9 +239,6 @@ class CalendarView(MoodMapping, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        sk_service = SkService(self.request.user)
-        serializer = serializers.CalendarSerializer(sk_service.calendar())
-        context["entries"] = serializer.data
         context["mood_mapping"] = self.mood_mapping
         context["site_url"] = reverse_lazy("index")
         return context
