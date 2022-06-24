@@ -31,7 +31,8 @@
                     {% for weekday_entry in mood_table.days_of_week %}
                         <div class="col-12 col-md-auto d-flex flex-column my-3 my-md-0"
                              id="{{ form.name }}-{{ weekday_entry.day|date:'D' }}">
-                            <span class="font-weight-bold border p-1 m-1 d-flex justify-content-center">{{ weekday_entry.day|date:"D" }}</span>
+                            <span title="{{ weekday_entry.day|date:'l' }}"
+                                  class="font-weight-bold border p-1 m-1 d-flex justify-content-center">{{ weekday_entry.day|date:"D" }}</span>
                             <span class="border text-muted text-monospace p-1 m-1 d-flex justify-content-center">{{ weekday_entry.day|date:"d. m." }}</span>
                             {% for number in moods reversed %}
                                 {% include 'web/index/mood_button.html' with mood_value=weekday_entry|get_obj_attr:form.attr %}
