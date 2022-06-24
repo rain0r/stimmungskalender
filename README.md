@@ -1,3 +1,5 @@
+![Logo of Stimmungskalender](.github/sk-logo.png)
+
 # stimmungskalender
 
 `stimmungskalender` is a mood calendar. It is a simple but effective way of keeping track of your daily mood and sleep.
