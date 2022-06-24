@@ -1,4 +1,11 @@
 {% extends 'web/base.html' %}
+{% load i18n %}
+
+{% block title %}
+{% translate 'settings' %}
+{% endblock %}
+
+
 {% block content %}
     {% load i18n %}
     {% get_current_language as LANGUAGE_CODE %}
