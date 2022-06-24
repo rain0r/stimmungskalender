@@ -1,6 +1,9 @@
 {% extends 'web/base.html' %}
+{% load i18n %}
+{% block title %}
+    {% translate 'graphs' %}
+{% endblock %}
 {% block content %}
-    {% load i18n %}
     {% load relative_url %}
     <!-- Title -->
     <div class="pt-4 row">

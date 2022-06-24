@@ -1,4 +1,8 @@
 {% extends 'web/base.html' %}
+{% load i18n %}
+{% block title %}
+    {% translate 'settings' %}
+{% endblock %}
 {% block content %}
     {% load i18n %}
     {% get_current_language as LANGUAGE_CODE %}
@@ -15,6 +19,9 @@
     <div class="d-flex flex-row-reverse">
         <ul class="list-group list-group-horizontal">
             <li class="list-group-item text-muted">Version {{ version }}</li>
+            <li class="list-group-item">
+                <a href="{% url 'export' %}">{% translate 'export_your_data' %}</a>
+            </li>
             <li class="list-group-item">
                 <a href="{% url 'schema' %}">API schema</a>
             </li>

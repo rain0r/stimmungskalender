@@ -17,7 +17,7 @@ from web.service.pie_graph import PieGraphService
 from web.service.scatter_graph import ScatterGraphService
 from web.service.settings import SettingsService
 from web.service.sk import SkService
-from web.views import MoodMapping, DefaultDateHandler
+from web.views import DefaultDateHandler
 
 
 class EntryDayView(GenericAPIView):
@@ -211,7 +211,7 @@ class StandoutDataView(GenericAPIView):
         return Response(serializer.data)
 
 
-class ScatterGraphView(MoodMapping, DefaultDateHandler, GenericAPIView):
+class ScatterGraphView(DefaultDateHandler, GenericAPIView):
     """
     Get the mood scatter graph.
     """
@@ -238,13 +238,14 @@ class ScatterGraphView(MoodMapping, DefaultDateHandler, GenericAPIView):
         ],
     )
     def get(self, request):
+        sk_service = SkService(self.request.user)
         ss = SettingsService(self.request.user)
         is_markers = ss.is_markers(self.request.GET)
         start_dt = self.default_start_dt()
         end_dt = self.default_end_dt()
         scatter_graph = ScatterGraphService(
             is_markers=is_markers,
-            mood_mapping=self.mood_mapping,
+            mood_mapping=sk_service.mood_mapping,
             user=self.request.user,
             start_dt=start_dt,
             end_dt=end_dt,
@@ -255,7 +256,7 @@ class ScatterGraphView(MoodMapping, DefaultDateHandler, GenericAPIView):
         return Response(serializer.data)
 
 
-class PieChartGraphView(MoodMapping, DefaultDateHandler, GenericAPIView):
+class PieChartGraphView(DefaultDateHandler, GenericAPIView):
     """
     Get the mood scatter graph.
     """
@@ -279,6 +280,7 @@ class PieChartGraphView(MoodMapping, DefaultDateHandler, GenericAPIView):
         ],
     )
     def get(self, request):
+        sk_service = SkService(self.request.user)
         start_dt = self.default_start_dt()
         end_dt = self.default_end_dt()
         period = self.request.GET.get(QP_PERIOD, None)
@@ -288,7 +290,7 @@ class PieChartGraphView(MoodMapping, DefaultDateHandler, GenericAPIView):
 
         pie_graph = PieGraphService(
             user=self.request.user,
-            mood_mapping=self.mood_mapping,
+            mood_mapping=sk_service.mood_mapping,
             start_dt=start_dt,
             end_dt=end_dt,
         )
@@ -383,4 +385,15 @@ class CalendarView(GenericAPIView):
     def get(self, request):
         sk_service = SkService(request.user)
         serializer = serializers.CalendarSerializer(sk_service.calendar())
+        return Response(serializer.data)
+
+
+class ExportView(GenericAPIView):
+
+    permission_classes = [IsAuthenticated]
+    serializer_class = serializers.ExportDataSerializer
+
+    def get(self, request):
+        sk_service = SkService(request.user)
+        serializer = serializers.ExportDataSerializer(sk_service.export())
         return Response(serializer.data)

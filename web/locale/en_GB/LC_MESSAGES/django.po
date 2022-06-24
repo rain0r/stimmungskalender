@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-23 19:02+0200\n"
-"PO-Revision-Date: 2022-06-23 19:03+0200\n"
+"POT-Creation-Date: 2022-06-24 22:46+0200\n"
+"PO-Revision-Date: 2022-06-24 22:47+0200\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,23 +19,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: context_processors.py:32 views.py:31
+#: context_processors.py:33 service/sk.py:44
 msgid "very_bad"
 msgstr "Very bad"
 
-#: context_processors.py:33 views.py:32
+#: context_processors.py:34 service/sk.py:45
 msgid "bad"
 msgstr "Bad"
 
-#: context_processors.py:34 views.py:33
+#: context_processors.py:35 service/sk.py:46
 msgid "medium"
 msgstr "Medium"
 
-#: context_processors.py:35 views.py:34
+#: context_processors.py:36 service/sk.py:47
 msgid "good"
 msgstr "Good"
 
-#: context_processors.py:36 views.py:35
+#: context_processors.py:37 service/sk.py:48
 msgid "very_good"
 msgstr "Very good"
 
@@ -51,56 +51,61 @@ msgstr "Night"
 msgid "Log in"
 msgstr ""
 
-#: templates/web/base.html:47 templates/web/base.html:79
+#: templates/web/base.html:48 templates/web/base.html:80
+#: templates/web/index/entry_list.html:4
 msgid "home"
 msgstr "Home"
 
-#: templates/web/base.html:50 templates/web/graph.html:8
+#: templates/web/base.html:51 templates/web/graph.html:4
+#: templates/web/graph.html:11
 msgid "graphs"
 msgstr "Graphs"
 
-#: templates/web/base.html:53 templates/web/calendar.html:4
+#: templates/web/base.html:54 templates/web/calendar.html:4
+#: templates/web/calendar.html:7
 msgid "calendar"
 msgstr "Calendar"
 
-#: templates/web/base.html:56 templates/web/search.html:5
+#: templates/web/base.html:57 templates/web/search.html:4
+#: templates/web/search.html:9
 msgid "search"
 msgstr "Search"
 
-#: templates/web/base.html:59 templates/web/settings.html:5
+#: templates/web/base.html:60 templates/web/settings.html:4
+#: templates/web/settings.html:9
 msgid "settings"
 msgstr "Settings"
 
-#: templates/web/base.html:67
+#: templates/web/base.html:68
 msgid "logged_in_as"
 msgstr "Logged in as"
 
-#: templates/web/base.html:82
+#: templates/web/base.html:83
 msgid "logout"
 msgstr "Logout"
 
-#: templates/web/graph.html:13
+#: templates/web/graph.html:16
 msgid "date_filter"
 msgstr "Date filter"
 
-#: templates/web/graph.html:25
+#: templates/web/graph.html:28
 msgid "scatterplot"
 msgstr "Scatterplot"
 
-#: templates/web/graph.html:34
+#: templates/web/graph.html:37
 msgid "pie_charts"
 msgstr "Pie Charts"
 
-#: templates/web/graph/date_select.html:7 templates/web/search.html:11
+#: templates/web/graph/date_select.html:7 templates/web/search.html:15
 msgid "start_date"
 msgstr "From"
 
-#: templates/web/graph/date_select.html:19 templates/web/search.html:23
+#: templates/web/graph/date_select.html:19 templates/web/search.html:27
 msgid "end_date"
 msgstr "To"
 
 #: templates/web/graph/date_select.html:31
-#: templates/web/index/entry_list.html:69 templates/web/search.html:63
+#: templates/web/index/entry_list.html:73 templates/web/search.html:67
 msgid "go_to"
 msgstr "Go"
 
@@ -194,27 +199,27 @@ msgstr "Last very bad night"
 msgid "no_results"
 msgstr "No results"
 
-#: templates/web/index/entry_list.html:7 templates/web/search.html:73
+#: templates/web/index/entry_list.html:11 templates/web/search.html:77
 msgid "week"
 msgstr "Week"
 
-#: templates/web/index/entry_list.html:21
+#: templates/web/index/entry_list.html:25
 msgid "note"
 msgstr "Note"
 
-#: templates/web/index/entry_list.html:24
+#: templates/web/index/entry_list.html:28
 msgid "prev"
 msgstr "Previous"
 
-#: templates/web/index/entry_list.html:26
+#: templates/web/index/entry_list.html:30
 msgid "next"
 msgstr "Next"
 
-#: templates/web/index/entry_list.html:44
+#: templates/web/index/entry_list.html:48
 msgid "what_happened_this_week"
 msgstr "What happened this week?"
 
-#: templates/web/index/entry_list.html:47
+#: templates/web/index/entry_list.html:51
 #: templates/web/settings/default_view_mode.html:28
 #: templates/web/settings/language.html:20
 #: templates/web/settings/mood_colors.html:29
@@ -222,15 +227,15 @@ msgstr "What happened this week?"
 msgid "save"
 msgstr "Save"
 
-#: templates/web/index/entry_list.html:55
+#: templates/web/index/entry_list.html:59
 msgid "jump_to_week"
 msgstr "Jump to week"
 
-#: templates/web/index/entry_list.html:77
+#: templates/web/index/entry_list.html:81
 msgid "days_tracked"
 msgstr "days tracked"
 
-#: templates/web/index/entry_list.html:78
+#: templates/web/index/entry_list.html:82
 msgid "nights_tracked"
 msgstr "nights tracked"
 
@@ -238,13 +243,17 @@ msgstr "nights tracked"
 msgid "click_to_toggle"
 msgstr "Click to toggle"
 
-#: templates/web/search.html:36
+#: templates/web/search.html:40
 msgid "mood"
 msgstr "Mood"
 
-#: templates/web/search.html:52 templates/web/search.html:57
+#: templates/web/search.html:56 templates/web/search.html:61
 msgid "search_term"
 msgstr "Search term"
+
+#: templates/web/settings.html:23
+msgid "export_your_data"
+msgstr "Export your data"
 
 #: templates/web/settings/default_view_mode.html:2
 msgid "default_view_mode"
