@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-23 19:02+0200\n"
+"POT-Creation-Date: 2022-06-24 21:53+0200\n"
 "PO-Revision-Date: 2022-06-23 19:03+0200\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,23 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: context_processors.py:32 views.py:31
+#: context_processors.py:33 views.py:32
 msgid "very_bad"
 msgstr "Sehr schlecht"
 
-#: context_processors.py:33 views.py:32
+#: context_processors.py:34 views.py:33
 msgid "bad"
 msgstr "Schlecht"
 
-#: context_processors.py:34 views.py:33
+#: context_processors.py:35 views.py:34
 msgid "medium"
 msgstr "Mittel"
 
-#: context_processors.py:35 views.py:34
+#: context_processors.py:36 views.py:35
 msgid "good"
 msgstr "Gut"
 
-#: context_processors.py:36 views.py:35
+#: context_processors.py:37 views.py:36
 msgid "very_good"
 msgstr "Sehr gut"
 
@@ -50,31 +50,32 @@ msgstr "Nacht"
 msgid "Log in"
 msgstr ""
 
-#: templates/web/base.html:47 templates/web/base.html:79
+#: templates/web/base.html:45 templates/web/base.html:77
 msgid "home"
 msgstr "Startseite"
 
-#: templates/web/base.html:50 templates/web/graph.html:8
+#: templates/web/base.html:48 templates/web/graph.html:8
 msgid "graphs"
 msgstr "Diagramme"
 
-#: templates/web/base.html:53 templates/web/calendar.html:4
+#: templates/web/base.html:51 templates/web/calendar.html:2
+#: templates/web/calendar.html:8
 msgid "calendar"
 msgstr "Kalender"
 
-#: templates/web/base.html:56 templates/web/search.html:5
+#: templates/web/base.html:54 templates/web/search.html:5
 msgid "search"
 msgstr "Suche"
 
-#: templates/web/base.html:59 templates/web/settings.html:5
+#: templates/web/base.html:57 templates/web/settings.html:5
 msgid "settings"
 msgstr "Einstellungen"
 
-#: templates/web/base.html:67
+#: templates/web/base.html:65
 msgid "logged_in_as"
 msgstr "Angemeldet als"
 
-#: templates/web/base.html:82
+#: templates/web/base.html:80
 msgid "logout"
 msgstr "Abmelden"
 
