@@ -17,6 +17,7 @@ from web.structs import (
     GraphTimeRanges,
     SkCalendar,
     GeneralStats,
+    ExportData,
 )
 
 
@@ -46,6 +47,9 @@ class SkService:
             4: _("good"),
             5: _("very_good"),
         }
+
+    def export(self) -> ExportData:
+        return ExportData(entries=self.calendar(), moods=self.mood_mapping)
 
     def general_stats(self) -> GeneralStats:
         qs = Entry.objects.filter(user=self._user)

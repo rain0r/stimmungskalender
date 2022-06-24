@@ -45,6 +45,7 @@ urlpatterns = [
     path("api/search/", api.SearchView.as_view()),
     path("api/graph/", api.GraphView.as_view()),
     path("api/calendar/", api.CalendarView.as_view()),
+    path("api/export/", api.ExportView.as_view(), name="export"),
     path("api/set-language/", api.SetLanguageView.as_view()),
     path("api/forms-displayed/", api.FormsDisplayedView.as_view()),
     path("api/mood-colors/", api.UserMoodColorSettingsView.as_view()),

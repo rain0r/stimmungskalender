@@ -64,3 +64,9 @@ class PieChartResponse:
 class GeneralStats:
     day_count: int
     night_count: int
+
+
+@dataclass
+class ExportData:
+    entries: SkCalendar
+    moods: dict

@@ -386,3 +386,14 @@ class CalendarView(GenericAPIView):
         sk_service = SkService(request.user)
         serializer = serializers.CalendarSerializer(sk_service.calendar())
         return Response(serializer.data)
+
+
+class ExportView(GenericAPIView):
+
+    permission_classes = [IsAuthenticated]
+    serializer_class = serializers.ExportDataSerializer
+
+    def get(self, request):
+        sk_service = SkService(request.user)
+        serializer = serializers.ExportDataSerializer(sk_service.export())
+        return Response(serializer.data)

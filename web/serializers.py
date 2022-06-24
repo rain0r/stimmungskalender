@@ -11,6 +11,7 @@ from web.structs import (
     ScatterGraphResponse,
     PieChartResponse,
     GraphDataPointY,
+    ExportData,
 )
 
 
@@ -74,3 +75,8 @@ class StandoutDataSerializer(DataclassSerializer):
 
     class Meta:
         dataclass = StandoutData
+
+
+class ExportDataSerializer(DataclassSerializer):
+    class Meta:
+        dataclass = ExportData
