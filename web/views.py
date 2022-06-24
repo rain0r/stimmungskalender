@@ -10,7 +10,6 @@ from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.utils.decorators import method_decorator
-from django.utils.translation import gettext as _
 from django.views import View
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import RedirectView, TemplateView
@@ -22,18 +21,6 @@ from web.service.pie_graph import PieGraphService, PERIOD_DAY, PERIOD_NIGHT
 from web.service.scatter_graph import ScatterGraphService
 from web.service.settings import SettingsService
 from web.service.sk import SkService
-
-
-class MoodMapping:
-    def __init__(self) -> None:
-        """Provides translated names for each mood"""
-        self.mood_mapping = {
-            1: _("very_bad"),
-            2: _("bad"),
-            3: _("medium"),
-            4: _("good"),
-            5: _("very_good"),
-        }
 
 
 class DefaultDateHandler:
@@ -92,7 +79,7 @@ class SaveSettingsView(View):
 
 
 @method_decorator(login_required, name="dispatch")
-class EntryListView(MoodMapping, TemplateView):
+class EntryListView(TemplateView):
     template_name = "web/index/entry_list.html"
 
     @method_decorator(ensure_csrf_cookie)
@@ -105,7 +92,7 @@ class EntryListView(MoodMapping, TemplateView):
 
         start_day_p = self.request.GET.get(QP_START_DT, "").strip()
         context["mood_table"] = sk_service.mood_table(start_day_p)
-        context["moods"] = self.mood_mapping
+        context["moods"] = sk_service.mood_mapping
         context["forms"] = self.get_forms()
         context["standout_data"] = sk_service.standout_data()
         context["general_stats"] = sk_service.general_stats()
@@ -145,12 +132,12 @@ class SaveMoodView(View):
         return redirect(f"{reverse('index')}?start_dt={start_day_p}")
 
 
-class GraphView(MoodMapping, DefaultDateHandler, TemplateView):
+class GraphView(DefaultDateHandler, TemplateView):
     template_name = "web/graph.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
+        sk_service = SkService(self.request.user)
         ss = SettingsService(self.request.user)
         is_markers = ss.is_markers(self.request.GET)
         start_dt = self.default_start_dt()
@@ -158,14 +145,14 @@ class GraphView(MoodMapping, DefaultDateHandler, TemplateView):
 
         scatter_graph = ScatterGraphService(
             is_markers=is_markers,
-            mood_mapping=self.mood_mapping,
+            mood_mapping=sk_service.mood_mapping,
             user=self.request.user,
             start_dt=start_dt,
             end_dt=end_dt,
         )
         pie_graph = PieGraphService(
             user=self.request.user,
-            mood_mapping=self.mood_mapping,
+            mood_mapping=sk_service.mood_mapping,
             start_dt=start_dt,
             end_dt=end_dt,
         )
@@ -194,7 +181,7 @@ class LogoutView(RedirectView):
 
 
 @method_decorator(login_required, name="dispatch")
-class SearchView(MoodMapping, TemplateView):
+class SearchView(TemplateView):
     template_name = "web/search.html"
 
     def get_context_data(self, **kwargs):
@@ -213,7 +200,7 @@ class SearchView(MoodMapping, TemplateView):
         context["paginator"] = paginator
         context["page_obj"] = paginator.page
         context["parameters"] = get_copy.pop(QP_PAGE, True) and get_copy.urlencode()
-        context["moods"] = self.mood_mapping
+        context["moods"] = sk_service.mood_mapping
 
         return context
 
@@ -234,11 +221,11 @@ class SaveNoteView(View):
 
 
 @method_decorator(login_required, name="dispatch")
-class CalendarView(MoodMapping, TemplateView):
+class CalendarView(TemplateView):
     template_name = "web/calendar.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["mood_mapping"] = self.mood_mapping
+        context["mood_mapping"] = SkService(self.request.user).mood_mapping
         context["site_url"] = reverse_lazy("index")
         return context

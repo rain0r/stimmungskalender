@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models import Q, QuerySet
 from django.utils import timezone
+from django.utils.translation import gettext as _
 
 from web.models import Entry, Week, Moods
 from web.service.pie_graph import PERIOD_NIGHT, PERIOD_DAY
@@ -38,6 +39,13 @@ class SkService:
         user: User,
     ):
         self._user = user
+        self.mood_mapping = {
+            1: _("very_bad"),
+            2: _("bad"),
+            3: _("medium"),
+            4: _("good"),
+            5: _("very_good"),
+        }
 
     def general_stats(self) -> GeneralStats:
         qs = Entry.objects.filter(user=self._user)
