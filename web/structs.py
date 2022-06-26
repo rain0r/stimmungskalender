@@ -70,3 +70,4 @@ class GeneralStats:
 class ExportData:
     entries: SkCalendar
     moods: dict
+    weeks: typing.List[Week]

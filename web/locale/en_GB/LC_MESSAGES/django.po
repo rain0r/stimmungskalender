@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-24 22:46+0200\n"
+"POT-Creation-Date: 2022-06-26 18:57+0200\n"
 "PO-Revision-Date: 2022-06-24 22:47+0200\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -251,7 +251,7 @@ msgstr "Mood"
 msgid "search_term"
 msgstr "Search term"
 
-#: templates/web/settings.html:23
+#: templates/web/settings.html:35
 msgid "export_your_data"
 msgstr "Export your data"
 

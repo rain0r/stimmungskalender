@@ -16,17 +16,23 @@
     <hr>
     {% include 'web/settings/mood_colors.html' %}
     <hr>
-    <div class="d-flex flex-row-reverse">
+    <h3>API</h3>
+    <div class="d-flex">
         <ul class="list-group list-group-horizontal">
-            <li class="list-group-item text-muted">Version {{ version }}</li>
-            <li class="list-group-item">
-                <a href="{% url 'export' %}">{% translate 'export_your_data' %}</a>
-            </li>
             <li class="list-group-item">
                 <a href="{% url 'schema' %}">API schema</a>
             </li>
             <li class="list-group-item">
                 <a href="{% url 'swagger-ui' %}">API swagger UI</a>
+            </li>
+        </ul>
+    </div>
+    <hr>
+    <div class="d-flex flex-row-reverse">
+        <ul class="list-group list-group-horizontal">
+            <li class="list-group-item text-muted">Version {{ version }}</li>
+            <li class="list-group-item">
+                <a href="{% url 'export' %}">{% translate 'export_your_data' %}</a>
             </li>
             <li class="list-group-item">
                 <a href="https://github.com/rain0r/stimmungskalender/">stimmungskalender on GitHub</a>

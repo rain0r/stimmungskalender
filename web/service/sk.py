@@ -49,7 +49,8 @@ class SkService:
         }
 
     def export(self) -> ExportData:
-        return ExportData(entries=self.calendar(), moods=self.mood_mapping)
+        weeks = Week.objects.filter(user=self._user)
+        return ExportData(entries=self.calendar(), moods=self.mood_mapping, weeks=weeks)
 
     def general_stats(self) -> GeneralStats:
         qs = Entry.objects.filter(user=self._user)

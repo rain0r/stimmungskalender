@@ -78,5 +78,7 @@ class StandoutDataSerializer(DataclassSerializer):
 
 
 class ExportDataSerializer(DataclassSerializer):
+    weeks = serializers.ListField(child=WeekSerializer())
+
     class Meta:
         dataclass = ExportData

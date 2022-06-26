@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-24 22:46+0200\n"
-"PO-Revision-Date: 2022-06-24 22:47+0200\n"
+"POT-Creation-Date: 2022-06-26 18:57+0200\n"
+"PO-Revision-Date: 2022-06-26 18:42+0200\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -250,9 +250,9 @@ msgstr "Stimmung"
 msgid "search_term"
 msgstr "Suchbegriff"
 
-#: templates/web/settings.html:23
+#: templates/web/settings.html:35
 msgid "export_your_data"
-msgstr "Alle Einträge exportieren"
+msgstr "Alle Daten exportieren"
 
 #: templates/web/settings/default_view_mode.html:2
 msgid "default_view_mode"
