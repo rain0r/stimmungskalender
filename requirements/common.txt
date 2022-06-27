@@ -12,6 +12,6 @@ djangorestframework-simplejwt==5.2.0
 djangorestframework==3.13.1
 drf-spectacular==0.22.1
 ipython==8.4.0
-plotly==5.8.2
+plotly==5.9.0
 psycopg2==2.9.3
 python-decouple==3.6
