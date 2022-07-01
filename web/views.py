@@ -1,6 +1,7 @@
 import typing
 from datetime import datetime, date, timedelta
 
+import pkg_resources
 from django.conf import settings
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -14,7 +15,6 @@ from django.views import View
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import RedirectView, TemplateView
 
-from stimmungskalender import VERSION
 from web.models import PERIODS
 from web.query_params import QP_START_DT, QP_END_DT, QP_MOOD, QP_SEARCH_TERM, QP_PAGE
 from web.service.pie_graph import PieGraphService, PERIOD_DAY, PERIOD_NIGHT
@@ -53,7 +53,8 @@ class SettingsView(TemplateView):
         context["default_view_mode"] = ss.get_default_view_mode()
         context["user_settings"] = ss.user_settings()
         context["user_colors_settings"] = ss.user_colors_settings()
-        context["version"] = VERSION
+        sk_version = pkg_resources.get_distribution("stimmungskalender").version
+        context["version"] = sk_version
         return context
 
 
