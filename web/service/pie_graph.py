@@ -58,7 +58,6 @@ class PieGraphService(BaseGraph):
         # Use `hole` to create a donut-like pie chart
         fig.update_traces(hole=0.4, hoverinfo="label+percent+name")
         fig.update_layout(
-            title_text="Global Emissions 1990-2011",
             # Add annotations in the center of the donut pies.
             annotations=[
                 dict(text=_("day"), x=0.18, y=0.5, font_size=20, showarrow=False),
