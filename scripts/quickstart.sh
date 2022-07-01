@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 full_path=$(realpath $0)
 dir_path=$(dirname $full_path)
 
@@ -7,13 +9,13 @@ dir_path=$(dirname $full_path)
 cp .env.sample .env
 
 # Create a virtualenv that holds all dependencies
-python3 -m venv virtualenv
+python3 -m venv --clear virtualenv
 
 # We don't need postgres support for now, so let's comment it out
-sed -i 's/psycopg2/#psycopg2/' requirements/common.txt
+sed -i 's/psycopg2/#psycopg2/' pyproject.toml
 
-# Install the developer dependencies
-./virtualenv/bin/pip install -r requirements/dev.txt
+# Install the dependencies
+./virtualenv/bin/pip install .
 
 # Initialize the sqlite database
 ./virtualenv/bin/python manage.py migrate
