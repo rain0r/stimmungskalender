@@ -26,7 +26,7 @@ RUN touch /srv/www/stimmungskalender/sk_debug.log /db/db.sqlite3
 RUN ./scripts/node.sh
 
 RUN python3 -m venv --clear virtualenv
-RUN ./virtualenv/bin/pip install -r requirements/prod.txt
+RUN ./virtualenv/bin/pip install .
 RUN ./virtualenv/bin/python manage.py collectstatic --noinput
 
 WORKDIR /srv/www/stimmungskalender/web
