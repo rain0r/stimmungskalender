@@ -17,4 +17,6 @@ git clone https://github.com/rain0r/stimmungskalender.git
 sh scripts/quickstart.sh
 ```
 
+You will be asked for a username and password (you can skip the e-mail question). This will be the admin user.
+
 Visit `http://localhost:8000/` and log in with the user you just created.
