@@ -1,8 +1,9 @@
 # Quickstart
 
-This section covers a quick set up that is not suitable for production use.
+## Requirements
+The `quickstart.sh` script requires `python3-venv`, `gettext` and `npm`.
 
-On debian based systems, you need the package `python3-venv`.
+## Download the code
 
 Download the latest release from [GitHub](https://github.com/rain0r/stimmungskalender/releases) or get the latest source code via `git`:
 
@@ -10,6 +11,10 @@ Download the latest release from [GitHub](https://github.com/rain0r/stimmungskal
 git clone https://github.com/rain0r/stimmungskalender.git
 ```
 
-Then execute `scripts/quickstart.sh`.
+## Run the script
 
-Visit `http://127.0.0.1:8000/` and log in with the user you just created.
+```sh
+sh scripts/quickstart.sh
+```
+
+Visit `http://localhost:8000/` and log in with the user you just created.
