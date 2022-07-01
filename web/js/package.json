@@ -1,6 +1,6 @@
 {
   "name": "stimmungskalender",
-  "version": "1.3.0-SNAPSHOT",
+  "version": "1.3.0",
   "description": "JavaScript and CSS files for stimmungskalender",
   "main": "index.js",
   "scripts": {
