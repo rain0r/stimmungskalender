@@ -49,7 +49,7 @@ python3 -m venv virtualenv
 Install the required depdendencies:
 
 ```shell
-./virtualenv/bin/pip install -r requirements/prod.txt
+./virtualenv/bin/pip install .
 ```
 
 Populate the database:
@@ -116,7 +116,7 @@ git pull
 # ... if you downloaded a release, extract it into the existing installation
 
 # Update installed pip packages and install newly added dependencies (if any).
-./virtualenv/bin/pip install -r requirements/prod.txt -U
+./virtualenv/bin/pip install .
 
 # Apply database changes (if there are any)
 ./virtualenv/bin/python manage.py migrate

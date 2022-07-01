@@ -17,13 +17,13 @@ The database line in the `.env` file should look like this:
 DATABASE_URL=mysql://my_user:my_password@my_host/my_database
 ```
 
-In the file `requirements/common.txt`, replace the line that contains `psycopg2` with `mysqlclient`.
+In the file `pyproject.toml`, replace the line that contains `psycopg2` with `mysqlclient`.
 
 Alternatively, `pip install mysqlclient`. Refer to the [docs](https://github.com/PyMySQL/mysqlclient) for more info.
 
 ## How can I use SQLite?
 
-No additional packages are needed. You can scrap line that contains `psycopg2` from `requirements/common.txt`.
+No additional packages are needed. You can scrap line that contains `psycopg2` from `pyproject.toml`.
 
 The database line in the `.env` file should look like this:
 
