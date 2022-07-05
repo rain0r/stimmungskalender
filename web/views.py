@@ -17,7 +17,9 @@ from django.views.generic import RedirectView, TemplateView
 
 from web.models import PERIODS
 from web.query_params import QP_START_DT, QP_END_DT, QP_MOOD, QP_SEARCH_TERM, QP_PAGE
-from web.service.pie_graph import PieGraphService, PERIOD_DAY, PERIOD_NIGHT
+from web.service.bar_graph import BarGraphService
+from web.service.base_graph import PERIOD_DAY, PERIOD_NIGHT
+from web.service.pie_graph import PieGraphService
 from web.service.scatter_graph import ScatterGraphService
 from web.service.settings import SettingsService
 from web.service.sk import SkService
@@ -157,6 +159,12 @@ class GraphView(DefaultDateHandler, TemplateView):
             start_dt=start_dt,
             end_dt=end_dt,
         )
+        bar_graph = BarGraphService(
+            user=self.request.user,
+            mood_mapping=sk_service.mood_mapping,
+            start_dt=start_dt,
+            end_dt=end_dt,
+        )
         sk_service = SkService(self.request.user)
 
         context["start_dt"] = start_dt
@@ -164,6 +172,7 @@ class GraphView(DefaultDateHandler, TemplateView):
         context["is_markers"] = is_markers
         context["scatter"] = scatter_graph.build_plot()
         context["pie_chart"] = pie_graph.build_chart()
+        context["bar_chart"] = bar_graph.build_chart()
         context["graph_time_ranges"] = sk_service.graph_time_ranges()
         return context
 

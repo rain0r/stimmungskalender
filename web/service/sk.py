@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.utils.translation import gettext as _
 
 from web.models import Entry, Week, Moods
-from web.service.pie_graph import PERIOD_NIGHT, PERIOD_DAY
+from web.service.base_graph import PERIOD_DAY, PERIOD_NIGHT
 from web.structs import (
     WeekdayEntry,
     MoodTable,

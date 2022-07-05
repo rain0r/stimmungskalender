@@ -6,6 +6,10 @@ from django.utils import timezone
 
 from web.models import Entry
 
+PERIOD_DAY = "mood_day"
+PERIOD_NIGHT = "mood_night"
+PERIODS = [PERIOD_DAY, PERIOD_NIGHT]
+
 
 class BaseGraph(ABC):
     def __init__(self, start_dt: date, end_dt: date, **kwargs: dict):

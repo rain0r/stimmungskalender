@@ -17,26 +17,34 @@
     </div>
     <div class="border p-3 bg-light border">{% include 'web/graph/date_select.html' %}</div>
     <hr>
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item" role="presentation">
-            <a class="nav-link clickable active" data-target="#scatter" data-toggle="tab">{% translate 'scatterplot' %}</a>
+            <a class="nav-link clickable active"
+               data-target="#scatter"
+               data-toggle="tab">{% translate 'scatterplot' %}</a>
         </li>
         <li class="nav-item" role="presentation">
             <a class="nav-link clickable" data-target="#pie" data-toggle="tab">{% translate 'pie_charts' %}</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link clickable " data-target="#average" data-toggle="tab">{% translate 'average' %}</a>
         </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade show active"
              id="scatter"
-             role="tabpanel"
-             aria-labelledby="scatter-tab">
+             role="tabpanel">
             {% include 'web/graph/scatter.html' %}
         </div>
         <div class="tab-pane fade"
              id="pie"
-             role="tabpanel"
-             aria-labelledby="pie-tab">
+             role="tabpanel">
             {% include 'web/graph/pie_chart.html' %}
+        </div>
+        <div class="tab-pane fade "
+             id="average"
+             role="tabpanel">
+            {% include 'web/graph/average.html' %}
         </div>
     </div>
     <hr>

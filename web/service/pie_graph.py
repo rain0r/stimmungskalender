@@ -8,12 +8,8 @@ from plotly.offline import plot
 from plotly.subplots import make_subplots
 
 from web.mood_colors import DEFAULT_COLORS
-from web.service.base_graph import BaseGraph
+from web.service.base_graph import BaseGraph, PERIODS, PERIOD_DAY, PERIOD_NIGHT
 from web.structs import PieChartResponse
-
-PERIOD_DAY = "mood_day"
-PERIOD_NIGHT = "mood_night"
-PERIODS = [PERIOD_DAY, PERIOD_NIGHT]
 
 
 class PieGraphService(BaseGraph):
