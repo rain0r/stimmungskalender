@@ -25,7 +25,7 @@ if [ ! -f "${dir_path}/../web/locale/de_DE/LC_MESSAGES/django.mo" ]; then
     ./virtualenv/bin/django-admin compilemessages
 fi
 
-# Create a user account
+# Create an user account
 ./virtualenv/bin/python manage.py createsuperuser
 
 # Generate javascript and css files
