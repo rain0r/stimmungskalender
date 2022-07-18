@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-05 18:38+0200\n"
+"POT-Creation-Date: 2022-07-07 18:30+0200\n"
 "PO-Revision-Date: 2022-07-05 18:39+0200\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,17 +88,17 @@ msgstr "Logout"
 msgid "date_filter"
 msgstr "Date filter"
 
-#: templates/web/graph.html:22
-msgid "average"
-msgstr "Average"
-
-#: templates/web/graph.html:25
+#: templates/web/graph.html:24
 msgid "scatterplot"
 msgstr "Scatterplot"
 
-#: templates/web/graph.html:28
+#: templates/web/graph.html:27
 msgid "pie_charts"
 msgstr "Pie Charts"
+
+#: templates/web/graph.html:30
+msgid "average"
+msgstr "Average"
 
 #: templates/web/graph/date_select.html:7 templates/web/search.html:15
 msgid "start_date"
@@ -133,12 +133,12 @@ msgstr "Last year"
 msgid "time_range"
 msgstr "Time range"
 
-#: templates/web/graph/scatter.html:14
+#: templates/web/graph/scatter.html:13
 #: templates/web/settings/default_view_mode.html:15
 msgid "markers"
 msgstr "Markers"
 
-#: templates/web/graph/scatter.html:20
+#: templates/web/graph/scatter.html:18
 #: templates/web/settings/default_view_mode.html:24
 msgid "lines"
 msgstr "Lines"
