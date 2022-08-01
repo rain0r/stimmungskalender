@@ -361,7 +361,7 @@ tqdm = ">=4.62.2,<5.0.0"
 
 [[package]]
 name = "drf-spectacular"
-version = "0.22.1"
+version = "0.23.1"
 description = "Sane and flexible OpenAPI 3 schema generation for Django REST framework"
 category = "main"
 optional = false
@@ -1016,7 +1016,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "f3ae330b4121d8ff9db82a6450dfaea3d549864a9a690f0420ce78c572d669ac"
+content-hash = "4fdfacf8f533256791930298f177f5f394d5990e492409642c3fb8756ad510a3"
 
 [metadata.files]
 appnope = [
@@ -1207,8 +1207,8 @@ djlint = [
     {file = "djlint-1.9.2.tar.gz", hash = "sha256:201c8a4d5bfac83d8e4e8099acff063a8802b8f8ddb65e30cda976b2910ed092"},
 ]
 drf-spectacular = [
-    {file = "drf-spectacular-0.22.1.tar.gz", hash = "sha256:866e16ddaae167a1234c76cd8c351161373551db994ce9665b347b32d5daf38b"},
-    {file = "drf_spectacular-0.22.1-py3-none-any.whl", hash = "sha256:17ac5e31e5d6150dd5fa10843b429202f4f38069202acc44394cc5a771de63d9"},
+    {file = "drf-spectacular-0.23.1.tar.gz", hash = "sha256:d1724da1fd4ae99d66333b1c8530f3c51788d87b380f5951830bf8405f234120"},
+    {file = "drf_spectacular-0.23.1-py3-none-any.whl", hash = "sha256:2e42ae16717a5c3b2ae8632ac2b92f7eeb7b4fb9a941bc7879a92343e50ddeb6"},
 ]
 editorconfig = [
     {file = "EditorConfig-0.12.3-py3-none-any.whl", hash = "sha256:6b0851425aa875b08b16789ee0eeadbd4ab59666e9ebe728e526314c4a2e52c1"},
