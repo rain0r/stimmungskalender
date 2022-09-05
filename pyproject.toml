@@ -25,7 +25,7 @@ psycopg2 = "^2.9.3"
 python-decouple = "^3.6"
 
 [tool.poetry.dev-dependencies]
-black = "^22.3.0"
+black = "^22.8.0"
 djlint = "^1.12.1"
 ipdb = "^0.13.9"
 mypy = "^0.971"
