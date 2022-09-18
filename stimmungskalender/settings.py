@@ -17,7 +17,6 @@ import django_cache_url
 from decouple import Csv, config
 from dj_database_url import parse as db_url
 from django.utils.translation import gettext_lazy as _
-
 from stimmungskalender import listed_tuples
 
 MAX_LOG_FILE_SIZE = 20971520  # 20 MB
@@ -49,7 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "bootstrap4",
+    "bootstrap5",
     "rosetta",
     "django_registration",
     "rest_framework",
@@ -244,7 +243,7 @@ SIMPLE_JWT = {
 
 DEFAULT_VIEW_MODE = "lines"
 
-PER_PAGE = 25
+PER_PAGE = 10
 
 SK_DATE_FORMAT = "%Y-%m-%d"  # To identify a week
 

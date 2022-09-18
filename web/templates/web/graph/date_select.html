@@ -2,14 +2,14 @@
 {% load i18n %}
 <!-- Date range filter -->
 <form action="{% url 'graph' %}" method="get" class="mb-3">
-    <div class="form-row align-items-end input-daterange">
+    <div class="row align-items-end input-daterange">
         <div class="form-group col-12 col-md-3">
             <label for="start_dt" class="col-sm-2 col-form-label">{% translate 'start_date' %}</label>
             <input type="text"
                    data-provide="datepicker"
-                   data-date-format="yyyy-mm-dd"
+
                    placeholder="YYYY-MM-DD"
-                   data-date-week-start="1"
+
                    name="start_dt"
                    class="form-control"
                    id="start_dt"
@@ -19,9 +19,9 @@
             <label for="end_dt" class="col-sm-2 col-form-label">{% translate 'end_date' %}</label>
             <input type="text"
                    data-provide="datepicker"
-                   data-date-format="yyyy-mm-dd"
+
                    placeholder="YYYY-MM-DD"
-                   data-date-week-start="1"
+
                    name="end_dt"
                    class="form-control"
                    id="end_dt"

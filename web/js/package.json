@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
+    "watch": "webpack --watch --mode=development",
     "format": "prettier --write src/*js && package-lock-sanitizer"
   },
   "keywords": [],
@@ -20,9 +21,11 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
-    "bootstrap": "4.6.1",
-    "bootstrap-datepicker": "1.9.0",
-    "jquery": "^3.6.0",
-    "js-year-calendar": "^2.0.0"
+    "@popperjs/core": "^2.11.6",
+    "bootstrap": "5.2.1",
+    "js-year-calendar": "^2.0.0",
+    "sass": "^1.54.9",
+    "sass-loader": "^13.0.2",
+    "vanillajs-datepicker": "^1.2.0"
   }
 }

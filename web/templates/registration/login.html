@@ -1,13 +1,13 @@
 {% extends 'registration/base.html' %}
 {% block content %}
     {% load i18n %}
-    {% load bootstrap4 %}
+    {% load bootstrap5 %}
     <form class="form-signin" method="post" action="{% url 'login' %}">
         <input type="hidden"
                name="next"
                value="{% if next %}{{ next }}{% else %}/{% endif %}"/>
         {% csrf_token %}
-        <a href="{% url 'index' %}" class="h1 text-monospace text-body">stimmungskalender</a>
+        <a href="{% url 'index' %}" class="h1 font-monospace text-body">stimmungskalender</a>
         <hr class="mb-5">
         {% bootstrap_form form %}
         <button class="btn btn-lg btn-primary btn-block" type="submit">{% translate 'Log in' %}</button>
