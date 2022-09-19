@@ -35,15 +35,15 @@
                 <a class="navbar-brand" href="{% url 'index' %}">🗓️ Stimmungskalender</a>
                 <button class="navbar-toggler"
                         type="button"
-                        data-toggle="collapse"
-                        data-target="#navbarCollapse"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarCollapse"
                         aria-controls="navbarCollapse"
                         aria-expanded="false"
                         aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
                             <a class="nav-link" href="{% url 'index' %}">{% translate 'home' %}</a>
                         </li>

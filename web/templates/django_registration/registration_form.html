@@ -1,9 +1,9 @@
 {% extends 'registration/base.html' %}
 {% block content %}
-    {% load bootstrap4 %}
+    {% load bootstrap5 %}
     <form class="form-signin" method="post" action="">
         {% csrf_token %}
-        <a href="{% url 'index' %}" class="h1 text-monospace text-body">stimmungskalender</a>
+        <a href="{% url 'index' %}" class="h1 font-monospace text-body">stimmungskalender</a>
         <hr class="mb-5">
         {% bootstrap_form_errors form %}
         <h1 class="h3 mb-3 font-weight-normal">Registration</h1>

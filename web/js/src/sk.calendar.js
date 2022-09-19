@@ -1,6 +1,6 @@
 import Calendar from "js-year-calendar";
+import { Popover } from "bootstrap";
 import "js-year-calendar/dist/js-year-calendar.css";
-import "bootstrap/js/dist/popover";
 
 const moodMapping = JSON.parse(
   document.getElementById("mood_mapping").textContent
@@ -12,6 +12,11 @@ const moodColors = JSON.parse(
 const currentLanguage = JSON.parse(
   document.getElementById("current_language").textContent
 );
+
+const ready = (callback) => {
+  if (document.readyState != "loading") callback();
+  else document.addEventListener("DOMContentLoaded", callback);
+};
 
 function buildCalendarEntries(calendarData) {
   calendarData.entries.map((item) => {
@@ -38,22 +43,24 @@ function formatDate(dateStr) {
 }
 
 function loadTranslation() {
-  const jqxhr = $.get(`${siteUrl}jsoni18n/?lang=${currentLanguage}`).fail(
-    (err) => {
+  const jqxhr = fetch(`${siteUrl}jsoni18n/?lang=${currentLanguage}`)
+    .then((response) => response.json())
+    .catch((err) => {
       console.error("Error", err);
-      $("#error-card").removeClass("invisible");
-      $("#error-msg").text(err.statusText);
-    }
-  );
+      document.getElementById("#error-card").classList.remove("invisible");
+      document.getElementById("#error-msg").textContent = err.statusText;
+    });
   return jqxhr;
 }
 
 function loadEntries() {
-  const jqxhr = $.get(`${siteUrl}api/calendar/`).fail((err) => {
-    console.error("Error", err);
-    $("#error-card").removeClass("invisible");
-    $("#error-msg").text(err.statusText);
-  });
+  const jqxhr = fetch(`${siteUrl}api/calendar/`)
+    .then((response) => response.json())
+    .catch((err) => {
+      console.error("Error", err);
+      document.getElementById("#error-card").classList.remove("invisible");
+      document.getElementById("#error-msg").textContent = err.statusText;
+    });
   return jqxhr;
 }
 
@@ -74,10 +81,11 @@ function buildCalendar(translations, calendarData) {
           nightColor = moodColors[eventList[0].mood_night];
         }
       }
-      $(ele).css("border-bottom", "3px solid " + dayColor);
-      $(ele).css("border-left", "3px solid " + dayColor);
-      $(ele).css("border-top", "3px solid " + nightColor);
-      $(ele).css("border-right", "3px solid " + nightColor);
+      ele.style.cssText = `border-bottom: 3px solid ${dayColor}; 
+      border-left: 3px solid ${dayColor};
+      border-top: 3px solid ${nightColor};
+      border-right: 3px solid ${nightColor};
+      `;
     },
     dataSource: calendarData.entries,
     mouseOnDay: function (e) {
@@ -104,25 +112,30 @@ function buildCalendar(translations, calendarData) {
           `;
         }
 
-        $(e.element).popover({
+        const popover = new Popover(e.element, {
           trigger: "manual",
           container: "body",
           html: true,
           content: content,
         });
 
-        $(e.element).popover("show");
+        popover.show();
       }
     },
     mouseOutDay: function (e) {
       if (e.events.length > 0) {
-        $(e.element).popover("hide");
+        Popover.getInstance(e.element).hide();
       }
     },
+    clickDay: function(e) {
+      const skDateStr = e.date.getFullYear() + '-' + ('0' + (e.date.getMonth()+1)).slice(-2) + '-' + ('0' + e.date.getDate()).slice(-2);
+      const url = `${siteUrl}?start_dt=${skDateStr}`      
+      window.location.href=url;
+    }
   });
 }
 
-$(() => {
+ready(() => {
   Promise.all([loadTranslation(), loadEntries()]).then((values) => {
     const translations = values[0];
     const calendarData = buildCalendarEntries(values[1]);

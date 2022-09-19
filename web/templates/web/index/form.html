@@ -9,8 +9,8 @@
             <input type="hidden" name="period" value="{{ form.name }}">
             <div class="d-flex align-items-center justify-content-center my-3 sticky-top bg-light">
                 <span class="h4 clickable"
-                      data-toggle="collapse"
-                      data-target="#collapse-{{ form.name }}"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapse-{{ form.name }}"
                       title="{% translate 'click_to_toggle' %}">
                     {% translate form.name_header %}
                     {% if form.name == 'night' %}
@@ -32,8 +32,8 @@
                         <div class="col-12 col-md-auto d-flex flex-column my-3 my-md-0"
                              id="{{ form.name }}-{{ weekday_entry.day|date:'D' }}">
                             <span title="{{ weekday_entry.day|date:'l' }}"
-                                  class="font-weight-bold border p-1 m-1 d-flex justify-content-center">{{ weekday_entry.day|date:"D" }}</span>
-                            <span class="border text-muted text-monospace p-1 m-1 d-flex justify-content-center">{{ weekday_entry.day|date:"d. m." }}</span>
+                                  class="fw-bold border p-1 m-1 d-flex justify-content-center">{{ weekday_entry.day|date:"D" }}</span>
+                            <span class="border text-muted font-monospace p-1 m-1 d-flex justify-content-center">{{ weekday_entry.day|date:"d. m." }}</span>
                             {% for number in moods reversed %}
                                 {% include 'web/index/mood_button.html' with mood_value=weekday_entry|get_obj_attr:form.attr %}
                             {% endfor %}

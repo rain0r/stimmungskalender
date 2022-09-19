@@ -9,7 +9,7 @@
     {% csrf_token %}
     <input name="next" type="hidden" value="{{ redirect_to }}">
     <input name="form_name" type="hidden" value="user_mood_color_settings">
-    <div class="form-row align-items-center">
+    <div class="row align-items-center">
         <div class="col-12 col-md-6">
             {% for row in user_colors_settings %}
                 <div class="row mb-3">
@@ -26,11 +26,11 @@
             {% endfor %}
         </div>
         <div class="col-12 col-md-6">
-            <button type="submit" class="btn btn-primary ml-5">{% translate 'save' %}</button>
+            <button type="submit" class="btn btn-primary ms-5">{% translate 'save' %}</button>
             <button type="submit"
                     name="reset"
                     value="true"
-                    class="btn btn-secondary ml-5">{% translate 'reset' %}</button>
+                    class="btn btn-secondary ms-5">{% translate 'reset' %}</button>
         </div>
     </div>
 </form>

@@ -3,7 +3,7 @@
 <form class="mt-3" action="{% url 'save-settings' %}" method="post">
     {% csrf_token %}
     <input name="form_name" type="hidden" value="save_view_mode">
-    <div class="form-row align-items-start">
+    <div class="row align-items-start">
         <div class="col-12 col-md-6">
             <div class="form-check">
                 <input class="form-check-input"
@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="col-12 col-md-6">
-            <button type="submit" class="btn btn-primary ml-5">{% translate 'save' %}</button>
+            <button type="submit" class="btn btn-primary ms-5">{% translate 'save' %}</button>
         </div>
     </div>
 </form>

@@ -19,12 +19,27 @@ module.exports = {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
       },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              implementation: require("sass"),
+              sassOptions: {
+                includePaths: [path.resolve(__dirname, './node_modules')],
+              }
+            },
+          },
+        ],
+      },
     ],
   },
+  devtool: 'inline-source-map',
   plugins: [
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
       Popper: ["popper.js", "default"],
     }),
     new CopyPlugin({
