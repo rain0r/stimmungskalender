@@ -39,9 +39,6 @@ module.exports = {
   },
   devtool: false,
   plugins: [
-    new webpack.ProvidePlugin({
-      Popper: ["popper.js", "default"],
-    }),
     new CopyPlugin({
       patterns: [
         {
