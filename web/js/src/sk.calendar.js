@@ -127,11 +127,16 @@ function buildCalendar(translations, calendarData) {
         Popover.getInstance(e.element).hide();
       }
     },
-    clickDay: function(e) {
-      const skDateStr = e.date.getFullYear() + '-' + ('0' + (e.date.getMonth()+1)).slice(-2) + '-' + ('0' + e.date.getDate()).slice(-2);
-      const url = `${siteUrl}?start_dt=${skDateStr}`      
-      window.location.href=url;
-    }
+    clickDay: function (e) {
+      const skDateStr =
+        e.date.getFullYear() +
+        "-" +
+        ("0" + (e.date.getMonth() + 1)).slice(-2) +
+        "-" +
+        ("0" + e.date.getDate()).slice(-2);
+      const url = `${siteUrl}?start_dt=${skDateStr}`;
+      window.location.href = url;
+    },
   });
 }
 
