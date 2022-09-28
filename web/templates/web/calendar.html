@@ -19,6 +19,5 @@
     {{ mood_mapping|json_script:"mood_mapping" }}
     {{ mood_colors|json_script:"mood_colors" }}
     {{ language_code|json_script:"current_language" }}
-    {% load static %}
-    <script src="{% static '/js/skCalendar.js' %}"></script>
+    <script>new SkCalendar();</script>
 {% endblock %}

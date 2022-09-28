@@ -1,5 +1,5 @@
 #!/bin/sh
 
-cd web/js/
+cd node
 npm i
 npm run build
