@@ -28,7 +28,7 @@ django-bootstrap-v5 = "^1.0.11"
 black = "^22.8.0"
 djlint = "^1.18.0"
 ipdb = "^0.13.9"
-mypy = "^0.971"
+mypy = "^0.981"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
