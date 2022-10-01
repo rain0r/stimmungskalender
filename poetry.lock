@@ -276,14 +276,14 @@ requests = ">=2.1.0"
 
 [[package]]
 name = "djangorestframework"
-version = "3.13.1"
+version = "3.14.0"
 description = "Web APIs for Django, made easy."
 category = "main"
 optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
-django = ">=2.2"
+django = ">=3.0"
 pytz = "*"
 
 [[package]]
@@ -925,7 +925,7 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=6)", "pytest-black (>=
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "08a931a9e6d38641e9bc06641a388094e2e92cc6114ca80c322236275ca7e32c"
+content-hash = "028e1a5b0150822609533fa54f1b2f4746880b5430614e66736c58960cfa2561"
 
 [metadata.files]
 appnope = [
@@ -1054,8 +1054,8 @@ django-rosetta = [
     {file = "django_rosetta-0.9.8-py3-none-any.whl", hash = "sha256:f8449da6963e77b6e4082bde70f5f3f270eba633e3bdb29d663741f6cd01c3fd"},
 ]
 djangorestframework = [
-    {file = "djangorestframework-3.13.1-py3-none-any.whl", hash = "sha256:24c4bf58ed7e85d1fe4ba250ab2da926d263cd57d64b03e8dcef0ac683f8b1aa"},
-    {file = "djangorestframework-3.13.1.tar.gz", hash = "sha256:0c33407ce23acc68eca2a6e46424b008c9c02eceb8cf18581921d0092bc1f2ee"},
+    {file = "djangorestframework-3.14.0-py3-none-any.whl", hash = "sha256:eb63f58c9f218e1a7d064d17a70751f528ed4e1d35547fdade9aaf4cd103fd08"},
+    {file = "djangorestframework-3.14.0.tar.gz", hash = "sha256:579a333e6256b09489cbe0a067e66abe55c6595d8926be6b99423786334350c8"},
 ]
 djangorestframework-dataclasses = [
     {file = "djangorestframework-dataclasses-1.1.1.tar.gz", hash = "sha256:11bed97049e433cdf00ebf963dac7b7f087aa5bedf92e04b48fe6b01467b0cf2"},
