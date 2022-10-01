@@ -320,7 +320,7 @@ test = ["cryptography", "pytest", "pytest-cov", "pytest-django", "pytest-xdist",
 
 [[package]]
 name = "djlint"
-version = "1.12.1"
+version = "1.18.0"
 description = "HTML Template Linter and Formatter"
 category = "dev"
 optional = false
@@ -334,7 +334,7 @@ html-tag-names = ">=0.1.2,<0.2.0"
 html-void-elements = ">=0.1.0,<0.2.0"
 importlib-metadata = ">=4.11.0,<5.0.0"
 jsbeautifier = ">=1.14.4,<2.0.0"
-pathspec = ">=0.9.0,<0.10.0"
+pathspec = ">=0.10.0,<0.11.0"
 PyYAML = ">=6.0,<7.0"
 regex = ">=2022.1.18,<2023.0.0"
 tomli = {version = ">=2.0.1,<3.0.0", markers = "python_version < \"3.11\""}
@@ -583,11 +583,11 @@ testing = ["docopt", "pytest (<6.0.0)"]
 
 [[package]]
 name = "pathspec"
-version = "0.9.0"
+version = "0.10.1"
 description = "Utility library for gitignore style pattern matching of file paths."
 category = "dev"
 optional = false
-python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
+python-versions = ">=3.7"
 
 [[package]]
 name = "pexpect"
@@ -925,7 +925,7 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=6)", "pytest-black (>=
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "bf7130d7f19f40905a738baa126d3db54cdb67f56926315ab8d7310f87f4d941"
+content-hash = "45e6b79bef23accd34609e3e57c8fffe4a0a0dd3930f578bf32e8d8b3b8e98a3"
 
 [metadata.files]
 appnope = [
@@ -1066,8 +1066,8 @@ djangorestframework-simplejwt = [
     {file = "djangorestframework_simplejwt-5.2.0.tar.gz", hash = "sha256:a60b09afb27d91ad1d7ac904cc632bd52cecead8f389f0fa1532ceb0fb757a74"},
 ]
 djlint = [
-    {file = "djlint-1.12.1-py3-none-any.whl", hash = "sha256:b2e3e93da4498907297bdebd0ab5631a1158a8268adac1fa5188d3d5053aae30"},
-    {file = "djlint-1.12.1.tar.gz", hash = "sha256:2837a38ed80abf2cf9932096d44b9f40aa42aa68db98892a1dc8747a4cd289db"},
+    {file = "djlint-1.18.0-py3-none-any.whl", hash = "sha256:ec414f46b5575985cb782d20b2c805247dc9d8b8b876d2745e570591587a94e8"},
+    {file = "djlint-1.18.0.tar.gz", hash = "sha256:f6b07793d8687e31c6a1d3c34d88cc3a352d66a0f0444286618cf5edfdb2207d"},
 ]
 drf-spectacular = [
     {file = "drf-spectacular-0.23.1.tar.gz", hash = "sha256:d1724da1fd4ae99d66333b1c8530f3c51788d87b380f5951830bf8405f234120"},
@@ -1161,8 +1161,8 @@ parso = [
     {file = "parso-0.8.3.tar.gz", hash = "sha256:8c07be290bb59f03588915921e29e8a50002acaf2cdc5fa0e0114f91709fafa0"},
 ]
 pathspec = [
-    {file = "pathspec-0.9.0-py2.py3-none-any.whl", hash = "sha256:7d15c4ddb0b5c802d161efc417ec1a2558ea2653c2e8ad9c19098201dc1c993a"},
-    {file = "pathspec-0.9.0.tar.gz", hash = "sha256:e564499435a2673d586f6b2130bb5b95f04a3ba06f81b8f895b651a3c76aabb1"},
+    {file = "pathspec-0.10.1-py3-none-any.whl", hash = "sha256:46846318467efc4556ccfd27816e004270a9eeeeb4d062ce5e6fc7a87c573f93"},
+    {file = "pathspec-0.10.1.tar.gz", hash = "sha256:7ace6161b621d31e7902eb6b5ae148d12cfd23f4a249b9ffb6b9fee12084323d"},
 ]
 pexpect = [
     {file = "pexpect-4.8.0-py2.py3-none-any.whl", hash = "sha256:0b48a55dcb3c05f3329815901ea4fc1537514d6ba867a152b581d69ae3710937"},
