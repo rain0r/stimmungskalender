@@ -70,7 +70,7 @@ The next step is only required if you got the source code from GitHub. The relea
 # To manage all needed resources, stimmungskalender uses node and webpack.
 # This is needed, to avoid pushing production JavaScript files to git 
 
-cd web/js
+cd node
 npm i && npm run build
 ```
 

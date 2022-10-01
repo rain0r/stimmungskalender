@@ -25,6 +25,10 @@
               sizes="16x16"
               href="{% static '/img/favicon-16x16.png' %}">
         <link rel="manifest" href="{% static '/site.webmanifest' %}">
+<<<<<<< HEAD
+=======
+<!--        <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">-->
+>>>>>>> 7682766 (Update)
         <link rel="stylesheet" href="{% static 'main.css' %}">
         <style>{% include 'web/css/moods.css' %}</style>
     </head>

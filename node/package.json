@@ -6,25 +6,31 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch --mode=development",
-    "format": "prettier --write src/*js && package-lock-sanitizer"
+    "format": "prettier --write . && package-lock-sanitizer"
   },
   "keywords": [],
   "author": "Rainer Hihn <hihn.rainer@gmail.com> (https://hihn.org/)",
   "license": "AGPL-3.0",
   "devDependencies": {
+    "autoprefixer": "^10.4.12",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
+    "mini-css-extract-plugin": "^2.6.1",
     "package-lock-sanitizer": "^1.0.1",
-    "prettier": "^2.6.2",
-    "style-loader": "^3.3.1",
-    "webpack": "^5.72.1",
-    "webpack-cli": "^4.9.2"
-  },
-  "dependencies": {    
-    "bootstrap": "5.2.1",
-    "js-year-calendar": "^2.0.0",
-    "sass": "^1.54.9",
+    "postcss-loader": "^7.0.1",
+    "prettier": "2.7.1",
+    "sass": "^1.55.0",
     "sass-loader": "^13.0.2",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.11.1"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.6",
+    "bootstrap": "^5.2.1",
+    "js-year-calendar": "^2.0.0",
     "vanillajs-datepicker": "^1.2.0"
   }
 }

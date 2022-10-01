@@ -97,3 +97,7 @@
         <div class="pt-2">{% bootstrap_pagination results extra=""|add:parameters %}</div>
     {% endif %}
 {% endblock %}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8a9e2aa (Update)
