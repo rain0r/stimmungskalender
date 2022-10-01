@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
+    "dev-build": "webpack --mode=development",
     "watch": "webpack --watch --mode=development",
     "format": "prettier --write . && package-lock-sanitizer"
   },

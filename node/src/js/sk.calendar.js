@@ -1,7 +1,8 @@
 import Calendar from "js-year-calendar";
 import { Popover } from "bootstrap";
+import "js-year-calendar/dist/js-year-calendar.css";
 
-class SkCalendar {
+export class SkCalendar {
   constructor() {
     this.moodMapping = JSON.parse(
       document.getElementById("mood_mapping").textContent
@@ -13,10 +14,10 @@ class SkCalendar {
     this.currentLanguage = JSON.parse(
       document.getElementById("current_language").textContent
     );
-    Promise.all([loadTranslation(), loadEntries()]).then((values) => {
+    Promise.all([this.loadTranslation(), this.loadEntries()]).then((values) => {
       const translations = values[0];
-      const calendarData = buildCalendarEntries(values[1]);
-      buildCalendar(translations, calendarData);
+      const calendarData = this.buildCalendarEntries(values[1]);
+      this.buildCalendar(translations, calendarData);
     });
   }
 
@@ -45,7 +46,7 @@ class SkCalendar {
   }
 
   loadTranslation() {
-    const jqxhr = fetch(`${siteUrl}jsoni18n/?lang=${currentLanguage}`)
+    const jqxhr = fetch(`${this.siteUrl}jsoni18n/?lang=${this.currentLanguage}`)
       .then((response) => response.json())
       .catch((err) => {
         console.error("Error", err);
@@ -56,7 +57,7 @@ class SkCalendar {
   }
 
   loadEntries() {
-    const jqxhr = fetch(`${siteUrl}api/calendar/`)
+    const jqxhr = fetch(`${this.siteUrl}api/calendar/`)
       .then((response) => response.json())
       .catch((err) => {
         console.error("Error", err);
@@ -71,16 +72,16 @@ class SkCalendar {
       minDate: new Date(calendarData.first_day),
       maxDate: new Date(calendarData.last_day),
       style: "custom",
-      customDataSourceRenderer: function (ele, renderDate, eventList) {
+      customDataSourceRenderer: (ele, renderDate, eventList) => {
         let dayColor = "transparent";
         let nightColor = "transparent";
         ele = ele.parentElement; // We are passed the child of the element to be styled
         if (eventList[0].startDate.getTime() == renderDate.getTime()) {
           if (eventList[0].mood_day) {
-            dayColor = moodColors[eventList[0].mood_day];
+            dayColor = this.moodColors[eventList[0].mood_day];
           }
           if (eventList[0].mood_night) {
-            nightColor = moodColors[eventList[0].mood_night];
+            nightColor = this.moodColors[eventList[0].mood_night];
           }
         }
         ele.style.cssText = `border-bottom: 3px solid ${dayColor}; 
@@ -90,24 +91,24 @@ class SkCalendar {
       `;
       },
       dataSource: calendarData.entries,
-      mouseOnDay: function (e) {
+      mouseOnDay: (e) => {
         if (e.events.length > 0) {
           let content = "";
 
           for (let i in e.events) {
             content += `
           <div class="event-tooltip-content">
-            <p>${formatDate(e.events[i].day)}</p>
+            <p>${this.formatDate(e.events[i].day)}</p>
             <ul>
               <li>
                 ${translations.catalog["mood"]} ${
               translations.catalog["night"]
-            }: ${moodMapping[e.events[i].mood_night]}
+            }: ${this.moodMapping[e.events[i].mood_night]}
               </li>
               <li>
                 ${translations.catalog["mood"]} ${
               translations.catalog["day"]
-            }: ${moodMapping[e.events[i].mood_day]}
+            }: ${this.moodMapping[e.events[i].mood_day]}
               </li>
             </ul>
           </div>
@@ -136,10 +137,20 @@ class SkCalendar {
           ("0" + (e.date.getMonth() + 1)).slice(-2) +
           "-" +
           ("0" + e.date.getDate()).slice(-2);
-        const url = `${siteUrl}?start_dt=${skDateStr}`;
+        const url = `${this.siteUrl}?start_dt=${skDateStr}`;
         window.location.href = url;
       },
     });
   }
 }
 
+const ready = (callback) => {
+  if (document.readyState != "loading") callback();
+  else document.addEventListener("DOMContentLoaded", callback);
+};
+ready(() => {
+  const element = document.getElementById("calendar");
+  if (typeof element != "undefined" && element != null) {
+    new SkCalendar();
+  }
+});
