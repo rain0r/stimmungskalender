@@ -17,6 +17,7 @@ import django_cache_url
 from decouple import Csv, config
 from dj_database_url import parse as db_url
 from django.utils.translation import gettext_lazy as _
+
 from stimmungskalender import listed_tuples
 
 MAX_LOG_FILE_SIZE = 20971520  # 20 MB
@@ -37,6 +38,18 @@ CSRF_TRUSTED_ORIGINS = config(
 )
 
 ADMINS = config("ADMINS", default=[], cast=Csv(post_process=listed_tuples))
+
+EMAIL_HOST = config("EMAIL_HOST")
+
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+
+EMAIL_PORT = config("EMAIL_PORT", default=587, cast=int)
+
+EMAIL_USE_SSL = config("EMAIL_USE_SSL", default=False, cast=bool)
+
+EMAIL_USE_TLS = config("EMAIL_USE_TLS", default=False, cast=bool)
 
 # Application definition
 
@@ -196,6 +209,11 @@ LOGGING = {
         "django": {
             "handlers": config("SK_LOG_HANDLERS", default="console", cast=Csv()),
             "level": config("DJANGO_LOG_LEVEL", default="ERROR"),
+        },
+        "django.request": {
+            "handlers": ["mail_admins"],
+            "level": "ERROR",
+            "propagate": False,
         },
     },
 }
