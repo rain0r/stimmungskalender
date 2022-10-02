@@ -39,11 +39,11 @@ CSRF_TRUSTED_ORIGINS = config(
 
 ADMINS = config("ADMINS", default=[], cast=Csv(post_process=listed_tuples))
 
-EMAIL_HOST = config("EMAIL_HOST")
+EMAIL_HOST = config("EMAIL_HOST", default=None)
 
-EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default=None)
 
-EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_USER = config("EMAIL_HOST_USER", default=None)
 
 EMAIL_PORT = config("EMAIL_PORT", default=587, cast=int)
 
