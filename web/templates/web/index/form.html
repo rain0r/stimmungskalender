@@ -7,10 +7,11 @@
               action="{% url 'save-mood' %}#{{ form.name }}">
             {% csrf_token %}
             <input type="hidden" name="period" value="{{ form.name }}">
-            <div class="d-flex align-items-center justify-content-center my-3 sticky-top bg-light">
+            <div class="d-flex align-items-center justify-content-center my-3 sticky-top clickable"
+                 data-bs-toggle="collapse"
+                 data-bs-target="#collapse-{{ form.name }}">
                 <span class="h4 clickable"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapse-{{ form.name }}"
+                      data-bs-toggle="tooltip"
                       title="{% translate 'click_to_toggle' %}">
                     {% translate form.name_header %}
                     {% if form.name == 'night' %}
