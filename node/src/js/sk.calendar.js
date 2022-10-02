@@ -130,7 +130,7 @@ export class SkCalendar {
           Popover.getInstance(e.element).hide();
         }
       },
-      clickDay: function (e) {
+      clickDay: (e) => {
         const skDateStr =
           e.date.getFullYear() +
           "-" +
