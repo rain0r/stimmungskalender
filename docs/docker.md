@@ -8,6 +8,12 @@ This image solely contains the `stimmungskalender` app, without `nginx` or `post
 
 Just execute `scripts/docker-quickstart.sh` to get it all up and running
 
+```sh
+wget https://raw.githubusercontent.com/rain0r/stimmungskalender/master/scripts/docker-quickstart.sh
+cat docker-quickstart.sh # Don't just execute scripts from the internet without checking first
+sh docker-quickstart.sh
+```
+
 ### Manually
 
 To get the latest version of `stimmungskalender` from Docker Hub:
@@ -19,7 +25,7 @@ docker pull rain0r/stimmungskalender
 Use one of the environment files, depending on what database engine you would like to use. Choose one of the pre-configured env files: [postgres](https://raw.githubusercontent.com/rain0r/stimmungskalender/master/docker/app/django-env-pgsql) or [sqlite](https://raw.githubusercontent.com/rain0r/stimmungskalender/master/docker/app/django-env-sqlite)
 
 ```sh
-wget https://raw.githubusercontent.com/rain0r/stimmungskalender/docker/docker/app/django-env-sqlite -O sqlite-env
+wget https://raw.githubusercontent.com/rain0r/stimmungskalender/master/docker/app/django-env-sqlite -O sqlite-env
 ```
 
 In the following examples, the `sqlite-env` will be used as the name of the environment file.
