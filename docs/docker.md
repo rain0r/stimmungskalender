@@ -14,6 +14,8 @@ cat docker-quickstart.sh # Don't just execute scripts from the internet without 
 sh docker-quickstart.sh
 ```
 
+Visit http://localhost:8080/ and log in with username `admin` and password `admin`.
+
 ### Manually
 
 To get the latest version of `stimmungskalender` from Docker Hub:
