@@ -16,7 +16,7 @@ To get the latest version of `stimmungskalender` from Docker Hub:
 docker pull rain0r/stimmungskalender
 ```
 
-Use one of the environment files, depending on what database engine you would like to use. Choose one of the pre-configured env files: [postgres](https://raw.githubusercontent.com/rain0r/stimmungskalender/master/docker/app/django-env-pgsql) or [sqlite](https://raw.githubusercontent.com/rain0r/stimmungskalender/docker/docker/app/django-env-sqlite)
+Use one of the environment files, depending on what database engine you would like to use. Choose one of the pre-configured env files: [postgres](https://raw.githubusercontent.com/rain0r/stimmungskalender/master/docker/app/django-env-pgsql) or [sqlite](https://raw.githubusercontent.com/rain0r/stimmungskalender/master/docker/app/django-env-sqlite)
 
 ```sh
 wget https://raw.githubusercontent.com/rain0r/stimmungskalender/docker/docker/app/django-env-sqlite -O sqlite-env
