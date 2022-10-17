@@ -1,4 +1,4 @@
-git[tool.poetry]
+[tool.poetry]
 name = "stimmungskalender"
 version = "1.4.0"
 description = "Self-hosted mood calendar"
