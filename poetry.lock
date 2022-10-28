@@ -300,7 +300,7 @@ djangorestframework = ">=3.9"
 
 [[package]]
 name = "djangorestframework-simplejwt"
-version = "5.2.1"
+version = "5.2.2"
 description = "A minimal JSON Web Token authentication plugin for Django REST Framework"
 category = "main"
 optional = false
@@ -941,7 +941,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "484762015ba1b44b510de389f4ba1a5d00ef90ad78ad32fa1078672ad4f378cb"
+content-hash = "3c018aa3c1c3e0ae3c49bb70d09ee484dfbf1e7bd5e6dba278eb1a15568f0bfa"
 
 [metadata.files]
 appnope = [
@@ -1076,8 +1076,8 @@ djangorestframework-dataclasses = [
     {file = "djangorestframework_dataclasses-1.1.1-py3-none-any.whl", hash = "sha256:aa4b23ac3de4ce25e82dd24110ddb9ff6551e2032ed7f25e8687eca6b4d7a472"},
 ]
 djangorestframework-simplejwt = [
-    {file = "djangorestframework_simplejwt-5.2.1-py3-none-any.whl", hash = "sha256:1965246979f521c24a3be81d305c3df40bb564e136823868aebc1a1b16e51b8c"},
-    {file = "djangorestframework_simplejwt-5.2.1.tar.gz", hash = "sha256:7613874c322a3f6e330cc118f9f00a3db957fea7f8e3bed81ba451853cd1dbd5"},
+    {file = "djangorestframework_simplejwt-5.2.2-py3-none-any.whl", hash = "sha256:4c0d2e2513e12587d93501ac091781684a216c3ee614eb3b5a10586aef5ca845"},
+    {file = "djangorestframework_simplejwt-5.2.2.tar.gz", hash = "sha256:d27d4bcac2c6394f678dea8b4d0d511c6e18a7f2eb8aaeeb8a7de601aeb77c42"},
 ]
 djlint = [
     {file = "djlint-1.19.3-py3-none-any.whl", hash = "sha256:86f0626c2186fd84a1236ec295b4ba0896b53221467733e72a4443d0f9c6ffce"},
