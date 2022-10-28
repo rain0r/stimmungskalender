@@ -321,7 +321,7 @@ test = ["cryptography", "pytest", "pytest-cov", "pytest-django", "pytest-xdist",
 
 [[package]]
 name = "djlint"
-version = "1.19.1"
+version = "1.19.3"
 description = "HTML Template Linter and Formatter"
 category = "dev"
 optional = false
@@ -941,7 +941,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "3bf160a88a61b03124f0bb4f4b38eca0592383d94394c0925d31d38766d4ecc1"
+content-hash = "484762015ba1b44b510de389f4ba1a5d00ef90ad78ad32fa1078672ad4f378cb"
 
 [metadata.files]
 appnope = [
@@ -1080,8 +1080,8 @@ djangorestframework-simplejwt = [
     {file = "djangorestframework_simplejwt-5.2.1.tar.gz", hash = "sha256:7613874c322a3f6e330cc118f9f00a3db957fea7f8e3bed81ba451853cd1dbd5"},
 ]
 djlint = [
-    {file = "djlint-1.19.1-py3-none-any.whl", hash = "sha256:baef9d7538c84c7d559279ee54c3dc79d39e8dd225f4e873ebae7a22ea8aed24"},
-    {file = "djlint-1.19.1.tar.gz", hash = "sha256:9eba47aad5c187908ad36053ba82a41d352dd48ffe024814090059c3d8986741"},
+    {file = "djlint-1.19.3-py3-none-any.whl", hash = "sha256:86f0626c2186fd84a1236ec295b4ba0896b53221467733e72a4443d0f9c6ffce"},
+    {file = "djlint-1.19.3.tar.gz", hash = "sha256:806d9fe477042ad8cd84b6714119a3243b0a5eec0d069e623571195b74cbca96"},
 ]
 drf-spectacular = [
     {file = "drf-spectacular-0.24.2.tar.gz", hash = "sha256:be32417594080a52f996afd83fd47ea9c2b83cbf13f6d3fbf3de809a0dfa7ead"},
