@@ -12,7 +12,7 @@
   "author": "Rainer Hihn <hihn.rainer@gmail.com> (https://hihn.org/)",
   "license": "AGPL-3.0",
   "devDependencies": {
-    "autoprefixer": "^10.4.12",
+    "autoprefixer": "^10.4.13",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
     "file-loader": "^6.2.0",
