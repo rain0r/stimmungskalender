@@ -321,7 +321,7 @@ test = ["cryptography", "pytest", "pytest-cov", "pytest-django", "pytest-xdist",
 
 [[package]]
 name = "djlint"
-version = "1.19.3"
+version = "1.19.7"
 description = "HTML Template Linter and Formatter"
 category = "dev"
 optional = false
@@ -941,7 +941,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "46ffd70fd3778d25ff88f5cab0f8a1622f07ffe44a4862c5d7b9f59097b00f94"
+content-hash = "42e3f070cbc13b37b7ea9e690ef87ff75c15b386855f513719cae3e6cfa207e4"
 
 [metadata.files]
 appnope = [
@@ -1080,8 +1080,8 @@ djangorestframework-simplejwt = [
     {file = "djangorestframework_simplejwt-5.2.2.tar.gz", hash = "sha256:d27d4bcac2c6394f678dea8b4d0d511c6e18a7f2eb8aaeeb8a7de601aeb77c42"},
 ]
 djlint = [
-    {file = "djlint-1.19.3-py3-none-any.whl", hash = "sha256:86f0626c2186fd84a1236ec295b4ba0896b53221467733e72a4443d0f9c6ffce"},
-    {file = "djlint-1.19.3.tar.gz", hash = "sha256:806d9fe477042ad8cd84b6714119a3243b0a5eec0d069e623571195b74cbca96"},
+    {file = "djlint-1.19.7-py3-none-any.whl", hash = "sha256:517b1a2dfb943854abaf8b1ad2117d5c2e699d5916cd2621e24f8669eb564af2"},
+    {file = "djlint-1.19.7.tar.gz", hash = "sha256:7339b0e2b228655000e6bc5e85adb146e1cdad11a1a29c52c3f1e68707d02d86"},
 ]
 drf-spectacular = [
     {file = "drf-spectacular-0.24.2.tar.gz", hash = "sha256:be32417594080a52f996afd83fd47ea9c2b83cbf13f6d3fbf3de809a0dfa7ead"},
@@ -1210,6 +1210,8 @@ prompt-toolkit = [
 psycopg2 = [
     {file = "psycopg2-2.9.5-cp310-cp310-win32.whl", hash = "sha256:d3ef67e630b0de0779c42912fe2cbae3805ebaba30cda27fea2a3de650a9414f"},
     {file = "psycopg2-2.9.5-cp310-cp310-win_amd64.whl", hash = "sha256:4cb9936316d88bfab614666eb9e32995e794ed0f8f6b3b718666c22819c1d7ee"},
+    {file = "psycopg2-2.9.5-cp311-cp311-win32.whl", hash = "sha256:093e3894d2d3c592ab0945d9eba9d139c139664dcf83a1c440b8a7aa9bb21955"},
+    {file = "psycopg2-2.9.5-cp311-cp311-win_amd64.whl", hash = "sha256:920bf418000dd17669d2904472efeab2b20546efd0548139618f8fa305d1d7ad"},
     {file = "psycopg2-2.9.5-cp36-cp36m-win32.whl", hash = "sha256:b9ac1b0d8ecc49e05e4e182694f418d27f3aedcfca854ebd6c05bb1cffa10d6d"},
     {file = "psycopg2-2.9.5-cp36-cp36m-win_amd64.whl", hash = "sha256:fc04dd5189b90d825509caa510f20d1d504761e78b8dfb95a0ede180f71d50e5"},
     {file = "psycopg2-2.9.5-cp37-cp37m-win32.whl", hash = "sha256:922cc5f0b98a5f2b1ff481f5551b95cd04580fd6f0c72d9b22e6c0145a4840e0"},
