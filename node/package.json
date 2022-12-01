@@ -14,7 +14,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.13",
     "copy-webpack-plugin": "^11.0.0",
-    "css-loader": "^6.7.1",
+    "css-loader": "^6.7.2",
     "file-loader": "^6.2.0",
     "mini-css-extract-plugin": "^2.6.1",
     "package-lock-sanitizer": "^1.0.1",
