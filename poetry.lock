@@ -288,7 +288,7 @@ pytz = "*"
 
 [[package]]
 name = "djangorestframework-dataclasses"
-version = "1.1.1"
+version = "1.2.0"
 description = "A dataclasses serializer for Django REST Framework"
 category = "main"
 optional = false
@@ -942,7 +942,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "a53c217597be422608d1048296b91876e1d99ad7cd525ccd92ea640b72159d10"
+content-hash = "b15245f5fe123a4d88a7b450e4080cb7a0f7082a6043976c8c072100ad908a5a"
 
 [metadata.files]
 appnope = [
@@ -1073,8 +1073,8 @@ djangorestframework = [
     {file = "djangorestframework-3.14.0.tar.gz", hash = "sha256:579a333e6256b09489cbe0a067e66abe55c6595d8926be6b99423786334350c8"},
 ]
 djangorestframework-dataclasses = [
-    {file = "djangorestframework-dataclasses-1.1.1.tar.gz", hash = "sha256:11bed97049e433cdf00ebf963dac7b7f087aa5bedf92e04b48fe6b01467b0cf2"},
-    {file = "djangorestframework_dataclasses-1.1.1-py3-none-any.whl", hash = "sha256:aa4b23ac3de4ce25e82dd24110ddb9ff6551e2032ed7f25e8687eca6b4d7a472"},
+    {file = "djangorestframework-dataclasses-1.2.0.tar.gz", hash = "sha256:4fa8d93a19a3e256487674e9c654b45992bc76de155bd097eced6fe4af4100a2"},
+    {file = "djangorestframework_dataclasses-1.2.0-py3-none-any.whl", hash = "sha256:e4f54a2a21b6dfdb07ba657f91b5a97a41d03c6760203e8a6c3749276d3f129c"},
 ]
 djangorestframework-simplejwt = [
     {file = "djangorestframework_simplejwt-5.2.2-py3-none-any.whl", hash = "sha256:4c0d2e2513e12587d93501ac091781684a216c3ee614eb3b5a10586aef5ca845"},
