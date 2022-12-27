@@ -16,7 +16,7 @@
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.2",
     "file-loader": "^6.2.0",
-    "mini-css-extract-plugin": "^2.6.1",
+    "mini-css-extract-plugin": "^2.7.2",
     "package-lock-sanitizer": "^1.0.1",
     "postcss-loader": "^7.0.2",
     "prettier": "2.8.0",
