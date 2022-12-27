@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-07 18:30+0200\n"
-"PO-Revision-Date: 2022-07-05 18:39+0200\n"
+"POT-Creation-Date: 2023-01-01 21:18+0100\n"
+"PO-Revision-Date: 2023-01-01 21:19+0100\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,23 +19,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: context_processors.py:33 service/sk.py:44
+#: context_processors.py:30 service/sk.py:44
 msgid "very_bad"
 msgstr "Very bad"
 
-#: context_processors.py:34 service/sk.py:45
+#: context_processors.py:31 service/sk.py:45
 msgid "bad"
 msgstr "Bad"
 
-#: context_processors.py:35 service/sk.py:46
+#: context_processors.py:32 service/sk.py:46
 msgid "medium"
 msgstr "Medium"
 
-#: context_processors.py:36 service/sk.py:47
+#: context_processors.py:33 service/sk.py:47
 msgid "good"
 msgstr "Good"
 
-#: context_processors.py:37 service/sk.py:48
+#: context_processors.py:34 service/sk.py:48
 msgid "very_good"
 msgstr "Very good"
 
@@ -47,87 +47,88 @@ msgstr "Day"
 msgid "night"
 msgstr "Night"
 
-#: templates/registration/login.html:13
+#: templates/registration/login.html:15
 msgid "Log in"
 msgstr ""
 
-#: templates/web/base.html:48 templates/web/base.html:80
-#: templates/web/index/entry_list.html:4
+#: templates/web/base.html:49 templates/web/base.html:85
+#: templates/web/mood-form/entry_list.html:4
 msgid "home"
 msgstr "Home"
 
-#: templates/web/base.html:51 templates/web/graph.html:4
-#: templates/web/graph.html:11
+#: templates/web/base.html:52 templates/web/graph/graph.html:4
+#: templates/web/graph/graph.html:11
 msgid "graphs"
 msgstr "Graphs"
 
-#: templates/web/base.html:54 templates/web/calendar.html:4
-#: templates/web/calendar.html:7
+#: templates/web/base.html:55 templates/web/calendar/calendar.html:4
+#: templates/web/calendar/calendar.html:7
 msgid "calendar"
 msgstr "Calendar"
 
-#: templates/web/base.html:57 templates/web/search.html:4
-#: templates/web/search.html:9
+#: templates/web/base.html:58 templates/web/search/search.html:4
+#: templates/web/search/search.html:9
 msgid "search"
 msgstr "Search"
 
-#: templates/web/base.html:60 templates/web/settings.html:4
-#: templates/web/settings.html:9
+#: templates/web/base.html:61 templates/web/settings/settings.html:4
+#: templates/web/settings/settings.html:9
 msgid "settings"
 msgstr "Settings"
 
-#: templates/web/base.html:68
+#: templates/web/base.html:72
 msgid "logged_in_as"
 msgstr "Logged in as"
 
-#: templates/web/base.html:83
+#: templates/web/base.html:88
 msgid "logout"
 msgstr "Logout"
 
-#: templates/web/graph.html:16
-msgid "date_filter"
-msgstr "Date filter"
-
-#: templates/web/graph.html:24
-msgid "scatterplot"
-msgstr "Scatterplot"
-
-#: templates/web/graph.html:27
-msgid "pie_charts"
-msgstr "Pie Charts"
-
-#: templates/web/graph.html:30
-msgid "average"
-msgstr "Average"
-
-#: templates/web/graph/date_select.html:7 templates/web/search.html:15
+#: templates/web/graph/date_select.html:7 templates/web/search/search.html:13
 msgid "start_date"
 msgstr "From"
 
-#: templates/web/graph/date_select.html:19 templates/web/search.html:27
+#: templates/web/graph/date_select.html:17 templates/web/search/search.html:25
 msgid "end_date"
 msgstr "To"
 
-#: templates/web/graph/date_select.html:31
-#: templates/web/index/entry_list.html:73 templates/web/search.html:67
+#: templates/web/graph/date_select.html:27
+#: templates/web/mood-form/entry_list.html:68
+#: templates/web/search/search.html:67
 msgid "go_to"
 msgstr "Go"
 
-#: templates/web/graph/date_select.html:39
+#: templates/web/graph/date_select.html:35
 msgid "from_start"
 msgstr "From start"
 
-#: templates/web/graph/date_select.html:45
+#: templates/web/graph/date_select.html:41
 msgid "last_week"
 msgstr "Last week"
 
-#: templates/web/graph/date_select.html:51
+#: templates/web/graph/date_select.html:47
 msgid "last_month"
 msgstr "Last month"
 
-#: templates/web/graph/date_select.html:57
+#: templates/web/graph/date_select.html:53
 msgid "last_year"
 msgstr "Last year"
+
+#: templates/web/graph/graph.html:16
+msgid "date_filter"
+msgstr "Date filter"
+
+#: templates/web/graph/graph.html:24
+msgid "scatterplot"
+msgstr "Scatterplot"
+
+#: templates/web/graph/graph.html:27
+msgid "pie_charts"
+msgstr "Pie Charts"
+
+#: templates/web/graph/graph.html:32
+msgid "average"
+msgstr "Average"
 
 #: templates/web/graph/pie_chart.html:4 templates/web/graph/scatter.html:5
 msgid "time_range"
@@ -143,133 +144,71 @@ msgstr "Markers"
 msgid "lines"
 msgstr "Lines"
 
-#: templates/web/i18n.html:5
-msgid "day_header"
-msgstr "My day was..."
-
-#: templates/web/i18n.html:6 templates/web/i18n.html:7
-msgid "night_header"
-msgstr "My night was..."
-
-#: templates/web/i18n.html:8
-msgid "first_page"
-msgstr "First page"
-
-#: templates/web/i18n.html:9
-msgid "items_per_page"
-msgstr "Items per page"
-
-#: templates/web/i18n.html:10
-msgid "last_page"
-msgstr "Last page"
-
-#: templates/web/i18n.html:11
-msgid "next_page"
-msgstr "Next page"
-
-#: templates/web/i18n.html:12
-msgid "previous_page"
-msgstr "Previous page"
-
-#: templates/web/i18n.html:13
-msgid "page"
-msgstr "Page"
-
-#: templates/web/i18n.html:14
-msgid "colors_enabled"
-msgstr "Colors enabled"
-
-#: templates/web/i18n.html:15
-msgid "colors_enabled_label"
-msgstr "Use a color for each mood."
-
-#: templates/web/i18n.html:16
-msgid "last_very_good_day"
-msgstr "Last very good day"
-
-#: templates/web/i18n.html:17
-msgid "last_very_bad_day"
-msgstr "Last very bad day"
-
-#: templates/web/i18n.html:18
-msgid "last_very_good_night"
-msgstr "Last very good night"
-
-#: templates/web/i18n.html:19
-msgid "last_very_bad_night"
-msgstr "Last very bad night"
-
-#: templates/web/i18n.html:20
-msgid "no_results"
-msgstr "No results"
-
-#: templates/web/index/entry_list.html:11 templates/web/search.html:77
+#: templates/web/mood-form/entry_list.html:11
+#: templates/web/search/search.html:77
 msgid "week"
 msgstr "Week"
 
-#: templates/web/index/entry_list.html:25
+#: templates/web/mood-form/entry_list.html:25
 msgid "note"
 msgstr "Note"
 
-#: templates/web/index/entry_list.html:28
+#: templates/web/mood-form/entry_list.html:28
 msgid "prev"
 msgstr "Previous"
 
-#: templates/web/index/entry_list.html:30
+#: templates/web/mood-form/entry_list.html:30
 msgid "next"
 msgstr "Next"
 
-#: templates/web/index/entry_list.html:48
+#: templates/web/mood-form/entry_list.html:48
 msgid "what_happened_this_week"
 msgstr "What happened this week?"
 
-#: templates/web/index/entry_list.html:51
+#: templates/web/mood-form/entry_list.html:51
 #: templates/web/settings/default_view_mode.html:28
+#: templates/web/settings/js_btn.html:17
 #: templates/web/settings/language.html:20
 #: templates/web/settings/mood_colors.html:29
 #: templates/web/settings/view_forms.html:29
 msgid "save"
 msgstr "Save"
 
-#: templates/web/index/entry_list.html:59
+#: templates/web/mood-form/entry_list.html:58
 msgid "jump_to_week"
 msgstr "Jump to week"
 
-#: templates/web/index/entry_list.html:81
+#: templates/web/mood-form/entry_list.html:75
 msgid "days_tracked"
 msgstr "days tracked"
 
-#: templates/web/index/entry_list.html:82
+#: templates/web/mood-form/entry_list.html:76
 msgid "nights_tracked"
 msgstr "nights tracked"
 
-#: templates/web/index/form.html:14
+#: templates/web/mood-form/form.html:15
 msgid "click_to_toggle"
 msgstr "Click to toggle"
 
-#: templates/web/search.html:40
-msgid "mood"
-msgstr "Mood"
-
-#: templates/web/search.html:56 templates/web/search.html:61
+#: templates/web/search/search.html:37 templates/web/search/search.html:43
 msgid "search_term"
 msgstr "Search term"
 
-#: templates/web/settings.html:19
-msgid "user_mgmt"
-msgstr "User management"
-
-#: templates/web/settings.html:20
-msgid "add_edit_remove_user"
-msgstr "To add, edit and remove user, go to the"
-
-#: templates/web/settings.html:39
-msgid "export_your_data"
-msgstr "Export your data"
+#: templates/web/search/search.html:48
+msgid "mood"
+msgstr "Mood"
 
 #: templates/web/settings/default_view_mode.html:2
 msgid "default_view_mode"
 msgstr "Default view"
+
+#: templates/web/settings/js_btn.html:2
+msgid "use_js_btn"
+msgstr "Use JavaScript buttons"
+
+#: templates/web/settings/js_btn.html:12
+msgid "submit_form_via_js"
+msgstr "Submit data from the mood form via JavaScript"
 
 #: templates/web/settings/language.html:2
 msgid "language"
@@ -295,6 +234,18 @@ msgstr "Examples"
 msgid "reset"
 msgstr "Reset"
 
+#: templates/web/settings/settings.html:21
+msgid "user_mgmt"
+msgstr "User management"
+
+#: templates/web/settings/settings.html:22
+msgid "add_edit_remove_user"
+msgstr "To add, edit and remove user, go to the"
+
+#: templates/web/settings/settings.html:41
+msgid "export_your_data"
+msgstr "Export your data"
+
 #: templates/web/settings/view_forms.html:2
 msgid "view_forms"
 msgstr "Displayed forms"
@@ -306,6 +257,66 @@ msgstr "Night form"
 #: templates/web/settings/view_forms.html:25
 msgid "view_day_form"
 msgstr "Day form"
+
+#: templates/web/shared/i18n.html:5
+msgid "day_header"
+msgstr "My day was..."
+
+#: templates/web/shared/i18n.html:6 templates/web/shared/i18n.html:7
+msgid "night_header"
+msgstr "My night was..."
+
+#: templates/web/shared/i18n.html:8
+msgid "first_page"
+msgstr "First page"
+
+#: templates/web/shared/i18n.html:9
+msgid "items_per_page"
+msgstr "Items per page"
+
+#: templates/web/shared/i18n.html:10
+msgid "last_page"
+msgstr "Last page"
+
+#: templates/web/shared/i18n.html:11
+msgid "next_page"
+msgstr "Next page"
+
+#: templates/web/shared/i18n.html:12
+msgid "previous_page"
+msgstr "Previous page"
+
+#: templates/web/shared/i18n.html:13
+msgid "page"
+msgstr "Page"
+
+#: templates/web/shared/i18n.html:14
+msgid "colors_enabled"
+msgstr "Colors enabled"
+
+#: templates/web/shared/i18n.html:15
+msgid "colors_enabled_label"
+msgstr "Use a color for each mood."
+
+#: templates/web/shared/i18n.html:16
+msgid "last_very_good_day"
+msgstr "Last very good day"
+
+#: templates/web/shared/i18n.html:17
+msgid "last_very_bad_day"
+msgstr "Last very bad day"
+
+#: templates/web/shared/i18n.html:18
+msgid "last_very_good_night"
+msgstr "Last very good night"
+
+#: templates/web/shared/i18n.html:19
+msgid "last_very_bad_night"
+msgstr "Last very bad night"
+
+#: templates/web/shared/i18n.html:20
+msgid "no_results"
+msgstr "No results"
 
 #~ msgid "graph"
 #~ msgstr "Graph"

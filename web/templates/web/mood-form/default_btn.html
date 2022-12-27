@@ -1,0 +1,16 @@
+{% for number in moods reversed %}
+    {% with mood_value=weekday_entry|get_obj_attr:form.attr %}
+        <button type="submit"
+                name="entry"
+                value="{{ number }}_{{ weekday_entry.day|date:'Y-m-d' }}"
+                title="{{ moods|get_item:number }}"
+                data-bs-toggle="tooltip"
+                class="btn m-1 mood-{{ number }} {% if mood_value == number %} mood-active{% endif %}">
+            {% if mood_value == number %}
+                X
+            {% else %}
+                &nbsp;
+            {% endif %}
+        </button>
+    {% endwith %}
+{% endfor %}

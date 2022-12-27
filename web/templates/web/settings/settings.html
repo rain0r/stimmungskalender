@@ -6,18 +6,27 @@
 {% block content %}
     {% load i18n %}
     {% get_current_language as LANGUAGE_CODE %}
-    <a href="{% url 'settings' %}" class="h1 text-dark mb-2">{% translate 'settings' %}</a>
+    <a href="{% url 'settings' %}" class="h1  mb-2">{% translate 'settings' %}</a>
     <hr>
     {% include 'web/settings/language.html' %}
     <hr>
-    {% include 'web/settings/default_view_mode.html' %}
-    <hr>
-    {% include 'web/settings/view_forms.html' %}
-    <hr>
-    {% include 'web/settings/mood_colors.html' %}
+    <form class="mt-3" action="{% url 'save-settings' %}" method="post">
+        {% csrf_token %}
+        {% include 'web/settings/default_view_mode.html' %}
+        <hr>
+        {% include 'web/settings/view_forms.html' %}
+        <hr>
+        {% include 'web/settings/js_btn.html' %}
+        <hr>
+        {% if not user_settings.use_js_btn %}
+            {% include 'web/settings/mood_colors.html' %}
+            <hr>
+        {% endif %}
+        <button type="submit" class="btn btn-primary">{% translate 'save' %}</button>
+    </form>
     <hr>
     <h3>{% translate 'user_mgmt' %}</h3>
-    <span class="text-muted">{% translate 'add_edit_remove_user' %} <a href="{% url 'admin:auth_user_changelist' %}">Admin Site</a>.
+    <span class="text-body-secondary">{% translate 'add_edit_remove_user' %} <a href="{% url 'admin:auth_user_changelist' %}">Admin Site</a>.
     </span>
     <hr>
     <h3>API</h3>
@@ -34,7 +43,7 @@
     <hr>
     <div class="d-flex flex-row-reverse">
         <ul class="list-group list-group-horizontal">
-            <li class="list-group-item text-muted">Version {{ version }}</li>
+            <li class="list-group-item text-body-secondary">Version {{ version }}</li>
             <li class="list-group-item">
                 <a href="{% url 'export' %}">{% translate 'export_your_data' %}</a>
             </li>

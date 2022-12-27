@@ -98,8 +98,9 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "web.context_processors.lang",
                 "web.context_processors.mood_colors",
-                "web.context_processors.ng_sk",
                 "web.context_processors.mood_names",
+                "web.context_processors.api_urls",
+                "web.context_processors.active_url",
             ],
         },
     },
@@ -264,9 +265,5 @@ DEFAULT_VIEW_MODE = "lines"
 PER_PAGE = 10
 
 SK_DATE_FORMAT = "%Y-%m-%d"  # To identify a week
-
-NG_SK_ENABLED = config("NG_SK_ENABLED", default=False, cast=bool)
-
-NG_SK_PATH = config("NG_SK_PATH", default="ng-sk")  # without leading or trailing slash
 
 IS_WSGI = config("IS_WSGI", default=False, cast=bool)

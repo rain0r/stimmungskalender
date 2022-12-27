@@ -17,7 +17,6 @@ from django.conf import settings
 from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path, re_path
-from django.views.generic import TemplateView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from web import views, api
@@ -36,15 +35,15 @@ urlpatterns = [
     path("settings/", views.SettingsView.as_view(), name="settings"),
     path("search/", views.SearchView.as_view(), name="search"),
     path("calendar/", views.CalendarView.as_view(), name="calendar"),
-    path("api/entry-day/", api.EntryDayView.as_view()),
-    path("api/mood-table/", api.MoodTableView.as_view()),
+    path("api/entry-day/", api.EntryDayView.as_view(), name="api-entry-day"),
+    path("api/mood-table/", api.MoodTableView.as_view(), name="api-mood-table"),
     path("api/standout-data/", api.StandoutDataView.as_view()),
     path("api/scatter-graph/", api.ScatterGraphView.as_view()),
     path("api/pie-chart-graph/", api.PieChartGraphView.as_view()),
     path("api/save-note/", api.SaveNoteView.as_view()),
     path("api/search/", api.SearchView.as_view()),
     path("api/graph/", api.GraphView.as_view()),
-    path("api/calendar/", api.CalendarView.as_view()),
+    path("api/calendar/", api.CalendarView.as_view(), name="api-calendar"),
     path("api/export/", api.ExportView.as_view(), name="export"),
     path("api/set-language/", api.SetLanguageView.as_view()),
     path("api/forms-displayed/", api.FormsDisplayedView.as_view()),
@@ -64,15 +63,6 @@ urlpatterns = [
         name="swagger-ui",
     ),
 ]
-
-if settings.NG_SK_ENABLED:
-    urlpatterns.append(
-        re_path(
-            rf"^{settings.NG_SK_PATH}/",
-            TemplateView.as_view(template_name="ng-sk/index.html"),
-            name="ng-sk",
-        )
-    )
 
 # Host the static from uWSGI
 if settings.IS_WSGI:

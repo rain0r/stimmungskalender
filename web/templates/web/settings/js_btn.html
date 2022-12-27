@@ -1,0 +1,10 @@
+{% load i18n %}
+<h3>{% translate 'use_js_btn' %}</h3>
+<div class="form-check">
+    <input class="form-check-input"
+           type="checkbox"
+           {% if user_settings.use_js_btn %}checked{% endif %}
+           name="use_js_btn"
+           id="foo">
+    <label class="form-check-label" for="foo">{% translate 'submit_form_via_js' %}</label>
+</div>

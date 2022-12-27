@@ -3,11 +3,11 @@ import { Popover } from "bootstrap";
 import "js-year-calendar/dist/js-year-calendar.css";
 
 export class SkCalendar {
-  constructor() {
+  constructor(apiUrls) {
+    this.apiUrls = apiUrls;
     this.moodMapping = JSON.parse(
       document.getElementById("mood_mapping").textContent
     );
-    this.siteUrl = JSON.parse(document.getElementById("site_url").textContent);
     this.moodColors = JSON.parse(
       document.getElementById("mood_colors").textContent
     );
@@ -46,18 +46,19 @@ export class SkCalendar {
   }
 
   loadTranslation() {
-    const jqxhr = fetch(`${this.siteUrl}jsoni18n/?lang=${this.currentLanguage}`)
+    return fetch(
+      `${this.apiUrls["base-url"]}jsoni18n/?lang=${this.currentLanguage}`
+    )
       .then((response) => response.json())
       .catch((err) => {
         console.error("Error", err);
         document.getElementById("#error-card").classList.remove("invisible");
         document.getElementById("#error-msg").textContent = err.statusText;
       });
-    return jqxhr;
   }
 
   loadEntries() {
-    const jqxhr = fetch(`${this.siteUrl}api/calendar/`)
+    const jqxhr = fetch(`${this.apiUrls["api-calendar"]}`)
       .then((response) => response.json())
       .catch((err) => {
         console.error("Error", err);
@@ -143,14 +144,3 @@ export class SkCalendar {
     });
   }
 }
-
-const ready = (callback) => {
-  if (document.readyState != "loading") callback();
-  else document.addEventListener("DOMContentLoaded", callback);
-};
-ready(() => {
-  const element = document.getElementById("calendar");
-  if (typeof element != "undefined" && element != null) {
-    new SkCalendar();
-  }
-});

@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import BadRequest
 from django.core.paginator import Paginator
 from django.shortcuts import redirect
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views import View
@@ -47,15 +47,16 @@ class DefaultDateHandler:
 
 @method_decorator(login_required, name="dispatch")
 class SettingsView(TemplateView):
-    template_name = "web/settings.html"
+    template_name = "web/settings/settings.html"
 
     def get_context_data(self, **kwargs):
         ss = SettingsService(self.request.user)
+        sk_version = pkg_resources.get_distribution("stimmungskalender").version
+
         context = super().get_context_data(**kwargs)
         context["default_view_mode"] = ss.get_default_view_mode()
         context["user_settings"] = ss.user_settings()
         context["user_colors_settings"] = ss.user_colors_settings()
-        sk_version = pkg_resources.get_distribution("stimmungskalender").version
         context["version"] = sk_version
         return context
 
@@ -64,26 +65,32 @@ class SettingsView(TemplateView):
 class SaveSettingsView(View):
     def post(self, request):
         ss = SettingsService(self.request.user)
-        form_name = request.POST.get("form_name", "")
-        if form_name == "save_view_forms":
-            view_day_form = request.POST.get("view_day_form", "")
-            view_night_form = request.POST.get("view_night_form", "")
-            ss.set_forms_displayed(day=view_day_form, night=view_night_form)
-        if form_name == "save_view_mode":
-            view_mode = request.POST.get("default_view_mode", "")
-            ss.set_markers(view_mode)
-        if form_name == "user_mood_color_settings":
-            reset = bool(request.POST.get("reset", False))
-            if reset:
-                ss.save_user_colors_settings()
-            else:
-                ss.save_user_colors_settings(request.POST.dict())
+        # If day and night form should be displayed
+        view_day_form = request.POST.get("view_day_form", "")
+        view_night_form = request.POST.get("view_night_form", "")
+        ss.set_forms_displayed(day=view_day_form == "on", night=view_night_form == "on")
+
+        # Set markers / lines
+        view_mode = request.POST.get("default_view_mode", "")
+        ss.set_markers(view_mode)
+
+        # Reset / set custom mood colors
+        reset = bool(request.POST.get("reset", False))
+        if reset:
+            ss.save_user_colors_settings()
+        else:
+            ss.save_user_colors_settings(request.POST.dict())
+
+        # Set js_btn enabled / disabled
+        use_js_btn = request.POST.get("use_js_btn", "")
+        ss.set_use_js_btn(use_js_btn == "on")
+
         return redirect("settings")
 
 
 @method_decorator(login_required, name="dispatch")
 class EntryListView(TemplateView):
-    template_name = "web/index/entry_list.html"
+    template_name = "web/mood-form/entry_list.html"
 
     @method_decorator(ensure_csrf_cookie)
     def get(self, request, *args, **kwargs):
@@ -93,12 +100,15 @@ class EntryListView(TemplateView):
         context = super().get_context_data(**kwargs)
         sk_service = SkService(self.request.user)
 
+        ss = SettingsService(self.request.user)
+
         start_day_p = self.request.GET.get(QP_START_DT, "").strip()
         context["mood_table"] = sk_service.mood_table(start_day_p)
         context["moods"] = sk_service.mood_mapping
         context["forms"] = self.get_forms()
         context["standout_data"] = sk_service.standout_data()
         context["general_stats"] = sk_service.general_stats()
+        context["js_btn"] = ss.is_use_js_btn()
 
         return context
 
@@ -132,11 +142,11 @@ class SaveMoodView(View):
         start_day_p = datetime.strptime(day, "%Y-%m-%d").strftime(
             settings.SK_DATE_FORMAT
         )
-        return redirect(f"{reverse('index')}?start_dt={start_day_p}")
+        return redirect(f"{reverse_lazy('index')}?start_dt={start_day_p}")
 
 
 class GraphView(DefaultDateHandler, TemplateView):
-    template_name = "web/graph.html"
+    template_name = "web/graph/graph.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -192,7 +202,7 @@ class LogoutView(RedirectView):
 
 @method_decorator(login_required, name="dispatch")
 class SearchView(TemplateView):
-    template_name = "web/search.html"
+    template_name = "web/search/search.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -227,12 +237,12 @@ class SaveNoteView(View):
         sk_service = SkService(self.request.user)
         week = sk_service.save_note(week, note)
         start_day_p = week.week_date.strftime(settings.SK_DATE_FORMAT)
-        return redirect(f"{reverse('index')}?{QP_START_DT}={start_day_p}")
+        return redirect(f"{reverse_lazy('index')}?{QP_START_DT}={start_day_p}")
 
 
 @method_decorator(login_required, name="dispatch")
 class CalendarView(TemplateView):
-    template_name = "web/calendar.html"
+    template_name = "web/calendar/calendar.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

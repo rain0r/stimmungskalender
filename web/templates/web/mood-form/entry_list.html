@@ -1,0 +1,63 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+{% block title %}
+    {% translate 'home' %}
+{% endblock %}
+{% block content %}
+    {% load i18n %}
+    <div class="container">
+        <div class="d-flex flex-column flex-md-row align-items-baseline justify-content-between">
+            <div class="d-flex flex-column flex-md-row mb-4 mb-md-2 align-items-baseline ">
+                <a href="{% url 'index' %}?start_dt={{ mood_table.week_start|date:'Y-m-d' }}"
+                   class="h4 text-reset">{% translate 'week' %} #{{ mood_table.week.week_date|date:"W" }}</a>
+                <span class="text-body-secondary ms-md-5">
+                    {{ mood_table.week.week_date }}
+                    —
+                    {{ mood_table.week.week_date|week_end_date }}
+                </span>
+            </div>
+            <div class="mb-4 mb-md-2 d-flex w-100 w-md-50">
+                <div class="d-none d-md-inline flex-grow-1"></div>
+                <button class="btn mx-2 {% if mood_table.week.note %} btn-primary {% else %} btn-outline-secondary {% endif %}"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target=".multi-collapse"
+                        aria-expanded="false"
+                        aria-controls="collapseNote">
+                    {% translate 'note' %}
+                </button>
+                <div class="d-lg-none flex-grow-1"></div>
+                <a href="?start_dt={{ mood_table.prev_week }}"
+                   class="btn btn-outline-secondary mx-2">{% translate 'prev' %}</a>
+                <a href="?start_dt={{ mood_table.next_week }}"
+                   class="btn btn-outline-secondary mx-2">{% translate 'next' %}</a>
+            </div>
+        </div>
+        {% include 'web/mood-form/note.html' %}
+        <hr>
+        {% for form in forms %}
+            {% include 'web/mood-form/form.html' with form=form %}
+        {% endfor %}
+        <hr>
+        <span class="h4">{% translate 'jump_to_week' %}</span>
+        <form method="get" action="{% url 'index' %}"  class="row my-2 g-2">
+            <div class="col-auto">
+                <input type="text"
+                       data-provide="datepicker"
+                       placeholder="YYYY-MM-DD"
+                       name="start_dt"
+                       class="form-control">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">{% translate 'go_to' %}</button>
+            </div>
+        </form>
+        <hr>
+        {% include 'web/mood-form/standout_data.html' %}
+        <hr>
+        <div class="d-flex flex-row-reverse">
+            <div class="mx-1">{{ general_stats.day_count }} {% translate 'days_tracked' %}.</div>
+            <div class="mx-1">{{ general_stats.night_count }} {% translate 'nights_tracked' %}.</div>
+        </div>
+    </div>
+{% endblock %}

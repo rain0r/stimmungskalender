@@ -2,13 +2,12 @@
   cursor: pointer;
 }
 
-.sk-active {
-  opacity: 100% !important;
-  border-color: #343a40 !important;
-}
-
 .color-box {
   display: block;
   width: 20px;
   height: 20px;
+}
+
+.mood-btn-label:hover {
+  // border: 3px solid skyblue !important;
 }

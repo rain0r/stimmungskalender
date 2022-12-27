@@ -171,7 +171,7 @@ class SkService:
         ret.append(
             StandoutData(
                 label="last_very_good_day",
-                css_class="alert-success",
+                css_class="standout-data-good",
                 entry=(qs.filter(mood_day=Moods.VERY_GOOD).order_by("-id").first()),
             )
         )
@@ -180,7 +180,7 @@ class SkService:
         ret.append(
             StandoutData(
                 label="last_very_good_night",
-                css_class="alert-success",
+                css_class="standout-data-good",
                 entry=(qs.filter(mood_night=Moods.VERY_GOOD).order_by("-id").first()),
             )
         )
@@ -189,7 +189,7 @@ class SkService:
         ret.append(
             StandoutData(
                 label="last_very_bad_day",
-                css_class="alert-danger",
+                css_class="standout-data-bad",
                 entry=(qs.filter(mood_day=Moods.VERY_BAD).order_by("-id").first()),
             )
         )
@@ -198,7 +198,7 @@ class SkService:
         ret.append(
             StandoutData(
                 label="last_very_bad_night",
-                css_class="alert-danger",
+                css_class="standout-data-bad",
                 entry=(qs.filter(mood_night=Moods.VERY_BAD).order_by("-id").first()),
             )
         )

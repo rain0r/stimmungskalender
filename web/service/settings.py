@@ -1,10 +1,8 @@
 import typing
 
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.http import QueryDict
 
-from web import models
 from web.models import UserSettings, Moods, UserMoodColorSettings
 from web.mood_colors import DEFAULT_COLORS
 
@@ -15,12 +13,11 @@ class SettingsService:
         user: User,
     ):
         self._user = user
+        self._obj = UserSettings.objects.get(user=self._user)
 
     def save_user_colors_settings(self, colors=None) -> None:
         """
         Sets a color to each mood.
-        :param args:
-        :return:
         """
         if colors is None:
             colors = dict()
@@ -51,27 +48,15 @@ class SettingsService:
         return colors
 
     def user_settings(self) -> UserSettings:
-        return UserSettings.objects.get(user=self._user)
+        return self._obj
 
     def set_forms_displayed(self, **kwargs: dict) -> None:
-        for period in models.PERIODS:
-            UserSettings.objects.update_or_create(
-                user=self._user,
-                defaults={
-                    "user": self._user,
-                    f"view_{period}_form": bool(kwargs.get(period)),
-                },
-            )
+        self._obj.view_day_form = bool(kwargs.get("day"))
+        self._obj.view_night_form = bool(kwargs.get("night"))
+        self._obj.save()
 
     def get_default_view_mode(self) -> str:
-        try:
-            obj = UserSettings.objects.get(user=self._user)
-            if obj.view_is_markers:
-                return "markers"
-            else:
-                return "lines"
-        except UserSettings.DoesNotExist:
-            return settings.DEFAULT_VIEW_MODE
+        return "markers" if self._obj.view_is_markers else "lines"
 
     def is_markers(self, query_dict: QueryDict) -> bool:
         if "view" in query_dict:
@@ -80,11 +65,12 @@ class SettingsService:
             return self.get_default_view_mode() == "markers"
 
     def set_markers(self, view_is_markers: str) -> None:
-        if view_is_markers:
-            UserSettings.objects.update_or_create(
-                user=self._user,
-                defaults={
-                    "user": self._user,
-                    "view_is_markers": view_is_markers == "markers",
-                },
-            )
+        self._obj.view_is_markers = view_is_markers == "markers"
+        self._obj.save()
+
+    def is_use_js_btn(self):
+        return self._obj.use_js_btn
+
+    def set_use_js_btn(self, enabled):
+        self._obj.use_js_btn = enabled
+        self._obj.save()

@@ -27,22 +27,24 @@
         <link rel="manifest" href="{% static '/site.webmanifest' %}">
         <link rel="stylesheet" href="{% static 'main.css' %}">
         <style>{% include 'web/css/moods.css' %}</style>
+        {{ api_urls|json_script:"api_urls" }}
+        {{ active_url|json_script:"active_url" }}
     </head>
     <body>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="{% url 'index' %}">🗓️ Stimmungskalender</a>
                 <button class="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#navbarCollapse"
-                        aria-controls="navbarCollapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
                         aria-expanded="false"
                         aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav me-auto">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
                             <a class="nav-link" href="{% url 'index' %}">{% translate 'home' %}</a>
                         </li>
@@ -58,22 +60,26 @@
                         <li class="nav-item {% if request.resolver_match.url_name == 'settings' %}active{% endif %}">
                             <a class="nav-link" href="{% url 'settings' %}">{% translate 'settings' %}</a>
                         </li>
-                        {% if ng_sk_enabled %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'ng-sk' %}">NG SK</a>
-                            </li>
-                        {% endif %}
                     </ul>
-                    <span class="text-muted">{% translate 'logged_in_as' %}: {{ user.get_username }}</span>
+                    <div class="form-check form-switch me-2">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               role="switch"
+                               id="dark-theme">
+                        <label class="form-check-label" for="dark-theme">☀️</label>
+                    </div>
+                    <div>
+                        {% translate 'logged_in_as' %}: <span class="font-monospace">{{ user.get_username }}</span>
+                    </div>
                 </div>
             </div>
         </nav>
         <main class="container pt-3">
             {% block content %}
             {% endblock content %}
-            {% include 'web/i18n.html' %}
+            {% include 'web/shared/i18n.html' %}
         </main>
-        <footer class="my-5 pt-5 text-muted text-center text-small">
+        <footer class="my-5 pt-5 text-body-secondary text-center text-small">
             <ul class="list-inline">
                 <li class="list-inline-item">
                     <a href="{% url 'index' %}">{% translate 'home' %}</a>
