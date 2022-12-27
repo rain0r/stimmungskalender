@@ -27,7 +27,7 @@ django-bootstrap-v5 = "^1.0.11"
 [tool.poetry.dev-dependencies]
 black = "^22.8.0"
 djlint = "^1.19.7"
-ipdb = "^0.13.9"
+ipdb = "^0.13.11"
 mypy = "^0.991"
 
 [build-system]
