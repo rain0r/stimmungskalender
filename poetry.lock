@@ -232,7 +232,7 @@ docs = ["m2r2 (>=0.2.5,<0.3.0)", "sphinx (>=4.4,<5.0)", "sphinx_rtd_theme (>=1.0
 
 [[package]]
 name = "django-cache-url"
-version = "3.4.2"
+version = "3.4.4"
 description = "Use Cache URLs in your Django application."
 category = "main"
 optional = false
@@ -920,7 +920,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "60b04f46060c28b0bd991344d7845804eaa27abea15a046ea7d86221855aad47"
+content-hash = "6f3a177e46c9c6c7e502a602defe243718afea16435449dcfb4d93dce951375d"
 
 [metadata.files]
 appnope = [
@@ -1031,8 +1031,8 @@ django-bootstrap-v5 = [
     {file = "django_bootstrap_v5-1.0.11-py3-none-any.whl", hash = "sha256:a207aa804938164c8450bbbef4faaba6d2093b3236000557a50f3bd44b53d268"},
 ]
 django-cache-url = [
-    {file = "django-cache-url-3.4.2.tar.gz", hash = "sha256:6cc9901a99a99751f5458aa7de08ce06e48c1441b1a94c9457d78af74fab9a26"},
-    {file = "django_cache_url-3.4.2-py2.py3-none-any.whl", hash = "sha256:c4a62634cffc9d636073cef597a44576d67b07660ab2ef1f02b160ee7ecf0e98"},
+    {file = "django-cache-url-3.4.4.tar.gz", hash = "sha256:ef2cfacea361ee22e9b67d6ca941db22e0a9eaf892b67ca71cad52c62a17fd36"},
+    {file = "django_cache_url-3.4.4-py2.py3-none-any.whl", hash = "sha256:5ca4760b4580b80e41279bc60d1e5c16a822e4e462265faab0a330701bb0ef9a"},
 ]
 django-cors-headers = [
     {file = "django-cors-headers-3.13.0.tar.gz", hash = "sha256:f9dc6b4e3f611c3199700b3e5f3398c28757dcd559c2f82932687f3d0443cfdf"},
