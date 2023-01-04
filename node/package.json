@@ -3,7 +3,7 @@
   "description": "JavaScript and CSS files for stimmungskalender",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --mode=production",
     "dev-build": "webpack --mode=development",
     "watch": "webpack --watch --mode=development",
     "format": "prettier --write . && package-lock-sanitizer"
@@ -31,6 +31,7 @@
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.3.0-alpha1",
     "js-year-calendar": "^2.0.0",
+    "plotly.js": "^2.17.0",
     "vanillajs-datepicker": "^1.2.0"
   }
 }

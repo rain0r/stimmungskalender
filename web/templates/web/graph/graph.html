@@ -1,41 +1,45 @@
 {% extends 'web/base.html' %}
 {% load i18n %}
+{% load static %}
 {% block title %}
     {% translate 'graphs' %}
 {% endblock %}
 {% block content %}
     {% load relative_url %}
-    <!-- Title -->
-    <div class="pt-4 row">
-        <div class="col-12 col-md-6">
-            <a href="{% url 'graph' %}" class="h1  my-2 my-md-0">{% translate 'graphs' %}</a>
+    <div id="sk-graph"
+         data-is-markers="{{ is_markers }}"
+         data-start-dt="{{ start_dt|date:'Y-m-d' }}"
+         data-end-dt="{{ end_dt|date:'Y-m-d' }}">
+        <!-- Title -->
+        <div class="page-title-div">
+            <a href="{% url 'graph' %}" class="page-title">{% translate 'graphs' %}</a>
         </div>
+        <div class="border rounded my-3 p-3">{% include 'web/graph/date_select.html' %}</div>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <button class="nav-link clickable active"
+                        data-bs-target="#scatter"
+                        data-bs-toggle="tab">
+                    {% translate 'scatterplot' %}
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link clickable" data-bs-target="#pie" data-bs-toggle="tab">{% translate 'pie_charts' %}</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link clickable "
+                        data-bs-target="#average"
+                        data-bs-toggle="tab">{% translate 'average' %}</button>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="scatter">{% include 'web/graph/scatter.html' %}</div>
+            <div class="tab-pane fade" id="pie">{% include 'web/graph/pie_chart.html' %}</div>
+            <div class="tab-pane fade " id="average">{% include 'web/graph/average.html' %}</div>
+        </div>
+        <hr>
     </div>
-    <hr>
-    <div class="mt-3 mb-1">
-        <a href="{% url 'graph' %}" class=" fw-bold">{% translate 'date_filter' %}</a>
-    </div>
-    <div class="border p-3 border">{% include 'web/graph/date_select.html' %}</div>
-    <hr>
-    <ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item" role="presentation">
-            <a class="nav-link clickable active"
-               data-bs-target="#scatter"
-               data-bs-toggle="tab">{% translate 'scatterplot' %}</a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a class="nav-link clickable" data-bs-target="#pie" data-bs-toggle="tab">{% translate 'pie_charts' %}</a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a class="nav-link clickable "
-               data-bs-target="#average"
-               data-bs-toggle="tab">{% translate 'average' %}</a>
-        </li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane fade show active" id="scatter" role="tabpanel">{% include 'web/graph/scatter.html' %}</div>
-        <div class="tab-pane fade" id="pie" role="tabpanel">{% include 'web/graph/pie_chart.html' %}</div>
-        <div class="tab-pane fade " id="average" role="tabpanel">{% include 'web/graph/average.html' %}</div>
-    </div>
-    <hr>
 {% endblock %}
+{% block js %}
+    <script src="{% static '/plotly.js' %}"></script>
+{% endblock js %}

@@ -15,7 +15,11 @@
            name="week"
            value="{{ mood_table.week.week_date|date:'Y-m-d' }}">
     <div class="row p-1">
-        <textarea id="note" name="note" class="form-control" rows="7" placeholder="{% translate 'what_happened_this_week' %}">{{ mood_table.week.note }}</textarea>
+        <textarea id="note"
+                  name="note"
+                  class="form-control"
+                  rows="7"
+                  placeholder="{% translate 'what_happened_this_week' %}">{{ mood_table.week.note }}</textarea>
     </div>
     <button class="btn btn-primary  mt-3">{% translate 'save' %}</button>
 </form>

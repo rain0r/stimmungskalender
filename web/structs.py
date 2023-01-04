@@ -43,21 +43,43 @@ class SkCalendar:
 
 
 @dataclass
-class GraphDataPointY:
+class ScatterGraphDataPointY:
+    """
+    Data class for the y-axis of the scatter graph.
+    """
+
     day: int
     night: int
 
 
 @dataclass
 class ScatterGraphResponse:
+    """
+    Data class for the scatter graph.
+    """
+
     x: str
-    y: GraphDataPointY
+    y: ScatterGraphDataPointY
 
 
 @dataclass
 class PieChartResponse:
+    """
+    Data class for the pie chart graph.
+    """
+
     label_numbers: typing.List[int]
     values: typing.List[int]
+
+
+@dataclass
+class BarChartResponse:
+    """
+    Data class for the "Average Mood" bar chart.
+    """
+
+    labels: typing.List[str]
+    values: typing.List[float]
 
 
 @dataclass

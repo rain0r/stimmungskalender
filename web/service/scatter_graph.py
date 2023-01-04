@@ -7,7 +7,7 @@ from django_registration.forms import User
 from plotly.offline import plot
 
 from web.service.base_graph import BaseGraph
-from web.structs import ScatterGraphResponse, GraphDataPointY
+from web.structs import ScatterGraphResponse, ScatterGraphDataPointY
 
 
 class ScatterGraphService(BaseGraph):
@@ -59,21 +59,20 @@ class ScatterGraphService(BaseGraph):
             margin=dict(l=5, r=5, b=75, t=75, pad=10),
         )
 
-        return plot(fig, output_type="div", include_plotlyjs=True)
+        return plot(fig, output_type="div", include_plotlyjs=False)
 
     def load_data(self) -> typing.List[ScatterGraphResponse]:
         """
         Loads data from the last seven days if no dates are provided
-        :return:
         """
         data = {}
         day_count = self.build_day_range(self.start_dt, self.end_dt)
         days = [(self.start_dt + timedelta(days=d)) for d in range(day_count)]
         for day in days:
-            data[day] = GraphDataPointY(day=0, night=0)
+            data[day] = ScatterGraphDataPointY(day=0, night=0)
         entries = self.date_range_qs()
         for entry in entries.iterator():
-            data[entry.day] = GraphDataPointY(
+            data[entry.day] = ScatterGraphDataPointY(
                 day=entry.mood_day, night=entry.mood_night
             )
         ret = []

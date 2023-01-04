@@ -48,6 +48,10 @@ def api_urls(request: WSGIRequest) -> dict:
             "api-entry-day": reverse_lazy("api-entry-day"),
             "api-mood-table": reverse_lazy("api-mood-table"),
             "api-calendar": reverse_lazy("api-calendar"),
+            "api-scatter-plot": reverse_lazy("api-scatter-plot"),
+            "api-pie-chart": reverse_lazy("api-pie-chart"),
+            "api-mood-colors": reverse_lazy("api-mood-colors"),
+            "api-bar-chart": reverse_lazy("api-bar-chart"),
         }
     }
 

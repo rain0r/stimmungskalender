@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-01 21:18+0100\n"
-"PO-Revision-Date: 2023-01-01 21:19+0100\n"
+"POT-Creation-Date: 2023-01-08 19:58+0100\n"
+"PO-Revision-Date: 2023-01-08 15:30+0100\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -51,50 +51,50 @@ msgstr "Night"
 msgid "Log in"
 msgstr ""
 
-#: templates/web/base.html:49 templates/web/base.html:85
+#: templates/web/base.html:47 templates/web/base.html:83
 #: templates/web/mood-form/entry_list.html:4
 msgid "home"
 msgstr "Home"
 
-#: templates/web/base.html:52 templates/web/graph/graph.html:4
-#: templates/web/graph/graph.html:11
+#: templates/web/base.html:50 templates/web/graph/graph.html:5
+#: templates/web/graph/graph.html:15
 msgid "graphs"
 msgstr "Graphs"
 
-#: templates/web/base.html:55 templates/web/calendar/calendar.html:4
-#: templates/web/calendar/calendar.html:7
+#: templates/web/base.html:53 templates/web/calendar/calendar.html:4
+#: templates/web/calendar/calendar.html:8
 msgid "calendar"
 msgstr "Calendar"
 
-#: templates/web/base.html:58 templates/web/search/search.html:4
-#: templates/web/search/search.html:9
+#: templates/web/base.html:56 templates/web/search/search.html:4
+#: templates/web/search/search.html:10
 msgid "search"
 msgstr "Search"
 
-#: templates/web/base.html:61 templates/web/settings/settings.html:4
-#: templates/web/settings/settings.html:9
+#: templates/web/base.html:59 templates/web/settings/settings.html:4
+#: templates/web/settings/settings.html:10
 msgid "settings"
 msgstr "Settings"
 
-#: templates/web/base.html:72
+#: templates/web/base.html:70
 msgid "logged_in_as"
 msgstr "Logged in as"
 
-#: templates/web/base.html:88
+#: templates/web/base.html:86
 msgid "logout"
 msgstr "Logout"
 
-#: templates/web/graph/date_select.html:7 templates/web/search/search.html:13
+#: templates/web/graph/date_select.html:7 templates/web/search/search.html:14
 msgid "start_date"
 msgstr "From"
 
-#: templates/web/graph/date_select.html:17 templates/web/search/search.html:25
+#: templates/web/graph/date_select.html:17 templates/web/search/search.html:26
 msgid "end_date"
 msgstr "To"
 
 #: templates/web/graph/date_select.html:27
-#: templates/web/mood-form/entry_list.html:68
-#: templates/web/search/search.html:67
+#: templates/web/mood-form/entry_list.html:55
+#: templates/web/search/search.html:68
 msgid "go_to"
 msgstr "Go"
 
@@ -114,11 +114,7 @@ msgstr "Last month"
 msgid "last_year"
 msgstr "Last year"
 
-#: templates/web/graph/graph.html:16
-msgid "date_filter"
-msgstr "Date filter"
-
-#: templates/web/graph/graph.html:24
+#: templates/web/graph/graph.html:23
 msgid "scatterplot"
 msgstr "Scatterplot"
 
@@ -135,54 +131,45 @@ msgid "time_range"
 msgstr "Time range"
 
 #: templates/web/graph/scatter.html:13
-#: templates/web/settings/default_view_mode.html:15
+#: templates/web/settings/default_view_mode.html:10
 msgid "markers"
 msgstr "Markers"
 
 #: templates/web/graph/scatter.html:18
-#: templates/web/settings/default_view_mode.html:24
+#: templates/web/settings/default_view_mode.html:19
 msgid "lines"
 msgstr "Lines"
 
-#: templates/web/mood-form/entry_list.html:11
-#: templates/web/search/search.html:77
+#: templates/web/mood-form/entry_list.html:9
+msgid "diary"
+msgstr "Diary"
+
+#: templates/web/mood-form/entry_list.html:15
+#: templates/web/search/search.html:78
 msgid "week"
 msgstr "Week"
 
-#: templates/web/mood-form/entry_list.html:25
+#: templates/web/mood-form/entry_list.html:30
 msgid "note"
 msgstr "Note"
 
-#: templates/web/mood-form/entry_list.html:28
+#: templates/web/mood-form/entry_list.html:34
 msgid "prev"
 msgstr "Previous"
 
-#: templates/web/mood-form/entry_list.html:30
+#: templates/web/mood-form/entry_list.html:36
 msgid "next"
 msgstr "Next"
 
-#: templates/web/mood-form/entry_list.html:48
-msgid "what_happened_this_week"
-msgstr "What happened this week?"
-
-#: templates/web/mood-form/entry_list.html:51
-#: templates/web/settings/default_view_mode.html:28
-#: templates/web/settings/js_btn.html:17
-#: templates/web/settings/language.html:20
-#: templates/web/settings/mood_colors.html:29
-#: templates/web/settings/view_forms.html:29
-msgid "save"
-msgstr "Save"
-
-#: templates/web/mood-form/entry_list.html:58
+#: templates/web/mood-form/entry_list.html:45
 msgid "jump_to_week"
 msgstr "Jump to week"
 
-#: templates/web/mood-form/entry_list.html:75
+#: templates/web/mood-form/entry_list.html:62
 msgid "days_tracked"
 msgstr "days tracked"
 
-#: templates/web/mood-form/entry_list.html:76
+#: templates/web/mood-form/entry_list.html:63
 msgid "nights_tracked"
 msgstr "nights tracked"
 
@@ -190,11 +177,20 @@ msgstr "nights tracked"
 msgid "click_to_toggle"
 msgstr "Click to toggle"
 
-#: templates/web/search/search.html:37 templates/web/search/search.html:43
+#: templates/web/mood-form/note.html:22
+msgid "what_happened_this_week"
+msgstr "What happened this week?"
+
+#: templates/web/mood-form/note.html:24 templates/web/settings/language.html:20
+#: templates/web/settings/settings.html:26
+msgid "save"
+msgstr "Save"
+
+#: templates/web/search/search.html:38 templates/web/search/search.html:44
 msgid "search_term"
 msgstr "Search term"
 
-#: templates/web/search/search.html:48
+#: templates/web/search/search.html:49
 msgid "mood"
 msgstr "Mood"
 
@@ -206,7 +202,7 @@ msgstr "Default view"
 msgid "use_js_btn"
 msgstr "Use JavaScript buttons"
 
-#: templates/web/settings/js_btn.html:12
+#: templates/web/settings/js_btn.html:9
 msgid "submit_form_via_js"
 msgstr "Submit data from the mood form via JavaScript"
 
@@ -230,19 +226,19 @@ msgstr "You can set a color for each color"
 msgid "examples"
 msgstr "Examples"
 
-#: templates/web/settings/mood_colors.html:33
+#: templates/web/settings/mood_colors.html:28
 msgid "reset"
 msgstr "Reset"
 
-#: templates/web/settings/settings.html:21
+#: templates/web/settings/settings.html:29
 msgid "user_mgmt"
 msgstr "User management"
 
-#: templates/web/settings/settings.html:22
+#: templates/web/settings/settings.html:30
 msgid "add_edit_remove_user"
 msgstr "To add, edit and remove user, go to the"
 
-#: templates/web/settings/settings.html:41
+#: templates/web/settings/settings.html:49
 msgid "export_your_data"
 msgstr "Export your data"
 
@@ -250,11 +246,11 @@ msgstr "Export your data"
 msgid "view_forms"
 msgstr "Displayed forms"
 
-#: templates/web/settings/view_forms.html:16
+#: templates/web/settings/view_forms.html:9
 msgid "view_night_form"
 msgstr "Night form"
 
-#: templates/web/settings/view_forms.html:25
+#: templates/web/settings/view_forms.html:17
 msgid "view_day_form"
 msgstr "Day form"
 
@@ -317,6 +313,9 @@ msgstr "Last very bad night"
 #: templates/web/shared/i18n.html:20
 msgid "no_results"
 msgstr "No results"
+
+#~ msgid "date_filter"
+#~ msgstr "Date filter"
 
 #~ msgid "graph"
 #~ msgstr "Graph"

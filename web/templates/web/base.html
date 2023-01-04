@@ -27,8 +27,6 @@
         <link rel="manifest" href="{% static '/site.webmanifest' %}">
         <link rel="stylesheet" href="{% static 'main.css' %}">
         <style>{% include 'web/css/moods.css' %}</style>
-        {{ api_urls|json_script:"api_urls" }}
-        {{ active_url|json_script:"active_url" }}
     </head>
     <body>
         <nav class="navbar navbar-expand-lg">
@@ -46,7 +44,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
-                            <a class="nav-link" href="{% url 'index' %}">{% translate 'home' %}</a>
+                            <a class="nav-link" href="{% url 'index' %}">{% translate 'diary' %}</a>
                         </li>
                         <li class="nav-item {% if request.resolver_match.url_name == 'graph' %}active{% endif %}">
                             <a class="nav-link" href="{% url 'graph' %}">{% translate 'graphs' %}</a>
@@ -89,8 +87,14 @@
                 </li>
             </ul>
         </footer>
-        <script src="{% static '/main.js' %}"></script>
         {% block js %}
         {% endblock js %}
+        {{ api_urls|json_script:"api_urls" }}
+        {{ mood_mapping|json_script:"mood_mapping" }}
+        {{ mood_colors|json_script:"mood_colors" }}
+        {{ active_url|json_script:"active_url" }}
+        {% get_current_language as language_code %}
+        {{ language_code|json_script:"current_language" }}
+        <script src="{% static '/main.js' %}"></script>
     </body>
 </html>

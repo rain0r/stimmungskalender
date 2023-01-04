@@ -3,21 +3,18 @@ import { Popover } from "bootstrap";
 import "js-year-calendar/dist/js-year-calendar.css";
 
 export class SkCalendar {
-  constructor(apiUrls) {
+  constructor(apiUrls, catalog) {
     this.apiUrls = apiUrls;
+    this.catalog = catalog;
     this.moodMapping = JSON.parse(
       document.getElementById("mood_mapping").textContent
     );
     this.moodColors = JSON.parse(
       document.getElementById("mood_colors").textContent
     );
-    this.currentLanguage = JSON.parse(
-      document.getElementById("current_language").textContent
-    );
-    Promise.all([this.loadTranslation(), this.loadEntries()]).then((values) => {
-      const translations = values[0];
-      const calendarData = this.buildCalendarEntries(values[1]);
-      this.buildCalendar(translations, calendarData);
+    this.loadEntries().then((response) => {
+      const calendarData = this.buildCalendarEntries(response);
+      this.buildCalendar(calendarData);
     });
   }
 
@@ -45,18 +42,6 @@ export class SkCalendar {
     return event.toLocaleDateString(undefined, options);
   }
 
-  loadTranslation() {
-    return fetch(
-      `${this.apiUrls["base-url"]}jsoni18n/?lang=${this.currentLanguage}`
-    )
-      .then((response) => response.json())
-      .catch((err) => {
-        console.error("Error", err);
-        document.getElementById("#error-card").classList.remove("invisible");
-        document.getElementById("#error-msg").textContent = err.statusText;
-      });
-  }
-
   loadEntries() {
     return fetch(`${this.apiUrls["api-calendar"]}`)
       .then((response) => response.json())
@@ -67,7 +52,7 @@ export class SkCalendar {
       });
   }
 
-  buildCalendar(translations, calendarData) {
+  buildCalendar(calendarData) {
     new Calendar("#calendar", {
       minDate: new Date(calendarData.first_day),
       maxDate: new Date(calendarData.last_day),
@@ -101,14 +86,14 @@ export class SkCalendar {
             <p>${this.formatDate(e.events[i].day)}</p>
             <ul>
               <li>
-                ${translations.catalog["mood"]} ${
-              translations.catalog["night"]
-            }: ${this.moodMapping[e.events[i].mood_night]}
+                ${this.catalog["mood"]} ${this.catalog["night"]}: ${
+              this.moodMapping[e.events[i].mood_night]
+            }
               </li>
               <li>
-                ${translations.catalog["mood"]} ${
-              translations.catalog["day"]
-            }: ${this.moodMapping[e.events[i].mood_day]}
+                ${this.catalog["mood"]} ${this.catalog["day"]}: ${
+              this.moodMapping[e.events[i].mood_day]
+            }
               </li>
             </ul>
           </div>

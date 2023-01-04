@@ -13,6 +13,7 @@ from rest_framework.response import Response
 from web import serializers
 from web.models import UserSettings, PERIODS, Moods, UserMoodColorSettings
 from web.query_params import QP_START_DT, QP_END_DT, QP_MOOD, QP_SEARCH_TERM, QP_PERIOD
+from web.service.bar_graph import BarGraphService
 from web.service.pie_graph import PieGraphService
 from web.service.scatter_graph import ScatterGraphService
 from web.service.settings import SettingsService
@@ -122,7 +123,7 @@ class SearchView(GenericAPIView):
     @extend_schema(
         parameters=[
             inline_serializer(
-                name="ScatterGraphSerializer",
+                name="WeekSerializer",
                 fields={
                     "search": drf_serializers.CharField(required=False),
                     "mood": drf_serializers.ChoiceField(Moods, required=False),
@@ -238,15 +239,13 @@ class ScatterGraphView(DefaultDateHandler, GenericAPIView):
         ],
     )
     def get(self, request):
-        sk_service = SkService(self.request.user)
-        ss = SettingsService(self.request.user)
-        is_markers = ss.is_markers(self.request.GET)
+        sk_service = SkService(request.user)
         start_dt = self.default_start_dt()
         end_dt = self.default_end_dt()
         scatter_graph = ScatterGraphService(
-            is_markers=is_markers,
+            is_markers=True,
             mood_mapping=sk_service.mood_mapping,
-            user=self.request.user,
+            user=request.user,
             start_dt=start_dt,
             end_dt=end_dt,
         )
@@ -275,26 +274,67 @@ class PieChartGraphView(DefaultDateHandler, GenericAPIView):
                     QP_END_DT: drf_serializers.DateField(
                         format=settings.SK_DATE_FORMAT, required=False
                     ),
+                    QP_PERIOD: drf_serializers.ChoiceField(
+                        choices=PERIODS, required=True
+                    ),
                 },
             ),
         ],
     )
     def get(self, request):
-        sk_service = SkService(self.request.user)
+        sk_service = SkService(request.user)
         start_dt = self.default_start_dt()
         end_dt = self.default_end_dt()
-        period = self.request.GET.get(QP_PERIOD, None)
+        period = request.GET.get(QP_PERIOD, None)
 
         if not period:
             return Response(status=400)
-
         pie_graph = PieGraphService(
-            user=self.request.user,
+            user=request.user,
             mood_mapping=sk_service.mood_mapping,
             start_dt=start_dt,
             end_dt=end_dt,
         )
         serializer = serializers.PieChartResponseSerializer(pie_graph.load_data(period))
+        return Response(serializer.data)
+
+
+class BarChartGraphView(DefaultDateHandler, GenericAPIView):
+    """
+    Returns data for the "Average Moods" bar chart.
+    """
+
+    permission_classes = [IsAuthenticated]
+    serializer_class = serializers.BarChartResponseSerializer
+
+    @extend_schema(
+        parameters=[
+            inline_serializer(
+                name="BarChartGraphSerializer",
+                fields={
+                    QP_START_DT: drf_serializers.DateField(
+                        format=settings.SK_DATE_FORMAT, required=False
+                    ),
+                    QP_END_DT: drf_serializers.DateField(
+                        format=settings.SK_DATE_FORMAT, required=False
+                    ),
+                },
+            ),
+        ],
+    )
+    def get(self, request):
+        sk_service = SkService(request.user)
+        start_dt = self.default_start_dt()
+        end_dt = self.default_end_dt()
+        print(f"start_dt: {start_dt}")
+        bar_graph = BarGraphService(
+            user=self.request.user,
+            mood_mapping=sk_service.mood_mapping,
+            start_dt=start_dt,
+            end_dt=end_dt,
+        )
+
+        serializer = serializers.BarChartResponseSerializer(bar_graph.load_data())
         return Response(serializer.data)
 
 
@@ -320,7 +360,7 @@ class FormsDisplayedView(GenericAPIView):
     serializer_class = serializers.UserSettingsSerializer
 
     def get(self, request):
-        user_settings = UserSettings.objects.get(user=self.request.user)
+        user_settings = UserSettings.objects.get(user=request.user)
         serializer = serializers.UserSettingsSerializer(user_settings)
         return Response(serializer.data)
 
@@ -336,7 +376,7 @@ class FormsDisplayedView(GenericAPIView):
     def post(self, request):
         night_form = request.data.get("night_form")
         day_form = request.data.get("day_form")
-        ss = SettingsService(self.request.user)
+        ss = SettingsService(request.user)
         ss.set_forms_displayed(day=day_form, night=night_form)
         return Response(status=status.HTTP_200_OK)
 
