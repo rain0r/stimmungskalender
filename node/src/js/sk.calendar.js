@@ -58,14 +58,13 @@ export class SkCalendar {
   }
 
   loadEntries() {
-    const jqxhr = fetch(`${this.apiUrls["api-calendar"]}`)
+    return fetch(`${this.apiUrls["api-calendar"]}`)
       .then((response) => response.json())
       .catch((err) => {
         console.error("Error", err);
         document.getElementById("#error-card").classList.remove("invisible");
         document.getElementById("#error-msg").textContent = err.statusText;
       });
-    return jqxhr;
   }
 
   buildCalendar(translations, calendarData) {

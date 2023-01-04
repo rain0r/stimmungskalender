@@ -1,8 +1,11 @@
 export class MoodForm {
   constructor(apiUrls) {
     this.apiUrls = apiUrls;
-    this.loadEntries();
-    this.addInputListener();
+
+    if (document.querySelectorAll(".js-btn").length > 0) {
+      this.loadEntries();
+      this.addInputListener();
+    }
   }
 
   loadEntries() {
