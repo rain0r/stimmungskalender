@@ -1,5 +1,6 @@
-from django.conf import settings
 from django.core.handlers.wsgi import WSGIRequest
+from django.urls import resolve
+from django.urls import reverse_lazy
 from django.utils.translation import get_language, to_locale
 from django.utils.translation import gettext as _
 
@@ -23,10 +24,6 @@ def mood_colors(request: WSGIRequest) -> dict:
     return {"mood_colors": ret}
 
 
-def ng_sk(request: WSGIRequest) -> dict:
-    return {"ng_sk_enabled": settings.NG_SK_ENABLED}
-
-
 def mood_names(request: WSGIRequest) -> dict:
     return {
         "mood_names": {
@@ -37,3 +34,24 @@ def mood_names(request: WSGIRequest) -> dict:
             5: _("very_good"),
         }
     }
+
+
+def api_urls(request: WSGIRequest) -> dict:
+    """
+    Provide urls to api endpoints.
+    :param request:
+    :return:
+    """
+    return {
+        "api_urls": {
+            "base-url": reverse_lazy("index"),
+            "api-entry-day": reverse_lazy("api-entry-day"),
+            "api-mood-table": reverse_lazy("api-mood-table"),
+            "api-calendar": reverse_lazy("api-calendar"),
+        }
+    }
+
+
+def active_url(request: WSGIRequest) -> dict:
+    current_url = resolve(request.path_info).url_name
+    return {"active_url": current_url}

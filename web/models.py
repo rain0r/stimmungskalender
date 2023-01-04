@@ -50,13 +50,23 @@ class Week(models.Model):
 
 
 class UserSettings(models.Model):
+    """
+    SK settings for a user.
+    """
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     view_is_markers = models.BooleanField(default=True)
     view_day_form = models.BooleanField(default=True)
     view_night_form = models.BooleanField(default=True)
+    # Defines, if the mood form contains the default buttons or the new toggle button group.
+    use_js_btn = models.BooleanField(default=True)
 
 
 class UserMoodColorSettings(models.Model):
+    """
+    Maps user-defined colors to moods.
+    """
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     mood = models.IntegerField(choices=Moods.choices)
     color = models.CharField(max_length=32)

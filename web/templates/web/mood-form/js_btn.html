@@ -1,0 +1,23 @@
+<div class="btn-group-vertical"
+     role="group"
+     aria-label="Vertical radio toggle button group">
+    {% for number in moods reversed %}
+        {% with mood_value=weekday_entry|get_obj_attr:form.attr %}
+            <input type="radio"
+                   class="btn-check mood-input"
+                   name="radio-{{ weekday_entry.day|date:'Y-m-d' }}"
+                   id="radio-{{ form.name }}-{{ number }}-{{ weekday_entry.day|date:'Y-m-d' }}"
+                   autocomplete="off"
+                   data-period="{{ form.name }}"
+                   data-day="{{ weekday_entry.day|date:'Y-m-d' }}"
+                   data-mood="{{ number }}">
+            <label class="btn btn-outline-secondary btn-mood-{{ number }}"
+                   for="radio-{{ form.name }}-{{ number }}-{{ weekday_entry.day|date:'Y-m-d' }}"
+                   title="{{ moods|get_item:number }}"
+                   id="label-{{ form.name }}-{{ number }}-{{ weekday_entry.day|date:'Y-m-d' }}"
+                   data-bs-toggle="tooltip">
+                &nbsp;
+            </label>
+        {% endwith %}
+    {% endfor %}
+</div>

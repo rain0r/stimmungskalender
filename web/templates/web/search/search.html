@@ -6,7 +6,7 @@
 {% block content %}
     {% load bootstrap5 %}
     {% load i18n %}
-    <a href="{% url 'search' %}" class="h1 text-dark mb-2">{% translate 'search' %}</a>
+    <a href="{% url 'search' %}" class="h1  mb-2">{% translate 'search' %}</a>
     <hr>
     <form action="{% url 'search' %}" method="get" class="row my-2 g-2">
         <div class="mb-3 row">
@@ -83,7 +83,7 @@
                 </small>
             </div>
             <div class="col-12 col-md-6">
-                <pre class="text-muted">{% if week.note %}{{ week.note }}{% endif %}</pre>
+                <pre class="text-body-secondary">{% if week.note %}{{ week.note }}{% endif %}</pre>
             </div>
             <div class="col-12 col-md-3">
                 <a href="{% url 'graph' %}?start_date={{ week.week_date|date:'Y-m-d' }}"

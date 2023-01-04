@@ -1,3 +1,81 @@
 @import "datePicker.scss";
-@import "stimmungskalender.css";
+@import "stimmungskalender.scss";
 @import "bootstrap.scss";
+
+.standout-data-good {
+  background-color: $green-300;
+  color: $black;
+}
+
+.standout-data-bad {
+  background-color: $red-400;
+  color: $black;
+}
+
+.btn-mood-1 {
+  background-color: $red-500 !important;
+}
+
+.btn-mood-2 {
+  background-color: $yellow-300 !important;
+}
+
+.btn-mood-3 {
+  background-color: $green-100 !important;
+}
+
+.btn-mood-4 {
+  background-color: $green-400 !important;
+}
+
+.btn-mood-5 {
+  background-color: $green-500 !important;
+}
+
+.btn-check:checked + .btn,
+:not(.btn-check) + .btn:active,
+.btn:first-child:active,
+.btn.active,
+.btn.show {
+  color: $black;
+}
+
+[data-bs-theme="dark"] {
+  .bg-tertiary {
+    background-color: var(--bs-tertiary-bg) !important;
+  }
+
+  .form-night {
+    @include gradient-y(var(--bs-tertiary-bg), var(--bs-secondary-bg));
+  }
+
+  .form-day {
+    color: $black;
+    @include gradient-y($gray-400, $yellow-100);
+  }
+
+  .form-text-color-day {
+    color: $black;
+  }
+}
+
+[data-bs-theme="light"] {
+  body {
+    color: $black;
+    background-color: $gray-100 !important;
+  }
+
+  .form-night {
+    @include gradient-y($white, $blue-300);
+    color: $black;
+  }
+
+  .form-day {
+    color: $black;
+    @include gradient-y($gray-100, $yellow-100);
+  }
+
+  .form-text-color-day {
+    color: $black;
+  }
+}
