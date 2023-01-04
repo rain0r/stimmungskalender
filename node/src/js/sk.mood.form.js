@@ -48,6 +48,7 @@ export class MoodForm {
     document.querySelectorAll(".mood-btn-label").forEach((label) => {
       label.addEventListener("click", () => {
         const checkbox = label.previousElementSibling;
+        debugger;
         const csrfToken = document.querySelector(
           "[name=csrfmiddlewaretoken]"
         ).value;
