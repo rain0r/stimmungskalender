@@ -21,7 +21,7 @@ drf-spectacular = "^0.25.1"
 ipython = "^8.8.0"
 plotly = "^5.11.0"
 psycopg2 = "^2.9.5"
-python-decouple = "^3.6"
+python-decouple = "^3.7"
 django-bootstrap-v5 = "^1.0.11"
 
 [tool.poetry.dev-dependencies]
