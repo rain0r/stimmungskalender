@@ -10,8 +10,9 @@ from web.structs import (
     SkCalendar,
     ScatterGraphResponse,
     PieChartResponse,
-    GraphDataPointY,
+    ScatterGraphDataPointY,
     ExportData,
+    BarChartResponse,
 )
 
 
@@ -50,7 +51,7 @@ class CalendarSerializer(DataclassSerializer):
 
 class GraphDataPointYSerializer(DataclassSerializer):
     class Meta:
-        dataclass = GraphDataPointY
+        dataclass = ScatterGraphDataPointY
 
 
 class ScatterGraphResponseSerializer(DataclassSerializer):
@@ -61,6 +62,11 @@ class ScatterGraphResponseSerializer(DataclassSerializer):
 class PieChartResponseSerializer(DataclassSerializer):
     class Meta:
         dataclass = PieChartResponse
+
+
+class BarChartResponseSerializer(DataclassSerializer):
+    class Meta:
+        dataclass = BarChartResponse
 
 
 class MoodTableSerializer(DataclassSerializer):

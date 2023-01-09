@@ -22,6 +22,7 @@
         <link rel="stylesheet" href="{% static 'main.css' %}">
         <!-- Custom styles for this template -->
         <link rel="stylesheet" type="text/css" href="{% static '/signin.css' %}">
+        {{ active_url|json_script:"active_url" }}
     </head>
     <body class="d-flex flex-column h-100">
         {% block content %}
@@ -29,7 +30,7 @@
         <hr>
         <footer class="footer mt-auto py-3">
             <div class="container">
-                <span class="text-body-secondary">&copy; 2021-2022</span>
+                <span class="text-body-secondary">&copy; 2021-2023</span>
             </div>
         </footer>
         <script src="{% static '/main.js' %}"></script>

@@ -6,8 +6,9 @@
 {% block content %}
     {% load bootstrap5 %}
     {% load i18n %}
-    <a href="{% url 'search' %}" class="h1  mb-2">{% translate 'search' %}</a>
-    <hr>
+    <div class="page-title-div">
+        <a href="{% url 'search' %}" class="page-title">{% translate 'search' %}</a>
+    </div>
     <form action="{% url 'search' %}" method="get" class="row my-2 g-2">
         <div class="mb-3 row">
             <label for="start_date" class="col-sm-2 col-form-label">{% translate 'start_date' %}</label>

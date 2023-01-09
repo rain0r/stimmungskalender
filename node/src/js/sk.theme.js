@@ -47,7 +47,10 @@ export class Theme {
   }
 
   showActiveTheme(theme) {
-    document.querySelector("#dark-theme").checked = theme === "dark";
+    const checkbox = document.querySelector("#dark-theme");
+    if (checkbox) {
+      checkbox.checked = theme === "dark";
+    }
   }
 }
 

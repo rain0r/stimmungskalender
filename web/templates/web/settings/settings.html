@@ -6,8 +6,9 @@
 {% block content %}
     {% load i18n %}
     {% get_current_language as LANGUAGE_CODE %}
-    <a href="{% url 'settings' %}" class="h1  mb-2">{% translate 'settings' %}</a>
-    <hr>
+    <div class="page-title-div">
+        <a href="{% url 'settings' %}"  class="page-title">{% translate 'settings' %}</a>
+    </div>
     {% include 'web/settings/language.html' %}
     <hr>
     <form class="mt-3" action="{% url 'save-settings' %}" method="post">

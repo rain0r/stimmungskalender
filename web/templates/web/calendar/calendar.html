@@ -4,7 +4,9 @@
     {% translate 'calendar' %}
 {% endblock %}
 {% block content %}
-    <a href="{% url 'calendar' %}" class="h1  mb-2">{% translate 'calendar' %}</a>
+    <div class="page-title-div">
+        <a href="{% url 'calendar' %}" class="page-title">{% translate 'calendar' %}</a>
+    </div>
     <div id="calendar"></div>
     <div id="error-card" class="card invisible">
         <div class="card-body">
@@ -13,9 +15,4 @@
         </div>
     </div>
 {% endblock %}
-{% block js %}
-    {% get_current_language as language_code %}
-    {{ mood_mapping|json_script:"mood_mapping" }}
-    {{ mood_colors|json_script:"mood_colors" }}
-    {{ language_code|json_script:"current_language" }}
-{% endblock %}
+{% block js %}{% endblock %}

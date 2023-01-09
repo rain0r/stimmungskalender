@@ -4,11 +4,9 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   mode: "production",
-  entry: {
-    main: "./src/js/main.js",
-  },
+  entry: { main: "./src/js/main.js", plotly: "./src/js/plotly.js" },
   output: {
-    filename: "main.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "../web/static"),
   },
   plugins: [
@@ -32,7 +30,7 @@ module.exports = {
         test: /\.(scss)$/,
         use: [
           {
-            loader: "style-loader",
+            loader: miniCssExtractPlugin.loader,
           },
           {
             loader: "css-loader",

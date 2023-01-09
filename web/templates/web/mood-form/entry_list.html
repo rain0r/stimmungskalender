@@ -5,6 +5,9 @@
 {% endblock %}
 {% block content %}
     {% load i18n %}
+    <div class="page-title-div">
+        <a href="{% url 'index' %}" class="page-title">{% translate 'diary' %}</a>
+    </div>
     <div class="container">
         <div class="d-flex flex-column flex-md-row align-items-baseline justify-content-between">
             <div class="d-flex flex-column flex-md-row mb-4 mb-md-2 align-items-baseline ">
