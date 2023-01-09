@@ -184,7 +184,7 @@ Django = ">=3.2"
 
 [[package]]
 name = "dj-rest-auth"
-version = "2.2.5"
+version = "2.2.6"
 description = "Authentication and Registration in Django Rest Framework"
 category = "main"
 optional = false
@@ -920,7 +920,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "b4d08028f0714a9eabaff92f2f63815c0298f375d461443c909c4bf271863f5b"
+content-hash = "8adedb352fd173f0fe5cc0af0366a9447f31fd14ef637a7d3804a6dfe6f0f14a"
 
 [metadata.files]
 appnope = [
@@ -1011,7 +1011,7 @@ dj-database-url = [
     {file = "dj_database_url-1.2.0-py3-none-any.whl", hash = "sha256:5c2993b91801c0f78a8b19e642b497b90831124cbade0c265900d4c1037b4730"},
 ]
 dj-rest-auth = [
-    {file = "dj-rest-auth-2.2.5.tar.gz", hash = "sha256:c9a0dd9c79c33a2d4c723d1e4c1a60ab4657b6333aa2539b6781fe25a01c41b6"},
+    {file = "dj-rest-auth-2.2.6.tar.gz", hash = "sha256:653f5eecdd96699768a80fd8439de70a3bb17280101b0d25001ffae5ea7b4dc6"},
 ]
 django = [
     {file = "Django-4.1.5-py3-none-any.whl", hash = "sha256:4b214a05fe4c99476e99e2445c8b978c8369c18d4dea8e22ec412862715ad763"},
