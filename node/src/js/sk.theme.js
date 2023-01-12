@@ -19,7 +19,7 @@ export class Theme {
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", () => {
-        if (storedTheme !== "light" || storedTheme !== "dark") {
+        if (this.storedTheme !== "light" || this.storedTheme !== "dark") {
           this.setTheme(this.getPreferredTheme());
         }
       });
