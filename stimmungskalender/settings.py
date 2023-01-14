@@ -223,7 +223,7 @@ LOGGING = {
 
 REGISTRATION_OPEN = config("REGISTRATION_OPEN", default=False, cast=bool)
 
-LOGOUT_REDIRECT_URL = "/accounts/login/"
+LOGOUT_REDIRECT_URL = "/"
 
 # Django Rest Framework
 
