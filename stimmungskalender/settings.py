@@ -116,17 +116,17 @@ AUTH_PASSWORD_VALIDATORS = []
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = "de-de"
+LANGUAGE_CODE = config("LANGUAGE_CODE", default="de-de")
 
-TIME_ZONE = "Europe/Berlin"
+TIME_ZONE = config("TIME_ZONE", default="Europe/Berlin")
 
-USE_I18N = True
+USE_I18N = config("USE_I18N", default=True, cast=bool)
 
-USE_L10N = True
+USE_L10N = config("USE_L10N", default=True, cast=bool)
 
-USE_TZ = True
+USE_TZ = config("USE_TZ", default=True, cast=bool)
 
-FIRST_DAY_OF_WEEK = 1
+FIRST_DAY_OF_WEEK = config("FIRST_DAY_OF_WEEK", default=1, cast=int)
 
 LANGUAGE_PATHS = [
     os.path.join(BASE_DIR, "locale"),  # base folder where manage.py resides
@@ -239,7 +239,7 @@ REST_FRAMEWORK = {
 
 # django cors header
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = config("CORS_ORIGIN_ALLOW_ALL", default=True, cast=bool)
 
 CORS_ALLOWED_ORIGINS = config(
     "CORS_ALLOWED_ORIGINS", default="http://localhost", cast=Csv()
@@ -262,7 +262,7 @@ SIMPLE_JWT = {
 
 DEFAULT_VIEW_MODE = "lines"
 
-PER_PAGE = 10
+PER_PAGE = config("PER_PAGE", default=10, cast=int)
 
 SK_DATE_FORMAT = "%Y-%m-%d"  # To identify a week
 
