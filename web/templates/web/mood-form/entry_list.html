@@ -41,6 +41,7 @@
         {% for form in forms %}
             {% include 'web/mood-form/form.html' with form=form %}
         {% endfor %}
+        {% include 'web/mood-form/entry_posted_toast.html' %}
         <hr>
         <span class="h4">{% translate 'jump_to_week' %}</span>
         <form method="get" action="{% url 'index' %}"  class="row my-2 g-2">

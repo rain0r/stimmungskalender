@@ -74,6 +74,7 @@ class UserMoodColorSettings(models.Model):
 
 # Django database signals
 
+
 # Create a UserSettings entry for each user
 @receiver(post_save, sender=User)
 def create_user_settings(

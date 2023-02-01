@@ -429,7 +429,6 @@ class CalendarView(GenericAPIView):
 
 
 class ExportView(GenericAPIView):
-
     permission_classes = [IsAuthenticated]
     serializer_class = serializers.ExportDataSerializer
 

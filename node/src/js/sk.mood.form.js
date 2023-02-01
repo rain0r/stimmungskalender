@@ -1,3 +1,5 @@
+import { Toast } from "bootstrap";
+
 export class MoodForm {
   constructor(apiUrls) {
     this.apiUrls = apiUrls;
@@ -48,7 +50,6 @@ export class MoodForm {
     document.querySelectorAll(".mood-btn-label").forEach((label) => {
       label.addEventListener("click", () => {
         const checkbox = label.previousElementSibling;
-        debugger;
         const csrfToken = document.querySelector(
           "[name=csrfmiddlewaretoken]"
         ).value;
@@ -71,13 +72,27 @@ export class MoodForm {
             .filter((elem) => elem.nodeName === "LABEL")
             .forEach((elem) => (elem.innerHTML = "&nbsp;"));
           if (checkbox.dataset.active === "true") {
+            // Remove entry
             checkbox.checked = false;
             checkbox.removeAttribute("checked");
             checkbox.dataset.active = "false";
+
+            document.querySelector(
+              "#mood-entry-posted-body"
+            ).textContent = `Removed mood`;
           } else {
+            // Set entry selected
             checkbox.setAttribute("data-active", true);
             label.innerText = "X";
+
+            document.querySelector(
+              "#mood-entry-posted-body"
+            ).textContent = `Saved mood`;
           }
+          // Display a toast to signal the entry has been saved
+          new Toast(document.querySelector("#mood-entry-posted"), {
+            delay: 1500,
+          }).show();
         });
       });
     });

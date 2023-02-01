@@ -35,6 +35,7 @@ ready(() => {
   );
 
   SkUtil.enableToolTip();
+  SkUtil.enableToast();
   SkUtil.enableDatePicker();
   new Theme();
 

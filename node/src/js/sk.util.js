@@ -22,3 +22,9 @@ export const enableToolTip = function () {
     (tooltipTriggerEl) => new Tooltip(tooltipTriggerEl)
   );
 };
+
+export const enableToast = function () {
+  // const toastElList = document.querySelectorAll(".toast");
+  // const hugo = [...toastElList].map((toastEl) => new Toast(toastEl));
+  // hugo.forEach((i) => i.show());
+};
