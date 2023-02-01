@@ -299,13 +299,13 @@ Django = ">=3.2"
 
 [[package]]
 name = "dj-rest-auth"
-version = "2.2.6"
+version = "2.2.7"
 description = "Authentication and Registration in Django Rest Framework"
 category = "main"
 optional = false
 python-versions = ">=3.5"
 files = [
-    {file = "dj-rest-auth-2.2.6.tar.gz", hash = "sha256:653f5eecdd96699768a80fd8439de70a3bb17280101b0d25001ffae5ea7b4dc6"},
+    {file = "dj-rest-auth-2.2.7.tar.gz", hash = "sha256:911bcf377df68c958a7f534def7715b61f3d887a46fbb53ca7666244b7c0b143"},
 ]
 
 [package.dependencies]
@@ -313,7 +313,7 @@ Django = ">=2.0"
 djangorestframework = ">=3.7.0"
 
 [package.extras]
-with-social = ["django-allauth (>=0.40.0,<0.51.0)"]
+with-social = ["django-allauth (>=0.40.0,<0.53.0)"]
 
 [[package]]
 name = "django"
@@ -1443,4 +1443,4 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "fc3c7af87c1d6e8284ee11f70c7f7d8feb204e8e9f60feba6ba95c7db2cb5f4a"
+content-hash = "31720faff1ad97ebf2c2080abe7eb17e965feecbf91f405da3ed339897419322"
