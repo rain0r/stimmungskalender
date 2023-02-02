@@ -23,7 +23,7 @@
             </div>
             <div id="collapse-{{ form.name }}" class="p-3 collapse show">
                 <div class="d-flex justify-content-md-center flex-column flex-md-row flex-grow-1 p3">
-                    <div class="d-lg-none d-flex flex-row justify-content-between mb-5 p-1 border rounded sticky-top form-{{ form.name }}">
+                    <div class="d-lg-none d-flex flex-row justify-content-between mb-5 p-1 border rounded sticky-top z-2 form-{{ form.name }}">
                         {% for weekday_entry in mood_table.days_of_week %}
                             <a href="#{{ form.name }}-{{ weekday_entry.day|date:'D' }}">{{ weekday_entry.day|date:"D" }}</a>
                         {% endfor %}
