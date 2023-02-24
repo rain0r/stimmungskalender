@@ -62,16 +62,15 @@ Steps to get `stimmungskalender` up and running:
 
 ```sh
 git clone https://github.com/rain0r/stimmungskalender/
-```
-
-```sh
+cd stimmungskalender
 docker compose up web
 ```
 
-In another shell, initialise the application:
+In another shell, initialise the application and create the first user :
 
 ```sh
 docker compose run app first_run
+docker compose run app default_user
 ```
 
 Show all available commands
@@ -80,3 +79,4 @@ Show all available commands
 docker compose run app help
 ```
 
+Visit http://localhost:8080/ and log in with username `admin` and password `admin`.
