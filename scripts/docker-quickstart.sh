@@ -14,7 +14,7 @@ docker run --env-file sqlite-env \
         -v dbdir:/db rain0r/stimmungskalender default_user \
         --name stimmungskalender
 
-docker run -p 8080:8000 --env-file sqlite-env \
-        --name stimmungskalender
+docker run --name stimmungskalender -p 8080:8000 \
+        --env-file sqlite-env \
         -v static:/srv/www/stimmungskalender/static \
         -v dbdir:/db rain0r/stimmungskalender \
