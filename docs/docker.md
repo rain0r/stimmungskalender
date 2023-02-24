@@ -24,15 +24,11 @@ To get the latest version of `stimmungskalender` from Docker Hub:
 docker pull rain0r/stimmungskalender
 ```
 
-Use one of the environment files, depending on what database engine you would like to use. Choose one of the pre-configured env files: [postgres](https://raw.githubusercontent.com/rain0r/stimmungskalender/master/docker/app/django-env-pgsql) or [sqlite](https://raw.githubusercontent.com/rain0r/stimmungskalender/master/docker/app/django-env-sqlite)
-
 ```sh
 wget https://raw.githubusercontent.com/rain0r/stimmungskalender/master/docker/app/django-env-sqlite -O sqlite-env
 ```
 
 In the following examples, the `sqlite-env` will be used as the name of the environment file.
-
-The instructions for `postgres` and `sqlite` are basically the same. `postgres` user can omit the `-v dbdir:/db` flag.
 
 Before starting, the database needs to be initialized:
 
@@ -65,6 +61,10 @@ This includes `nginx` and `postgres`.
 Steps to get `stimmungskalender` up and running:
 
 ```sh
+git clone https://github.com/rain0r/stimmungskalender/
+```
+
+```sh
 docker compose up web
 ```
 
@@ -74,9 +74,9 @@ In another shell, initialise the application:
 docker compose run app first_run
 ```
 
-
-All available commands
+Show all available commands
 
 ```sh
-docker compose run app
+docker compose run app help
 ```
+

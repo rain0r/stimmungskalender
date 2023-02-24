@@ -25,8 +25,7 @@ yarn-debug.log*
 yarn-error.log*
 
 ## Dependency directories
-node_modules/
-node
+node/node_modules/
 
 # postgres
 pgdata
