@@ -2,7 +2,7 @@
 
 docker pull rain0r/stimmungskalender
 
-wget https://raw.githubusercontent.com/rain0r/stimmungskalender/docker/docker/app/django-env-sqlite -O sqlite-env
+wget https://raw.githubusercontent.com/rain0r/stimmungskalender/master/docker/app/django-env-sqlite -O sqlite-env
 
 docker run --env-file sqlite-env \
         -v static:/srv/www/stimmungskalender/static \
