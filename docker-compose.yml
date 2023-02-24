@@ -1,21 +1,19 @@
 version: '3.9'
 
 services:
-  # PostgreSQL
+  # Database
   db:
-      image: postgres
-      restart: always
+      image: "postgres:15-alpine"
+      restart: unless-stopped
+      env_file: ./docker/db/env
       ports:
         - "8081:5432"
       volumes:
         - "db:/var/lib/postgresql/data"
-      environment:
-        - LC_ALL=C.UTF-8
-        - POSTGRES_USER=stimmungskalender
-        - POSTGRES_PASSWORD=stimmungskalender
 
   # Django app
   app:
+      env_file: ./docker/app/django-env-pgsql
       build:
         context: .
         dockerfile: ./docker/app/Dockerfile

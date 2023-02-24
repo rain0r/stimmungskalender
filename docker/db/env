@@ -1,0 +1,4 @@
+LC_ALL=C.UTF-8
+POSTGRES_USER=stimmungskalender
+POSTGRES_PASSWORD=stimmungskalender
+POSTGRES_DB=stimmungskalender
