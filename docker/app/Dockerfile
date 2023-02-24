@@ -3,10 +3,14 @@ FROM python:3.10-alpine
 # Defines which decouple environment file to use
 ARG django_env=django-env-pgsql
 
-# Ensure that Python outputs everything that's printed inside
-# the application rather than buffering it.
-ENV PYTHONUNBUFFERED 1
-ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONFAULTHANDLER=1 \
+  PYTHONUNBUFFERED=1 \
+  PYTHONHASHSEED=random \
+  PYTHONDONTWRITEBYTECODE=1 \
+  # pip:
+  PIP_NO_CACHE_DIR=1 \
+  PIP_DISABLE_PIP_VERSION_CHECK=1 \
+  PIP_DEFAULT_TIMEOUT=100
 
 # Set the default workdir
 WORKDIR /srv/www/stimmungskalender
