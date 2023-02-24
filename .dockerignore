@@ -26,5 +26,12 @@ yarn-error.log*
 
 ## Dependency directories
 node_modules/
+node
 
+# postgres
 pgdata
+
+# python
+.venv
+.virtualenv
+

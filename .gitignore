@@ -153,14 +153,13 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 
-# stimmungskalender Sqlite Database
+# stimmungskalender
 sk.sqlite
-
 web/static/ng-sk/
 web/static/js/
 web/static/css/bootstrap.min.css
-
 static/
+sqlite-env
 
 # Logs
 logs
@@ -299,7 +298,8 @@ dist
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
