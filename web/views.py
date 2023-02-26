@@ -87,6 +87,9 @@ class SaveSettingsView(View):
 
 @method_decorator(login_required, name="dispatch")
 class EntryListView(TemplateView):
+    """
+    The home page, displays the day and night form.
+    """
     template_name = "web/mood-form/entry_list.html"
 
     @method_decorator(ensure_csrf_cookie)
