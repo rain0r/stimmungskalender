@@ -1,8 +1,8 @@
 from django.core.handlers.wsgi import WSGIRequest
-from django.urls import resolve
-from django.urls import reverse_lazy
-from django.utils.translation import get_language, to_locale
+from django.urls import resolve, reverse_lazy
+from django.utils.translation import get_language
 from django.utils.translation import gettext as _
+from django.utils.translation import to_locale
 
 from web.service.settings import SettingsService
 

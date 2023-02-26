@@ -1,5 +1,5 @@
 import typing
-from datetime import date, timedelta, datetime
+from datetime import date, datetime, timedelta
 from enum import Enum
 
 from django.conf import settings
@@ -8,16 +8,16 @@ from django.db.models import Q, QuerySet
 from django.utils import timezone
 from django.utils.translation import gettext as _
 
-from web.models import Entry, Week, Moods
+from web.models import Entry, Moods, Week
 from web.service.base_graph import PERIOD_DAY, PERIOD_NIGHT
 from web.structs import (
-    WeekdayEntry,
-    MoodTable,
-    StandoutData,
-    GraphTimeRanges,
-    SkCalendar,
-    GeneralStats,
     ExportData,
+    GeneralStats,
+    GraphTimeRanges,
+    MoodTable,
+    SkCalendar,
+    StandoutData,
+    WeekdayEntry,
 )
 
 

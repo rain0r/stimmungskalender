@@ -1,5 +1,5 @@
 import typing
-from datetime import datetime, date, timedelta
+from datetime import date, datetime, timedelta
 
 import pkg_resources
 from django.conf import settings
@@ -16,7 +16,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import RedirectView, TemplateView
 
 from web.models import PERIODS
-from web.query_params import QP_START_DT, QP_END_DT, QP_MOOD, QP_SEARCH_TERM, QP_PAGE
+from web.query_params import QP_END_DT, QP_MOOD, QP_PAGE, QP_SEARCH_TERM, QP_START_DT
 from web.service.base_graph import PERIOD_DAY, PERIOD_NIGHT
 from web.service.settings import SettingsService
 from web.service.sk import SkService
@@ -90,6 +90,7 @@ class EntryListView(TemplateView):
     """
     The home page, displays the day and night form.
     """
+
     template_name = "web/mood-form/entry_list.html"
 
     @method_decorator(ensure_csrf_cookie)

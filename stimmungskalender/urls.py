@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
-from web import views, api
+from web import api, views
 
 urlpatterns = [
     path("admin/", admin.site.urls),

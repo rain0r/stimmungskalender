@@ -2,7 +2,7 @@ import typing
 from dataclasses import dataclass
 from datetime import date
 
-from web.models import Week, Entry
+from web.models import Entry, Week
 
 
 @dataclass
