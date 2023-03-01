@@ -26,7 +26,7 @@ redis = "^4.5.1"
 
 [tool.poetry.dev-dependencies]
 black = "^23.1.0"
-djlint = "^1.19.13"
+djlint = "^1.19.16"
 ipdb = "^0.13.11"
 mypy = "^0.991"
 
