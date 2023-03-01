@@ -22,7 +22,7 @@ ipython = "^8.10.0"
 psycopg2 = "^2.9.5"
 python-decouple = "^3.7"
 django-bootstrap-v5 = "^1.0.11"
-redis = "^4.4.2"
+redis = "^4.5.1"
 
 [tool.poetry.dev-dependencies]
 black = "^23.1.0"
