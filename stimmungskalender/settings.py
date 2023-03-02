@@ -246,6 +246,7 @@ CORS_ALLOWED_ORIGINS = config(
 )
 
 # dj rest auth
+
 REST_AUTH = {
     "USE_JWT": True,
     "JWT_AUTH_COOKIE": "sk-auth-cookie",
