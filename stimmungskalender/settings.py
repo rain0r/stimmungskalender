@@ -246,10 +246,12 @@ CORS_ALLOWED_ORIGINS = config(
 )
 
 # dj rest auth
-
-REST_USE_JWT = True
-JWT_AUTH_COOKIE = "sk-auth-cookie"
-JWT_AUTH_REFRESH_COOKIE = "sk-refresh-token"
+REST_AUTH = {
+    "USE_JWT": True,
+    "JWT_AUTH_COOKIE": "sk-auth-cookie",
+    "JWT_AUTH_REFRESH_COOKIE": "sk-refresh-token",
+    "JWT_AUTH_HTTPONLY": False,
+}
 
 # Simple JWT
 
