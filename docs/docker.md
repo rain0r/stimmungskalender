@@ -69,7 +69,6 @@ docker compose up web
 In another shell, initialise the application and create the first user :
 
 ```sh
-docker compose run app first_run
 docker compose run app default_user
 ```
 
