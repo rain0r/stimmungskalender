@@ -1,8 +1,8 @@
 {% load i18n %}
 {% if mood_table.week.note %}
     <div id="read-only-note"
-         class="collapse multi-collapse show alert alert-light">
-        <pre>{{ mood_table.week.note }}</pre>
+         class="collapse multi-collapse show fw-lighter mt-4 fs-5 border border-1 rounded p-3">
+        {{ mood_table.week.note }}
     </div>
 {% endif %}
 <form method="post"
