@@ -1,4 +1,4 @@
-from datetime import timedelta, date
+from datetime import date, timedelta
 
 from django.template.defaulttags import register
 

@@ -3,16 +3,16 @@ from rest_framework_dataclasses.serializers import DataclassSerializer
 
 from web import models
 from web.structs import (
-    MoodTable,
-    WeekdayEntry,
-    StandoutData,
+    BarChartResponse,
+    ExportData,
     GraphTimeRanges,
-    SkCalendar,
-    ScatterGraphResponse,
+    MoodTable,
     PieChartResponse,
     ScatterGraphDataPointY,
-    ExportData,
-    BarChartResponse,
+    ScatterGraphResponse,
+    SkCalendar,
+    StandoutData,
+    WeekdayEntry,
 )
 
 

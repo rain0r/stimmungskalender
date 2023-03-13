@@ -3,7 +3,7 @@ import typing
 from django.contrib.auth.models import User
 from django.http import QueryDict
 
-from web.models import UserSettings, Moods, UserMoodColorSettings
+from web.models import Moods, UserMoodColorSettings, UserSettings
 from web.mood_colors import DEFAULT_COLORS
 
 

@@ -1,8 +1,5 @@
 FROM python:3.10-alpine
 
-# Defines which decouple environment file to use
-ARG django_env=django-env-pgsql
-
 ENV PYTHONFAULTHANDLER=1 \
   PYTHONUNBUFFERED=1 \
   PYTHONHASHSEED=random \
@@ -22,10 +19,10 @@ RUN apk add --no-cache gcc gettext musl-dev nano nodejs npm \
 
 # Add the project source
 COPY --chown=uwsgi:uwsgi . .
-COPY --chown=uwsgi:uwsgi docker/app/$django_env .env
+COPY --chown=uwsgi:uwsgi docker/app/env .env
 
 RUN mkdir /db
-RUN touch /srv/www/stimmungskalender/sk_debug.log /db/db.sqlite3
+RUN touch /srv/www/stimmungskalender/sk_debug.log
 
 RUN ./scripts/node.sh
 
@@ -34,10 +31,8 @@ RUN ./virtualenv/bin/pip install .
 RUN ./virtualenv/bin/python manage.py collectstatic --noinput
 
 WORKDIR /srv/www/stimmungskalender/web
-RUN /srv/www/stimmungskalender/virtualenv/bin/python /srv/www/stimmungskalender/virtualenv/bin/django-admin compilemessages # > /dev/null 2>&1
+RUN /srv/www/stimmungskalender/virtualenv/bin/python /srv/www/stimmungskalender/virtualenv/bin/django-admin compilemessages
 WORKDIR /srv/www/stimmungskalender
-
-RUN chmod 777 /db/db.sqlite3
 
 # Add the entrypoint.sh
 COPY --chown=uwsgi:uwsgi docker/app/entrypoint.sh /tmp/

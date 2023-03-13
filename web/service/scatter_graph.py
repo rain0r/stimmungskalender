@@ -1,10 +1,10 @@
 import typing
-from datetime import timedelta, date
+from datetime import date, timedelta
 
 from django_registration.forms import User
 
 from web.service.base_graph import BaseGraph
-from web.structs import ScatterGraphResponse, ScatterGraphDataPointY
+from web.structs import ScatterGraphDataPointY, ScatterGraphResponse
 
 
 class ScatterGraphService(BaseGraph):

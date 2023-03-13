@@ -1,6 +1,8 @@
+import sys
 import typing
-from datetime import datetime, date, timedelta
+from datetime import date, datetime, timedelta
 
+import ipdb
 import pkg_resources
 from django.conf import settings
 from django.contrib.auth import logout
@@ -16,10 +18,48 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import RedirectView, TemplateView
 
 from web.models import PERIODS
-from web.query_params import QP_START_DT, QP_END_DT, QP_MOOD, QP_SEARCH_TERM, QP_PAGE
+from web.query_params import QP_END_DT, QP_MOOD, QP_PAGE, QP_SEARCH_TERM, QP_START_DT
 from web.service.base_graph import PERIOD_DAY, PERIOD_NIGHT
 from web.service.settings import SettingsService
 from web.service.sk import SkService
+
+from django.http import HttpResponseNotFound
+from django.template import loader
+
+
+def custom_page_not_found_view(request, exception):
+    context = {
+        "request": request,
+    }
+    t = loader.get_template("web/errors/404.html")
+    return HttpResponseNotFound(t.render(context))
+
+
+def custom_error_view(request, exception=None):
+    type_, value, traceback = sys.exc_info()
+    context = {
+        "request": request,
+        "exception": exception,
+        "type_": str(type_),
+    }
+    t = loader.get_template("web/errors/500.html")
+    return HttpResponseNotFound(t.render(context))
+
+
+def custom_permission_denied_view(request, exception=None):
+    context = {
+        "request": request,
+    }
+    t = loader.get_template("web/errors/403.html")
+    return HttpResponseNotFound(t.render(context))
+
+
+def custom_bad_request_view(request, exception=None):
+    context = {
+        "request": request,
+    }
+    t = loader.get_template("web/errors/400.html")
+    return HttpResponseNotFound(t.render(context))
 
 
 class DefaultDateHandler:
@@ -90,6 +130,7 @@ class EntryListView(TemplateView):
     """
     The home page, displays the day and night form.
     """
+
     template_name = "web/mood-form/entry_list.html"
 
     @method_decorator(ensure_csrf_cookie)

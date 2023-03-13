@@ -2,4 +2,4 @@
 
 cd node
 npm i
-npm run build
+npm run build && rm -rf node_modules
