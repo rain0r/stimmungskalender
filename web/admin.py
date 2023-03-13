@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from web.models import Week, Entry, UserMoodColorSettings, UserSettings
+from web.models import Entry, UserMoodColorSettings, UserSettings, Week
 
 admin.site.register(Entry)
 admin.site.register(Week)

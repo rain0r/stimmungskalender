@@ -13,7 +13,7 @@ services:
 
   # Django app
   app:
-      env_file: ./docker/app/django-env-pgsql
+      env_file: ./docker/app/env
       build:
         context: .
         dockerfile: ./docker/app/Dockerfile

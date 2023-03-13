@@ -1,0 +1,14 @@
+{% extends 'web/base.html' %}
+{% block content %}
+    <div class="page-title-div">
+        <span class="page-title">Error 500</span>
+    </div>
+<div class="font-monospace">
+    {{type_}}
+</div>
+{% if exception %}
+<div>
+    {{ exception }}
+</div>
+{% endif %}
+{% endblock %}

@@ -3,7 +3,7 @@ from datetime import date
 from django.db.models import Count
 from django_registration.forms import User
 
-from web.service.base_graph import BaseGraph, PERIODS
+from web.service.base_graph import PERIODS, BaseGraph
 from web.structs import PieChartResponse
 
 

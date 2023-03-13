@@ -5,14 +5,14 @@ from django.utils import translation
 from django.views.i18n import JSONCatalog
 from drf_spectacular.utils import extend_schema, inline_serializer
 from rest_framework import serializers as drf_serializers
-from rest_framework import views, status
+from rest_framework import status, views
 from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from web import serializers
-from web.models import UserSettings, PERIODS, Moods, UserMoodColorSettings
-from web.query_params import QP_START_DT, QP_END_DT, QP_MOOD, QP_SEARCH_TERM, QP_PERIOD
+from web.models import PERIODS, Moods, UserMoodColorSettings, UserSettings
+from web.query_params import QP_END_DT, QP_MOOD, QP_PERIOD, QP_SEARCH_TERM, QP_START_DT
 from web.service.bar_graph import BarGraphService
 from web.service.pie_graph import PieGraphService
 from web.service.scatter_graph import ScatterGraphService
