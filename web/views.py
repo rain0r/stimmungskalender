@@ -2,14 +2,15 @@ import sys
 import typing
 from datetime import date, datetime, timedelta
 
-import ipdb
 import pkg_resources
 from django.conf import settings
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import BadRequest
 from django.core.paginator import Paginator
+from django.http import HttpResponseNotFound
 from django.shortcuts import redirect
+from django.template import loader
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.decorators import method_decorator
@@ -22,9 +23,6 @@ from web.query_params import QP_END_DT, QP_MOOD, QP_PAGE, QP_SEARCH_TERM, QP_STA
 from web.service.base_graph import PERIOD_DAY, PERIOD_NIGHT
 from web.service.settings import SettingsService
 from web.service.sk import SkService
-
-from django.http import HttpResponseNotFound
-from django.template import loader
 
 
 def custom_page_not_found_view(request, exception):
