@@ -6,7 +6,7 @@ from django.core.management import BaseCommand, CommandParser
 from django.utils import timezone
 from django_registration.forms import User
 
-from web.models import Moods, Week, PERIODS
+from web.models import PERIODS, Moods, Week
 from web.service.sk import SkService
 
 

@@ -19,7 +19,12 @@ from django.contrib import admin
 from django.urls import path, re_path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
-from web import views, api
+from web import api, views
+
+handler400 = "web.views.custom_bad_request_view"
+handler403 = "web.views.custom_permission_denied_view"
+handler404 = "web.views.custom_page_not_found_view"
+handler500 = "web.views.custom_error_view"
 
 urlpatterns = [
     path("admin/", admin.site.urls),

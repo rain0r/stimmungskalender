@@ -1,6 +1,0 @@
-ALLOWED_HOSTS="*"
-DATABASE_URL=pgsql://stimmungskalender:stimmungskalender@db/stimmungskalender
-DEBUG=True
-SECRET_KEY=django-insecure
-STATIC_ROOT=/srv/www/stimmungskalender/static/
-IS_WSGI=True

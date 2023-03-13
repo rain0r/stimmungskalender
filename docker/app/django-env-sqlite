@@ -1,6 +1,0 @@
-ALLOWED_HOSTS="*"
-DATABASE_URL=sqlite:////db/db.sqlite3
-DEBUG=True
-SECRET_KEY=django-insecure
-STATIC_ROOT=/srv/www/stimmungskalender/static/
-IS_WSGI=True

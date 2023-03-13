@@ -1,20 +1,25 @@
-{% extends 'registration/base.html' %}
+{% extends 'web/base.html' %}
 {% block content %}
     {% load i18n %}
     {% load bootstrap5 %}
-    <main class="form-signin w-100 m-auto">
-        <form method="post" action="{% url 'login' %}">
+    {% load bootstrap5 %}
+    <div class="container">
+        <form method="post"
+              action="{% url 'login' %}"
+              class="row justify-content-center">
             <input type="hidden"
                    name="next"
-                   value="{% if next %}{{ next }}{% else %}/{% endif %}"/>
+                   value="{% if next %}{{ next }}{% else %}/{% endif %}">
             {% csrf_token %}
-            <a href="{% url 'index' %}" class="h1 font-monospace text-body">stimmungs-</a>
-            <a href="{% url 'index' %}" class="h1 font-monospace text-body">kalender</a>
-            <hr class="mb-5">
-            {% bootstrap_form form %}
-            <button class="w-100 btn btn-lg btn-primary" type="submit">{% translate 'Log in' %}</button>
-            <hr>
-            <a href="{% url 'django_registration_register' %}">Register</a>
+            <div class="col-12 col-md-4">
+                <span class="h1 font-monospace text-body">stimmungs-</span>
+                <span class="h1 font-monospace text-body">kalender</span>
+                <hr class="mb-5">
+                {% bootstrap_form form %}
+                <button class="w-100 btn btn-lg btn-primary" type="submit">{% translate 'Log in' %}</button>
+                <hr>
+                <a href="{% url 'django_registration_register' %}">Register</a>
+            </div>
         </form>
-    </main>
+    </div>
 {% endblock %}
