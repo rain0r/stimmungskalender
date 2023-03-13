@@ -10,7 +10,9 @@ Just execute `scripts/docker-quickstart.sh` to get it all up and running
 
 ```sh
 wget https://raw.githubusercontent.com/rain0r/stimmungskalender/master/scripts/docker-quickstart.sh
-cat docker-quickstart.sh # Don't just execute scripts from the internet without checking first
+```
+
+```sh
 sh docker-quickstart.sh
 ```
 
