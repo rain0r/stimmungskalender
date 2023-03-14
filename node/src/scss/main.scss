@@ -2,6 +2,10 @@
 @import "stimmungskalender.scss";
 @import "bootstrap.scss";
 
+#read-only-note {
+  white-space: pre-wrap;
+}
+
 .standout-data-good {
   background-color: $green-300;
   color: $black;
