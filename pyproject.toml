@@ -22,7 +22,7 @@ ipython = "^8.11.0"
 psycopg2 = "^2.9.5"
 python-decouple = "^3.7"
 django-bootstrap-v5 = "^1.0.11"
-redis = "^4.5.3"
+redis = "^4.5.4"
 
 [tool.poetry.group.dev.dependencies]
 djangorestframework-stubs = "^1.9.1"
