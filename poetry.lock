@@ -443,14 +443,14 @@ Django = ">=3.2"
 
 [[package]]
 name = "django-rosetta"
-version = "0.9.8"
+version = "0.9.9"
 description = "A Django application that eases the translation of Django projects"
 category = "main"
 optional = false
 python-versions = "*"
 files = [
-    {file = "django-rosetta-0.9.8.tar.gz", hash = "sha256:a5049d47abafeef6a8aba8a0c12103c93fd77a8bd8436b60307fbd5e1cb8d248"},
-    {file = "django_rosetta-0.9.8-py3-none-any.whl", hash = "sha256:f8449da6963e77b6e4082bde70f5f3f270eba633e3bdb29d663741f6cd01c3fd"},
+    {file = "django-rosetta-0.9.9.tar.gz", hash = "sha256:776ac03f43974ea780ca25e7d805862b06c8ede4698f999c771a5ed78da4b87f"},
+    {file = "django_rosetta-0.9.9-py3-none-any.whl", hash = "sha256:269d9ce7e9972002ac216e7bca33b4d9f578bd38b6043d98e28c9b69c04c1f59"},
 ]
 
 [package.dependencies]
@@ -1630,4 +1630,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "35998061a16d4e4d32e3aa5210632449007db1a32860b65c60f5d5ce12600dd0"
+content-hash = "b19c263c1ef0cf60e0ab1930f39b6909a0e93f61151aa5dc658266548a9fb66e"
