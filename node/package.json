@@ -18,7 +18,7 @@
     "file-loader": "^6.2.0",
     "mini-css-extract-plugin": "^2.7.6",
     "package-lock-sanitizer": "^1.0.3",
-    "postcss-loader": "^7.2.4",
+    "postcss-loader": "^7.3.2",
     "prettier": "2.8.8",
     "sass": "^1.62.0",
     "sass-loader": "^13.3.1",
