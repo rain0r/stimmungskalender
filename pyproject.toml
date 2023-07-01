@@ -27,7 +27,7 @@ redis = "^4.6.0"
 [tool.poetry.group.dev.dependencies]
 djangorestframework-stubs = "^3.14.2"
 black = "^23.3.0"
-djlint = "^1.30.2"
+djlint = "^1.31.1"
 ipdb = "^0.13.11"
 django-stubs = {extras = ["compatible-mypy"], version = "^4.2.1"}
 flake8-django = "^1.3"
