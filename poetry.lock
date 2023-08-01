@@ -425,18 +425,22 @@ Django = ">=3.2"
 
 [[package]]
 name = "django-registration"
-version = "3.3"
-description = "An extensible user-registration application for Django"
+version = "3.4"
+description = "An extensible user-registration application for Django."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "django-registration-3.3.tar.gz", hash = "sha256:884a4cc9ec87b9f1c0ceb6b6c4b7ba491c1877997a3cd29cc923697dac785eb8"},
-    {file = "django_registration-3.3-py3-none-any.whl", hash = "sha256:dfa176f594fb465c93495caa55686be723a15829769511383e25172d2efbd0e6"},
+    {file = "django-registration-3.4.tar.gz", hash = "sha256:1a0ccef7ef71e67a78a551abd8ad378977dc14a036f1fcd8be422a68bd5254a9"},
+    {file = "django_registration-3.4-py3-none-any.whl", hash = "sha256:fa76df481189794f47eb73043ee5cc9bfb0963194b901d7bd8cf914beab1ddd0"},
 ]
 
 [package.dependencies]
 confusable-homoglyphs = ">=3.0,<4.0"
-Django = ">=3.2"
+Django = ">=3.2,<4.0.dev0 || >=4.1.dev0"
+
+[package.extras]
+docs = ["furo", "sphinx", "sphinx-copybutton", "sphinx-inline-tabs", "sphinx-notfound-page", "sphinxcontrib-django", "sphinxext-opengraph"]
+tests = ["coverage", "tomli"]
 
 [[package]]
 name = "django-rosetta"
@@ -1711,4 +1715,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "4c1badda535a98150ab4f9e35e204e65c6b10231e810e11a2ac7b6d0bf034331"
+content-hash = "c2c45967c70a995e36b105047258ab6b903baaf1cea1c926917889f360ef9fdd"
