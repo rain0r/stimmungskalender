@@ -19,10 +19,10 @@ djangorestframework-simplejwt = "^5.2.2"
 djangorestframework = "^3.14.0"
 drf-spectacular = "^0.26.3"
 ipython = "^8.14.0"
-psycopg2 = "^2.9.5"
 python-decouple = "^3.7"
 django-bootstrap-v5 = "^1.0.11"
 redis = "^4.6.0"
+psycopg2-binary = "^2.9.7"
 
 [tool.poetry.group.dev.dependencies]
 djangorestframework-stubs = "^3.14.2"
