@@ -23,6 +23,7 @@ python-decouple = "^3.7"
 django-bootstrap-v5 = "^1.0.11"
 redis = "^4.6.0"
 psycopg2-binary = "^2.9.7"
+pyyaml = "^6.0.1"  # https://github.com/yaml/pyyaml/issues/601
 
 [tool.poetry.group.dev.dependencies]
 djangorestframework-stubs = "^3.14.2"
