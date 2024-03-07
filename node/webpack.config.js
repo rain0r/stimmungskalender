@@ -3,7 +3,7 @@ const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  stats: 'errors-only',
+  stats: "errors-only",
   mode: "production",
   entry: { main: "./src/js/main.js", plotly: "./src/js/plotly.js" },
   output: {

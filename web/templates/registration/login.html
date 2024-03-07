@@ -1,8 +1,6 @@
 {% extends 'web/base.html' %}
 {% block content %}
     {% load i18n %}
-    {% load bootstrap5 %}
-    {% load bootstrap5 %}
     <div class="container">
         <form method="post"
               action="{% url 'login' %}"
@@ -15,7 +13,9 @@
                 <span class="h1 font-monospace text-body">stimmungs-</span>
                 <span class="h1 font-monospace text-body">kalender</span>
                 <hr class="mb-5">
-                {% bootstrap_form form %}
+                <table class="table">
+                    {{ form.as_table }}
+                </table>
                 <button class="w-100 btn btn-lg btn-primary" type="submit">{% translate 'Log in' %}</button>
                 <hr>
                 <a href="{% url 'django_registration_register' %}">Register</a>

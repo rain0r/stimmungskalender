@@ -14,9 +14,7 @@
                    for="radio-{{ form.name }}-{{ number }}-{{ weekday_entry.day|date:'Y-m-d' }}"
                    title="{{ moods|get_item:number }}"
                    id="label-{{ form.name }}-{{ number }}-{{ weekday_entry.day|date:'Y-m-d' }}"
-                   data-bs-toggle="tooltip">
-                &nbsp;
-            </label>
+                   data-bs-toggle="tooltip">&nbsp;</label>
         {% endwith %}
     {% endfor %}
 </div>

@@ -24,9 +24,7 @@
                 <button class="btn mx-2 {% if mood_table.week.note %} btn-primary {% else %} btn-outline-secondary {% endif %}"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target=".multi-collapse">
-                    {% translate 'note' %}
-                </button>
+                        data-bs-target=".multi-collapse">{% translate 'note' %}</button>
                 <div class="d-lg-none flex-grow-1"></div>
                 <a href="?start_dt={{ mood_table.prev_week }}"
                    class="btn btn-outline-secondary mx-2">{% translate 'prev' %}</a>

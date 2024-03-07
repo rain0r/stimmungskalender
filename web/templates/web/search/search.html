@@ -4,7 +4,6 @@
     {% translate 'search' %}
 {% endblock %}
 {% block content %}
-    {% load bootstrap5 %}
     {% load i18n %}
     <div class="page-title-div">
         <a href="{% url 'search' %}" class="page-title">{% translate 'search' %}</a>
@@ -19,7 +18,7 @@
                        name="start_dt"
                        placeholder="YYYY-MM-DD"
                        data-provide="datepicker"
-                       value="{{ request.GET.start_dt }}"/>
+                       value="{{ request.GET.start_dt }}" />
             </div>
         </div>
         <div class="mb-3 row">
@@ -31,7 +30,7 @@
                        name="end_dt"
                        placeholder="YYYY-MM-DD"
                        data-provide="datepicker"
-                       value="{{ request.GET.end_dt }}"/>
+                       value="{{ request.GET.end_dt }}" />
             </div>
         </div>
         <div class="mb-3 row">
@@ -42,22 +41,18 @@
                        id="search_term"
                        name="search_term"
                        placeholder="{% translate 'search_term' %}"
-                       value="{{ request.GET.search_term }}"/>
+                       value="{{ request.GET.search_term }}" />
             </div>
         </div>
         <div class="mb-3 row">
             <label for="mood" class="col-sm-2 col-form-label">{% translate 'mood' %}</label>
             <div class="col-sm-10">
                 <select id="mood" name="mood" class="form-select">
-                    <option>
-                        —
-                    </option>
+                    <option>—</option>
                     {% for it in moods %}
                         {% with mood=moods|get_item:it %}
                             <option value="{{ it }}"
-                                    {% if request.GET.mood|add:"0" == it %}selected{% endif %}>
-                                {{ mood }}
-                            </option>
+                                    {% if request.GET.mood|add:"0" == it %}selected{% endif %}>{{ mood }}</option>
                         {% endwith %}
                     {% endfor %}
                 </select>
@@ -70,13 +65,11 @@
         </div>
     </form>
     <hr class="py-3">
-    {% for week in results %}
+    {% for week in object_list %}
         <div class="row border rounded p-3 my-3">
             <div class="col-12 col-md-3 d-flex flex-column">
                 <a href="{% url 'index' %}?start_dt={{ week.week_date|date:'Y-m-d' }}"
-                   class="flex-grow-1">
-                    {% translate 'week' %} #{{ week.week_date|date:'W' }}
-                </a>
+                   class="flex-grow-1">{% translate 'week' %} #{{ week.week_date|date:'W' }}</a>
                 <small>
                     {{ week.week_date }}
                     —
@@ -88,13 +81,11 @@
             </div>
             <div class="col-12 col-md-3">
                 <a href="{% url 'graph' %}?start_date={{ week.week_date|date:'Y-m-d' }}"
-                   class="flex-grow-1 d-flex justify-content-end">
-                    Graph
-                </a>
+                   class="flex-grow-1 d-flex justify-content-end">Graph</a>
             </div>
         </div>
     {% endfor %}
     {% if paginator.num_pages > 1 %}
-        <div class="pt-2">{% bootstrap_pagination results extra=""|add:parameters %}</div>
+        <div class="pt-2">{% include 'web/shared/pagination.html' %}</div>
     {% endif %}
 {% endblock %}

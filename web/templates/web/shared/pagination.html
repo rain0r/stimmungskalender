@@ -1,0 +1,26 @@
+{% load relative_url %}
+{% load i18n %}
+{% if page_obj.has_other_pages %}
+    {% with params=request.GET.urlencode %}
+        <div class="d-flex flex-row align-items-center">
+            {% if page_obj.has_previous %}
+                <div class="px-2">
+                    <a class="btn btn-primary" href="{% relative_url '1' 'page' params %}">{% translate 'first_page' %}</a>
+                    <a class="btn btn-primary"
+                       href="{% relative_url page_obj.previous_page_number 'page' params %}">{% translate 'previous_page' %}</a>
+                </div>
+            {% endif %}
+            <div class="px-2">
+                <span class="current">{% translate 'page' %} {{ page_obj.number }}.</span>
+            </div>
+            {% if page_obj.has_next %}
+                <div class="px-2 ">
+                    <a class="btn btn-primary"
+                       href="{% relative_url page_obj.next_page_number 'page' params %}">{% translate 'next_page' %}</a>
+                    <a class="btn btn-primary"
+                       href="{% relative_url page_obj.paginator.num_pages 'page' params %}">{% translate 'last_page' %}</a>
+                </div>
+            {% endif %}
+        </div>
+    {% endwith %}
+{% endif %}

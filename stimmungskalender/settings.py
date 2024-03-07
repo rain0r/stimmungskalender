@@ -61,7 +61,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "bootstrap5",
     "rosetta",
     "django_registration",
     "rest_framework",

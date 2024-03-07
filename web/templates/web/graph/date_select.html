@@ -11,7 +11,7 @@
                    name="start_dt"
                    class="form-control"
                    id="start_dt"
-                   value="{{ start_dt|date:'Y-m-d' }}"/>
+                   value="{{ start_dt|date:'Y-m-d' }}" />
         </div>
         <div class="form-group col-12 col-md-3">
             <label for="end_dt" class="col-sm-2 col-form-label">{% translate 'end_date' %}</label>
@@ -21,7 +21,7 @@
                    name="end_dt"
                    class="form-control"
                    id="end_dt"
-                   value="{{ end_dt|date:'Y-m-d' }}"/>
+                   value="{{ end_dt|date:'Y-m-d' }}" />
         </div>
         <div class="form-group col-12 col-md-2">
             <button type="submit" class="btn btn-primary">{% translate 'go_to' %}</button>
@@ -37,21 +37,15 @@
     {% with params=request.GET.urlencode %}
         <li class="nav-item">
             <a href="{% relative_url graph_time_ranges.last_week_start_dt 'start_dt' params %}"
-               class="nav-link">
-                {% translate 'last_week' %}
-            </a>
+               class="nav-link">{% translate 'last_week' %}</a>
         </li>
         <li class="nav-item">
             <a href="{% relative_url graph_time_ranges.last_month_start_dt 'start_dt' params %}"
-               class="nav-link">
-                {% translate 'last_month' %}
-            </a>
+               class="nav-link">{% translate 'last_month' %}</a>
         </li>
         <li class="nav-item">
             <a href="{% relative_url graph_time_ranges.last_year_start_dt 'start_dt' params %}"
-               class="nav-link">
-                {% translate 'last_year' %}
-            </a>
+               class="nav-link">{% translate 'last_year' %}</a>
         </li>
     {% endwith %}
 </ul>

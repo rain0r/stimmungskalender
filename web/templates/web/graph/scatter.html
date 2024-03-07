@@ -9,12 +9,12 @@
             <div class="btn-group" role="group">
                 <a href="{% relative_url 'markers' 'view' params %}"
                    title="View as list."
-                   class="btn btn-light my-2 my-md-0 {% if is_markers %} active{% endif %}">
+                   class="btn btn-light my-2 my-md-0 {% if is_markers %}active{% endif %}">
                     {% translate 'markers' %}
                 </a>
                 <a href="{% relative_url 'lines' 'view' params %}"
                    title="View as list."
-                   class="btn btn-light my-2 my-md-0 {% if not is_markers %} active{% endif %}">
+                   class="btn btn-light my-2 my-md-0 {% if not is_markers %}active{% endif %}">
                     {% translate 'lines' %}
                 </a>
             </div>

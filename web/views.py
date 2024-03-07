@@ -7,7 +7,6 @@ from django.conf import settings
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import BadRequest
-from django.core.paginator import Paginator
 from django.http import HttpResponseNotFound
 from django.shortcuts import redirect
 from django.template import loader
@@ -17,9 +16,10 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import RedirectView, TemplateView
+from django.views.generic.list import ListView
 
 from web.models import PERIODS
-from web.query_params import QP_END_DT, QP_MOOD, QP_PAGE, QP_SEARCH_TERM, QP_START_DT
+from web.query_params import QP_END_DT, QP_MOOD, QP_SEARCH_TERM, QP_START_DT
 from web.service.base_graph import PERIOD_DAY, PERIOD_NIGHT
 from web.service.settings import SettingsService
 from web.service.sk import SkService
@@ -217,28 +217,24 @@ class LogoutView(RedirectView):
 
 
 @method_decorator(login_required, name="dispatch")
-class SearchView(TemplateView):
+class SearchView(ListView):
     template_name = "web/search/search.html"
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         sk_service = SkService(self.request.user)
-        results = sk_service.search(
+        context["moods"] = sk_service.mood_mapping
+        return context
+
+    def get_queryset(self):
+        sk_service = SkService(self.request.user)
+        return sk_service.search(
             mood=self.request.GET.get(QP_MOOD, ""),
             search_term=self.request.GET.get(QP_SEARCH_TERM, ""),
             start_dt=self.request.GET.get(QP_START_DT, ""),
             end_dt=self.request.GET.get(QP_END_DT, ""),
         )
-        paginator = Paginator(results, settings.PER_PAGE)
-        page = self.request.GET.get(QP_PAGE, 1)
-        get_copy = self.request.GET.copy()
-        context["results"] = paginator.get_page(page)
-        context["paginator"] = paginator
-        context["page_obj"] = paginator.page
-        context["parameters"] = get_copy.pop(QP_PAGE, True) and get_copy.urlencode()
-        context["moods"] = sk_service.mood_mapping
-
-        return context
 
 
 @method_decorator(login_required, name="dispatch")

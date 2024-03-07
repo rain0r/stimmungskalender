@@ -1,16 +1,17 @@
 {% extends 'web/base.html' %}
 {% block content %}
-    {% load bootstrap5 %}
     <form class="form-signin" method="post" action="">
         {% csrf_token %}
         <a href="{% url 'index' %}" class="h1 font-monospace text-body">stimmungskalender</a>
         <hr class="mb-5">
-        {% bootstrap_form_errors form %}
-        <h1 class="h3 mb-3 font-weight-normal">Registration</h1>
-        {% bootstrap_form form %}
+        <h1 class="h3 my-5 font-weight-normal">Registration</h1>
+        <table class="table">
+            {{ form.as_table }}
+        </table>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+        <a href="{% url 'login' %}" class="btn btn-lg btn-primary btn-block">Login</a>
         <input type="hidden"
                name="next"
-               value="{% if next %}{{ next }}{% else %}/{% endif %}"/>
+               value="{% if next %}{{ next }}{% else %}/{% endif %}" />
     </form>
 {% endblock %}
