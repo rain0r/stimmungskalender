@@ -6,7 +6,7 @@ authors = ["Rainer Hihn <hihn.rainer@gmail.com>"]
 license = "AGPL-3.0-only"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 Django = "^5.0.3"
 dj-database-url = "^2.1.0"
 dj-rest-auth = "^5.0.2"
