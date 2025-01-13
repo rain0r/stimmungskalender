@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+
 import os
 from datetime import timedelta
 from pathlib import Path
@@ -31,7 +32,7 @@ DEBUG = config("DEBUG", default=False, cast=bool)
 
 SESSION_COOKIE_SECURE = config("SESSION_COOKIE_SECURE", default=False, cast=bool)
 
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="127.0.0.1", cast=Csv())
 
 CSRF_TRUSTED_ORIGINS = config(
     "CSRF_TRUSTED_ORIGINS", default="http://127.0.0.1", cast=Csv()
@@ -175,7 +176,7 @@ STATIC_URL = "/static/"
 
 STATIC_ROOT = config("STATIC_ROOT", default=None)
 
-LOG_FILE_PATH = config("LOG_FILE_PATH", default=BASE_DIR / "sk_debug.log")
+LOG_FILE_PATH = config("LOG_FILE_PATH", default=BASE_DIR / "stimmungskalender.log")
 
 LOGGING = {
     "version": 1,
@@ -208,7 +209,7 @@ LOGGING = {
     "loggers": {
         "django": {
             "handlers": config("SK_LOG_HANDLERS", default="console", cast=Csv()),
-            "level": config("DJANGO_LOG_LEVEL", default="ERROR"),
+            "level": config("DJANGO_LOG_LEVEL", default="WARNING"),
         },
         "django.request": {
             "handlers": ["mail_admins"],
@@ -268,4 +269,4 @@ PER_PAGE = config("PER_PAGE", default=10, cast=int)
 
 SK_DATE_FORMAT = "%Y-%m-%d"  # To identify a week
 
-IS_WSGI = config("IS_WSGI", default=False, cast=bool)
+IS_WSGI = config("IS_WSGI", default=True, cast=bool)

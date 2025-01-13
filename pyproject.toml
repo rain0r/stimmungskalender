@@ -21,7 +21,7 @@ drf-spectacular = "^0.27.1"
 ipython = "^8.22.2"
 python-decouple = "^3.8"
 redis = "^5.0.2"
-psycopg2-binary = "^2.9.9"
+psycopg2 = "^2.9.10"
 pyyaml = "^6.0.1"  # https://github.com/yaml/pyyaml/issues/601
 jsonschema = "^4.21.1"  # Version 4.18.0 started to require Rust
 

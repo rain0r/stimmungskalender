@@ -1,12 +1,14 @@
-.git*
-*.md
-Dockerfile
-
 # Common
-README.md
-CHANGELOG.md
+.dockerignore
+*.md
 docker-compose.yml
-Dockerfile
+_config.yml
+db.sqlite3
+docs
+.flake8
+.github
+.isort.cfg
+
 
 # git
 .git
@@ -17,20 +19,15 @@ Dockerfile
 .idea
 
 # Node
-## Logs
-logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-## Dependency directories
-node/node_modules/
-
-# postgres
-pgdata
+**/node_modules/
+**/dist
 
 # python
 .venv
 .virtualenv
-
+**/__pycache__/
+**/*.py[cod]

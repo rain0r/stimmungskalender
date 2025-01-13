@@ -1,27 +1,35 @@
-version: '3.9'
-
 services:
   # Database
   db:
-      image: "postgres:15-alpine"
+      image: "postgres:16-alpine"
+      container_name: "sk-db"
       restart: unless-stopped
-      env_file: ./docker/db/env
-      ports:
-        - "8081:5432"
+      environment:
+        LC_ALL: C.UTF-8
+        POSTGRES_USER: stimmungskalender
+        POSTGRES_PASSWORD: stimmungskalender
+        POSTGRES_DB: stimmungskalender
       volumes:
         - "db:/var/lib/postgresql/data"
 
   # Django app
   app:
-      env_file: ./docker/app/env
+      image: "rain0r/stimmungskalender-app"
+      container_name: "sk-app"
       build:
-        context: .
+        args:
+          DATABASE_URL: "pgsql://stimmungskalender:stimmungskalender@db/stimmungskalender"
+          LOG_FILE_PATH: /var/log/uwsgi/stimmungskalender.log
+          SECRET_KEY: "PLEASE-CHANGE-ME"
+          STATIC_ROOT: /srv/www/stimmungskalender/static/
         dockerfile: ./docker/app/Dockerfile
-      command: uwsgi
-      expose:
-        - "8000"
-      ports:
-        - "8000:8000"
+      environment:
+        ALLOWED_HOSTS: "127.0.0.1,localhost" # Add your Stimmungskalender-URL here
+        DATABASE_URL: "pgsql://stimmungskalender:stimmungskalender@db/stimmungskalender"
+        LOG_FILE_PATH: /var/log/uwsgi/stimmungskalender.log
+        SECRET_KEY: "PLEASE-CHANGE-ME"
+        STATIC_ROOT: /srv/www/stimmungskalender/static/
+        SESSION_COOKIE_SECURE: True
       volumes:
         - "static:/srv/www/stimmungskalender/static"
       depends_on:
@@ -29,11 +37,13 @@ services:
 
   # Nginx
   web:
+      image: "rain0r/stimmungskalender-web"
+      container_name: "sk-web"
+      restart: unless-stopped
       build:
-        context: ./
         dockerfile: ./docker/web/Dockerfile
       ports:
-        - "8080:80"
+        - "7890:80"
       volumes:
         - "static:/srv/www/stimmungskalender/static"
       depends_on:

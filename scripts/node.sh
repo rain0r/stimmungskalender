@@ -1,5 +1,8 @@
 #!/bin/sh
 
 cd node
-npm i
-npm run build && rm -rf node_modules
+mkdir .temp
+npm install --cache .temp --audit=false --fund=false --loglevel=error --progress=false
+npm run build
+cd ..
+rm -rf ./node

@@ -6,6 +6,10 @@ export DJANGO_SUPERUSER_USERNAME=admin
 export DJANGO_SUPERUSER_PASSWORD=admin
 export DJANGO_SUPERUSER_EMAIL=admin@example.com
 
+BASE_DIR="/srv/www/stimmungskalender"
+V_ENV="${BASE_DIR}/.venv"
+PYTHON="${V_ENV}/bin/python"
+
 # Define help message
 show_help() {
     echo """
@@ -28,13 +32,12 @@ uwsgi       : Run uwsgi server
 translate() {
     cd web
     find . -type f -name "*.mo" -delete
-    ../virtualenv/bin/python ../virtualenv/bin/django-admin makemessages -l de_DE # > /dev/null 2>&1
-    ../virtualenv/bin/python ../virtualenv/bin/django-admin makemessages -l en_GB # > /dev/null 2>&1
-    ../virtualenv/bin/python ../virtualenv/bin/django-admin compilemessages # > /dev/null 2>&1
+    $PYTHON "${V_ENV}/bin/django-admin" makemessages -l de_DE # > /dev/null 2>&1
+    $PYTHON "${V_ENV}/bin/django-admin" makemessages -l en_GB # > /dev/null 2>&1
+    $PYTHON "${V_ENV}/bin/django-admin" compilemessages # > /dev/null 2>&1
     cd ..
 }
 
-py="./virtualenv/bin/python"
 
 # Run
 case "$1" in
@@ -42,32 +45,30 @@ case "$1" in
         /bin/sh "${@:2}"
         ;;
     default_user)
-        $py manage.py createsuperuser --noinput --username $DJANGO_SUPERUSER_USERNAME --email $DJANGO_SUPERUSER_EMAIL
+        $PYTHON ${BASE_DIR}/manage.py createsuperuser --noinput --username $DJANGO_SUPERUSER_USERNAME --email $DJANGO_SUPERUSER_EMAIL
         ;;
     dev)
         echo "Running Development Server on 0.0.0.0:${PORT}"
-        $py manage.py runserver 0.0.0.0:${PORT}
+        $PYTHON ${BASE_DIR}/manage.py runserver 0.0.0.0:${PORT}
         ;;
     first_run)
-        $py manage.py migrate
+        $PYTHON ${BASE_DIR}/manage.py migrate
         translate
-        $py manage.py collectstatic --noinput
-        $py manage.py createsuperuser
+        $PYTHON ${BASE_DIR}/manage.py collectstatic --noinput
+        $PYTHON ${BASE_DIR}/manage.py createsuperuser
         ;;
     manage)
-        $py manage.py "${@:2}"
+        $PYTHON ${BASE_DIR}/manage.py "${@:2}"
         ;;
     shell)
-        $py manage.py shell
+        $PYTHON ${BASE_DIR}/manage.py shell
         ;;
     translate)
         translate
         ;;
     uwsgi)
         echo "Running App (uWSGI)..."
-        # uwsgi --ini docker/app/uwsgi.ini --static-map /static=/srv/www/stimmungskalender/static/
-        uwsgi --ini docker/app/uwsgi.ini
-        # sleep 9999
+        uwsgi --ini /srv/www/stimmungskalender/docker/app/uwsgi.ini
         ;;
     *)
         show_help
