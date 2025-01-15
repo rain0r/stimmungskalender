@@ -17,21 +17,24 @@ services:
       image: "rain0r/stimmungskalender-app"
       container_name: "sk-app"
       build:
+        dockerfile: ./docker/app/Dockerfile
         args:
           DATABASE_URL: "pgsql://stimmungskalender:stimmungskalender@db/stimmungskalender"
-          LOG_FILE_PATH: /var/log/uwsgi/stimmungskalender.log
+          LOG_FILE_PATH: /logs/stimmungskalender.log
           SECRET_KEY: "PLEASE-CHANGE-ME"
           STATIC_ROOT: /srv/www/stimmungskalender/static/
-        dockerfile: ./docker/app/Dockerfile
       environment:
         ALLOWED_HOSTS: "127.0.0.1,localhost" # Add your Stimmungskalender-URL here
         DATABASE_URL: "pgsql://stimmungskalender:stimmungskalender@db/stimmungskalender"
-        LOG_FILE_PATH: /var/log/uwsgi/stimmungskalender.log
+        LOG_FILE_PATH: /logs/stimmungskalender.log
         SECRET_KEY: "PLEASE-CHANGE-ME"
         STATIC_ROOT: /srv/www/stimmungskalender/static/
         SESSION_COOKIE_SECURE: True
+      ports:
+        - "7891:8000"
       volumes:
         - "static:/srv/www/stimmungskalender/static"
+        - "./logs:/logs"
       depends_on:
         - db
 
