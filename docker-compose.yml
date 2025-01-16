@@ -16,13 +16,9 @@ services:
   app:
       image: "rain0r/stimmungskalender-app"
       container_name: "sk-app"
+      platform: ${BUILD_PLATFORM:-}
       build:
         dockerfile: ./docker/app/Dockerfile
-        platforms:
-          - "linux/amd64"
-          - "linux/arm64"
-          - "linux/arm/v7"
-          - "linux/arm/v6"
         args:
           DATABASE_URL: "pgsql://stimmungskalender:stimmungskalender@db/stimmungskalender"
           LOG_FILE_PATH: /logs/stimmungskalender.log
@@ -47,14 +43,10 @@ services:
   web:
       image: "rain0r/stimmungskalender-web"
       container_name: "sk-web"
+      platform: ${BUILD_PLATFORM:-}
       restart: unless-stopped
       build:
         dockerfile: ./docker/web/Dockerfile
-        platforms:
-          - "linux/amd64"
-          - "linux/arm64"
-          - "linux/arm/v7"
-          - "linux/arm/v6"
       ports:
         - "7890:80"
       volumes:
