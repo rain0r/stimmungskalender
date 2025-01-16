@@ -18,6 +18,13 @@ services:
       container_name: "sk-app"
       build:
         dockerfile: ./docker/app/Dockerfile
+        platforms:
+          - "linux/amd64"
+          - "linux/arm64"
+          - "linux/ppc64le"
+          - "linux/s390x"
+          - "linux/arm/v7"
+          - "linux/arm/v6"
         args:
           DATABASE_URL: "pgsql://stimmungskalender:stimmungskalender@db/stimmungskalender"
           LOG_FILE_PATH: /logs/stimmungskalender.log
@@ -45,6 +52,13 @@ services:
       restart: unless-stopped
       build:
         dockerfile: ./docker/web/Dockerfile
+        platforms:
+          - "linux/amd64"
+          - "linux/arm64"
+          - "linux/ppc64le"
+          - "linux/s390x"
+          - "linux/arm/v7"
+          - "linux/arm/v6"
       ports:
         - "7890:80"
       volumes:
