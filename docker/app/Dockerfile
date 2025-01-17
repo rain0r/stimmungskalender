@@ -27,20 +27,24 @@ ENV PYTHONFAULTHANDLER=1 \
 # Install system packages
 RUN apk add --update build-base \
     postgresql-dev uwsgi uwsgi-logfile \
-    uwsgi-python3 cargo gettext python3-dev \
-    nodejs npm
+    uwsgi-python3 cargo gettext python3-dev
 
 WORKDIR /srv/www/stimmungskalender
 
 # Add the project source
 COPY --chown=uwsgi:uwsgi . .
 
-RUN ./scripts/node.sh
-
 RUN python -m venv --clear .venv
 RUN ./.venv/bin/pip -qqq install -r requirements.txt
 RUN ./.venv/bin/pip -qqq install setuptools
 
+# Build frontend
+FROM docker.io/node:20-bookworm-slim AS client-builder
+
+COPY --from=python-build-stage /srv/www/stimmungskalender /srv/www/stimmungskalender
+
+WORKDIR /srv/www/stimmungskalender
+RUN ./scripts/node.sh
 
 # Python 'run' stage
 FROM python AS python-run-stage
@@ -62,7 +66,7 @@ RUN apk add --update  \
     postgresql-dev uwsgi uwsgi-logfile \
     uwsgi-python3 gettext
 
-COPY --from=python-build-stage /srv/www/stimmungskalender /srv/www/stimmungskalender
+COPY --from=client-builder /srv/www/stimmungskalender /srv/www/stimmungskalender
 
 RUN mkdir /logs
 RUN chown uwsgi:uwsgi /logs
