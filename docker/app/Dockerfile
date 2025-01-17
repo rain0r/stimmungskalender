@@ -1,9 +1,10 @@
-FROM python:3.12-alpine
+FROM python:3.12-alpine AS python
+
+FROM python AS python-build-stage
 
 # Vars from the compose file
 ARG DATABASE_URL
 ARG LOG_FILE_PATH
-ARG SECRET_KEY
 ARG STATIC_ROOT
 
 ENV PYTHONFAULTHANDLER=1 \
@@ -21,7 +22,6 @@ ENV PYTHONFAULTHANDLER=1 \
   # django
   DATABASE_URL=$DATABASE_URL \
   LOG_FILE_PATH=$LOG_FILE_PATH \
-  SECRET_KEY=$SECRET_KEY \
   STATIC_ROOT=$STATIC_ROOT
 
 # Install system packages
@@ -35,15 +35,40 @@ WORKDIR /srv/www/stimmungskalender
 # Add the project source
 COPY --chown=uwsgi:uwsgi . .
 
-RUN mkdir /logs
-RUN chown uwsgi:uwsgi /logs
-
 RUN ./scripts/node.sh
 
 RUN python -m venv --clear .venv
-RUN ./.venv/bin/pip -qqq install -U pip setuptools
-RUN ./.venv/bin/pip -qqq install poetry
-RUN ./.venv/bin/poetry install --no-interaction --only main
+RUN ./.venv/bin/pip -qqq install -r requirements.txt
+RUN ./.venv/bin/pip -qqq install setuptools
+
+
+# Python 'run' stage
+FROM python AS python-run-stage
+
+ARG DATABASE_URL
+ARG LOG_FILE_PATH
+ARG STATIC_ROOT
+
+ENV PYTHONFAULTHANDLER=1 \
+  PYTHONUNBUFFERED=1 \
+  PYTHONHASHSEED=random \
+  PYTHONDONTWRITEBYTECODE=1 \
+  # django
+  DATABASE_URL=$DATABASE_URL \
+  LOG_FILE_PATH=$LOG_FILE_PATH \
+  STATIC_ROOT=$STATIC_ROOT
+
+RUN apk add --update  \
+    postgresql-dev uwsgi uwsgi-logfile \
+    uwsgi-python3 gettext
+
+COPY --from=python-build-stage /srv/www/stimmungskalender /srv/www/stimmungskalender
+
+RUN mkdir /logs
+RUN chown uwsgi:uwsgi /logs
+
+WORKDIR /srv/www/stimmungskalender
+
 RUN ./.venv/bin/python manage.py collectstatic --noinput
 
 WORKDIR /srv/www/stimmungskalender/web
