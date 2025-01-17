@@ -22,7 +22,6 @@ services:
         args:
           DATABASE_URL: "pgsql://stimmungskalender:stimmungskalender@db/stimmungskalender"
           LOG_FILE_PATH: /logs/stimmungskalender.log
-          SECRET_KEY: "PLEASE-CHANGE-ME"
           STATIC_ROOT: /srv/www/stimmungskalender/static/
       environment:
         ALLOWED_HOSTS: "127.0.0.1,localhost" # Add your Stimmungskalender-URL here
