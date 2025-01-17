@@ -14,3 +14,5 @@ app-shell:
 	docker exec -it $(container_name) sh
 django-shell:
 	docker exec -it $(container_name) ./.venv/bin/python ./manage.py shell
+first-run:
+	docker compose run app first_run
