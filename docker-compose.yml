@@ -32,27 +32,12 @@ services:
         STATIC_ROOT: /srv/www/stimmungskalender/static/
         SESSION_COOKIE_SECURE: True
       ports:
-        - "7891:8000"
+        - "7890:8000"
       volumes:
         - "static:/srv/www/stimmungskalender/static"
         - "./logs:/logs"
       depends_on:
         - db
-
-  # Nginx
-  web:
-      image: "rain0r/stimmungskalender-web"
-      container_name: "sk-web"
-      platform: ${BUILD_PLATFORM:-}
-      restart: unless-stopped
-      build:
-        dockerfile: ./docker/web/Dockerfile
-      ports:
-        - "7890:80"
-      volumes:
-        - "static:/srv/www/stimmungskalender/static"
-      depends_on:
-        - app
 
 volumes:
   db:
