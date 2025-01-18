@@ -17,4 +17,4 @@ django-shell:
 first-run:
 	docker compose run app first_run
 requirements:
-	./.venv/bin/poetry export --without-hashes --format=requirements.txt > requirements.txt
+	./.venv/bin/poetry export --without-hashes --format=requirements.txt --only=main > requirements.txt
