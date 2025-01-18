@@ -1,4 +1,5 @@
-FROM python:3.12-alpine AS python
+# FROM python:3.12-alpine AS python
+FROM docker.io/python:3.11-slim-bookworm AS python
 
 FROM python AS python-build-stage
 
@@ -24,15 +25,17 @@ ENV PYTHONFAULTHANDLER=1 \
   LOG_FILE_PATH=$LOG_FILE_PATH \
   STATIC_ROOT=$STATIC_ROOT
 
-# Install system packages
-RUN apk add --update build-base \
-    postgresql-dev uwsgi uwsgi-logfile \
-    uwsgi-python3 cargo gettext python3-dev
+# Install apt packages
+RUN apt-get update && apt-get install --no-install-recommends -y \
+  # dependencies for building Python packages
+  build-essential \
+  # psycopg dependencies
+  libpq-dev
 
 WORKDIR /srv/www/stimmungskalender
 
 # Add the project source
-COPY --chown=uwsgi:uwsgi . .
+COPY --chown=www-data:www-data . .
 
 RUN python -m venv --clear .venv
 RUN ./.venv/bin/pip -qqq install -r requirements.txt
@@ -62,14 +65,28 @@ ENV PYTHONFAULTHANDLER=1 \
   LOG_FILE_PATH=$LOG_FILE_PATH \
   STATIC_ROOT=$STATIC_ROOT
 
-RUN apk add --update  \
-    postgresql-dev uwsgi uwsgi-logfile \
-    uwsgi-python3 gettext
+
+#RUN apk add --update  \
+#    postgresql-dev uwsgi uwsgi-logfile \
+#    uwsgi-python3 gettext
+
+# Install required system dependencies
+RUN apt-get update && apt-get install --no-install-recommends -y \
+      # psycopg dependencies
+      libpq-dev \
+      # Translations dependencies
+      gettext \
+      # web server
+      uwsgi-plugin-python3 \
+      # cleaning up unused files
+      && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+      && rm -rf /var/lib/apt/lists/*
+
 
 COPY --from=client-builder /srv/www/stimmungskalender /srv/www/stimmungskalender
 
 RUN mkdir /logs
-RUN chown uwsgi:uwsgi /logs
+RUN chown www-data:www-data /logs
 
 WORKDIR /srv/www/stimmungskalender
 
@@ -79,7 +96,7 @@ WORKDIR /srv/www/stimmungskalender/web
 RUN /srv/www/stimmungskalender/.venv/bin/django-admin compilemessages
 
 
-COPY --chown=uwsgi:uwsgi docker/app/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY --chown=www-data:www-data docker/app/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod a+x /usr/local/bin/entrypoint.sh
 
 WORKDIR /srv/www/stimmungskalender/
