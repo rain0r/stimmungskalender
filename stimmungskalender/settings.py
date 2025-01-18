@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+
+
 from decouple import Csv, config
 from dj_database_url import parse as db_url
 from django.utils.translation import gettext_lazy as _
@@ -89,8 +91,11 @@ WSGI_APPLICATION = "stimmungskalender.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {"default": config("DATABASE_URL", cast=db_url)}
+DATABASES = {
+    "default": config(
+        "DATABASE_URL", default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}", cast=db_url
+    )
+}
 
 
 # Password validation
@@ -181,10 +186,7 @@ LOGGING = {
         },
     },
     "loggers": {
-        "django": {
-            "handlers": ["log_file", "console"],
-            "level": "WARNING"
-        },
+        "django": {"handlers": ["log_file", "console"], "level": "WARNING"},
         "django.request": {
             "handlers": ["mail_admins"],
             "level": "ERROR",
