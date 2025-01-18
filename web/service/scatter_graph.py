@@ -1,7 +1,8 @@
 import typing
 from datetime import date, timedelta
 
-from django_registration.forms import User
+from django.contrib.auth.models import User
+
 
 from web.service.base_graph import BaseGraph
 from web.structs import ScatterGraphDataPointY, ScatterGraphResponse
