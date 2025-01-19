@@ -65,11 +65,6 @@ ENV PYTHONFAULTHANDLER=1 \
   LOG_FILE_PATH=$LOG_FILE_PATH \
   STATIC_ROOT=$STATIC_ROOT
 
-
-#RUN apk add --update  \
-#    postgresql-dev uwsgi uwsgi-logfile \
-#    uwsgi-python3 gettext
-
 # Install required system dependencies
 RUN apt-get update && apt-get install --no-install-recommends -y \
       # psycopg dependencies
@@ -86,7 +81,10 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 COPY --from=client-builder /srv/www/stimmungskalender /srv/www/stimmungskalender
 
 RUN mkdir /logs
-RUN chown www-data:www-data /logs
+RUN touch /logs/stimmungskalender.log
+RUN chown -R www-data:www-data /logs
+
+USER www-data
 
 WORKDIR /srv/www/stimmungskalender
 
@@ -94,7 +92,6 @@ RUN ./.venv/bin/python manage.py collectstatic --noinput
 
 WORKDIR /srv/www/stimmungskalender/web
 RUN /srv/www/stimmungskalender/.venv/bin/django-admin compilemessages
-
 
 COPY --chown=www-data:www-data docker/app/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod a+x /usr/local/bin/entrypoint.sh
