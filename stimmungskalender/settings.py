@@ -205,8 +205,6 @@ ROSETTA_MESSAGES_PER_PAGE = 100
 
 DEFAULT_VIEW_MODE = "lines"
 
-PER_PAGE = config("PER_PAGE", default=10, cast=int)
-
 SK_DATE_FORMAT = "%Y-%m-%d"  # To identify a week
 
 IS_WSGI = config("IS_WSGI", default=True, cast=bool)
