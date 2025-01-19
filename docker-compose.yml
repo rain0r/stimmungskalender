@@ -26,10 +26,12 @@ services:
       environment:
         ALLOWED_HOSTS: "127.0.0.1,localhost" # Add your Stimmungskalender-URL here
         DATABASE_URL: "pgsql://stimmungskalender:stimmungskalender@db/stimmungskalender"
+        FIRST_DAY_OF_WEEK: 1
+        LANGUAGE_CODE: de-de
         LOG_FILE_PATH: /logs/stimmungskalender.log
         SECRET_KEY: "PLEASE-CHANGE-ME"
         STATIC_ROOT: /srv/www/stimmungskalender/static/
-        SESSION_COOKIE_SECURE: True
+        TIME_ZONE: Europe/Berlin
       ports:
         - "7890:8000"
       volumes:
