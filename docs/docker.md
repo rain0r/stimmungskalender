@@ -46,4 +46,4 @@ run the following command to start `stimmungskalender` as a background service:
 docker compose up -d
 ```
 
-Visit http://localhost:8080/ and log in with user you just created.
+Visit http://localhost:7890 and log in with user you just created.
