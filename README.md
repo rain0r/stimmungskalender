@@ -24,10 +24,10 @@ It's built with [Django](https://www.djangoproject.com/) and can be self-hosted.
 
 ---
 
-The easiest way to get `stimmungskalender` up and running is with Docker. See: [`docs/docker.md`](docs/docker.md) 
+The easiest way to get `stimmungskalender` up and running is with Docker. See: [`docker.md`](docs/docker.md) 
 
 
-There is also a [`docs/faq.md`](docs/faq.md).
+There is also a [`faq.md`](docs/faq.md).
 
 ## REST API
 
