@@ -6,6 +6,8 @@ export DJANGO_SUPERUSER_USERNAME=admin
 export DJANGO_SUPERUSER_PASSWORD=admin
 export DJANGO_SUPERUSER_EMAIL=admin@example.com
 
+chown -R www-data:www-data /logs
+
 BASE_DIR="/srv/www/stimmungskalender"
 V_ENV="${BASE_DIR}/.venv"
 PYTHON="${V_ENV}/bin/python"

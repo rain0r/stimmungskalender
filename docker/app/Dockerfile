@@ -84,8 +84,6 @@ RUN mkdir /logs
 RUN touch /logs/stimmungskalender.log
 RUN chown -R www-data:www-data /logs
 
-USER www-data
-
 WORKDIR /srv/www/stimmungskalender
 
 RUN ./.venv/bin/python manage.py collectstatic --noinput
