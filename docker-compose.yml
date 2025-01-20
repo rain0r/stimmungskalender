@@ -24,7 +24,7 @@ services:
           LOG_FILE_PATH: /logs/stimmungskalender.log
           STATIC_ROOT: /srv/www/stimmungskalender/static/
       environment:
-        ALLOWED_HOSTS: "127.0.0.1,localhost" # Add your Stimmungskalender-URL here
+        ALLOWED_HOSTS: ${ALLOWED_HOSTS:-127.0.0.1-localhost"} # Add your Stimmungskalender-URL here
         DATABASE_URL: "pgsql://stimmungskalender:stimmungskalender@db/stimmungskalender"
         FIRST_DAY_OF_WEEK: 1
         LANGUAGE_CODE: de-de
