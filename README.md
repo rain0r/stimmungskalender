@@ -20,7 +20,7 @@ It's built with [Django](https://www.djangoproject.com/) and can be self-hosted.
 
 ---
 
-![Screenshot of Stimmungskalender](.github/form.png)
+![Screenshot of Stimmungskalender](assets/form.png)
 
 ---
 
