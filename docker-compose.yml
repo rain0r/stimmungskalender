@@ -29,6 +29,7 @@ services:
         FIRST_DAY_OF_WEEK: 1
         LANGUAGE_CODE: de-de
         LOG_FILE_PATH: /logs/stimmungskalender.log
+        REGISTRATION_OPEN: False
         SECRET_KEY: "PLEASE-CHANGE-ME"
         STATIC_ROOT: /srv/www/stimmungskalender/static/
         TIME_ZONE: Europe/Berlin

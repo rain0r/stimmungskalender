@@ -195,6 +195,10 @@ LOGGING = {
     },
 }
 
+# Django Registration
+
+REGISTRATION_OPEN = config("REGISTRATION_OPEN", default=False, cast=bool)
+
 # Rosetta Settings
 
 ROSETTA_SHOW_AT_ADMIN_PANEL = True
