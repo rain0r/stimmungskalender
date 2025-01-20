@@ -24,20 +24,11 @@ It's built with [Django](https://www.djangoproject.com/) and can be self-hosted.
 
 ---
 
-To take a first look `stimmungskalender`, you can set up a local running instance. 
+The easiest way to get `stimmungskalender` up and running is with Docker. See: [`docs/docker.md`](docs/docker.md) 
 
-See [`docs/quickstart.md`](docs/quickstart.md) or [`docs/docker.md`](docs/docker.md) for Docker.
-
-If you want to deploy in production, follow the instructions in [`docs/install.md`](docs/install.md).
 
 There is also a [`docs/faq.md`](docs/faq.md).
 
 ## REST API
 
 An OpenAPI 3.0 schema can be accessed under `/api/schema/` and swagger under `/api/schema/swagger-ui/`.
-
----
-
-## Requirements
-
-Requires Python **3.8** or higher.
