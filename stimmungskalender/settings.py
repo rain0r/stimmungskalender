@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+from datetime import timedelta
 
 from decouple import Csv, config
 from dj_database_url import parse as db_url
@@ -198,6 +198,34 @@ LOGGING = {
 # Django Registration
 
 REGISTRATION_OPEN = config("REGISTRATION_OPEN", default=False, cast=bool)
+
+# Django Rest Framework
+
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 7,
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ),
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+# dj rest auth
+
+REST_AUTH = {
+    "USE_JWT": True,
+    "JWT_AUTH_COOKIE": "sk-auth-cookie",
+    "JWT_AUTH_REFRESH_COOKIE": "sk-refresh-token",
+    "JWT_AUTH_HTTPONLY": False,
+}
+
+# Simple JWT
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=7),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+}
 
 # Rosetta Settings
 
