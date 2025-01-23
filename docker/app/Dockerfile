@@ -48,6 +48,7 @@ COPY --from=python-build-stage /srv/www/stimmungskalender /srv/www/stimmungskale
 
 WORKDIR /srv/www/stimmungskalender
 RUN ./scripts/node.sh
+RUN rm -rf ./node
 
 # Python 'run' stage
 FROM python AS python-run-stage

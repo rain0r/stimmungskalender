@@ -18,3 +18,5 @@ first-run:
 	docker compose run app first_run
 requirements:
 	./.venv/bin/poetry export --without-hashes --format=requirements.txt --only=main > requirements.txt
+format:
+	./.venv/bin/isort . && ./.venv/bin/black .

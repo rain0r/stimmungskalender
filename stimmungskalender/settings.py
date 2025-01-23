@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-from pathlib import Path
 from datetime import timedelta
+from pathlib import Path
 
 from decouple import Csv, config
 from dj_database_url import parse as db_url
@@ -46,9 +46,7 @@ INSTALLED_APPS = [
     "django_registration",
     "rest_framework",
     "rest_framework.authtoken",
-    "dj_rest_auth",
     "corsheaders",
-    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -186,7 +184,7 @@ LOGGING = {
         },
     },
     "loggers": {
-        "django": {"handlers": ["log_file", "console"], "level": "WARNING"},
+        "django": {"handlers": ["log_file", "console"], "level": "INFO"},
         "django.request": {
             "handlers": ["mail_admins"],
             "level": "ERROR",
@@ -205,10 +203,8 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 7,
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
-        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
     ),
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 # dj rest auth

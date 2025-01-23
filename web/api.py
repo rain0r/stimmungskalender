@@ -1,17 +1,13 @@
 from django.conf import settings
 from django.core.exceptions import BadRequest
-from django.http import JsonResponse
 from django.utils import translation
-from django.views.i18n import JSONCatalog
-from drf_spectacular.utils import extend_schema, inline_serializer
-from rest_framework import serializers as drf_serializers
 from rest_framework import status, views
 from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from web import serializers
-from web.models import PERIODS, Moods, UserMoodColorSettings, UserSettings
+from web.models import UserMoodColorSettings, UserSettings
 from web.query_params import QP_END_DT, QP_MOOD, QP_PERIOD, QP_SEARCH_TERM, QP_START_DT
 from web.service.bar_graph import BarGraphService
 from web.service.pie_graph import PieGraphService
@@ -29,16 +25,6 @@ class EntryDayView(GenericAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = serializers.WeekdayEntrySerializer
 
-    @extend_schema(
-        request=inline_serializer(
-            name="EntryDaySerializer",
-            fields={
-                "mood": drf_serializers.ChoiceField(Moods),
-                "period": drf_serializers.ChoiceField(PERIODS),
-                "day": drf_serializers.DateField(format=settings.SK_DATE_FORMAT),
-            },
-        ),
-    )
     def post(self, request):
         sk_service = SkService(request.user)
         mood = request.data.get("mood", None)
@@ -60,15 +46,6 @@ class SaveNoteView(GenericAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = serializers.WeekSerializer
 
-    @extend_schema(
-        request=inline_serializer(
-            name="SaveNoteSerializer",
-            fields={
-                "note": drf_serializers.CharField(),
-                "week_date": drf_serializers.DateField(format=settings.SK_DATE_FORMAT),
-            },
-        ),
-    )
     def post(self, request):
         week = request.data.get("week_date", None)
         note = request.data.get("note", "").strip()
@@ -92,18 +69,6 @@ class MoodTableView(GenericAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = serializers.MoodTableSerializer
 
-    @extend_schema(
-        parameters=[
-            inline_serializer(
-                name="MoodTableSerializer",
-                fields={
-                    QP_START_DT: drf_serializers.DateField(
-                        format=settings.SK_DATE_FORMAT, required=False
-                    ),
-                },
-            ),
-        ],
-    )
     def get(self, request):
         sk_service = SkService(request.user)
         start_day_p = request.GET.get(QP_START_DT, None)
@@ -120,23 +85,6 @@ class SearchView(GenericAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = serializers.WeekSerializer
 
-    @extend_schema(
-        parameters=[
-            inline_serializer(
-                name="WeekSerializer",
-                fields={
-                    "search": drf_serializers.CharField(required=False),
-                    "mood": drf_serializers.ChoiceField(Moods, required=False),
-                    QP_START_DT: drf_serializers.DateField(
-                        format=settings.SK_DATE_FORMAT, required=False
-                    ),
-                    QP_END_DT: drf_serializers.DateField(
-                        format=settings.SK_DATE_FORMAT, required=False
-                    ),
-                },
-            ),
-        ],
-    )
     def get(self, request):
         sk_service = SkService(request.user)
         start_dt = self.request.GET.get(QP_START_DT, "")
@@ -151,29 +99,29 @@ class SearchView(GenericAPIView):
         return Response(serializer.data)
 
 
-class SkJSONCatalog(GenericAPIView, JSONCatalog):
-    authentication_classes = []  # disables authentication
-    permission_classes = []  # disables permission
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.user_language = settings.LANGUAGE_CODE
-
-    def check_permissions(self, request):
-        super().check_permissions(request)
-
-    def setup(self, request, *args, **kwargs):
-        super().setup(request, *args, **kwargs)
-        lang = self.request.GET.get("lang", "")
-        if lang:
-            self.user_language = lang
-            translation.activate(self.user_language)
-
-    def render_to_response(self, context, **response_kwargs):
-        response = JsonResponse(context)
-        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, self.user_language)
-
-        return response
+# class SkJSONCatalog(GenericAPIView, JSONCatalog):
+#     authentication_classes = []  # disables authentication
+#     permission_classes = []  # disables permission
+#
+#     def __init__(self, **kwargs):
+#         super().__init__(**kwargs)
+#         self.user_language = settings.LANGUAGE_CODE
+#
+#     def check_permissions(self, request):
+#         super().check_permissions(request)
+#
+#     def setup(self, request, *args, **kwargs):
+#         super().setup(request, *args, **kwargs)
+#         lang = self.request.GET.get("lang", "")
+#         if lang:
+#             self.user_language = lang
+#             translation.activate(self.user_language)
+#
+#     def render_to_response(self, context, **response_kwargs):
+#         response = JsonResponse(context)
+#         response.set_cookie(settings.LANGUAGE_COOKIE_NAME, self.user_language)
+#
+#         return response
 
 
 class SetLanguageView(views.APIView):
@@ -183,14 +131,6 @@ class SetLanguageView(views.APIView):
 
     permission_classes = [IsAuthenticated]
 
-    @extend_schema(
-        request=inline_serializer(
-            name="SetLanguageSerializer",
-            fields={
-                "language": drf_serializers.ChoiceField(settings.LANGUAGES),
-            },
-        ),
-    )
     def post(self, request):
         user_language = request.data.get("language", settings.LANGUAGE_CODE).strip()
         translation.activate(user_language)
@@ -220,24 +160,6 @@ class ScatterGraphView(DefaultDateHandler, GenericAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = serializers.ScatterGraphResponseSerializer
 
-    @extend_schema(
-        parameters=[
-            inline_serializer(
-                name="ScatterGraphSerializer",
-                fields={
-                    "view": drf_serializers.ChoiceField(
-                        ["markers", "lines"], required=False
-                    ),
-                    QP_START_DT: drf_serializers.DateField(
-                        format=settings.SK_DATE_FORMAT, required=False
-                    ),
-                    QP_END_DT: drf_serializers.DateField(
-                        format=settings.SK_DATE_FORMAT, required=False
-                    ),
-                },
-            ),
-        ],
-    )
     def get(self, request):
         sk_service = SkService(request.user)
         start_dt = self.default_start_dt()
@@ -263,24 +185,6 @@ class PieChartGraphView(DefaultDateHandler, GenericAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = serializers.PieChartResponseSerializer
 
-    @extend_schema(
-        parameters=[
-            inline_serializer(
-                name="PieChartGraphSerializer",
-                fields={
-                    QP_START_DT: drf_serializers.DateField(
-                        format=settings.SK_DATE_FORMAT, required=False
-                    ),
-                    QP_END_DT: drf_serializers.DateField(
-                        format=settings.SK_DATE_FORMAT, required=False
-                    ),
-                    QP_PERIOD: drf_serializers.ChoiceField(
-                        choices=PERIODS, required=True
-                    ),
-                },
-            ),
-        ],
-    )
     def get(self, request):
         sk_service = SkService(request.user)
         start_dt = self.default_start_dt()
@@ -307,21 +211,6 @@ class BarChartGraphView(DefaultDateHandler, GenericAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = serializers.BarChartResponseSerializer
 
-    @extend_schema(
-        parameters=[
-            inline_serializer(
-                name="BarChartGraphSerializer",
-                fields={
-                    QP_START_DT: drf_serializers.DateField(
-                        format=settings.SK_DATE_FORMAT, required=False
-                    ),
-                    QP_END_DT: drf_serializers.DateField(
-                        format=settings.SK_DATE_FORMAT, required=False
-                    ),
-                },
-            ),
-        ],
-    )
     def get(self, request):
         sk_service = SkService(request.user)
         start_dt = self.default_start_dt()
@@ -364,15 +253,6 @@ class FormsDisplayedView(GenericAPIView):
         serializer = serializers.UserSettingsSerializer(user_settings)
         return Response(serializer.data)
 
-    @extend_schema(
-        request=inline_serializer(
-            name="FormsDisplayedSerializer",
-            fields={
-                "night_form": drf_serializers.BooleanField(),
-                "day_form": drf_serializers.BooleanField(),
-            },
-        ),
-    )
     def post(self, request):
         night_form = request.data.get("night_form")
         day_form = request.data.get("day_form")
@@ -389,23 +269,6 @@ class GraphView(GenericAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = serializers.GraphTimeRangesSerializer
 
-    @extend_schema(
-        responses=inline_serializer(
-            name="GraphViewSerializer",
-            fields={
-                "first_day": drf_serializers.DateField(format=settings.SK_DATE_FORMAT),
-                "last_week_start_dt": drf_serializers.DateField(
-                    format=settings.SK_DATE_FORMAT
-                ),
-                "last_month_start_dt": drf_serializers.DateField(
-                    format=settings.SK_DATE_FORMAT
-                ),
-                "last_year_start_dt": drf_serializers.DateField(
-                    format=settings.SK_DATE_FORMAT
-                ),
-            },
-        ),
-    )
     def get(self, request):
         sk_service = SkService(request.user)
         serializer = serializers.GraphTimeRangesSerializer(

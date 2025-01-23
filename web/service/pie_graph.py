@@ -1,10 +1,10 @@
 from datetime import date
 
+from django.contrib.auth.models import User
 from django.db.models import Count
 
 from web.service.base_graph import PERIODS, BaseGraph
 from web.structs import PieChartResponse
-from django.contrib.auth.models import User
 
 
 class PieGraphService(BaseGraph):
