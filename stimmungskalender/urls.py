@@ -64,11 +64,11 @@ urlpatterns = [
     path("calendar/", views.CalendarView.as_view(), name="calendar"),
     re_path(r"^rosetta/", include("rosetta.urls")),
     path("i18n/", include("django.conf.urls.i18n")),
-    # path(
-    #     "jsoni18n/",
-    #     api.SkJSONCatalog.as_view(domain="django"),
-    #     name="json-catalog",
-    # ),
+    path(
+        "jsoni18n/",
+        api.SkJSONCatalog.as_view(domain="django"),
+        name="json-catalog",
+    ),
     path(
         "openapi",
         get_schema_view(

@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.core.exceptions import BadRequest
+from django.http import JsonResponse
 from django.utils import translation
+from django.views.i18n import JSONCatalog
 from rest_framework import status, views
 from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated
@@ -99,29 +101,29 @@ class SearchView(GenericAPIView):
         return Response(serializer.data)
 
 
-# class SkJSONCatalog(GenericAPIView, JSONCatalog):
-#     authentication_classes = []  # disables authentication
-#     permission_classes = []  # disables permission
-#
-#     def __init__(self, **kwargs):
-#         super().__init__(**kwargs)
-#         self.user_language = settings.LANGUAGE_CODE
-#
-#     def check_permissions(self, request):
-#         super().check_permissions(request)
-#
-#     def setup(self, request, *args, **kwargs):
-#         super().setup(request, *args, **kwargs)
-#         lang = self.request.GET.get("lang", "")
-#         if lang:
-#             self.user_language = lang
-#             translation.activate(self.user_language)
-#
-#     def render_to_response(self, context, **response_kwargs):
-#         response = JsonResponse(context)
-#         response.set_cookie(settings.LANGUAGE_COOKIE_NAME, self.user_language)
-#
-#         return response
+class SkJSONCatalog(GenericAPIView, JSONCatalog):
+    authentication_classes = []  # disables authentication
+    permission_classes = []  # disables permission
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.user_language = settings.LANGUAGE_CODE
+
+    def check_permissions(self, request):
+        super().check_permissions(request)
+
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        lang = self.request.GET.get("lang", "")
+        if lang:
+            self.user_language = lang
+            translation.activate(self.user_language)
+
+    def render_to_response(self, context, **response_kwargs):
+        response = JsonResponse(context)
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, self.user_language)
+
+        return response
 
 
 class SetLanguageView(views.APIView):
