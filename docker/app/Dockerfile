@@ -42,7 +42,7 @@ RUN ./.venv/bin/pip -qqq install -r requirements.txt
 RUN ./.venv/bin/pip -qqq install setuptools
 
 # Build frontend
-FROM docker.io/node:20-bookworm-slim AS client-builder
+FROM docker.io/node:alpine3.20 AS client-builder
 
 COPY --from=python-build-stage /srv/www/stimmungskalender /srv/www/stimmungskalender
 
