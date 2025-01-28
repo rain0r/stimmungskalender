@@ -16,9 +16,11 @@ services:
   app:
       image: "rain0r/stimmungskalender-app"
       container_name: "sk-app"
-      platform: ${BUILD_PLATFORM:-}
       build:
         dockerfile: ./docker/app/Dockerfile
+        platforms:
+          - "linux/amd64"
+          - "linux/arm64"          
         args:
           DATABASE_URL: "pgsql://stimmungskalender:stimmungskalender@db/stimmungskalender"
           LOG_FILE_PATH: /logs/stimmungskalender.log
