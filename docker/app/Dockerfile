@@ -1,4 +1,3 @@
-# FROM python:3.12-alpine AS python
 FROM docker.io/python:3.11-slim-bookworm AS python
 
 FROM python AS python-build-stage
