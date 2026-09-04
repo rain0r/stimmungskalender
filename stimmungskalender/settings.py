@@ -90,9 +90,7 @@ WSGI_APPLICATION = "stimmungskalender.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 DATABASES = {
-    "default": config(
-        "DATABASE_URL", default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}", cast=db_url
-    )
+    "default": config("DATABASE_URL", default="sqlite:////data/db.sqlite3", cast=db_url)
 }
 
 

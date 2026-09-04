@@ -1,17 +1,4 @@
 services:
-  # Database
-  db:
-      image: "postgres:16-alpine"
-      container_name: "sk-db"
-      restart: unless-stopped
-      environment:
-        LC_ALL: C.UTF-8
-        POSTGRES_USER: stimmungskalender
-        POSTGRES_PASSWORD: stimmungskalender
-        POSTGRES_DB: stimmungskalender
-      volumes:
-        - "db:/var/lib/postgresql/data"
-
   # Django app
   app:
       image: "rain0r/stimmungskalender-app"
@@ -25,16 +12,7 @@ services:
           DATABASE_URL: "pgsql://stimmungskalender:stimmungskalender@db/stimmungskalender"
           LOG_FILE_PATH: /logs/stimmungskalender.log
           STATIC_ROOT: /srv/www/stimmungskalender/static/
-      environment:
-        ALLOWED_HOSTS: localhost # Set the host of your instance here
-        DATABASE_URL: "pgsql://stimmungskalender:stimmungskalender@db/stimmungskalender"
-        FIRST_DAY_OF_WEEK: 1
-        LANGUAGE_CODE: de-de
-        LOG_FILE_PATH: /logs/stimmungskalender.log
-        REGISTRATION_OPEN: False
-        SECRET_KEY: "PLEASE-CHANGE-ME"
-        STATIC_ROOT: /srv/www/stimmungskalender/static/
-        TIME_ZONE: Europe/Berlin
+      env_file: .env
       ports:
         - "7890:8000"
       volumes:
@@ -44,5 +22,4 @@ services:
         - db
 
 volumes:
-  db:
   static:

@@ -24,13 +24,6 @@ ENV PYTHONFAULTHANDLER=1 \
   LOG_FILE_PATH=$LOG_FILE_PATH \
   STATIC_ROOT=$STATIC_ROOT
 
-# Install apt packages
-RUN apt-get update && apt-get install --no-install-recommends -y \
-  # dependencies for building Python packages
-  build-essential \
-  # psycopg dependencies
-  libpq-dev
-
 WORKDIR /srv/www/stimmungskalender
 
 # Add the project source
