@@ -4,7 +4,7 @@ from datetime import timedelta
 from django.conf import settings
 from django.core.management import BaseCommand, CommandParser
 from django.utils import timezone
-from django_registration.forms import User
+from django.contrib.auth.models import User
 
 from web.models import PERIODS, Moods, Week
 from web.service.sk import SkService
