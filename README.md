@@ -28,7 +28,3 @@ The easiest way to get `stimmungskalender` up and running is with Docker. See: [
 
 
 There is also a [`faq.md`](docs/faq.md).
-
-## REST API
-
-An OpenAPI 3.0 schema can be accessed under `/api/schema/` and swagger under `/api/schema/swagger-ui/`.
