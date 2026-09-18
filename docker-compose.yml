@@ -1,25 +1,12 @@
 services:
-  # Django app
   app:
-      image: "rain0r/stimmungskalender-app"
+      image: "rain0r/stimmungskalender:2.0.0"
       container_name: "sk-app"
-      build:
-        dockerfile: ./docker/app/Dockerfile
-        platforms:
-          - "linux/amd64"
-          - "linux/arm64"          
-        args:
-          DATABASE_URL: "pgsql://stimmungskalender:stimmungskalender@db/stimmungskalender"
-          LOG_FILE_PATH: /logs/stimmungskalender.log
-          STATIC_ROOT: /srv/www/stimmungskalender/static/
       env_file: .env
       ports:
         - "7890:8000"
       volumes:
-        - "static:/srv/www/stimmungskalender/static"
         - "./logs:/logs"
-      depends_on:
-        - db
 
 volumes:
   static:

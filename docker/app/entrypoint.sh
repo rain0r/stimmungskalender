@@ -8,7 +8,7 @@ export DJANGO_SUPERUSER_EMAIL=admin@example.com
 
 chown -R www-data:www-data /logs
 
-BASE_DIR="/srv/www/stimmungskalender"
+BASE_DIR="/app"
 V_ENV="${BASE_DIR}/.venv"
 PYTHON="${V_ENV}/bin/python"
 
@@ -44,7 +44,7 @@ translate() {
 # Run
 case "$1" in
     sh)
-        /bin/sh "${@:2}"
+        /bin/bash
         ;;
     default_user)
         $PYTHON ${BASE_DIR}/manage.py createsuperuser --noinput --username $DJANGO_SUPERUSER_USERNAME --email $DJANGO_SUPERUSER_EMAIL
@@ -57,6 +57,7 @@ case "$1" in
         $PYTHON ${BASE_DIR}/manage.py migrate
         translate
         $PYTHON ${BASE_DIR}/manage.py collectstatic --noinput
+        echo "Creating admin user"
         $PYTHON ${BASE_DIR}/manage.py createsuperuser
         ;;
     manage)
@@ -69,8 +70,9 @@ case "$1" in
         translate
         ;;
     uwsgi)
+        $PYTHON ${BASE_DIR}/manage.py migrate
         echo "Running App (uWSGI)..."
-        uwsgi --ini /srv/www/stimmungskalender/docker/app/uwsgi.ini
+        ${V_ENV}/bin/uwsgi --ini  ${BASE_DIR}/docker/app/uwsgi.ini
         ;;
     *)
         show_help

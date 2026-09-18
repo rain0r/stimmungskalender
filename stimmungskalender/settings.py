@@ -222,3 +222,5 @@ DEFAULT_VIEW_MODE = "lines"
 SK_DATE_FORMAT = "%Y-%m-%d"  # To identify a week
 
 IS_WSGI = config("IS_WSGI", default=True, cast=bool)
+
+SK_VERSION = config("SK_VERSION", default="2.0.0")
