@@ -2,7 +2,6 @@ import sys
 import typing
 from datetime import date, datetime, timedelta
 
-import pkg_resources
 from django.conf import settings
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -86,13 +85,12 @@ class SettingsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         ss = SettingsService(self.request.user)
-        sk_version = pkg_resources.get_distribution("stimmungskalender").version
 
         context = super().get_context_data(**kwargs)
         context["default_view_mode"] = ss.get_default_view_mode()
         context["user_settings"] = ss.user_settings()
         context["user_colors_settings"] = ss.user_colors_settings()
-        context["version"] = sk_version
+        context["version"] = settings.SK_VERSION
         return context
 
 

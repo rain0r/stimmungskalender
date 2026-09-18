@@ -140,8 +140,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Logging
 
-LOG_FILE_PATH = config("LOG_FILE_PATH", default=BASE_DIR / "stimmungskalender.log")
-
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": True,
@@ -161,7 +159,7 @@ LOGGING = {
             "level": "DEBUG",
             "class": "logging.FileHandler",
             "formatter": "verbose",
-            "filename": LOG_FILE_PATH,
+            "filename": config("LOG_FILE_PATH", default=BASE_DIR / "stimmungskalender.log"),
         },
         "mail_admins": {
             "level": "ERROR",
@@ -222,3 +220,5 @@ DEFAULT_VIEW_MODE = "lines"
 SK_DATE_FORMAT = "%Y-%m-%d"  # To identify a week
 
 IS_WSGI = config("IS_WSGI", default=True, cast=bool)
+
+SK_VERSION = config("SK_VERSION", default="2.0.0")
