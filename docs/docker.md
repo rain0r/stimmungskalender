@@ -14,7 +14,13 @@ mkdir ./stimmungskalender && cd ./stimmungskalender
 Download `docker-compose.yml` by running the following commands:
 
 ```sh
-wget -O docker-compose.yml https://raw.githubusercontent.com/rain0r/stimmungskalender/refs/heads/master/docker-compose.yml
+wget https://raw.githubusercontent.com/rain0r/stimmungskalender/refs/heads/stimmungskalender-2.0.0/docker-compose.yml
+```
+
+Download the sample `.env` file and modify it to suite your needs:
+
+```sh
+wget -O .env https://raw.githubusercontent.com/rain0r/stimmungskalender/refs/heads/stimmungskalender-2.0.0/.env.sample
 ```
 
 ## Step 2 - Edit `docker-compose.yml`

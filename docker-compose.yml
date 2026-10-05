@@ -1,48 +1,12 @@
 services:
-  # Database
-  db:
-      image: "postgres:16-alpine"
-      container_name: "sk-db"
-      restart: unless-stopped
-      environment:
-        LC_ALL: C.UTF-8
-        POSTGRES_USER: stimmungskalender
-        POSTGRES_PASSWORD: stimmungskalender
-        POSTGRES_DB: stimmungskalender
-      volumes:
-        - "db:/var/lib/postgresql/data"
-
-  # Django app
   app:
-      image: "rain0r/stimmungskalender-app"
-      container_name: "sk-app"
-      build:
-        dockerfile: ./docker/app/Dockerfile
-        platforms:
-          - "linux/amd64"
-          - "linux/arm64"          
-        args:
-          DATABASE_URL: "pgsql://stimmungskalender:stimmungskalender@db/stimmungskalender"
-          LOG_FILE_PATH: /logs/stimmungskalender.log
-          STATIC_ROOT: /srv/www/stimmungskalender/static/
-      environment:
-        ALLOWED_HOSTS: ${ALLOWED_HOSTS:-127.0.0.1-localhost} # Add your Stimmungskalender-URL here
-        DATABASE_URL: "pgsql://stimmungskalender:stimmungskalender@db/stimmungskalender"
-        FIRST_DAY_OF_WEEK: 1
-        LANGUAGE_CODE: de-de
-        LOG_FILE_PATH: /logs/stimmungskalender.log
-        REGISTRATION_OPEN: False
-        SECRET_KEY: "PLEASE-CHANGE-ME"
-        STATIC_ROOT: /srv/www/stimmungskalender/static/
-        TIME_ZONE: Europe/Berlin
+      image: "rain0r/stimmungskalender:2.0.0"
+      container_name: "stimmungskalender"
+      env_file: .env
       ports:
         - "7890:8000"
       volumes:
-        - "static:/srv/www/stimmungskalender/static"
-        - "./logs:/logs"
-      depends_on:
-        - db
-
+        - "./data:/data"
+        - "static:/app/static"
 volumes:
-  db:
   static:

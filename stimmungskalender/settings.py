@@ -90,29 +90,14 @@ WSGI_APPLICATION = "stimmungskalender.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 DATABASES = {
-    "default": config(
-        "DATABASE_URL", default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}", cast=db_url
-    )
+    "default": config("DATABASE_URL", default="sqlite:////data/db.sqlite3", cast=db_url)
 }
 
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
-]
+AUTH_PASSWORD_VALIDATORS = []
 
 
 # Internationalization
@@ -155,8 +140,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Logging
 
-LOG_FILE_PATH = config("LOG_FILE_PATH", default=BASE_DIR / "stimmungskalender.log")
-
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": True,
@@ -176,7 +159,7 @@ LOGGING = {
             "level": "DEBUG",
             "class": "logging.FileHandler",
             "formatter": "verbose",
-            "filename": LOG_FILE_PATH,
+            "filename": config("LOG_FILE_PATH", default=BASE_DIR / "stimmungskalender.log"),
         },
         "mail_admins": {
             "level": "ERROR",
@@ -237,3 +220,5 @@ DEFAULT_VIEW_MODE = "lines"
 SK_DATE_FORMAT = "%Y-%m-%d"  # To identify a week
 
 IS_WSGI = config("IS_WSGI", default=True, cast=bool)
+
+SK_VERSION = config("SK_VERSION", default="2.0.0")

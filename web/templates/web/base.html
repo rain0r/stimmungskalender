@@ -25,7 +25,7 @@
               sizes="16x16"
               href="{% static '/img/favicon-16x16.png' %}">
         <link rel="manifest" href="{% static '/site.webmanifest' %}">
-        <link rel="stylesheet" href="{% static 'main.css' %}">
+        <link rel="stylesheet" href="{% static 'node/main.css' %}">
         <style>{% include 'web/css/moods.css' %}</style>
     </head>
     <body>
@@ -99,6 +99,6 @@
         {{ active_url|json_script:"active_url" }}
         {% get_current_language as language_code %}
         {{ language_code|json_script:"current_language" }}
-        <script src="{% static '/main.js' %}"></script>
+        <script src="{% static 'node/main.js' %}"></script>
     </body>
 </html>
