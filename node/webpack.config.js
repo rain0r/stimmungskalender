@@ -8,7 +8,7 @@ module.exports = {
   entry: { main: "./src/js/main.js", plotly: "./src/js/plotly.js" },
   output: {
     filename: "[name].js",
-    path: path.resolve(__dirname, "../web/static"),
+    path: path.resolve(__dirname, "../web/static/node"),
   },
   plugins: [
     new miniCssExtractPlugin(),
