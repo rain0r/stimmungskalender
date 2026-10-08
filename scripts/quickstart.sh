@@ -14,6 +14,7 @@ fi
 
 # Use the developer settings for a quick start
 cp .env.sample .env
+echo "\nDEBUG=True" >> .env
 
 # Create a virtualenv that holds all dependencies
 uv sync
@@ -22,7 +23,7 @@ uv sync
 uv run manage.py migrate
 
 # Create the frontend texts
-uv run django-admin compilemessages
+uv run django-admin compilemessages > /dev/null
 
 # Create an user account
 uv run manage.py createsuperuser
