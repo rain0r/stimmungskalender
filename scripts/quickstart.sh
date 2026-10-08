@@ -2,33 +2,33 @@
 
 set -e
 
-full_path=$(realpath $0)
-dir_path=$(dirname $full_path)
+if [ ! -f "manage.py" ]; then
+    echo "Please run this command from the root of the repository"
+    exit 1
+fi
+
+if [ ! -x "$(command -v uv)" ]; then
+    echo "This script depends on uv (package manager)"
+    exit 1
+fi
 
 # Use the developer settings for a quick start
 cp .env.sample .env
 
 # Create a virtualenv that holds all dependencies
-python3 -m venv --clear virtualenv
-
-# Install the dependencies
-./virtualenv/bin/pip install .
+uv sync
 
 # Initialize the sqlite database
-./virtualenv/bin/python manage.py migrate
+uv run manage.py migrate
 
 # Create the frontend texts
-if [ ! -f "${dir_path}/../web/locale/de_DE/LC_MESSAGES/django.mo" ]; then
-    ./virtualenv/bin/django-admin compilemessages
-fi
+uv run django-admin compilemessages
 
 # Create an user account
-./virtualenv/bin/python manage.py createsuperuser
+uv run manage.py createsuperuser
 
 # Generate javascript and css files
-if [ ! -f "${dir_path}/../web/static/js/skBase.js" ]; then
-    ./scripts/node.sh
-fi
+./scripts/node.sh
 
 # Start the app
-./virtualenv/bin/python manage.py runserver
+uv run manage.py runserver
