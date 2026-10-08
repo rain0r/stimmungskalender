@@ -20,7 +20,7 @@ wget https://raw.githubusercontent.com/rain0r/stimmungskalender/refs/heads/maste
 Download the sample `.env` file and modify it to suite your needs:
 
 ```sh
-wget -O .env https://raw.githubusercontent.com/rain0r/stimmungskalender/refs/heads/master/.env.sample
+wget -O .env https://raw.githubusercontent.com/rain0r/stimmungskalender/refs/heads/master/.env.docker.sample
 ```
 
 ## Step 2 - Edit `docker-compose.yml`
