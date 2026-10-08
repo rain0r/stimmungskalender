@@ -13,8 +13,7 @@ if [ ! -x "$(command -v uv)" ]; then
 fi
 
 # Use the developer settings for a quick start
-cp .env.sample .env
-echo "\nDEBUG=True" >> .env
+cp .env.local.sample .env
 
 # Create a virtualenv that holds all dependencies
 uv sync
