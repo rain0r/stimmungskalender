@@ -2,6 +2,7 @@ import sys
 import typing
 from datetime import date, datetime, timedelta
 
+import ipdb
 from django.conf import settings
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -54,6 +55,7 @@ def custom_permission_denied_view(request, exception=None):
 def custom_bad_request_view(request, exception=None):
     context = {
         "request": request,
+        "exception": exception,
     }
     t = loader.get_template("web/errors/400.html")
     return HttpResponseNotFound(t.render(context))

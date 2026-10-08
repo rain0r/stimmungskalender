@@ -16,7 +16,7 @@ module.exports = {
       patterns: [
         {
           from: "src/scss/signin.css",
-          to: path.resolve(__dirname, "../web/static"),
+          to: path.resolve(__dirname, "../web/static/node"),
         },
       ],
     }),
