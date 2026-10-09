@@ -4,7 +4,7 @@
         <div class="collapse multi-collapse show fw-lighter mt-4 fs-5 border border-1 rounded p-3"
                  id="read-only-note">{{ mood_table.week.note }}
     </div>
-<!-- djlint:on -->
+    <!-- djlint:on -->
 {% endif %}
 <form method="post"
       action="{% url 'save-note' %}"
@@ -22,5 +22,5 @@
                   rows="7"
                   placeholder="{% translate 'what_happened_this_week' %}">{{ mood_table.week.note }}</textarea>
     </div>
-    <button class="btn btn-primary  mt-3">{% translate 'save' %}</button>
+    <button class="btn btn-primary mt-3">{% translate "save" %}</button>
 </form>

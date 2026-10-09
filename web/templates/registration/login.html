@@ -1,4 +1,4 @@
-{% extends 'web/base.html' %}
+{% extends "web/base.html" %}
 {% block content %}
     {% load i18n %}
     <div class="container">
@@ -16,7 +16,7 @@
                 <table class="table">
                     {{ form.as_table }}
                 </table>
-                <button class="w-100 btn btn-lg btn-primary" type="submit">{% translate 'Log in' %}</button>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">{% translate "Log in" %}</button>
                 <hr>
                 <a href="{% url 'django_registration_register' %}">Register</a>
             </div>

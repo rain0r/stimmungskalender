@@ -45,19 +45,19 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
-                                <a class="nav-link" href="{% url 'index' %}">{% translate 'diary' %}</a>
+                                <a class="nav-link" href="{% url 'index' %}">{% translate "diary" %}</a>
                             </li>
                             <li class="nav-item {% if request.resolver_match.url_name == 'graph' %}active{% endif %}">
-                                <a class="nav-link" href="{% url 'graph' %}">{% translate 'graphs' %}</a>
+                                <a class="nav-link" href="{% url 'graph' %}">{% translate "graphs" %}</a>
                             </li>
                             <li class="nav-item {% if request.resolver_match.url_name == 'calendar' %}active{% endif %}">
-                                <a class="nav-link" href="{% url 'calendar' %}">{% translate 'calendar' %}</a>
+                                <a class="nav-link" href="{% url 'calendar' %}">{% translate "calendar" %}</a>
                             </li>
                             <li class="nav-item {% if request.resolver_match.url_name == 'search' %}active{% endif %}">
-                                <a class="nav-link" href="{% url 'search' %}">{% translate 'search' %}</a>
+                                <a class="nav-link" href="{% url 'search' %}">{% translate "search" %}</a>
                             </li>
                             <li class="nav-item {% if request.resolver_match.url_name == 'settings' %}active{% endif %}">
-                                <a class="nav-link" href="{% url 'settings' %}">{% translate 'settings' %}</a>
+                                <a class="nav-link" href="{% url 'settings' %}">{% translate "settings" %}</a>
                             </li>
                         </ul>
                         <div class="form-check form-switch me-2">
@@ -68,7 +68,7 @@
                             <label class="form-check-label" for="dark-theme">☀️</label>
                         </div>
                         <div>
-                            {% translate 'logged_in_as' %}: <span class="font-monospace">{{ user.get_username }}</span>
+                            {% translate "logged_in_as" %}: <span class="font-monospace">{{ user.get_username }}</span>
                         </div>
                     </div>
                 </div>
@@ -77,16 +77,16 @@
         <main class="container pt-3">
             {% block content %}
             {% endblock content %}
-            {% include 'web/shared/i18n.html' %}
+            {% include "web/shared/i18n.html" %}
         </main>
         {% if user.is_authenticated %}
             <footer class="my-5 pt-5 text-body-secondary text-center text-small">
                 <ul class="list-inline">
                     <li class="list-inline-item">
-                        <a href="{% url 'index' %}">{% translate 'home' %}</a>
+                        <a href="{% url 'index' %}">{% translate "home" %}</a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="{% url 'logout' %}" title="Logout {{ user.get_username }}">{% translate 'logout' %}</a>
+                        <a href="{% url 'logout' %}" title="Logout {{ user.get_username }}">{% translate "logout" %}</a>
                     </li>
                 </ul>
             </footer>

@@ -4,7 +4,7 @@
     {% for number in moods reversed %}
         {% with mood_value=weekday_entry|get_obj_attr:form.attr %}
             <input type="radio"
-                   class="btn-check "
+                   class="btn-check"
                    name="radio-{{ weekday_entry.day|date:'Y-m-d' }}"
                    id="radio-{{ form.name }}-{{ number }}-{{ weekday_entry.day|date:'Y-m-d' }}"
                    data-period="{{ form.name }}"
