@@ -20,7 +20,8 @@ RUN apt update \
     && uv sync --no-dev --compile-bytecode --no-cache --locked --no-install-project \
     && apt -y purge build-essential \
     && apt autoremove -y \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && uv run django-admin compilemessages
 
 ENV ALLOWED_HOSTS=[]
 ENV SECRET_KEY=123456
