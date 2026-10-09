@@ -12,6 +12,11 @@ if [ ! -x "$(command -v uv)" ]; then
     exit 1
 fi
 
+if [ ! -x "$(command -v npm)" ]; then
+    echo "This script depends on npm (node package manager)"
+    exit 1
+fi
+
 # Use the developer settings for a quick start
 cp .env.local.sample .env
 

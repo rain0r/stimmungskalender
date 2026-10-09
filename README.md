@@ -1,10 +1,17 @@
 # Stimmungskalender
 
-`stimmungskalender` is a mood calendar. It is a simple but effective way of keeping track of your daily mood and sleep.
+`stimmungskalender` is a self-hosted mood-calendar. It is a simple but effective way of keeping track of your daily mood and sleep.
 
 This can can help you identify patterns to establish a better understanding of your wellbeing or sleeping habits.
 
-It's built with [Django](https://www.djangoproject.com/) and can be self-hosted.
+---
+
+The easiest way to get `stimmungskalender` up and running is with Docker. See: [`docker.md`](docs/docker.md)
+
+If you like to build it yourself or run it outside of Docker, download this repository and run  [`scripts/quickstart.sh`](scripts/quickstart.sh) (requires `uv` and `npm`).
+
+There is also a [`faq.md`](docs/faq.md).
+
 
 ---
 
@@ -21,10 +28,6 @@ It's built with [Django](https://www.djangoproject.com/) and can be self-hosted.
 ---
 
 ![Screenshot of Stimmungskalender](assets/form.png)
-
----
-
-The easiest way to get `stimmungskalender` up and running is with Docker. See: [`docker.md`](docs/docker.md) 
+ 
 
 
-There is also a [`faq.md`](docs/faq.md).

@@ -12,7 +12,7 @@ WORKDIR /app
 
 # Add the project source
 COPY --exclude=node . .
-COPY --from=client-builder /web/static /app/web/static/node/
+COPY --from=client-builder /web/static /app/web/static/
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 RUN apt update \
