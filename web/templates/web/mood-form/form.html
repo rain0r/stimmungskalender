@@ -14,7 +14,7 @@
                       data-bs-toggle="tooltip"
                       title="{% translate 'click_to_toggle' %}">
                     {% translate form.name_header %}
-                    {% if form.name == 'night' %}
+                    {% if form.name == "night" %}
                         🌙
                     {% else %}
                         ☀️
@@ -38,9 +38,9 @@
                                     <span class="border rounded font-monospace d-flex flex-grow-1 justify-content-center mb-1 mb-md-3 p-1">{{ weekday_entry.day|date:"d. m." }}</span>
                                 </div>
                                 {% if js_btn %}
-                                    {% include 'web/mood-form/js_btn.html' %}
+                                    {% include "web/mood-form/js_btn.html" %}
                                 {% else %}
-                                    {% include 'web/mood-form/default_btn.html' %}
+                                    {% include "web/mood-form/default_btn.html" %}
                                 {% endif %}
                             </div>
                         {% endfor %}

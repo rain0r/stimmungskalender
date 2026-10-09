@@ -1,8 +1,8 @@
-{% extends 'web/base.html' %}
+{% extends "web/base.html" %}
 {% load i18n %}
 {% load static %}
 {% block title %}
-    {% translate 'graphs' %}
+    {% translate "graphs" %}
 {% endblock %}
 {% block content %}
     {% load relative_url %}
@@ -12,28 +12,30 @@
          data-end-dt="{{ end_dt|date:'Y-m-d' }}">
         <!-- Title -->
         <div class="page-title-div">
-            <a href="{% url 'graph' %}" class="page-title">{% translate 'graphs' %}</a>
+            <a href="{% url 'graph' %}" class="page-title">{% translate "graphs" %}</a>
         </div>
-        <div class="border rounded my-3 p-3">{% include 'web/graph/date_select.html' %}</div>
+        <div class="border rounded my-3 p-3">{% include "web/graph/date_select.html" %}</div>
         <ul class="nav nav-tabs">
             <li class="nav-item">
                 <button class="nav-link clickable active"
                         data-bs-target="#scatter"
-                        data-bs-toggle="tab">{% translate 'scatterplot' %}</button>
+                        data-bs-toggle="tab">{% translate "scatterplot" %}</button>
             </li>
             <li class="nav-item">
-                <button class="nav-link clickable" data-bs-target="#pie" data-bs-toggle="tab">{% translate 'pie_charts' %}</button>
+                <button class="nav-link clickable"
+                        data-bs-target="#pie"
+                        data-bs-toggle="tab">{% translate "pie_charts" %}</button>
             </li>
             <li class="nav-item">
-                <button class="nav-link clickable "
+                <button class="nav-link clickable"
                         data-bs-target="#average"
-                        data-bs-toggle="tab">{% translate 'average' %}</button>
+                        data-bs-toggle="tab">{% translate "average" %}</button>
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane fade show active" id="scatter">{% include 'web/graph/scatter.html' %}</div>
-            <div class="tab-pane fade" id="pie">{% include 'web/graph/pie_chart.html' %}</div>
-            <div class="tab-pane fade " id="average">{% include 'web/graph/average.html' %}</div>
+            <div class="tab-pane fade show active" id="scatter">{% include "web/graph/scatter.html" %}</div>
+            <div class="tab-pane fade" id="pie">{% include "web/graph/pie_chart.html" %}</div>
+            <div class="tab-pane fade" id="average">{% include "web/graph/average.html" %}</div>
         </div>
         <hr>
     </div>

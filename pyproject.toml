@@ -21,7 +21,9 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "djlint>=1.46.4",
     "ipdb==0.13.13",
+    "ruff>=0.16.10",
 ]
 
 [tool.djlint]

@@ -1,11 +1,11 @@
-{% extends 'web/base.html' %}
+{% extends "web/base.html" %}
 {% load i18n %}
 {% block title %}
-    {% translate 'calendar' %}
+    {% translate "calendar" %}
 {% endblock %}
 {% block content %}
     <div class="page-title-div">
-        <a href="{% url 'calendar' %}" class="page-title">{% translate 'calendar' %}</a>
+        <a href="{% url 'calendar' %}" class="page-title">{% translate "calendar" %}</a>
     </div>
     <div id="calendar"></div>
     <div id="error-card" class="card invisible">

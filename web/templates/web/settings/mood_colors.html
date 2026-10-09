@@ -1,15 +1,16 @@
 {% load i18n %}
-<h3>{% translate 'mood_colors' %}</h3>
+<h3>{% translate "mood_colors" %}</h3>
 <div class="text-body-secondary">
-    {% translate 'you_can_set_a_color_for_each_color' %}.
-    {% translate 'examples' %}
+    {% translate "you_can_set_a_color_for_each_color" %}.
+    {% translate "examples" %}
     : <code>red</code>, <code>#dc3545</code>, <code>rgba(40,167,69, 0.7)</code>
 </div>
 <div class="row align-items-center">
     <div class="col-12 col-md-6">
         {% for row in user_colors_settings %}
             <div class="row mb-3">
-                <label for="{{ row.mood }}" class="col-12 col-md-6 col-form-label">{{ mood_names|get_item:row.mood }}</label>
+                <label for="{{ row.mood }}"
+                       class="col-12 col-md-6 col-form-label">{{ mood_names|get_item:row.mood }}</label>
                 <div class="col-12 col-md-4">
                     <input type="text"
                            name="mood-{{ row.mood }}"
@@ -25,6 +26,6 @@
         <button type="submit"
                 name="reset"
                 value="true"
-                class="btn btn-secondary ms-5">{% translate 'reset' %}</button>
+                class="btn btn-secondary ms-5">{% translate "reset" %}</button>
     </div>
 </div>

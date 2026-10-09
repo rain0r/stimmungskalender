@@ -159,7 +159,9 @@ LOGGING = {
             "level": "DEBUG",
             "class": "logging.FileHandler",
             "formatter": "verbose",
-            "filename": config("LOG_FILE_PATH", default=BASE_DIR / "stimmungskalender.log"),
+            "filename": config(
+                "LOG_FILE_PATH", default=BASE_DIR / "stimmungskalender.log"
+            ),
         },
         "mail_admins": {
             "level": "ERROR",

@@ -1,12 +1,12 @@
 {% load i18n %}
-<h3>{% translate 'view_forms' %}</h3>
+<h3>{% translate "view_forms" %}</h3>
 <div class="form-check">
     <input class="form-check-input"
            type="checkbox"
            {% if user_settings.view_night_form %}checked{% endif %}
            name="view_night_form"
            id="view-night-form">
-    <label class="form-check-label" for="view-night-form">{% translate 'view_night_form' %}</label>
+    <label class="form-check-label" for="view-night-form">{% translate "view_night_form" %}</label>
 </div>
 <div class="form-check">
     <input class="form-check-input"
@@ -14,5 +14,5 @@
            {% if user_settings.view_day_form %}checked{% endif %}
            name="view_day_form"
            id="view-day-form">
-    <label class="form-check-label" for="view-day-form">{% translate 'view_day_form' %}</label>
+    <label class="form-check-label" for="view-day-form">{% translate "view_day_form" %}</label>
 </div>
